@@ -6,6 +6,7 @@
 */
 package lk.nexttravel.api_gateway.api;
 
+import lk.nexttravel.api_gateway.dto.RespondDTO;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class AuthController {
 
     //checkUsername
     @GetMapping(value = "/check-username")
-    public Mono<ResponseEntity<boolean>> checkUsername(@RequestParam("username")){
+    public Mono<ResponseEntity<RespondDTO>> checkUsername(@RequestParam("username") String username){
         ResponseEntity<RespondDTO> respondDTO = userService.loginUser(reqLoginDTO);
         return Mono.just(respondDTO);
     }
