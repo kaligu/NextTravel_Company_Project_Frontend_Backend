@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Backend/Backend.iml" filepath="$PROJECT_DIR$/Backend/Backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/NextTravel_Company_Project_Frontend_Backend.iml" filepath="$PROJECT_DIR$/NextTravel_Company_Project_Frontend_Backend.iml" />
     </modules>
   </component>
