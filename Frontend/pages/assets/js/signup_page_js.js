@@ -4,7 +4,6 @@ const signup_username = $('#signup_name');
 const checkUsernameContainer = $('#check_username_container');
 const next_btn = $('#next_btn');
 
-const invalidFeedbac_signup_username = signup_username.siblings('.invalid-feedback');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -25,12 +24,11 @@ function checkUsernameAlreadyExists(){
 }
 
 $(document).ready(function () {
-    const signupNameInput = $('#signup_name');
-    const invalidFeedback = signupNameInput.siblings('.invalid-feedback');
+    const invalidFeedback = signup_username.siblings('.invalid-feedback');
 
     // Add an event listener to the input field to check for validation
     signupNameInput.on('input', function () {
-        if (usernameIsValid(signupNameInput.val())) {
+        if (usernameIsValid(signupNameInput.val()) && isUsernameAlreadySaved(signupNameInput.val())) {
             // Username is valid
             signupNameInput.removeClass('is-invalid');
             signupNameInput.addClass('is-valid');
@@ -52,6 +50,38 @@ $(document).ready(function () {
 function usernameIsValid(username) {
     // Add your validation logic here
     return username.length >= 3; // Example: username should be at least 3 characters long
+}
+
+//check is already taken this username using AJAX
+function isUsernameAlreadySaved(username){
+    // Define the URL for the backend endpoint
+    const url = 'http://localhost:1010/main/auth/ischeck-username?username=' + encodeURIComponent(username);
+
+    // Send a GET request to the backend
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((response) => {
+            if (response.ok) {
+                // The request was successful (HTTP status code 200)
+                return response.json(); // Assuming your response is in JSON format
+            } else {
+                throw new Error(`Request failed with status: ${response.status}`);
+            }
+        })
+        .then((data) => {
+            // Handle the response data
+            console.log(data);
+            // You can add your own logic here to handle the response data
+        })
+        .catch((error) => {
+            // Handle any errors that occurred during the request
+            console.error(error);
+            // You can add your own error handling logic here
+        });
 }
 
 
