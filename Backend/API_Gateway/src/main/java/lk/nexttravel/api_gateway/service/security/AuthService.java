@@ -15,5 +15,5 @@ import org.springframework.http.ResponseEntity;
  * Time    : 4:50 AM
  */
 public interface AuthService {
-    ResponseEntity<RespondDTO> checkUsernameAlreadyTaken(String username);
+    ResponseEntity<RespondDTO> ischeckUsernameAlreadyTaken(String username);
 }

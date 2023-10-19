@@ -8,6 +8,7 @@ package lk.nexttravel.api_gateway.service.security.impl;
 
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.service.security.AuthService;
+import lk.nexttravel.api_gateway.util.RespondCodes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,14 +22,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthServiceImpl implements AuthService {
     @Override
-    public ResponseEntity<RespondDTO> checkUsernameAlreadyTaken(String username) {
+    public ResponseEntity<RespondDTO> ischeckUsernameAlreadyTaken(String username) {
+        System.out.println(username);
         return new ResponseEntity<RespondDTO>(
                 RespondDTO.builder()
-                        .rspd_code()
-                        .rspd_message("No Username Already Taken.")
-                        .data()
-                        .token()
-                        .data()
+                        .rspd_code(RespondCodes.Response_SUCCESS)
+                        .rspd_message("Username Already Taken.")
+                        .token(null)
+                        .data(true)
                         .build()
                 ,
                 HttpStatus.OK

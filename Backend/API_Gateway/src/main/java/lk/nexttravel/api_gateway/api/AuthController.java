@@ -7,8 +7,11 @@
 package lk.nexttravel.api_gateway.api;
 
 import lk.nexttravel.api_gateway.dto.RespondDTO;
+import lk.nexttravel.api_gateway.service.security.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -23,10 +26,14 @@ import reactor.core.publisher.Mono;
 @CrossOrigin(origins = "http://localhost:63342/")
 public class AuthController {
 
+    @Autowired
+    AuthService authService;
+
     //checkUsername
-    @GetMapping(value = "/check-username")
+    @GetMapping(value = "/ischeck-username")
     public Mono<ResponseEntity<RespondDTO>> checkUsername(@RequestParam("username") String username){
-        ResponseEntity<RespondDTO> respondDTO = userService.loginUser(reqLoginDTO);
-        return Mono.just(respondDTO);
+        return Mono.just(
+                authService.ischeckUsernameAlreadyTaken(username)
+        );
     }
 }
