@@ -79,6 +79,7 @@
 			}
 		</style>
 
+
 	</head>
 
 	<body>
@@ -117,8 +118,7 @@
 										<li class="smooth-menu"><a href="#blog">blog</a></li>
 										<li class="smooth-menu"><a href="#subs">subscription</a></li>
 										<li>
-											<button class="book-btn">Login
-											</button>
+											<button class="book-btn" id="login_btn">Login</button>
 										</li><!--/.project-btn--> 
 									</ul>
 								</div><!-- /.navbar-collapse -->
@@ -146,7 +146,7 @@
 
 									</h2>
 									<div class="about-btn">
-										<button  class="about-view">
+										<button  class="about-view" id="signup_btn">
 											Signup now
 										</button>
 									</div><!--/.about-btn-->
@@ -1622,6 +1622,17 @@
 		<!--Custom JS-->
 		<script src="assets/js/custom.js"></script>
 
+		<script>
+			document.getElementById("login_btn").addEventListener("click", function() {
+				// Replace the URL with the one you want to navigate to
+				window.location.href = "http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/assets/login_page.html?_ijt=oi9luv614jcebbuo0i2g2bk1ue&_ij_reload=RELOAD_ON_SAVE";
+			});
+
+			document.getElementById("signup_btn").addEventListener("click", function() {
+				// Replace the URL with the one you want to navigate to
+				window.location.href = "http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/assets/signup_page.html?_ijt=oi9luv614jcebbuo0i2g2bk1ue&_ij_reload=RELOAD_ON_SAVE";
+			});
+		</script>
 
 	</body>
 
