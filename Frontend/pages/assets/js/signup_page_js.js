@@ -1,3 +1,62 @@
+//variables
+const signupMainFormContainer = $('#main_signup_form_container');
+const signup_username = $('#signup_name');
+const checkUsernameContainer = $('#check_username_container');
+const next_btn = $('#next_btn');
+
+const invalidFeedbac_signup_username = signup_username.siblings('.invalid-feedback');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//if next button clicked
+function checkUsernameAlreadyExists(){
+    //send and check ajax request
+
+    //if found
+    signupMainFormContainer.css('display','none');
+    checkUsernameContainer.css('display','block');
+
+    //show invalid feedback
+
+
+    //if not found
+    // signupMainFormContainer.css('display','block');
+    // checkUsernameContainer.css('display','none');
+}
+
+$(document).ready(function () {
+    const signupNameInput = $('#signup_name');
+    const invalidFeedback = signupNameInput.siblings('.invalid-feedback');
+
+    // Add an event listener to the input field to check for validation
+    signupNameInput.on('input', function () {
+        if (usernameIsValid(signupNameInput.val())) {
+            // Username is valid
+            signupNameInput.removeClass('is-invalid');
+            signupNameInput.addClass('is-valid');
+            invalidFeedback.hide(); // Hide the invalid feedback message
+
+            next_btn.prop("disabled", false);
+        } else {
+            // Username is invalid
+            signupNameInput.removeClass('is-valid');
+            signupNameInput.addClass('is-invalid');
+            invalidFeedback.show(); // Show the invalid feedback message
+
+            next_btn.prop("disabled", true);
+        }
+    });
+});
+
+// Your validation function (replace this with your actual validation logic)
+function usernameIsValid(username) {
+    // Add your validation logic here
+    return username.length >= 3; // Example: username should be at least 3 characters long
+}
+
+
+
+
 
 //Boostrap input fields validations
 // starter JavaScript for disabling form submissions if there are invalid fields
