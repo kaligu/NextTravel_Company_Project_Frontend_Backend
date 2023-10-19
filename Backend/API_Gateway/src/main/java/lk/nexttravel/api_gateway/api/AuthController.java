@@ -6,10 +6,26 @@
 */
 package lk.nexttravel.api_gateway.api;
 
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
+
 /**
  * @author : H.C.Kaligu Jayanath
  * Date    : 10/20/2023
  * Time    : 4:39 AM
  */
+
+@RestController
+@RequestMapping("/auth")
+@CrossOrigin(origins = "http://localhost:63342/")
 public class AuthController {
+
+    //checkUsername
+    @GetMapping(value = "/check-username")
+    public Mono<ResponseEntity<boolean>> checkUsername(@RequestParam("username")){
+        ResponseEntity<RespondDTO> respondDTO = userService.loginUser(reqLoginDTO);
+        return Mono.just(respondDTO);
+    }
 }
