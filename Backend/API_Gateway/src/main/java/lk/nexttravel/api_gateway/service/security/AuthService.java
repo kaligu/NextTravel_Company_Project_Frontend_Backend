@@ -7,6 +7,7 @@
 package lk.nexttravel.api_gateway.service.security;
 
 import lk.nexttravel.api_gateway.dto.RespondDTO;
+import lk.nexttravel.api_gateway.dto.auth.AuthSignupDTO;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -18,5 +19,5 @@ public interface AuthService {
 
     ResponseEntity<RespondDTO> ischeckUsernameAlreadyTaken(String username);
 
-    ResponseEntity<RespondDTO> saveNewGuestUser();
+    ResponseEntity<RespondDTO> saveNewGuestUser(AuthSignupDTO authSignupDTO);
 }

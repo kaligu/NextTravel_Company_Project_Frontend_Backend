@@ -7,6 +7,7 @@
 package lk.nexttravel.api_gateway.service.security.impl;
 
 import lk.nexttravel.api_gateway.dto.RespondDTO;
+import lk.nexttravel.api_gateway.dto.auth.AuthSignupDTO;
 import lk.nexttravel.api_gateway.service.security.AuthService;
 import lk.nexttravel.api_gateway.util.RespondCodes;
 import org.springframework.http.HttpStatus;
@@ -33,5 +34,10 @@ public class AuthServiceImpl implements AuthService {
                 ,
                 HttpStatus.OK
         );
+    }
+
+    @Override
+    public ResponseEntity<RespondDTO> saveNewGuestUser(AuthSignupDTO authSignupDTO) {
+        return null;
     }
 }

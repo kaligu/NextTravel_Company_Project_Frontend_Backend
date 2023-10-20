@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Builder
 
 @Component
-public class authSignupDTO {
+public class AuthSignupDTO {
     private String signup_name;
     private String signup_email;
     private String signup_password;
