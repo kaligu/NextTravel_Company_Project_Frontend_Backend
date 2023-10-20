@@ -23,13 +23,12 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements AuthService {
     @Override
     public ResponseEntity<RespondDTO> ischeckUsernameAlreadyTaken(String username) {
-        System.out.println(username);
         return new ResponseEntity<RespondDTO>(
                 RespondDTO.builder()
                         .rspd_code(RespondCodes.Response_SUCCESS)
                         .rspd_message("Username Already Taken.")
                         .token(null)
-                        .data(true)
+                        .data(false)
                         .build()
                 ,
                 HttpStatus.OK
