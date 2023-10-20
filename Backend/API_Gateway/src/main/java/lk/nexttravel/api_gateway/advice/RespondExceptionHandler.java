@@ -20,7 +20,7 @@ public class RespondExceptionHandler {
     protected ResponseEntity<RespondDTO> exception(DuplicateException exception) {
         System.out.println("DuplicateException"+exception.getMessage());
         return new ResponseEntity<>(
-                new RespondDTO(RespondCodes.Response_DUPLICATED,"Response_DUPLICATED", exception.getMessage(),null)
+                new RespondDTO(RespondCodes.Response_DUPLICATED,"Response_DUPLICATED", null,null)
                 , HttpStatus.BAD_REQUEST);
     }
 
@@ -28,7 +28,7 @@ public class RespondExceptionHandler {
     protected ResponseEntity<RespondDTO> exception(InternalServerException exception) {
         System.out.println("InternalServerException"+exception.getMessage());
         return new ResponseEntity<>(
-                new RespondDTO(RespondCodes.Response_SERVERSIDE_INTERNAL_FAIL,"Response_SERVERSIDE_INTERNAL_FAIL", exception.getMessage(),null)
+                new RespondDTO(RespondCodes.Response_SERVERSIDE_INTERNAL_FAIL,"Response_SERVERSIDE_INTERNAL_FAIL", null,null)
                 , HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -36,7 +36,7 @@ public class RespondExceptionHandler {
     protected ResponseEntity<RespondDTO> exception(InvalidInputException exception) {
         System.out.println("InvalidInputException"+exception.getMessage());
         return new ResponseEntity<>(
-                new RespondDTO(RespondCodes.Response_DATA_INVALID,"Response_DATA_INVALID", exception.getMessage(),null)
+                new RespondDTO(RespondCodes.Response_DATA_INVALID,exception.getMessage(), null,null)
                 , HttpStatus.BAD_REQUEST);
     }
 
