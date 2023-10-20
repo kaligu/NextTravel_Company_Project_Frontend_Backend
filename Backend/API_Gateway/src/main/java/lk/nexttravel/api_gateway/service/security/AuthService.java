@@ -15,5 +15,8 @@ import org.springframework.http.ResponseEntity;
  * Time    : 4:50 AM
  */
 public interface AuthService {
+
     ResponseEntity<RespondDTO> ischeckUsernameAlreadyTaken(String username);
+
+    ResponseEntity<RespondDTO> saveNewGuestUser();
 }
