@@ -35,63 +35,67 @@ public class AuthController {
 
     //checkUsername
     @GetMapping(value = "/ischeck-username")
-    public Mono<ResponseEntity<RespondDTO>> checkUsername(@RequestParam("username") @NonNull String username){
-        if(username.length() > 3){
-
+    public Mono<ResponseEntity<RespondDTO>> checkUsername(@RequestParam("username") @NonNull String username) {
+        if (username.matches("^[a-zA-Z0-9_.-]{5,30}$")) {
             return Mono.just(
                     authService.ischeckUsernameAlreadyTaken(username)
             );
-
-        }else{
+        } else {
             throw new InvalidInputException("Username is invalid!");
         }
 
     }
 
     //save user
-    @PostMapping(value = "/signup-guestuser",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/signup-guestuser", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<ResponseEntity<RespondDTO>> saveNewGuestUser(@RequestPart("signup_name") @NonNull String name,
-                                                            @RequestPart("signup_email" ) @NonNull String email,
-                                                            @RequestPart("signup_password") @NonNull String password,
-                                                            @RequestPart("signup_nic_or_passport") @NonNull String nicOrPassport,
-                                                            @RequestPart("signup_address") @NonNull String addres,
-                                                            @RequestPart("signup_profile_image")  byte[] image )
-    {
+                                                             @RequestPart("signup_name_with_initial") @NonNull String nameWithInitial,
+                                                             @RequestPart("signup_email") @NonNull String email,
+                                                             @RequestPart("signup_password") @NonNull String password,
+                                                             @RequestPart("signup_nic_or_passport") @NonNull String nicOrPassport,
+                                                             @RequestPart("signup_address") @NonNull String addres,
+                                                             @RequestPart("signup_profile_image") byte[] image) {
 
-        if (name.length() > 3) {
-            if (email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-                if (password.length() > 3) {
-                    if (nicOrPassport.matches("^(?:[0-9]{9}[x|X|v|V]|[0-9]{12})$")) {
-                        if (addres.matches("^[a-zA-Z0-9\\s.,]+$")) {
-                            if(image != null) {
+        if (name.matches("^[a-zA-Z0-9_.-]{5,30}$")) {
+            if (nameWithInitial.matches("([A-Z])\\w+\\s([A-Z])\\w*\\s*([A-Z])*(?=,*)")) {
+                if (email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+                    if (password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$")) {
+                        if (nicOrPassport.matches("^[a-zA-Z0-9_-]+\\S{8,11}$")) {
+                            if (addres.matches("^\\S+\\s*[a-zA-Z0-9,.-]+\\S{0,48}$")) {
+                                if (image != null) {
 
-                                return Mono.just(
-                                        authService.saveNewGuestUser(
-                                                AuthSignupDTO.builder()
-                                                        .signup_name(name)
-                                                        .signup_address(addres)
-                                                        .signup_email(email)
-                                                        .signup_nic_or_passport(nicOrPassport)
-                                                        .signup_password(password)
-                                                        .signup_profile_image(image)
-                                                        .build()
-                                        )
-                                );
+                                    return Mono.just(
+                                            authService.saveNewGuestUser(
+                                                    AuthSignupDTO.builder()
+                                                            .signup_name(name)
+                                                            .signup_name_with_initial(nameWithInitial)
+                                                            .signup_address(addres)
+                                                            .signup_email(email)
+                                                            .signup_nic_or_passport(nicOrPassport)
+                                                            .signup_password(password)
+                                                            .signup_profile_image(image)
+                                                            .build()
+                                            )
+                                    );
 
+                                } else {
+                                    throw new InvalidInputException("Image data is invalid!");
+                                }
                             } else {
-                                throw new InvalidInputException("Image data is invalid!");
+                                throw new InvalidInputException("Address data is invalid!");
                             }
                         } else {
-                            throw new InvalidInputException("Address data is invalid!");
+                            throw new InvalidInputException("NIC or Passport data is invalid!");
                         }
                     } else {
-                        throw new InvalidInputException("NIC or Passport data is invalid!");
+                        throw new InvalidInputException("Password data is invalid!");
                     }
                 } else {
-                    throw new InvalidInputException("Password data is invalid!");
+                    throw new InvalidInputException("Email is invalid!");
                 }
+
             } else {
-                throw new InvalidInputException("Email is invalid!");
+                throw new InvalidInputException("Name with initialis invalid!");
             }
         } else {
             throw new InvalidInputException("Username is invalid!");

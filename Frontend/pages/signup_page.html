@@ -61,14 +61,11 @@
                             <div class="mb-4">
                                 <label for="signup_name" >Username</label>
                                 <input type="text" class="form-control" id="signup_name" >
-                                <div class="valid-feedback">
-                                    Looks good.
-                                </div>
-                                <div class="invalid-feedback">
-                                    Please enter a valid username!
-                                </div>
-                            </div>
-
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback"></div>
+                                <br>
+                                <div id="invalid-para-dbcheck" style="display: none"><p style="color: orangered">This username given User already registered! Type here another one...</p></div>
+                                <br>
                             <button class="btn btn-outline-light btn-lg px-5" type="button" id="next_btn" onclick="nextBtnClicked()" disabled>Next</button>
 
                     </div>
@@ -76,6 +73,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <div class="container-fluid" id="main_signup_form_container" style="display: none">
@@ -88,70 +86,127 @@
                         <h2 class="fw-bold mb-2 text-uppercase">Sign up</h2>
                         <br>
 
-                        <form class="row g-3 needs-validation" novalidate>
-
-                            <div class="mb-4">
-                                <label for="signup_email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="signup_email" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                                <div class="invalid-feedback">
-                                    Please enter a valid Email!.
-                                </div>
+                        <div class="mb-4">
+                            <label for="signup_name_with_initial" class="form-label">Name with Initial</label>
+                            <input type="email" class="form-control" id="signup_name_with_initial" required="required">
+                            <div class="valid-feedback">
+                                Looks good!
                             </div>
-
-                            <div class="mb-4">
-                                <label for="signup_password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="signup_password" pattern=".{3,}" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                                <div class="invalid-feedback">
-                                    Please enter a valid Password!. Password must includes over three characters...
-                                </div>
+                            <div class="invalid-feedback">
+                                *Starts with an uppercase letter, followed by one or more lowercase letters.
+                                *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                                *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
                             </div>
+                        </div>
 
-                            <div class="mb-4">
-                                <label for="signup_nic_or_passport" class="form-label">NIC or Passport</label>
-                                <input type="text" class="form-control" id="signup_nic_or_passport" pattern="^(?:[0-9]{9}[x|X|v|V]|[0-9]{12})$" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                                <div class="invalid-feedback">
-                                    Please enter a valid Sri Lankan NIC (new or old format) or Sri Lankan Passport.
-                                </div>
-                           </div>
-
-                            <div class="mb-4">
-                                <label for="signup_address" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="signup_address" pattern="^[a-zA-Z0-9\s.,]+$" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                                <div class="invalid-feedback">
-                                    Please enter a valid address ex:- No.120 , Colombo.
-                                </div>
+                        <div class="mb-4">
+                            <label for="signup_email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="signup_email" required="required">
+                            <div class="valid-feedback">
+                                Looks good!
                             </div>
-
-                            <div class="mb-4">
-                                <label for="signup_profile_image" class="form-label">Profile Image</label>
-                                <input class="form-control" type="file" id="signup_profile_image" accept=".jpg, .jpeg, .webp .png .gif" pattern=".*\.(jpg|jpeg|png|gif)$" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                                <div class="invalid-feedback">
-                                    Please choose a valid image (JPG, JPEG, PNG, or GIF format) and ensure the file size is less than 5MB.
-                                </div>
+                            <div class="invalid-feedback">
+                                *Must start and end with an alphanumeric character or period (.), and can only contain alphanumeric characters, periods, underscores (_), hyphens (-), and plus signs (+).
+                                *Must contain one or more @ symbols.
+                                *Must contain at least one domain name (e.g., .com, .net, .edu, etc.).
+                                *Examples: john.doe@example.com , jane_doe-123@example.net
                             </div>
-                            <br>
+                        </div>
 
-                            <button class="btn btn-outline-light btn-lg px-5" type="submit">SignUp</button>
+                        <div class="mb-4">
+                            <label for="signup_password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signup_password"  required="required">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                * Must be at least 8 characters long
+                                * Must contain at least one digit, lowercase letter, uppercase letter, and other character
+                                *Examples:`Password123!`, `MyStrongPassword2023`
+                            </div>
+                        </div>
 
-                        </form>
+                        <div class="mb-4">
+                            <label for="signup_nic_or_passport" class="form-label">NIC or Passport</label>
+                            <input type="text" class="form-control" id="signup_nic_or_passport" required="required">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                *Must be 9 or 12 characters long.
+                                *Must start and end with an alphanumeric character (a-z, A-Z, or 0-9).
+                                *Can only contain alphanumeric characters, hyphens (-), and underscores (_).
+                                *Examples: New NIC: 200133702832 , Old NIC: 788310390V , Passport: P1234567
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="signup_address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="signup_address" required="required">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                *Must start and end with a non-whitespace character, and can only contain non-whitespace characters, spaces, commas (,), periods (.), and hyphens (-).
+                                *Must be between 2 and 50 characters long.
+                                *Examples: '123 Main Street, Anytown, CA 91234' , '456 Elm Street, Apt. 7B, Anytown, CA 91234'
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="signup_profile_image" class="form-label">Profile Image</label>
+                            <input class="form-control" type="file" id="signup_profile_image" accept=".jpg, .jpeg, .webp .png .gif" required="required">
+                            <div class="valid-feedback" id="img-valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback" id="img-invalid-feedback">
+                                Please choose a valid image (JPG, JPEG, PNG, or GIF format) and ensure the file size is less than 5MB.
+                            </div>
+                        </div>
+                        <br>
+
+                        <button class="btn btn-outline-light btn-lg px-5" type="button" id="user_reg_signup_btn" onclick="sendSignupDataIntoServer()">SignUp</button>
 
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- loading window -->
+<!-- use Modal -->
+<div class="modal fade" id="loading-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-bs-backdrop='static'>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <!--          <div class="modal-header">-->
+            <!--            -->
+            <!--          </div>-->
+            <div class="modal-body text-center bg-info">
+                <img src="assets/images/logoloading.gif" class="img-fluid" alt="Responsive image" style="width: 50%; height: 50%">
+
+            </div>
+            <div class="modal-footer justify-content-center bg-info">
+                <h6 class="modal-title text-white" id="exampleModalLongTitle">Please Wait... </h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- alert window -->
+<!-- Modal -->
+<div class="modal fade" id="alert-model" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="alert-model-title">title</h5>
+            </div>
+            <div class="modal-body">
+                <p class="modal-dialog-centered" id="alert-model-content">content</p>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-primary bg-success w-25" onclick="closeAlertModel()" id="alert-model-btn"> Ok </button>
             </div>
         </div>
     </div>

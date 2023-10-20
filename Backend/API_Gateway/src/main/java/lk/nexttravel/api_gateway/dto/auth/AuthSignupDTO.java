@@ -9,6 +9,8 @@ package lk.nexttravel.api_gateway.dto.auth;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 /**
  * @author : H.C.Kaligu Jayanath
  * Date    : 10/20/2023
@@ -24,9 +26,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthSignupDTO {
     private String signup_name;
+    private String signup_name_with_initial;
     private String signup_email;
     private String signup_password;
     private String signup_nic_or_passport;
     private String signup_address;
     private byte[] signup_profile_image;
+
 }
