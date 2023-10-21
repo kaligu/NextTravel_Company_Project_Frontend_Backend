@@ -15,8 +15,8 @@ import lk.nexttravel.api_gateway.dto.user.ReqNewClientSaveDTO;
 import lk.nexttravel.api_gateway.entity.AuthUser;
 import lk.nexttravel.api_gateway.service.AuthService;
 import lk.nexttravel.api_gateway.service.SequenceGeneratorService;
-import lk.nexttravel.api_gateway.service.security.util.APIGatewayJwtAccessTokenService;
-import lk.nexttravel.api_gateway.service.security.util.RefreshTokenService;
+import lk.nexttravel.api_gateway.service.security.util.APIGatewayJwtAccessTokenServiceFrontend;
+import lk.nexttravel.api_gateway.service.security.util.RefreshTokenServiceFrontend;
 import lk.nexttravel.api_gateway.util.RespondCodes;
 import lk.nexttravel.api_gateway.util.RoleTypes;
 import lk.nexttravel.api_gateway.util.RqRpURLs;
@@ -46,10 +46,10 @@ public class AuthServiceImpl implements AuthService {
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    APIGatewayJwtAccessTokenService APIGatewayJwtAccessTokenService;
+    APIGatewayJwtAccessTokenServiceFrontend APIGatewayJwtAccessTokenServiceFrontend;
 
     @Autowired
-    RefreshTokenService refreshTokenService;
+    RefreshTokenServiceFrontend refreshTokenServiceFrontend;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -120,8 +120,8 @@ public class AuthServiceImpl implements AuthService {
         if(authUser.isPresent()){   //first check already saved AuthUser
             FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder()
                     .access_username(authUser.get().getName())
-                    .access_jwt_token(APIGatewayJwtAccessTokenService.generateToken(authUser.get().getName())) //create access token and assign it
-                    .access_refresh_token(refreshTokenService.createRefreshToken(authUser.get()))  //create refresh token and save and assign it
+                    .access_jwt_token(APIGatewayJwtAccessTokenServiceFrontend.generateToken(authUser.get().getName())) //create access token and assign it
+                    .access_refresh_token(refreshTokenServiceFrontend.createRefreshToken(authUser.get()))  //create refresh token and save and assign it
                     .build();
 
             //----------------------------------------------return if all are done

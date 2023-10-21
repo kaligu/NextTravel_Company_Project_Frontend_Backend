@@ -4,7 +4,7 @@
   @ Date         : 10/21/2023
   @ Time         : 10:43 AM
 */
-package lk.nexttravel.api_gateway.util.security;
+package lk.nexttravel.user_microservice.util.security;
 
 /**
  * @author : H.C.Kaligu Jayanath
@@ -12,11 +12,6 @@ package lk.nexttravel.api_gateway.util.security;
  * Time    : 10:43 AM
  */
 public class SecurityCodes {
-
-    //API Gateway Token Details - For Frontend
-    public static final String FRONTEND_APIGATEWAY_JWT_TOKEN_KEY = "AddddddddPIGATEWAYkfkfkkfkfdjjheenxcsecretcodetypeherejkhygyfghjjikojiuhugyffgdresrsrtvhjjnujhygtygvbjnkmklu";
-    public static final long FRONTEND_APIGATEWAY_JWT_TOKEN_KEY_VALIDITY = 5 * 60 * 60;
-
     //API Gateway Token Details - For Backend
     public static final String BACKEND_APIGATEWAY_JWT_TOKEN_USERNAME = "API_GATEWAY_BACKEND";
     public static final String BACKEND_APIGATEWAY_JWT_TOKEN_KEY = "WWWWWAddddddddPIGATEWAYkfkfkkfkfdjjheenxcsecretcodetypeherejkhygyfghjjikojiuhugyffgdresrsrtvhjjnujhygtygvbjnkmklu";
