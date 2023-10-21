@@ -26,7 +26,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Admin {
     @Id
     private String id;
+    private String signup_name_with_initial;
     private String nic_or_passport;
     private String address;
     private long salary;
+    private byte[] signup_profile_image;
 }
