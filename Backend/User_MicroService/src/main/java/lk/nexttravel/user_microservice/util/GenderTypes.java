@@ -4,7 +4,7 @@
   @ Date         : 10/21/2023
   @ Time         : 10:06 AM
 */
-package lk.nexttravel.api_gateway.util;
+package lk.nexttravel.user_microservice.util;
 
 /**
  * @author : H.C.Kaligu Jayanath
