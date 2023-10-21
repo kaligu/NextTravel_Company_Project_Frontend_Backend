@@ -6,7 +6,10 @@
 */
 package lk.nexttravel.user_microservice.service.impl;
 
+import lk.nexttravel.user_microservice.dto.ReqNewClientSaveDTO;
+import lk.nexttravel.user_microservice.dto.RespondDTO;
 import lk.nexttravel.user_microservice.service.ClientService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +20,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ClientServiceImpl implements ClientService {
+    @Override
+    public ResponseEntity<RespondDTO> saveNewClient(ReqNewClientSaveDTO reqNewClientSaveDTO) {
+        return null;
+    }
 }
