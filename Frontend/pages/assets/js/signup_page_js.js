@@ -364,7 +364,7 @@ function sendSignupDataIntoServer(){
                 // Show alert after the modal is completely hidden
 
                 alertModel_title.innerText = "Error has occured!";
-                alertModel_content.innerText = xhr+","+exception;
+                alertModel_content.innerText = xhr + "," + exception;
                 alertModel.modal('show');
 
                 // Remove event listener to avoid multiple executions
@@ -375,7 +375,7 @@ function sendSignupDataIntoServer(){
 }
 
 ////////////////////////-------------------------------------------------------------close alert model
-
-function closeAlertModel(){
+//when click alert model's close button close the model
+function closeAlerModel(){
     alertModel.modal('hide');
 }
