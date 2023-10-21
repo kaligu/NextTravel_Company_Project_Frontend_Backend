@@ -36,7 +36,7 @@ public class AuthController {
     //checkUsername
     @GetMapping(value = "/ischeck-username")
     public Mono<ResponseEntity<RespondDTO>> checkUsername(@RequestParam("username") @NonNull String username) {
-        if (username.matches("^[a-zA-Z0-9_.-]{5,30}$")) {
+        if (username.matches("^[a-zA-Z0-9_.-]{5,30}$")) {   //check Username Regax
             return Mono.just(
                     authService.ischeckUsernameAlreadyTaken(username)
             );
@@ -56,12 +56,12 @@ public class AuthController {
                                                              @RequestPart("signup_address") @NonNull String addres,
                                                              @RequestPart("signup_profile_image") byte[] image) {
 
-        if (name.matches("^[a-zA-Z0-9_.-]{5,30}$")) {
-            if (nameWithInitial.matches("([A-Z])\\w+\\s([A-Z])\\w*\\s*([A-Z])*(?=,*)")) {
-                if (email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
-                    if (password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$")) {
-                        if (nicOrPassport.matches("^[a-zA-Z0-9_-]+\\S{8,11}$")) {
-                            if (addres.matches("^\\S+\\s*[a-zA-Z0-9,.-]+\\S{0,48}$")) {
+        if (name.matches("^[a-zA-Z0-9_.-]{5,30}$")) {                                         //check Username Regax
+            if (nameWithInitial.matches("([A-Z])\\w+\\s([A-Z])\\w*\\s*([A-Z])*(?=,*)")) {     //check Name with Initial Regax
+                if (email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {     //check Email Regax
+                    if (password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$")) {         //check Password Regax
+                        if (nicOrPassport.matches("^[a-zA-Z0-9_-]+\\S{8,11}$")) {             //check Nic or Passport Regax
+                            if (addres.matches("^\\S+\\s*[a-zA-Z0-9,.-]+\\S{0,48}$")) {       //check Address Regax
                                 if (image != null) {
 
                                     return Mono.just(
