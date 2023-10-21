@@ -7,9 +7,14 @@
 package lk.nexttravel.api_gateway.service.security.util;
 
 import lk.nexttravel.api_gateway.service.security.AuthService;
+import lk.nexttravel.api_gateway.util.security.SecurityCodes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 import java.util.Date;
@@ -28,9 +33,9 @@ public class JwtAccessTokenService {
     @Autowired
     AuthService authService;
 
-    public final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+    public final long JWT_TOKEN_VALIDITY = SecurityCodes.APIGATEWAY_JWT_TOKEN_KEY_VALIDITY;
 
-    public final String JWT_TOKEN_KEY = "AddddddddPIGATEWAYkfkfkkfkfdjjheenxcsecretcodetypeherejkhygyfghjjikojiuhugyffgdresrsrtvhjjnujhygtygvbjnkmklu";
+    public final String JWT_TOKEN_KEY = SecurityCodes.APIGATEWAY_JWT_TOKEN_KEY;
 
     //retrieve username from jwt token
     public String getUsernameFromToken(String token) {
