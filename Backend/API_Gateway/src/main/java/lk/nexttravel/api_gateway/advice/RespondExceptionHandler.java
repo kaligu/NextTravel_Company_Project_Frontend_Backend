@@ -20,7 +20,7 @@ public class RespondExceptionHandler {
     protected ResponseEntity<RespondDTO> exception(DuplicateException exception) {
         System.out.println("DuplicateException"+exception.getMessage());
         return new ResponseEntity<>(
-                new RespondDTO(RespondCodes.Response_DUPLICATED,"Response_DUPLICATED", null,null)
+                new RespondDTO(RespondCodes.Response_DUPLICATED,exception.getMessage(), null,null)
                 , HttpStatus.BAD_REQUEST);
     }
 
@@ -28,7 +28,7 @@ public class RespondExceptionHandler {
     protected ResponseEntity<RespondDTO> exception(InternalServerException exception) {
         System.out.println("InternalServerException"+exception.getMessage());
         return new ResponseEntity<>(
-                new RespondDTO(RespondCodes.Response_SERVERSIDE_INTERNAL_FAIL,"Response_SERVERSIDE_INTERNAL_FAIL", null,null)
+                new RespondDTO(RespondCodes.Response_SERVERSIDE_INTERNAL_FAIL,exception.getMessage(), null,null)
                 , HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -45,7 +45,7 @@ public class RespondExceptionHandler {
         return new ResponseEntity<RespondDTO>(
                 (RespondDTO.builder()
                         .rspd_code(RespondCodes.Response_NO_DATA_FOUND)
-                        .rspd_message("Response_NO_DATA_FOUND , "+notfoundException.getMessage())
+                        .rspd_code(notfoundException.getMessage())
                         .token(null)
                         .data(null)
                         .build()
@@ -59,7 +59,7 @@ public class RespondExceptionHandler {
         return new ResponseEntity<RespondDTO>(
                 (RespondDTO.builder()
                         .rspd_code(RespondCodes.Response_NOT_AUTHORISED)
-                        .rspd_message("Response_NOT_AUTHORISED , "+passwordNotMatchException.getMessage())
+                        .repd_msg(passwordNotMatchException.getMessage())
                         .token(null)
                         .data(null)
                         .build()

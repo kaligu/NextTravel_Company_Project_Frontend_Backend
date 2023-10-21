@@ -9,8 +9,13 @@ package lk.nexttravel.api_gateway.service.impl;
 import lk.nexttravel.api_gateway.entity.util.DatabaseSequence;
 import lk.nexttravel.api_gateway.service.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.ReactiveMongoOperations;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -26,7 +31,7 @@ import static org.springframework.data.mongodb.core.query.Query.query;
  */
 
 @Service
-public class SequenceGeneratorServiceImpl implements SequenceGeneratorService {
+public class SequenceGeneratorServiceImpl implements SequenceGeneratorService{
     @Autowired
     private MongoOperations mongoOperations;
 
@@ -44,4 +49,5 @@ public class SequenceGeneratorServiceImpl implements SequenceGeneratorService {
         return !Objects.isNull(counter) ? counter.getSeq() : 1;
 
     }
+
 }

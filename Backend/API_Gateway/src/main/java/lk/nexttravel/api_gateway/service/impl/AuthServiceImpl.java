@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -77,6 +78,21 @@ public class AuthServiceImpl implements AuthService {
 //                .subscribe(response -> {
 //                    // Handle the response here
 //                });
+
+        //saved on Mongodb
+        authUserRepository.save(
+                AuthUser.builder()
+                        .id(id)
+                        .name(authSignupDTO.getSignup_name())
+                        .email(authSignupDTO.getSignup_email())
+                        .password(password)
+                        .role_type(RoleTypes.ROLE_CLIENT)
+                        .build()
+        );
+
+        //Generate tokens and save and return
+
+
 
 
 
