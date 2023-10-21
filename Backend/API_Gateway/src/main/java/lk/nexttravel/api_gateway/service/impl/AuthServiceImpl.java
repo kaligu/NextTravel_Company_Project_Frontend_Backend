@@ -20,12 +20,13 @@ import lk.nexttravel.api_gateway.util.RespondCodes;
 import lk.nexttravel.api_gateway.util.RoleTypes;
 import lk.nexttravel.api_gateway.util.RqRpURLs;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -53,6 +54,8 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     RefreshTokenService refreshTokenService;
 
+
+
     @Override
     public ResponseEntity<RespondDTO> ischeckUsernameAlreadyTaken(String username) {
         return new ResponseEntity<RespondDTO>(
@@ -73,24 +76,40 @@ public class AuthServiceImpl implements AuthService {
         //encode string of password
         String password = passwordEncoder.encode(authSignupDTO.getSignup_password());
 
-        RespondDTO respondDTO = (RespondDTO) WebClient.create()
-                .post()
-                .uri(RqRpURLs.User_Service_save_with_reg_user)
-                .bodyValue(
-                        ReqNewClientSaveDTO.builder()
-                                .id(id)
-                                .address(authSignupDTO.getSignup_address())
-                                .nic_or_passport(authSignupDTO.getSignup_nic_or_passport())
-                                .profile_image(authSignupDTO.getSignup_profile_image())
-                                .name_with_initial(authSignupDTO.getSignup_name_with_initial())
-                                .build()
-                )
-                .retrieve()
-                .bodyToMono(RespondDTO.class)
-                .subscribe(response -> {
-                    // Handle the response here
-                });
+        //Send data into User MicroService
+        // Create a RestTemplate instance
+        RestTemplate restTemplate = new RestTemplate();
 
+// Define the base URL for your service
+        String baseUrl = RqRpURLs.User_Service_save_with_reg_user;
+
+// Set the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+// Create a request entity with the request body and headers
+        HttpEntity<ReqNewClientSaveDTO> requestEntity = new HttpEntity<>(
+                ReqNewClientSaveDTO.builder()
+                        .id(id)
+                        .address(authSignupDTO.getSignup_address())
+                        .nic_or_passport(authSignupDTO.getSignup_nic_or_passport())
+                        .profile_image(authSignupDTO.getSignup_profile_image())
+                        .name_with_initial(authSignupDTO.getSignup_name_with_initial())
+                        .build(), headers);
+
+// Make an HTTP POST request
+        ResponseEntity<RespondDTO> responseEntity = restTemplate.exchange(
+                baseUrl,
+                HttpMethod.POST,
+                requestEntity,
+                RespondDTO.class
+        );
+
+// Handle the response
+        RespondDTO result = responseEntity.getBody();
+        System.out.println("Result: " + result.getRspd_code());
+        System.out.println("Result: " + result.getData().toString());
+        System.out.println("Doneooooo");
         //saved on Mongodb
         authUserRepository.save(
                                 AuthUser.builder()
@@ -114,7 +133,6 @@ public class AuthServiceImpl implements AuthService {
 
 
 
-
         System.out.println("AuthSignupDTO{" +
                 "signup_name='" + authSignupDTO.getSignup_name() + '\'' +
                 ", signup_name with initial='" + authSignupDTO.getSignup_name_with_initial() + '\'' +
@@ -134,5 +152,11 @@ public class AuthServiceImpl implements AuthService {
                         .build()
                 ,
                 HttpStatus.CREATED);
+    }
+
+    public void run(RespondDTO body){
+        System.out.println("run");
+        System.out.println("code"+body.getRspd_code());
+        System.out.println(body.getRepd_msg());
     }
 }

@@ -56,16 +56,16 @@ public class ClientServiceImpl implements ClientService {
         //check done saved
         Optional<Client> client = clientRepository.findClientById(reqNewClientSaveDTO.getId());
         if(client.isPresent()){
-            System.out.println("yes");
+            System.out.println("yes"+RespondCodes.Response_DATA_SAVED);
             return new ResponseEntity<RespondDTO>(
                     (RespondDTO.builder()
                             .rspd_code(RespondCodes.Response_DATA_SAVED)
                             .rspd_code("Client Saved! - Backend User Micro Service")
                             .token(null)
-                            .data(null)
+                            .data(client)
                             .build()
                     ),
-                    HttpStatus.NOT_FOUND
+                    HttpStatus.ACCEPTED
             );
         }else{
             System.out.println("no");
