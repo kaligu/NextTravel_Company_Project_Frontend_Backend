@@ -30,7 +30,7 @@ import java.util.function.Function;
  */
 
 @Component
-public class JwtAccessTokenService {
+public class APIGatewayJwtAccessTokenService {
     @Autowired
     AuthUserRepository authUserRepository;
 

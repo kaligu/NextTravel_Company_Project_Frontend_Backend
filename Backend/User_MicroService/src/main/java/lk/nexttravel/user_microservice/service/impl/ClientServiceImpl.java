@@ -36,12 +36,6 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ResponseEntity<RespondDTO> saveNewClient(ReqNewClientSaveDTO reqNewClientSaveDTO) {
-        System.out.println(reqNewClientSaveDTO.getId());
-        System.out.println(reqNewClientSaveDTO.getAddress());
-        System.out.println(reqNewClientSaveDTO.getName_with_initial());
-        System.out.println(Arrays.toString(reqNewClientSaveDTO.getProfile_image()));
-        System.out.println(reqNewClientSaveDTO.getNic_or_passport());
-
         //save into database
         clientRepository.save(
                 Client.builder()
@@ -52,11 +46,9 @@ public class ClientServiceImpl implements ClientService {
                         .nic_or_passport(reqNewClientSaveDTO.getNic_or_passport())
                         .build()
         );
-
         //check done saved
         Optional<Client> client = clientRepository.findClientById(reqNewClientSaveDTO.getId());
         if(client.isPresent()){
-            System.out.println("yes"+RespondCodes.Response_DATA_SAVED);
             return new ResponseEntity<RespondDTO>(
                     (RespondDTO.builder()
                             .rspd_code(RespondCodes.Response_DATA_SAVED)
@@ -65,10 +57,9 @@ public class ClientServiceImpl implements ClientService {
                             .data(client)
                             .build()
                     ),
-                    HttpStatus.ACCEPTED
+                    HttpStatus.CREATED
             );
         }else{
-            System.out.println("no");
             throw new NotfoundException("Not saved this Client! - Backend User Micro Service");
         }
     }

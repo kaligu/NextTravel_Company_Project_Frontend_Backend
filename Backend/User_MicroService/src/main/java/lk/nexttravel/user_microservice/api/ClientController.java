@@ -31,18 +31,7 @@ public class ClientController {
 
     @PostMapping(value = "/save_new_client")
     public ResponseEntity<RespondDTO> saveNewClient(@RequestBody ReqNewClientSaveDTO reqNewClientSaveDTO){
-        System.out.println("done");
-        System.out.println(reqNewClientSaveDTO.getId());
-        System.out.println(reqNewClientSaveDTO.getAddress());
-        System.out.println(reqNewClientSaveDTO.getName_with_initial());
-        System.out.println(Arrays.toString(reqNewClientSaveDTO.getProfile_image()));
-        System.out.println(reqNewClientSaveDTO.getNic_or_passport());
-
         return clientService.saveNewClient(reqNewClientSaveDTO);
     }
 
-    @PostMapping(value = "/test")
-    public String test(){
-        return "test() invokec!";
-    }
 }
