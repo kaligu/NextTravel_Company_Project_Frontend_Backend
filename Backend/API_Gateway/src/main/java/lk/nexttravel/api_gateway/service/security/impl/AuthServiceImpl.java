@@ -29,7 +29,6 @@ public class AuthServiceImpl implements AuthService {
         return new ResponseEntity<RespondDTO>(
                 RespondDTO.builder()
                         .rspd_code(RespondCodes.Response_SUCCESS)
-                        .rspd_message("Username Already Taken.")
                         .token(null)
                         .data(false)
                         .build()
@@ -54,7 +53,6 @@ public class AuthServiceImpl implements AuthService {
         return new ResponseEntity<RespondDTO> (
                 RespondDTO.builder()
                         .rspd_code(RespondCodes.Response_DATA_SAVED)
-                        .rspd_message("New User Registered Successfully!")
                         .token(null)
                         .data(null)
                         .build()

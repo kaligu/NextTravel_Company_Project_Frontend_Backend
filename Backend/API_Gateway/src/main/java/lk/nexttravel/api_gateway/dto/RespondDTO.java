@@ -24,7 +24,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class RespondDTO {
     private String rspd_code;
-    private String rspd_message;
     private Object token;
     private Object data;
 }
