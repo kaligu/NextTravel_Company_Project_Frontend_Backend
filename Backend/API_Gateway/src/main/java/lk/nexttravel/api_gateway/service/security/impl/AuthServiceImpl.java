@@ -6,15 +6,20 @@
 */
 package lk.nexttravel.api_gateway.service.security.impl;
 
+import lk.nexttravel.api_gateway.Persistence.AuthUserRepository;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.auth.AuthSignupDTO;
+import lk.nexttravel.api_gateway.entity.AuthUser;
 import lk.nexttravel.api_gateway.service.security.AuthService;
 import lk.nexttravel.api_gateway.util.RespondCodes;
+import lk.nexttravel.api_gateway.util.RoleTypes;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * @author : H.C.Kaligu Jayanath
@@ -24,6 +29,9 @@ import java.util.Arrays;
 
 @Service
 public class AuthServiceImpl implements AuthService {
+    @Autowired
+    AuthUserRepository authUserRepository;
+
     @Override
     public ResponseEntity<RespondDTO> ischeckUsernameAlreadyTaken(String username) {
         return new ResponseEntity<RespondDTO>(
@@ -58,5 +66,15 @@ public class AuthServiceImpl implements AuthService {
                         .build()
                 ,
                 HttpStatus.CREATED);
+    }
+
+    @Override
+    public Optional<RoleTypes> getRoleByUsername(String username) {
+        Optional<AuthUser> user = authUserRepository.findAuthUserByName(username);
+        if (user.isPresent()) {
+            return Optional.of(user.get().getRole_type());
+        } else {
+            return Optional.empty();
+        }
     }
 }

@@ -6,6 +6,7 @@
 */
 package lk.nexttravel.api_gateway.service.security.util;
 
+import lk.nexttravel.api_gateway.dto.auth.InternalJWTUserDTO;
 import lk.nexttravel.api_gateway.service.security.AuthService;
 import lk.nexttravel.api_gateway.util.security.SecurityCodes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,8 +101,8 @@ public class JwtAccessTokenService {
         InternalJWTUserDTO internalJWTUserDTO = new InternalJWTUserDTO();
         //check JWT
         try {
-            if(userService.getRoleByUsername(username).isPresent()){ //check database and get role
-                internalJWTUserDTO.setRole(userService.getRoleByUsername(username).get());//gett role from user database
+            if(authService.getRoleByUsername(username).isPresent()){ //check database and get role
+                internalJWTUserDTO.setRole(authService.getRoleByUsername(username).get());//gett role from user database
 
                 Jwts.parser()
                         .setSigningKey( new SecretKeySpec(Base64.getDecoder().decode(JWT_TOKEN_KEY), SignatureAlgorithm.HS512.getJcaName()))

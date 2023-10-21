@@ -31,7 +31,7 @@ public class AuthUser {
     @Id
     private String id;
 
-    private String name;
+    private String name;  //uniq
 
     private String email;
 
