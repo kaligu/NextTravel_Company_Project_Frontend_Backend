@@ -9,13 +9,11 @@ package lk.nexttravel.api_gateway.api;
 import lk.nexttravel.api_gateway.advice.util.InvalidInputException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.auth.AuthSignupDTO;
-import lk.nexttravel.api_gateway.service.security.AuthService;
+import lk.nexttravel.api_gateway.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 

@@ -7,7 +7,7 @@
 package lk.nexttravel.api_gateway.service.security.util;
 
 import lk.nexttravel.api_gateway.dto.auth.InternalJWTUserDTO;
-import lk.nexttravel.api_gateway.service.security.AuthService;
+import lk.nexttravel.api_gateway.service.AuthService;
 import lk.nexttravel.api_gateway.util.security.SecurityCodes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
