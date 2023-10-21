@@ -24,6 +24,4 @@ public interface AuthService {
 
     ResponseEntity<RespondDTO> saveNewGuestUser(AuthSignupDTO authSignupDTO);
 
-    //for security
-    Optional<RoleTypes> getRoleByUsername(String username);
 }

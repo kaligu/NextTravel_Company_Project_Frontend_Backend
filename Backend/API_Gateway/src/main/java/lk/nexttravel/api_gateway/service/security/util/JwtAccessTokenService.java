@@ -6,8 +6,11 @@
 */
 package lk.nexttravel.api_gateway.service.security.util;
 
+import lk.nexttravel.api_gateway.Persistence.AuthUserRepository;
 import lk.nexttravel.api_gateway.dto.auth.InternalJWTUserDTO;
+import lk.nexttravel.api_gateway.entity.AuthUser;
 import lk.nexttravel.api_gateway.service.AuthService;
+import lk.nexttravel.api_gateway.util.RoleTypes;
 import lk.nexttravel.api_gateway.util.security.SecurityCodes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,10 +20,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import javax.crypto.spec.SecretKeySpec;
-import java.util.Base64;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -32,7 +32,7 @@ import java.util.function.Function;
 @Component
 public class JwtAccessTokenService {
     @Autowired
-    AuthService authService;
+    AuthUserRepository authUserRepository;
 
     public final long JWT_TOKEN_VALIDITY = SecurityCodes.APIGATEWAY_JWT_TOKEN_KEY_VALIDITY;
 
@@ -101,8 +101,8 @@ public class JwtAccessTokenService {
         InternalJWTUserDTO internalJWTUserDTO = new InternalJWTUserDTO();
         //check JWT
         try {
-            if(authService.getRoleByUsername(username).isPresent()){ //check database and get role
-                internalJWTUserDTO.setRole(authService.getRoleByUsername(username).get());//gett role from user database
+            if(getRoleByUsername(username).isPresent()){ //check database and get role
+                internalJWTUserDTO.setRole(getRoleByUsername(username).get());//gett role from user database
 
                 Jwts.parser()
                         .setSigningKey( new SecretKeySpec(Base64.getDecoder().decode(JWT_TOKEN_KEY), SignatureAlgorithm.HS512.getJcaName()))
@@ -131,5 +131,14 @@ public class JwtAccessTokenService {
             return internalJWTUserDTO;
         }
 
+    }
+
+    public Optional<RoleTypes> getRoleByUsername(String username) {
+        Optional<AuthUser> user = authUserRepository.findAuthUserByName(username);
+        if (user.isPresent()) {
+            return Optional.of(user.get().getRole_type());
+        } else {
+            return Optional.empty();
+        }
     }
 }

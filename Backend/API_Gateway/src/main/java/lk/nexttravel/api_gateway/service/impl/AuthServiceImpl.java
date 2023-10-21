@@ -9,9 +9,12 @@ package lk.nexttravel.api_gateway.service.impl;
 import lk.nexttravel.api_gateway.Persistence.AuthUserRepository;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.auth.AuthSignupDTO;
+import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.entity.AuthUser;
 import lk.nexttravel.api_gateway.service.AuthService;
 import lk.nexttravel.api_gateway.service.SequenceGeneratorService;
+import lk.nexttravel.api_gateway.service.security.util.JwtAccessTokenService;
+import lk.nexttravel.api_gateway.service.security.util.RefreshTokenService;
 import lk.nexttravel.api_gateway.util.RespondCodes;
 import lk.nexttravel.api_gateway.util.RoleTypes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +44,12 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    JwtAccessTokenService jwtAccessTokenService;
+
+    @Autowired
+    RefreshTokenService refreshTokenService;
 
     @Override
     public ResponseEntity<RespondDTO> ischeckUsernameAlreadyTaken(String username) {
@@ -81,17 +90,24 @@ public class AuthServiceImpl implements AuthService {
 
         //saved on Mongodb
         authUserRepository.save(
-                AuthUser.builder()
-                        .id(id)
-                        .name(authSignupDTO.getSignup_name())
-                        .email(authSignupDTO.getSignup_email())
-                        .password(password)
-                        .role_type(RoleTypes.ROLE_CLIENT)
-                        .build()
-        );
+                                AuthUser.builder()
+                                        .id(id)
+                                        .name(authSignupDTO.getSignup_name())
+                                        .email(authSignupDTO.getSignup_email())
+                                        .password(password)
+                                        .role_type(RoleTypes.ROLE_CLIENT)
+                                        .build());
 
-        //Generate tokens and save and return
-
+        //Check saved and Generate tokens and save and return
+        Optional<AuthUser> authUser = authUserRepository.findAuthUserByName(authSignupDTO.getSignup_name());
+        if(authUser.isPresent()){
+            FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder()
+                    .access_username(authUser.get().getName())
+                    .access_jwt_token(jwtAccessTokenService.generateToken(authUser.get().getName())) //create access token and assign it
+                    .access_refresh_token(refreshTokenService.createRefreshToken(authUser.get()))  //create refresh token and save and assign it
+                    .build();
+            System.out.println(frontendTokenDTO.toString());
+        }
 
 
 
@@ -115,15 +131,5 @@ public class AuthServiceImpl implements AuthService {
                         .build()
                 ,
                 HttpStatus.CREATED);
-    }
-
-    @Override
-    public Optional<RoleTypes> getRoleByUsername(String username) {
-        Optional<AuthUser> user = authUserRepository.findAuthUserByName(username);
-        if (user.isPresent()) {
-            return Optional.of(user.get().getRole_type());
-        } else {
-            return Optional.empty();
-        }
     }
 }
