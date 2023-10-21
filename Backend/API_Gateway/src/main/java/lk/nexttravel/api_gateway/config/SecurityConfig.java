@@ -4,7 +4,7 @@
   @ Date         : 10/20/2023
   @ Time         : 4:32 AM
 */
-package lk.nexttravel.api_gateway.entity;
+package lk.nexttravel.api_gateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
