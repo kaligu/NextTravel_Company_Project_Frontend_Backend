@@ -12,11 +12,6 @@ package lk.nexttravel.user_microservice.util;
  * Time    : 5:00 AM
  */
 public class RespondCodes {
-    //Backen Api gateway to Frontend Respond codes
-    public static final String FrontRespond_SUCCESS              = "1000";
-
-    //Backen Microservice to Api gateway Respond codes
-    public static final String BackRespond_SUCCESS              = "2000";
 
     public static final String Response_SUCCESS              = "00";
     public static final String Response_NO_DATA_FOUND        = "01";

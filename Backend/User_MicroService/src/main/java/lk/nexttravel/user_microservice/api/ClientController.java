@@ -6,12 +6,14 @@
 */
 package lk.nexttravel.user_microservice.api;
 
+import lk.nexttravel.user_microservice.dto.ReqNewClientSaveDTO;
 import lk.nexttravel.user_microservice.dto.RespondDTO;
+import lk.nexttravel.user_microservice.service.ClientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
 
 /**
  * @author : H.C.Kaligu Jayanath
@@ -24,8 +26,23 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 public class ClientController {
 
-    @PostMapping(value = "/save_client")
-    public ResponseEntity<RespondDTO> saveClient(){
+    @Autowired
+    ClientService clientService;
 
+    @PostMapping(value = "/save_new_client")
+    public ResponseEntity<RespondDTO> saveNewClient(@RequestBody ReqNewClientSaveDTO reqNewClientSaveDTO){
+        System.out.println("done");
+        System.out.println(reqNewClientSaveDTO.getId());
+        System.out.println(reqNewClientSaveDTO.getAddress());
+        System.out.println(reqNewClientSaveDTO.getName_with_initial());
+        System.out.println(Arrays.toString(reqNewClientSaveDTO.getProfile_image()));
+        System.out.println(reqNewClientSaveDTO.getNic_or_passport());
+
+        return clientService.saveNewClient(reqNewClientSaveDTO);
+    }
+
+    @PostMapping(value = "/test")
+    public String test(){
+        return "test() invokec!";
     }
 }

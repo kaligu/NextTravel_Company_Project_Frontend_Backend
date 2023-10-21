@@ -10,6 +10,7 @@ import lk.nexttravel.api_gateway.Persistence.AuthUserRepository;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.auth.AuthSignupDTO;
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
+import lk.nexttravel.api_gateway.dto.user.ReqNewClientSaveDTO;
 import lk.nexttravel.api_gateway.entity.AuthUser;
 import lk.nexttravel.api_gateway.service.AuthService;
 import lk.nexttravel.api_gateway.service.SequenceGeneratorService;
@@ -17,6 +18,7 @@ import lk.nexttravel.api_gateway.service.security.util.JwtAccessTokenService;
 import lk.nexttravel.api_gateway.service.security.util.RefreshTokenService;
 import lk.nexttravel.api_gateway.util.RespondCodes;
 import lk.nexttravel.api_gateway.util.RoleTypes;
+import lk.nexttravel.api_gateway.util.RqRpURLs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -71,22 +73,23 @@ public class AuthServiceImpl implements AuthService {
         //encode string of password
         String password = passwordEncoder.encode(authSignupDTO.getSignup_password());
 
-//        WebClient.create()
-//                .post()
-//                .uri(RqRpURLs.User_Service_save_with_reg_user)
-//                .bodyValue(
-//                        ReqClientRegUserDTO.builder()
-//                                .id(id)
-//                                .address(reqSignupDTO.getSignup_address())
-//                                .nic_or_passport(reqSignupDTO.getSignup_nic_or_passport())
-//                                .profile_picture(profileStringData)
-//                                .build()
-//                )
-//                .retrieve()
-//                .bodyToMono(String.class)
-//                .subscribe(response -> {
-//                    // Handle the response here
-//                });
+        RespondDTO respondDTO = (RespondDTO) WebClient.create()
+                .post()
+                .uri(RqRpURLs.User_Service_save_with_reg_user)
+                .bodyValue(
+                        ReqNewClientSaveDTO.builder()
+                                .id(id)
+                                .address(authSignupDTO.getSignup_address())
+                                .nic_or_passport(authSignupDTO.getSignup_nic_or_passport())
+                                .profile_image(authSignupDTO.getSignup_profile_image())
+                                .name_with_initial(authSignupDTO.getSignup_name_with_initial())
+                                .build()
+                )
+                .retrieve()
+                .bodyToMono(RespondDTO.class)
+                .subscribe(response -> {
+                    // Handle the response here
+                });
 
         //saved on Mongodb
         authUserRepository.save(
