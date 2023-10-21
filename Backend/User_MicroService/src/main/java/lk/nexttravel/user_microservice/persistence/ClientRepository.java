@@ -6,10 +6,16 @@
 */
 package lk.nexttravel.user_microservice.persistence;
 
+import lk.nexttravel.user_microservice.entity.Client;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
 /**
  * @author : H.C.Kaligu Jayanath
  * Date    : 10/21/2023
  * Time    : 10:22 AM
  */
-public interface ClientRepository {
+
+@Repository
+public interface ClientRepository extends MongoRepository<Client, Long> {
 }
