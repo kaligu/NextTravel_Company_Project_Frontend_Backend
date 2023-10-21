@@ -8,6 +8,7 @@ package lk.nexttravel.api_gateway.service.security.util;
 
 import lk.nexttravel.api_gateway.Persistence.AuthUserRepository;
 import lk.nexttravel.api_gateway.Persistence.RefreshTokenRepository;
+import lk.nexttravel.api_gateway.dto.auth.InternalRefreshTUserDTO;
 import lk.nexttravel.api_gateway.entity.AuthUser;
 import lk.nexttravel.api_gateway.entity.RefreshToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,8 +86,8 @@ public class RefreshTokenService {
                 //delte it
                 refreshTokenRepository.delete(Token);
                 //generate new one
-                if(userRepository.findUserByName(username).isPresent()){
-                    String tokenkey = createRefreshToken(userRepository.findUserByName(username).get());
+                if(authUserRepository.findAuthUserByName(username).isPresent()){
+                    String tokenkey = createRefreshToken(authUserRepository.findAuthUserByName(username).get());
                     internalRefreshTUserDTO.setRefreshToken(tokenkey);
                     internalRefreshTUserDTO.setUserAuthenticated(true);
                     return internalRefreshTUserDTO;
