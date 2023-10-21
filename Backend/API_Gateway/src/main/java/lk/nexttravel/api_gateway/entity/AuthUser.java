@@ -28,6 +28,9 @@ import org.springframework.stereotype.Component;
 @Document(collection = "AuthUser")
 public class AuthUser {
 
+    @Transient
+    public static final String SEQUENCE_NAME = "users_sequence";
+
     @Id
     private String id;
 
