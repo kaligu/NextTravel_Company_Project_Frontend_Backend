@@ -12,4 +12,6 @@ package lk.nexttravel.api_gateway.util;
  * Time    : 10:06 AM
  */
 public enum GenderTypes {
+    MALE,
+    FEMALE
 }
