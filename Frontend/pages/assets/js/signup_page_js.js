@@ -1,12 +1,14 @@
 ///////////////////////////////////////////////////////////////////////////////////////////--variables
+
 const signupMainFormContainer = $('#main_signup_form_container');
 const checkUsernameContainer = $('#check_username_container');
 
 const loadingModel = $('#loading-model');
 
 const alertModel = $('#alert-model');
-const alertModel_title =  document.getElementById('alert-model-title');
-const alertModel_content = document.getElementById('alert-model-content');
+const alertModel_title =  $('#alert-model-title');
+const alertModel_content = $('#alert-model-content');
+
 //////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////--check username interface
 
 //if next button clicked
@@ -266,7 +268,7 @@ profileImageInput.onchange = () => {
     const minvalidFeedback = $('#img-invalid-feedback');
     const mvalidFeedback = $('#img-valid-feedback');
     const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-    const maxFileSize = 5 * 1024 * 1024; // 5MB
+    const maxFileSize = 2 * 1024 * 1024; // 2MB
 
     if (profileImageInput.files.length > 0) {
         const file = profileImageInput.files[0];
@@ -303,6 +305,7 @@ function readyToEnableSignupBtn() {
 }
 
 function sendSignupDataIntoServer(){
+
     //show loading model
     loadingModel.modal('show');
 
@@ -335,6 +338,7 @@ function sendSignupDataIntoServer(){
     //send JSON to signup
     // Send the form data to the server
     $.ajax({
+
         method: "POST",
         async: true,
         url: "http://localhost:1010/main/auth/signup-guestuser",
@@ -343,13 +347,15 @@ function sendSignupDataIntoServer(){
         contentType: false,
         data: formData,
         success: function (data) {
+            location.reload();
+
             //hide loading model
             loadingModel.modal('hide');
 
             loadingModel.on('hidden.bs.modal', function () {
                 // Show alert after the modal is completely hidden
-                alertModel_title.innerText = "Done";
-                alertModel_content.innerText = "New User registered successfully!";
+                alertModel_title.text("Done");
+                alertModel_content.text("New User registered successfully!");
                 alertModel.modal('show');
 
                 // Remove the event listener to avoid multiple executions
@@ -357,14 +363,16 @@ function sendSignupDataIntoServer(){
             });
         },
         error: function (xhr, exception) {
+            location.reload();
+
             //hide loading model
             loadingModel.modal('hide');
 
             loadingModel.on('hidden.bs.modal', function () {
                 // Show alert after the modal is completely hidden
 
-                alertModel_title.innerText = "Error has occured!";
-                alertModel_content.innerText = xhr + "," + exception;
+                alertModel_title.text("Error has occurred!");
+                alertModel_content.text(xhr + ", " + exception);
                 alertModel.modal('show');
 
                 // Remove event listener to avoid multiple executions
@@ -376,6 +384,6 @@ function sendSignupDataIntoServer(){
 
 ////////////////////////-------------------------------------------------------------close alert model
 //when click alert model's close button close the model
-function closeAlerModel(){
+function closeAlertModel(){
     alertModel.modal('hide');
 }

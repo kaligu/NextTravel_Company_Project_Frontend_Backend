@@ -160,7 +160,7 @@
                                 Looks good!
                             </div>
                             <div class="invalid-feedback" id="img-invalid-feedback">
-                                Please choose a valid image (JPG, JPEG, PNG, or GIF format) and ensure the file size is less than 5MB.
+                                Please choose a valid image (JPG, JPEG, PNG, or GIF format) and ensure the file size is less than 2MB.
                             </div>
                         </div>
                         <br>
@@ -177,17 +177,18 @@
 
 <!-- loading window -->
 <!-- use Modal -->
-<div class="modal fade " id="loading-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-bs-backdrop='static'>
+<div class="modal fade" id="loading-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-bs-backdrop='static'>
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <!--          <div class="modal-header">-->
             <!--            -->
             <!--          </div>-->
-            <div class="modal-body text-center bg-info">
+            <div class="modal-body text-center bg-info flex-box">
                 <img src="assets/images/logoloading.gif" class="img-fluid" alt="Responsive image" style="width: 50%; height: 50%">
+
             </div>
             <div class="modal-footer justify-content-center bg-info">
-                <h6 class="modal-title " style="color: black" id="exampleModalLongTitle">Please Wait... </h6>
+                <h6 class="modal-title text-white" id="exampleModalLongTitle">Please Wait... </h6>
             </div>
         </div>
     </div>
@@ -205,12 +206,11 @@
                 <p class="modal-dialog-centered" id="alert-model-content">content</p>
             </div>
             <div class="modal-footer ">
-                <button type="button" class="btn btn-primary bg-success w-25" onclick="closeAlerModel()" id="alert-model-btn"> Ok </button>
+                <button type="button" class="btn btn-primary bg-success w-25" onclick="closeAlertModel()" id="alert-model-btn"> Ok </button>
             </div>
         </div>
     </div>
 </div>
-
 
 <script src="assets/js/jquery-3.6.1.min.js"></script>
 <script src="assets/js/signup_page_js.js"></script>
