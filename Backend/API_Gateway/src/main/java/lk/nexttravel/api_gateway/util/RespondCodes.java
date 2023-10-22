@@ -24,6 +24,7 @@ public class RespondCodes {
     public static final String Response_DATA_INVALID        = "12";
     public static final String Response_AUTHORISED       = "13";
     public static final String Response_DATA_SAVED         = "14";
+    public static final String Response_INTERNAL_SERVER_FAIL        = "15";
 
     public static final String Response_New_Tokens_Generated        = "C100";
 

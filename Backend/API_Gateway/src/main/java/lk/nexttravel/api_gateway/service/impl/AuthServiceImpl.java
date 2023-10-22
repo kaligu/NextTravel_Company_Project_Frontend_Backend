@@ -62,6 +62,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public ResponseEntity<RespondDTO> ischeckUsernameAlreadyTaken(String username) {
+//        System.out.println(username);
         try{
             //check username on DB
             if(authUserRepository.existsByName(username)){

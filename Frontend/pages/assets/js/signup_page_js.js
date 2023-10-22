@@ -1,3 +1,12 @@
+//////////////////////////////////----variable must
+
+let RespondCodes = {
+    Response_SUCCESS: "00",
+    Response_NO_DATA_FOUND: "01",
+    Response_DUPLICATED   : "06",
+    Response_INTERNAL_SERVER_FAIL  :"15"
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////--variables
 
 const signupMainFormContainer = $('#main_signup_form_container');
@@ -40,27 +49,26 @@ signup_username.on('input', async function () {
                 signup_username.addClass('is-valid');
                 signup_username.removeClass('is-invalid');
 
-                invalid_para_dbcheck.hide(); // Use .show()
-                next_btn.prop("disabled", false); // Enable the button
+                invalid_para_dbcheck.hide();
+                next_btn.prop("disabled", false);
             } else {
                 signup_username.removeClass('is-valid');
                 signup_username.addClass('is-invalid');
 
-                invalid_para_dbcheck.show(); // Use .hide()
-                next_btn.prop("disabled", true); // Disable the button
+                invalid_para_dbcheck.show();
+                next_btn.prop("disabled", true);
             }
         } catch (error) {
             console.log("Error checking username availability:", error);
         }
     } else {
-        invalid_para_dbcheck.hide(); // Use .hide()
-        // Username is invalid
+        invalid_para_dbcheck.hide();
         signup_username.removeClass('is-valid');
         signup_username.addClass('is-invalid');
         invalidFeedback.text("Please enter a valid Username here! It must include over three characters...");
         invalidFeedback.show();
 
-        next_btn.prop("disabled", true); // Disable the button
+        next_btn.prop("disabled", true);
     }
 });
 
@@ -69,27 +77,33 @@ function isUsernameCheckedRegex(username) {
     return regex.test(username);
 }
 
-async function isUsernameAvailable(username) {
-    try {
-        const url = 'http://localhost:1010/main/auth/ischeck-username?username=' + encodeURIComponent(username);
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
+// Check username availability using AJAX
+function isUsernameAvailable(username) {
+    return new Promise(function (resolve) {
+        $.ajax({
+            method: "GET",
+            async: true,
+            url: 'http://localhost:1010/main/auth/ischeck-username?username=' + encodeURIComponent(username),
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if (data.rspd_code === RespondCodes.Response_SUCCESS) {
+                    console.log("Done! No Users of this username...");
+                    resolve(true);
+                } else {
+                    console.log("Error occured!");
+                    resolve(false);
+                }
             },
+            error: function (xhr, exception) {
+                resolve(false);
+                console.log("Exception occured!");
+            }
         });
-
-        if (response.ok) {
-            // console.log("ok");
-            return true;  //you can save this
-        }else {
-            return false;
-        }
-    } catch (error) {
-        console.log("Error: " + error.message);
-        return false;
-    }
+    });
 }
+
+
 
 
 //---------------------------------------------------------------------
@@ -305,6 +319,7 @@ function readyToEnableSignupBtn() {
     }
 }
 
+//-------------------------------------send signup form data into DB
 function sendSignupDataIntoServer(){
 
     //show loading model
@@ -341,7 +356,6 @@ function sendSignupDataIntoServer(){
     $.ajax({
 
         method: "POST",
-        headers: {'Authorization':'dddd'},
         async: true,
         url: "http://localhost:1010/main/auth/signup-guestuser",
 
