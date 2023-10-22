@@ -31,6 +31,7 @@ public class ClientController {
 
     @PostMapping(value = "/save_new_client")
     public ResponseEntity<RespondDTO> saveNewClient(@RequestBody ReqNewClientSaveDTO reqNewClientSaveDTO){
+        System.out.println("inb");
         return clientService.saveNewClient(reqNewClientSaveDTO);
     }
 

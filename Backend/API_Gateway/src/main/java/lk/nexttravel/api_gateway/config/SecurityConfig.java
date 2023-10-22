@@ -6,9 +6,11 @@
 */
 package lk.nexttravel.api_gateway.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.User;
@@ -49,13 +51,14 @@ public class SecurityConfig {
         return https
                 .authorizeExchange(auth -> {
 //                    auth.pathMatchers("/http://localhost:63342/**").permitAll();  //mekata danone client url eka
-
-                    auth.anyExchange().permitAll();
+                    auth.anyExchange().permitAll(); //okotm permit krl thinne error nisa
                 })
                 .httpBasic(httpBasic -> httpBasic.disable())
                 .formLogin(formLogin -> formLogin.disable())
                 .csrf(csrf -> csrf.disable())
-
                 .build();
     }
+
+
+
 }

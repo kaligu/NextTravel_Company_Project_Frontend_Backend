@@ -7,6 +7,7 @@
 package lk.nexttravel.api_gateway.service.impl;
 
 import lk.nexttravel.api_gateway.Persistence.AuthUserRepository;
+import lk.nexttravel.api_gateway.advice.util.DuplicateException;
 import lk.nexttravel.api_gateway.advice.util.InternalServerException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.auth.AuthSignupDTO;
@@ -61,15 +62,30 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public ResponseEntity<RespondDTO> ischeckUsernameAlreadyTaken(String username) {
-        return new ResponseEntity<RespondDTO>(
-                RespondDTO.builder()
-                        .rspd_code(RespondCodes.Response_SUCCESS)
-                        .token(null)
-                        .data(false)
-                        .build()
-                ,
-                HttpStatus.OK
-        );
+        try{
+            //check username on DB
+            if(authUserRepository.existsByName(username)){
+//                System.out.println("duplicate");
+                //Existed
+                throw new DuplicateException("This username already Exists!");
+            }else{
+//                System.out.println("done");
+                //not Existed
+                return new ResponseEntity<RespondDTO>(
+                        RespondDTO.builder()
+                                .rspd_code(RespondCodes.Response_SUCCESS)
+                                .repd_msg("This User not exists!")
+                                .token(null)
+                                .data(null)
+                                .build()
+                        ,
+                        HttpStatus.OK
+                );
+            }
+        }catch (Exception e){
+//            System.out.println("exception");
+            throw new InternalServerException("Username Check Exception Internal!");
+        }
     }
 
     @Override

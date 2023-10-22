@@ -36,11 +36,16 @@ signup_username.on('input', async function () {
         // Check if the username is available in the database
         try {
             const isAvailable = await isUsernameAvailable(username);
-            if (!isAvailable) {
+            if (isAvailable) {
+                signup_username.addClass('is-valid');
+                signup_username.removeClass('is-invalid');
+
                 invalid_para_dbcheck.hide(); // Use .show()
                 next_btn.prop("disabled", false); // Enable the button
-
             } else {
+                signup_username.removeClass('is-valid');
+                signup_username.addClass('is-invalid');
+
                 invalid_para_dbcheck.show(); // Use .hide()
                 next_btn.prop("disabled", true); // Disable the button
             }
@@ -75,18 +80,14 @@ async function isUsernameAvailable(username) {
         });
 
         if (response.ok) {
-            const data = await response.json();
-            if(data.data === true){
-                return true;
-            }else if(data.data === false){
-                return false;
-            }
-        } else {
-            console.log("Backend Not connected to Check Username!");
+            console.log("ok");
+            return true;  //you can save this
+        }else {
+            return false;
         }
     } catch (error) {
-        console.error(error);
-        throw error;
+        console.log("Error: " + error.message);
+        return false;
     }
 }
 
@@ -340,6 +341,7 @@ function sendSignupDataIntoServer(){
     $.ajax({
 
         method: "POST",
+        headers: {'Authorization':'dddd'},
         async: true,
         url: "http://localhost:1010/main/auth/signup-guestuser",
 

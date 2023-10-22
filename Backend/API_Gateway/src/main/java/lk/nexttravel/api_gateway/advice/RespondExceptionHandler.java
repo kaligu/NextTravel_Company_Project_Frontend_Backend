@@ -18,15 +18,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class RespondExceptionHandler {
     @ExceptionHandler(DuplicateException.class)
     protected ResponseEntity<RespondDTO> exception(DuplicateException exception) {
-        System.out.println("DuplicateException"+exception.getMessage());
+//        System.out.println("DuplicateException"+exception.getMessage());
         return new ResponseEntity<>(
                 new RespondDTO(RespondCodes.Response_DUPLICATED,exception.getMessage(), null,null)
-                , HttpStatus.BAD_REQUEST);
+                , HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(InternalServerException.class)
     protected ResponseEntity<RespondDTO> exception(InternalServerException exception) {
-        System.out.println("InternalServerException"+exception.getMessage());
+//        System.out.println("InternalServerException"+exception.getMessage());
         return new ResponseEntity<>(
                 new RespondDTO(RespondCodes.Response_SERVERSIDE_INTERNAL_FAIL,exception.getMessage(), null,null)
                 , HttpStatus.INTERNAL_SERVER_ERROR);
@@ -34,7 +34,7 @@ public class RespondExceptionHandler {
 
     @ExceptionHandler(InvalidInputException.class)
     protected ResponseEntity<RespondDTO> exception(InvalidInputException exception) {
-        System.out.println("InvalidInputException"+exception.getMessage());
+//        System.out.println("InvalidInputException"+exception.getMessage());
         return new ResponseEntity<>(
                 new RespondDTO(RespondCodes.Response_DATA_INVALID,exception.getMessage(), null,null)
                 , HttpStatus.BAD_REQUEST);

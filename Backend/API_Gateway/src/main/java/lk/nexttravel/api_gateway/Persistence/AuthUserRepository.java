@@ -21,4 +21,5 @@ import java.util.Optional;
 @Repository
 public interface AuthUserRepository extends MongoRepository<AuthUser, String> {
     Optional<AuthUser> findAuthUserByName(String Username);
+    boolean existsByName(String username);
 }
