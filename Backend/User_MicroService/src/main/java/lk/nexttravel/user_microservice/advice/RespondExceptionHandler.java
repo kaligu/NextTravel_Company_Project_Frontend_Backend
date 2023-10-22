@@ -1,5 +1,6 @@
 package lk.nexttravel.user_microservice.advice;
 
+import lk.nexttravel.user_microservice.advice.util.InternalServerException;
 import lk.nexttravel.user_microservice.advice.util.NotfoundException;
 import lk.nexttravel.user_microservice.dto.RespondDTO;
 import lk.nexttravel.user_microservice.util.RespondCodes;
@@ -29,6 +30,14 @@ public class RespondExceptionHandler {
                 ),
                 HttpStatus.NOT_FOUND
         );
+    }
+
+    @ExceptionHandler(InternalServerException.class)
+    protected ResponseEntity<RespondDTO> exception(InternalServerException exception) {
+        System.out.println("InternalServerException"+exception.getMessage());
+        return new ResponseEntity<>(
+                new RespondDTO(RespondCodes.Response_SERVERSIDE_INTERNAL_FAIL,exception.getMessage(), null,null)
+                , HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

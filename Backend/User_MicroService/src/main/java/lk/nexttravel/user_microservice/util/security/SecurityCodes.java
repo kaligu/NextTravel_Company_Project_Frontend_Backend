@@ -6,8 +6,7 @@ package lk.nexttravel.user_microservice.util.security;
  * Time    : 10:43 AM
  */
 public class SecurityCodes {
-    //API Gateway Token Details - For Backend
+    //API Gateway Token key - For Backend connection with api gateway
     public static final String BACKEND_APIGATEWAY_JWT_TOKEN_USERNAME = "API_GATEWAY_BACKEND";
     public static final String BACKEND_APIGATEWAY_JWT_TOKEN_KEY = "WWWWWAddddddddPIGATEWAYkfkfkkfkfdjjheenxcsecretcodetypeherejkhygyfghjjikojiuhugyffgdresrsrtvhjjnujhygtygvbjnkmklu";
-    public static final long BACKEND_APIGATEWAY_JWT_TOKEN_KEY_VALIDITY     = 5 * 60 * 80;
 }

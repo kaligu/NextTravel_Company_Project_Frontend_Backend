@@ -30,4 +30,7 @@ public class ReqNewClientSaveDTO {
     private String address;
     private byte[] profile_image;
     private String nic_or_passport;
+
+    //---for security purpose
+    private String token;
 }

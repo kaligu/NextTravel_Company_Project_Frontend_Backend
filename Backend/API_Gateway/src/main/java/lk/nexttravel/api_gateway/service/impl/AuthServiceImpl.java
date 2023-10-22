@@ -11,10 +11,11 @@ import lk.nexttravel.api_gateway.advice.util.InternalServerException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.auth.AuthSignupDTO;
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
-import lk.nexttravel.api_gateway.dto.user.ReqNewClientSaveDTO;
+import lk.nexttravel.api_gateway.dto.user.UserReqNewClientSaveDTO;
 import lk.nexttravel.api_gateway.entity.AuthUser;
 import lk.nexttravel.api_gateway.service.AuthService;
 import lk.nexttravel.api_gateway.service.SequenceGeneratorService;
+import lk.nexttravel.api_gateway.service.security.util.APIGatewayJwtAccessTokenServiceBackend;
 import lk.nexttravel.api_gateway.service.security.util.APIGatewayJwtAccessTokenServiceFrontend;
 import lk.nexttravel.api_gateway.service.security.util.RefreshTokenServiceFrontend;
 import lk.nexttravel.api_gateway.util.RespondCodes;
@@ -54,6 +55,9 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    APIGatewayJwtAccessTokenServiceBackend apiGatewayJwtAccessTokenServiceBackend;
+
 
     @Override
     public ResponseEntity<RespondDTO> ischeckUsernameAlreadyTaken(String username) {
@@ -81,8 +85,9 @@ public class AuthServiceImpl implements AuthService {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             // Create a request entity with the request body and headers
-            HttpEntity<ReqNewClientSaveDTO> requestEntity = new HttpEntity<>(
-                    ReqNewClientSaveDTO.builder()
+            HttpEntity<UserReqNewClientSaveDTO> requestEntity = new HttpEntity<>(
+                    UserReqNewClientSaveDTO.builder()
+                            .token( apiGatewayJwtAccessTokenServiceBackend.generateToken() ) //create a session token to connect with microservice check this request is valid request
                             .id(id)
                             .address(authSignupDTO.getSignup_address())
                             .nic_or_passport(authSignupDTO.getSignup_nic_or_passport())
@@ -96,10 +101,17 @@ public class AuthServiceImpl implements AuthService {
                     requestEntity,
                     RespondDTO.class
             );
-            //check if not saved
-            if(!responseEntity.getStatusCode().equals(HttpStatus.CREATED)){
-                throw new InternalServerException("This User not saved! User Micro Serive Error!");
+            //##---------------First Response authentication-----------------------------
+            String token = (String) responseEntity.getBody().getToken();
+            if(apiGatewayJwtAccessTokenServiceBackend.isTokenValid(token)){
+                //check if not saved throw exception
+                if(!responseEntity.getStatusCode().equals(HttpStatus.CREATED)){
+                    throw new InternalServerException("This User not saved! User Micro Serive Error!");
+                }
+            }else {
+                throw new InternalServerException("Not valid token received! User Micro Serive Error!");
             }
+
         }catch (Exception e){
             throw new InternalServerException("This User not saved! User Micro Serive Error!");
         }

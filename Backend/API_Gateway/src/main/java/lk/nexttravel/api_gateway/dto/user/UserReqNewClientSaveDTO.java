@@ -17,11 +17,14 @@ import org.springframework.stereotype.Component;
 @ToString
 
 @Component
-public class ReqNewClientSaveDTO {
+public class UserReqNewClientSaveDTO {
     @Id
     private String id;
     private String name_with_initial;
     private String address;
     private byte[] profile_image;
     private String nic_or_passport;
+
+    //---for security purpose
+    private String token;
 }
