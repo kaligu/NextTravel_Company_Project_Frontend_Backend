@@ -39,7 +39,8 @@ dependencies {
     //------mail sending dependency
     implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-
+    //------apache velocity dependency
+    implementation 'org.apache.velocity:velocity-engine-core:2.3'
 }
 
 tasks.named('test') {

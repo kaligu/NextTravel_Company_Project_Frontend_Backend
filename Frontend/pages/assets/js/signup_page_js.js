@@ -350,13 +350,13 @@ function sendSignupDataIntoServer(){
     formData.append("signup_address", form_signup_address);
     formData.append("signup_profile_image", form_signup_profile_image);
 
-    console.log(form_signup_name);
-    console.log(form_signup_name_with_initial);
-    console.log(form_signup_email);
-    console.log(form_signup_password);
-    console.log(form_signup_nic_or_passport);
-    console.log(form_signup_address);
-    console.log(form_signup_profile_image);
+    // console.log(form_signup_name);
+    // console.log(form_signup_name_with_initial);
+    // console.log(form_signup_email);
+    // console.log(form_signup_password);
+    // console.log(form_signup_nic_or_passport);
+    // console.log(form_signup_address);
+    // console.log(form_signup_profile_image);
 
     //send JSON to signup
     // Send the form data to the server
@@ -378,14 +378,20 @@ function sendSignupDataIntoServer(){
             //hide loading model
             loadingModel.modal('hide');
 
+
+
             loadingModel.on('hidden.bs.modal', function () {
                 // Show alert after the modal is completely hidden
                 alertModel_title.text("Done");
-                alertModel_content.text("New User registered successfully!");
+                alertModel_content.text("You registered successfully!");
                 alertModel.modal('show');
 
                 // Remove the event listener to avoid multiple executions
                 loadingModel.off('hidden.bs.modal');
+
+                location.reload();
+
+                window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/client_main_page.html?_ijt=65d3q769nd0k24e1vqus1m71m7&_ij_reload=RELOAD_ON_SAVE';
             });
         },
         error: function (xhr, exception) {
@@ -402,6 +408,8 @@ function sendSignupDataIntoServer(){
 
                 // Remove event listener to avoid multiple executions
                 loadingModel.off('hidden.bs.modal');
+
+                location.reload();
             });
         }
     })
