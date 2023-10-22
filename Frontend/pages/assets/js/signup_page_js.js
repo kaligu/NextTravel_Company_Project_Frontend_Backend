@@ -80,7 +80,7 @@ async function isUsernameAvailable(username) {
         });
 
         if (response.ok) {
-            console.log("ok");
+            // console.log("ok");
             return true;  //you can save this
         }else {
             return false;
