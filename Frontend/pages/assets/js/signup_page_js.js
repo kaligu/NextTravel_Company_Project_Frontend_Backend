@@ -375,13 +375,6 @@ function sendSignupDataIntoServer(){
             localStorage.setItem("secure_data_jwt_access_token", data.token.access_jwt_token);
             localStorage.setItem("secure_data_refresh_token", data.token.access_refresh_token);
 
-            alert("secure_data_username : "+localStorage.getItem("secure_data_username")+
-            "secure_data_jwt_access_token : "+localStorage.getItem("secure_data_jwt_access_token")+
-                "secure_data_refresh_token : "+localStorage.getItem("secure_data_refresh_token")
-            );
-
-            location.reload();
-
             //hide loading model
             loadingModel.modal('hide');
 
@@ -396,7 +389,6 @@ function sendSignupDataIntoServer(){
             });
         },
         error: function (xhr, exception) {
-            location.reload();
 
             //hide loading model
             loadingModel.modal('hide');
@@ -405,7 +397,7 @@ function sendSignupDataIntoServer(){
                 // Show alert after the modal is completely hidden
 
                 alertModel_title.text("Error has occurred!");
-                alertModel_content.text(xhr + ", " + exception);
+                alertModel_content.text("Server Error found! User Registered Error!  Try again");
                 alertModel.modal('show');
 
                 // Remove event listener to avoid multiple executions

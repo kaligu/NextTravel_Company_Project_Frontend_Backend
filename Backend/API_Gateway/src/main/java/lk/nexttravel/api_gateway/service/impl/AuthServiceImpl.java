@@ -120,7 +120,7 @@ public class AuthServiceImpl implements AuthService {
             );
             //##---------------First Response authentication-----------------------------
             String token = (String) responseEntity.getBody().getToken();
-            if(apiGatewayJwtAccessTokenServiceBackend.isTokenValid(token)){
+            if(apiGatewayJwtAccessTokenServiceBackend.isTokenValid(token)){ //check recieved token first
                 //check if not saved throw exception
                 if(!responseEntity.getStatusCode().equals(HttpStatus.CREATED)){
                     throw new InternalServerException("This User not saved! User Micro Serive Error!");

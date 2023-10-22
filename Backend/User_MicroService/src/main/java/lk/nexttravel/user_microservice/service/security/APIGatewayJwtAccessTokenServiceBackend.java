@@ -27,50 +27,19 @@ import java.util.function.Function;
  */
 
 @Component
-public class APIGatewayJwtAccessTokenServiceBackend {
+public class APIGatewayJwtAccessTokenServiceBackend {  //this include only checking methods this class cannot create token
 
     public final String JWT_TOKEN_KEY = SecurityCodes.BACKEND_APIGATEWAY_JWT_TOKEN_KEY;
 
     public final String JWT_TOKEN_USERNAME = SecurityCodes.BACKEND_APIGATEWAY_JWT_TOKEN_USERNAME;
 
-//    //***********-------------------------------------------------------validateUpdateGetUserJWT  - this method check JWT and if it expired create new it return
-//    public InternalTokenDTO validateJWTToken(String token){
-//        System.out.println("Microservice "+token);
-//        InternalTokenDTO internalTokenDTO = new InternalTokenDTO();
-//        //check JWT
-//        try {
-//
-//            Jwts.parser()
-//                    .setSigningKey( new SecretKeySpec(Base64.getDecoder().decode(JWT_TOKEN_KEY), SignatureAlgorithm.HS512.getJcaName()))
-//                    .parseClaimsJws(token);
-//
-//            //add data to DTO
-//            internalTokenDTO.setToken(token);
-//            internalTokenDTO.setAuthenticated(true);
-//
-//            System.out.println("Microservice vauthenticated done");
-//
-//
-//            return internalTokenDTO;
-//
-//        } catch (Exception e) { //if token expired
-//            //add data to DTO
-//            internalTokenDTO.setToken(token);
-//            internalTokenDTO.setAuthenticated(false);
-//
-//            System.out.println("Microservice vauthenticated Error"+e.getMessage());
-//
-//            return internalTokenDTO;
-//        }
-
     public String extractUserName(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-
-
     public boolean isTokenValid(String token) {
         final String userName = extractUserName(token);
+        System.out.println((userName.equals(JWT_TOKEN_USERNAME)) && !isTokenExpired(token));
         return (userName.equals(JWT_TOKEN_USERNAME)) && !isTokenExpired(token);
     }
 
@@ -78,8 +47,6 @@ public class APIGatewayJwtAccessTokenServiceBackend {
         final Claims claims = extractAllClaims(token);
         return claimsResolvers.apply(claims);
     }
-
-
 
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());

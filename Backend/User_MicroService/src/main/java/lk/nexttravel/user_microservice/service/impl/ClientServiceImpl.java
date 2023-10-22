@@ -43,7 +43,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ResponseEntity<RespondDTO> saveNewClient(ReqNewClientSaveDTO reqNewClientSaveDTO) {
         //check authentication
-        if(apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqNewClientSaveDTO.getToken())){
+        if(apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqNewClientSaveDTO.getToken())){  //check gateway token
             //save into database
             clientRepository.save(
                     Client.builder()
@@ -61,7 +61,7 @@ public class ClientServiceImpl implements ClientService {
                         (RespondDTO.builder()
                                 .rspd_code(RespondCodes.Response_DATA_SAVED)
                                 .rspd_code("Client Saved! - Backend User Micro Service")
-                                .token(reqNewClientSaveDTO.getToken())
+                                .token(reqNewClientSaveDTO.getToken()) //send recieved token
                                 .data(client)
                                 .build()
                         ),

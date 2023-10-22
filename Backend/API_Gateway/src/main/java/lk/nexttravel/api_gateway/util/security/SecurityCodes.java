@@ -14,11 +14,11 @@ package lk.nexttravel.api_gateway.util.security;
 public class SecurityCodes {
 
     //API Gateway Token Details - For Frontend
-    public static final String FRONTEND_APIGATEWAY_JWT_TOKEN_KEY = "AddddddddPIGATEWAYkfkfkkfkfdjjheenxcsecretcodetypeherejkhygyfghjjikojiuhugyffgdresrsrtvhjjnujhygtygvbjnkmklu";
-    public static final long FRONTEND_APIGATEWAY_JWT_TOKEN_KEY_VALIDITY = 5 * 60 * 60;
+    public static final String FRONTEND_APIGATEWAY_JWT_TOKEN_KEY = "FRONTENDTOKENEFGVBTHJNMYUJKEDFVBEDFGBTGHNEDFCWSDXQAZEDFCTGBHNJMYHNTGBFVEDCWSXFVFGVGBYHNTGBKJOLDFGHJRFGHJWSDCEDFVRFGBRFGBEDFV";
+    public static final long FRONTEND_APIGATEWAY_JWT_TOKEN_KEY_VALIDITY = 5 * 60 * 60;//5min
 
     //API Gateway Token Details - For Backend
     public static final String BACKEND_APIGATEWAY_JWT_TOKEN_USERNAME = "API_GATEWAY_BACKEND";
-    public static final String BACKEND_APIGATEWAY_JWT_TOKEN_KEY = "WWWWWAddddddddPIGATEWAYkfkfkkfkfdjjheenxcsecretcodetypeherejkhygyfghjjikojiuhugyffgdresrsrtvhjjnujhygtygvbjnkmklu";
-    public static final long BACKEND_APIGATEWAY_JWT_TOKEN_KEY_VALIDITY     = 5 * 60 * 80;
+    public static final String BACKEND_APIGATEWAY_JWT_TOKEN_KEY = "BACKENDTOKENERTYUIDFGHJKERTYUIDFGHHJHLHNKGMDHEYRJFGHFEHEWQYUIEORUDHGHSJDHNNCDHRIUEYIOIUWERTYUSDFGHJDFGHERTYUIDFGHJRTYUIDFGHJK";
+    public static final long BACKEND_APIGATEWAY_JWT_TOKEN_KEY_VALIDITY     = 5 * 60 * 60; //5min
 }
