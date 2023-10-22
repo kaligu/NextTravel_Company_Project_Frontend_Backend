@@ -91,7 +91,7 @@ function isUsernameAvailable(username) {
         $.ajax({
             method: "GET",
             async: true,
-            url: 'http://localhost:1010/main/auth/ischeck-username?username=' + encodeURIComponent(username),
+            url: 'http://localhost:1010/main/user/ischeck-username?username=' + encodeURIComponent(username),
             processData: false,
             contentType: false,
             success: function (data) {
@@ -364,7 +364,7 @@ function sendSignupDataIntoServer(){
 
         method: "POST",
         async: true,
-        url: "http://localhost:1010/main/auth/signup-guestuser",
+        url: "http://localhost:1010/main/user/signup-guestuser",
 
         processData: false,
         contentType: false,

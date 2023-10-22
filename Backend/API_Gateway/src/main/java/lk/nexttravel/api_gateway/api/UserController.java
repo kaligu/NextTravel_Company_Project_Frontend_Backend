@@ -8,8 +8,8 @@ package lk.nexttravel.api_gateway.api;
 
 import lk.nexttravel.api_gateway.advice.util.InvalidInputException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
-import lk.nexttravel.api_gateway.dto.auth.AuthSignupDTO;
-import lk.nexttravel.api_gateway.service.AuthService;
+import lk.nexttravel.api_gateway.dto.auth.UserSignupDTO;
+import lk.nexttravel.api_gateway.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,19 +24,19 @@ import reactor.core.publisher.Mono;
  */
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/user")
 @CrossOrigin(origins = "http://localhost:63342/")
-public class AuthController {
+public class UserController {
 
     @Autowired
-    AuthService authService;
+    UserService userService;
 
     //checkUsername
     @GetMapping(value = "/ischeck-username")
     public Mono<ResponseEntity<RespondDTO>> checkUsername(@RequestParam("username") @NonNull String username) {
         if (username.matches("^[a-zA-Z0-9_.-]{5,30}$")) {   //check Username Regax
             return Mono.just(
-                    authService.ischeckUsernameAlreadyTaken(username)
+                    userService.ischeckUsernameAlreadyTaken(username)
             );
         } else {
             throw new InvalidInputException("Username is invalid!");
@@ -63,8 +63,8 @@ public class AuthController {
                                 if (image != null) {
 
                                     return Mono.just(
-                                            authService.saveNewGuestUser(
-                                                    AuthSignupDTO.builder()
+                                            userService.saveNewGuestUser(
+                                                    UserSignupDTO.builder()
                                                             .signup_name(name)
                                                             .signup_name_with_initial(nameWithInitial)
                                                             .signup_address(addres)
@@ -99,4 +99,17 @@ public class AuthController {
             throw new InvalidInputException("Username is invalid!");
         }
     }
+
+//    //user login
+//    @GetMapping(value = "/login-user")
+//    public Mono<ResponseEntity<RespondDTO>> checkUsername(@RequestParam("username") @NonNull String username) {
+//        if (username.matches("^[a-zA-Z0-9_.-]{5,30}$")) {   //check Username Regax
+//            return Mono.just(
+//                    userService.ischeckUsernameAlreadyTaken(username)
+//            );
+//        } else {
+//            throw new InvalidInputException("Username is invalid!");
+//        }
+//
+//    }
 }

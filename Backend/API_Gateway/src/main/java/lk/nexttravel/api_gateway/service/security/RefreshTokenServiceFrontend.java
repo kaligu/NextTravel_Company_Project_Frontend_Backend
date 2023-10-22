@@ -4,15 +4,14 @@
   @ Date         : 10/21/2023
   @ Time         : 11:10 AM
 */
-package lk.nexttravel.api_gateway.service.security.util;
+package lk.nexttravel.api_gateway.service.security;
 
-import lk.nexttravel.api_gateway.Persistence.AuthUserRepository;
+import lk.nexttravel.api_gateway.Persistence.UserRepository;
 import lk.nexttravel.api_gateway.Persistence.RefreshTokenRepository;
 import lk.nexttravel.api_gateway.dto.auth.InternalRefreshTUserDTO;
-import lk.nexttravel.api_gateway.entity.AuthUser;
+import lk.nexttravel.api_gateway.entity.User;
 import lk.nexttravel.api_gateway.entity.RefreshToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -31,12 +30,12 @@ public class RefreshTokenServiceFrontend {
     private RefreshTokenRepository refreshTokenRepository;
 
     @Autowired
-    private AuthUserRepository authUserRepository;
+    private UserRepository userRepository;
 
-    public String createRefreshToken(AuthUser authUser) {
+    public String createRefreshToken(User user) {
         //check has old saved tokens
-        if(refreshTokenRepository.existsById(authUser.getId())){
-            Optional<RefreshToken> refreshToken = refreshTokenRepository.findById(authUser.getId());
+        if(refreshTokenRepository.existsById(user.getId())){
+            Optional<RefreshToken> refreshToken = refreshTokenRepository.findById(user.getId());
             if(refreshToken.isPresent()){
                 //if has existing token delete it
                 refreshTokenRepository.delete(refreshToken.get());
@@ -48,7 +47,7 @@ public class RefreshTokenServiceFrontend {
 
         refreshTokenRepository.save(
                 RefreshToken.builder()
-                        .id(authUser.getId())
+                        .id(user.getId())
                         .token(token)
                         .expiredate(Instant.now().plusMillis(600000))
                         .build()
@@ -86,8 +85,8 @@ public class RefreshTokenServiceFrontend {
                 //delte it
                 refreshTokenRepository.delete(Token);
                 //generate new one
-                if(authUserRepository.findAuthUserByName(username).isPresent()){
-                    String tokenkey = createRefreshToken(authUserRepository.findAuthUserByName(username).get());
+                if(userRepository.findAuthUserByName(username).isPresent()){
+                    String tokenkey = createRefreshToken(userRepository.findAuthUserByName(username).get());
                     internalRefreshTUserDTO.setRefreshToken(tokenkey);
                     internalRefreshTUserDTO.setUserAuthenticated(true);
                     return internalRefreshTUserDTO;

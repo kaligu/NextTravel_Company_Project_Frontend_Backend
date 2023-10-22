@@ -6,19 +6,20 @@
 */
 package lk.nexttravel.api_gateway.service.impl;
 
-import lk.nexttravel.api_gateway.Persistence.AuthUserRepository;
+import lk.nexttravel.api_gateway.Persistence.UserRepository;
 import lk.nexttravel.api_gateway.advice.util.DuplicateException;
 import lk.nexttravel.api_gateway.advice.util.InternalServerException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
-import lk.nexttravel.api_gateway.dto.auth.AuthSignupDTO;
+import lk.nexttravel.api_gateway.dto.auth.UserSignupDTO;
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.user.UserReqNewClientSaveDTO;
-import lk.nexttravel.api_gateway.entity.AuthUser;
-import lk.nexttravel.api_gateway.service.AuthService;
+import lk.nexttravel.api_gateway.entity.User;
+import lk.nexttravel.api_gateway.service.UserService;
 import lk.nexttravel.api_gateway.service.SequenceGeneratorService;
-import lk.nexttravel.api_gateway.service.security.util.APIGatewayJwtAccessTokenServiceBackend;
-import lk.nexttravel.api_gateway.service.security.util.APIGatewayJwtAccessTokenServiceFrontend;
-import lk.nexttravel.api_gateway.service.security.util.RefreshTokenServiceFrontend;
+import lk.nexttravel.api_gateway.service.mail.MailService;
+import lk.nexttravel.api_gateway.service.security.APIGatewayJwtAccessTokenServiceBackend;
+import lk.nexttravel.api_gateway.service.security.APIGatewayJwtAccessTokenServiceFrontend;
+import lk.nexttravel.api_gateway.service.security.RefreshTokenServiceFrontend;
 import lk.nexttravel.api_gateway.util.RespondCodes;
 import lk.nexttravel.api_gateway.util.RoleTypes;
 import lk.nexttravel.api_gateway.util.RqRpURLs;
@@ -37,9 +38,12 @@ import java.util.Optional;
  */
 
 @Service
-public class AuthServiceImpl implements AuthService {
+public class UserServiceImpl implements UserService {
     @Autowired
-    AuthUserRepository authUserRepository;
+    private MailService mailService;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
@@ -65,7 +69,7 @@ public class AuthServiceImpl implements AuthService {
 //        System.out.println(username);
         try{
             //check username on DB
-            if(authUserRepository.existsByName(username)){
+            if(userRepository.existsByName(username)){
 //                System.out.println("duplicate");
                 //Existed
                 throw new DuplicateException("This username already Exists!");
@@ -90,11 +94,11 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public ResponseEntity<RespondDTO> saveNewGuestUser(AuthSignupDTO authSignupDTO) {
+    public ResponseEntity<RespondDTO> saveNewGuestUser(UserSignupDTO userSignupDTO) {
         //Generate ID using previous DB User ID
-        String id = "U00"+sequenceGeneratorService.generateSequence(AuthUser.SEQUENCE_NAME);
+        String id = "U00"+sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME);
         //encode string of password
-        String password = passwordEncoder.encode(authSignupDTO.getSignup_password());
+        String password = passwordEncoder.encode(userSignupDTO.getSignup_password());
 
         //--------------------------------------------Send data into User MicroService
         try {
@@ -106,10 +110,10 @@ public class AuthServiceImpl implements AuthService {
                     UserReqNewClientSaveDTO.builder()
                             .token( apiGatewayJwtAccessTokenServiceBackend.generateToken() ) //create a session token to connect with microservice check this request is valid request
                             .id(id)
-                            .address(authSignupDTO.getSignup_address())
-                            .nic_or_passport(authSignupDTO.getSignup_nic_or_passport())
-                            .profile_image(authSignupDTO.getSignup_profile_image())
-                            .name_with_initial(authSignupDTO.getSignup_name_with_initial())
+                            .address(userSignupDTO.getSignup_address())
+                            .nic_or_passport(userSignupDTO.getSignup_nic_or_passport())
+                            .profile_image(userSignupDTO.getSignup_profile_image())
+                            .name_with_initial(userSignupDTO.getSignup_name_with_initial())
                             .build(), headers);
 
             ResponseEntity<RespondDTO> responseEntity = restTemplate.exchange(
@@ -134,16 +138,16 @@ public class AuthServiceImpl implements AuthService {
         }
 
         ///--------------------------------------save data AuthUser Repo
-        authUserRepository.save(
-                                AuthUser.builder()
+        userRepository.save(
+                                User.builder()
                                         .id(id)
-                                        .name(authSignupDTO.getSignup_name())
-                                        .email(authSignupDTO.getSignup_email())
+                                        .name(userSignupDTO.getSignup_name())
+                                        .email(userSignupDTO.getSignup_email())
                                         .password(password)
                                         .role_type(RoleTypes.ROLE_CLIENT)
                                         .build());
         //Check saved and Generate tokens and save and return
-        Optional<AuthUser> authUser = authUserRepository.findAuthUserByName(authSignupDTO.getSignup_name());
+        Optional<User> authUser = userRepository.findAuthUserByName(userSignupDTO.getSignup_name());
 
         //----------------------------Create Jwtaccess token and create,save data Refresh token
         if(authUser.isPresent()){   //first check already saved AuthUser
@@ -152,6 +156,10 @@ public class AuthServiceImpl implements AuthService {
                     .access_jwt_token(APIGatewayJwtAccessTokenServiceFrontend.generateToken(authUser.get().getName())) //create access token and assign it
                     .access_refresh_token(refreshTokenServiceFrontend.createRefreshToken(authUser.get()))  //create refresh token and save and assign it
                     .build();
+
+            //send confirmation mail to register user
+            //send mail
+            mailService.sendEmailForNewUserSignup(userSignupDTO.getSignup_email(), userSignupDTO.getSignup_name());
 
             //----------------------------------------------return if all are done
             return new ResponseEntity<RespondDTO> (

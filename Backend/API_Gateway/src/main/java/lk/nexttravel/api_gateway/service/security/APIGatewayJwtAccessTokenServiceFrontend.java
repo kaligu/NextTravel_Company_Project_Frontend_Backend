@@ -4,11 +4,11 @@
   @ Date         : 10/21/2023
   @ Time         : 10:39 AM
 */
-package lk.nexttravel.api_gateway.service.security.util;
+package lk.nexttravel.api_gateway.service.security;
 
-import lk.nexttravel.api_gateway.Persistence.AuthUserRepository;
+import lk.nexttravel.api_gateway.Persistence.UserRepository;
 import lk.nexttravel.api_gateway.dto.auth.InternalJWTUserDTO;
-import lk.nexttravel.api_gateway.entity.AuthUser;
+import lk.nexttravel.api_gateway.entity.User;
 import lk.nexttravel.api_gateway.util.RoleTypes;
 import lk.nexttravel.api_gateway.util.security.SecurityCodes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ import java.util.function.Function;
 @Component
 public class APIGatewayJwtAccessTokenServiceFrontend {
     @Autowired
-    AuthUserRepository authUserRepository;
+    UserRepository userRepository;
 
     public final long JWT_TOKEN_VALIDITY = SecurityCodes.FRONTEND_APIGATEWAY_JWT_TOKEN_KEY_VALIDITY;
 
@@ -133,7 +133,7 @@ public class APIGatewayJwtAccessTokenServiceFrontend {
     }
 
     public Optional<RoleTypes> getRoleByUsername(String username) {
-        Optional<AuthUser> user = authUserRepository.findAuthUserByName(username);
+        Optional<User> user = userRepository.findAuthUserByName(username);
         if (user.isPresent()) {
             return Optional.of(user.get().getRole_type());
         } else {

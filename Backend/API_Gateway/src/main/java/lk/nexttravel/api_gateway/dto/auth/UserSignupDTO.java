@@ -24,7 +24,7 @@ import java.util.Arrays;
 @Builder
 
 @Component
-public class AuthSignupDTO {
+public class UserSignupDTO {
     private String signup_name;
     private String signup_name_with_initial;
     private String signup_email;

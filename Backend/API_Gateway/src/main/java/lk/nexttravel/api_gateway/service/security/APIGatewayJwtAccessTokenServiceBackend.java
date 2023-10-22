@@ -4,22 +4,16 @@
   @ Date         : 10/22/2023
   @ Time         : 1:36 AM
 */
-package lk.nexttravel.api_gateway.service.security.util;
+package lk.nexttravel.api_gateway.service.security;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lk.nexttravel.api_gateway.advice.util.InternalServerException;
-import lk.nexttravel.api_gateway.dto.auth.InternalJWTUserDTO;
-import lk.nexttravel.api_gateway.entity.AuthUser;
-import lk.nexttravel.api_gateway.util.RoleTypes;
 import lk.nexttravel.api_gateway.util.security.SecurityCodes;
 import org.springframework.stereotype.Component;
 
-import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.util.*;
 import java.util.function.Function;

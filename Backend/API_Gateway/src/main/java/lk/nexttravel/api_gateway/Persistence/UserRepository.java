@@ -6,7 +6,7 @@
 */
 package lk.nexttravel.api_gateway.Persistence;
 
-import lk.nexttravel.api_gateway.entity.AuthUser;
+import lk.nexttravel.api_gateway.entity.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +19,7 @@ import java.util.Optional;
  */
 
 @Repository
-public interface AuthUserRepository extends MongoRepository<AuthUser, String> {
-    Optional<AuthUser> findAuthUserByName(String Username);
+public interface UserRepository extends MongoRepository<User, String> {
+    Optional<User> findAuthUserByName(String Username);
     boolean existsByName(String username);
 }

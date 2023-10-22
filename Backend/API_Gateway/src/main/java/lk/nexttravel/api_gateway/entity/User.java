@@ -25,8 +25,8 @@ import org.springframework.stereotype.Component;
 @ToString
 @Builder
 
-@Document(collection = "AuthUser")
-public class AuthUser {
+@Document(collection = "User")
+public class User {
 
     @Transient
     public static final String SEQUENCE_NAME = "users_sequence";
