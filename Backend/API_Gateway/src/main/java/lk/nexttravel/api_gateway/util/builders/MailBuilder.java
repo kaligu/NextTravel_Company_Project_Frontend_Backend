@@ -1,6 +1,6 @@
 package lk.nexttravel.api_gateway.util.builders;
 
-import lk.nexttravel.apigateway.dto.MailDTO;
+import lk.nexttravel.api_gateway.dto.mail.MailDTO;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
