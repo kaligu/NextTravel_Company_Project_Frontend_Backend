@@ -7,6 +7,11 @@ let RespondCodes = {
     Response_INTERNAL_SERVER_FAIL  :"15"
 }
 
+//--------------------------------------------------------save tokens and usernames on local localStorage
+localStorage.setItem("secure_data_username", "");
+localStorage.setItem("secure_data_jwt_access_token", "");
+localStorage.setItem("secure_data_refresh_token", "");
+
 ///////////////////////////////////////////////////////////////////////////////////////////--variables
 
 const signupMainFormContainer = $('#main_signup_form_container');
@@ -20,11 +25,8 @@ const alertModel_content = $('#alert-model-content');
 
 //////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////--check username interface
 
-//if next button clicked
-function nextBtnClicked(){
-    signupMainFormContainer.css('display','block');
-    checkUsernameContainer.css('display','none');
-}
+
+
 
 //-------------------------------------------------------------check Username txtfld validations
 const signup_username = $('#signup_name');
@@ -32,6 +34,12 @@ const invalidFeedback = signup_username.siblings('.invalid-feedback');
 const validFeedback = signup_username.siblings('.valid-feedback');
 const next_btn = $('#next_btn'); // Replace with the actual button selector
 const invalid_para_dbcheck = $('#invalid-para-dbcheck');
+
+//if next button clicked
+function nextBtnClicked() {
+    signupMainFormContainer.css('display', 'block');
+    checkUsernameContainer.css('display', 'none');
+}
 
 // Add an event listener to the input field to check for validation
 signup_username.on('input', async function () {
@@ -102,7 +110,6 @@ function isUsernameAvailable(username) {
         });
     });
 }
-
 
 
 
@@ -363,6 +370,16 @@ function sendSignupDataIntoServer(){
         contentType: false,
         data: formData,
         success: function (data) {
+            //save local storage secured data
+            localStorage.setItem("secure_data_username", data.token.access_username);
+            localStorage.setItem("secure_data_jwt_access_token", data.token.access_jwt_token);
+            localStorage.setItem("secure_data_refresh_token", data.token.access_refresh_token);
+
+            alert("secure_data_username : "+localStorage.getItem("secure_data_username")+
+            "secure_data_jwt_access_token : "+localStorage.getItem("secure_data_jwt_access_token")+
+                "secure_data_refresh_token : "+localStorage.getItem("secure_data_refresh_token")
+            );
+
             location.reload();
 
             //hide loading model
