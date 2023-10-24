@@ -37,7 +37,7 @@ public class ClientController {
     }
     @PutMapping(value = "/save_new_client")
     public ResponseEntity<String> SaveNewClient_Commit(@RequestBody ReqNewClientSaveDTO reqNewClientSaveDTO){
-        return clientService.SaveNewClient_Prepare(reqNewClientSaveDTO);
+        return clientService.SaveNewClient_Commit(reqNewClientSaveDTO);
     }
     @DeleteMapping(value = "/save_new_client")
     public ResponseEntity<String> SaveNewClient_Abrot(@RequestBody ReqNewClientSaveDTO reqNewClientSaveDTO){

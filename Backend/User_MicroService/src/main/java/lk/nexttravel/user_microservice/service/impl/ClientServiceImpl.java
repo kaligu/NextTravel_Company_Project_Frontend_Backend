@@ -16,6 +16,7 @@ import lk.nexttravel.user_microservice.persistence.ClientRepository;
 import lk.nexttravel.user_microservice.service.ClientService;
 import lk.nexttravel.user_microservice.service.security.APIGatewayJwtAccessTokenServiceBackend;
 import lk.nexttravel.user_microservice.util.RespondCodes;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,7 +64,7 @@ public class ClientServiceImpl implements ClientService {
                 return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
             }
         }catch (Exception e){
-            return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.OK);
         }
     }
 
@@ -89,7 +90,7 @@ public class ClientServiceImpl implements ClientService {
                 return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
             }
         }catch (Exception e){
-            return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.OK);
         }
     }
 
@@ -114,7 +115,7 @@ public class ClientServiceImpl implements ClientService {
                 return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
             }
         }catch (Exception e){
-            return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.OK);
         }
     }
 }

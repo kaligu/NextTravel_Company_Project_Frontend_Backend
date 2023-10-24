@@ -122,6 +122,7 @@ public class UserServiceImpl implements UserService {
                                     .email(userSignupDTO.getSignup_email())
                                     .password(password)
                                     .role_type(RoleTypes.ROLE_CLIENT)
+                                    .transaction_state(RespondCodes.PENDING)
                                     .build())
             );
 
@@ -150,6 +151,10 @@ public class UserServiceImpl implements UserService {
             if(
                     savedUser.isPresent() && isAllMicroServiceTasksCommited
             ){
+                //commit user
+                savedUser.get().setTransaction_state(RespondCodes.COMMITED);
+                userRepository.save(savedUser.get());
+
                 //commit
                 transactionCordinator.commitPhaseForCreate(transactionDTOArrayList);
 
@@ -178,10 +183,9 @@ public class UserServiceImpl implements UserService {
                         ,
                         HttpStatus.CREATED);
             }else {
-                System.out.println("ïnvoked");
                 //abrot User
                 userRepository.delete(userRepository.findAuthUserByName(userSignupDTO.getSignup_name()).get());
-                System.out.println("ïnvoked");
+
                 //abrot Client
                 transactionCordinator.rollbackPhaseForCreate(transactionDTOArrayList);
 
