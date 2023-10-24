@@ -10,10 +10,13 @@ import lk.nexttravel.api_gateway.Persistence.UserRepository;
 import lk.nexttravel.api_gateway.advice.util.DuplicateException;
 import lk.nexttravel.api_gateway.advice.util.InternalServerException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
+import lk.nexttravel.api_gateway.dto.TransactionDTO;
 import lk.nexttravel.api_gateway.dto.auth.UserSignupDTO;
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.user.UserReqNewClientSaveDTO;
+import lk.nexttravel.api_gateway.entity.RefreshToken;
 import lk.nexttravel.api_gateway.entity.User;
+import lk.nexttravel.api_gateway.service.TransactionCordinator;
 import lk.nexttravel.api_gateway.service.UserService;
 import lk.nexttravel.api_gateway.service.SequenceGeneratorService;
 import lk.nexttravel.api_gateway.service.mail.MailService;
@@ -23,12 +26,15 @@ import lk.nexttravel.api_gateway.service.security.RefreshTokenServiceFrontend;
 import lk.nexttravel.api_gateway.util.RespondCodes;
 import lk.nexttravel.api_gateway.util.RoleTypes;
 import lk.nexttravel.api_gateway.util.RqRpURLs;
+import org.apache.velocity.app.event.implement.EscapeXmlReference;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -63,22 +69,30 @@ public class UserServiceImpl implements UserService {
     @Autowired
     APIGatewayJwtAccessTokenServiceBackend apiGatewayJwtAccessTokenServiceBackend;
 
+    @Autowired
+    TransactionCordinator transactionCordinator;
+
 
     @Override
     public ResponseEntity<RespondDTO> ischeckUsernameAlreadyTaken(String username) {
-//        System.out.println(username);
         try{
-            //check username on DB
             if(userRepository.existsByName(username)){
-//                System.out.println("duplicate");
                 //Existed
-                throw new DuplicateException("This username already Exists!");
+                return new ResponseEntity<RespondDTO>(
+                        RespondDTO.builder()
+                                .rspd_code(RespondCodes.Respond_THIS_USER_ALREADY_REGISTERED)
+                                .repd_msg("This User is exists!")
+                                .token(null)
+                                .data(null)
+                                .build()
+                        ,
+                        HttpStatus.OK
+                );
             }else{
-//                System.out.println("done");
                 //not Existed
                 return new ResponseEntity<RespondDTO>(
                         RespondDTO.builder()
-                                .rspd_code(RespondCodes.Response_SUCCESS)
+                                .rspd_code(RespondCodes.Respond_THIS_USER_NOT_REGISTERED_YET)
                                 .repd_msg("This User not exists!")
                                 .token(null)
                                 .data(null)
@@ -88,91 +102,103 @@ public class UserServiceImpl implements UserService {
                 );
             }
         }catch (Exception e){
-//            System.out.println("exception");
             throw new InternalServerException("Username Check Exception Internal!");
         }
     }
 
     @Override
     public ResponseEntity<RespondDTO> saveNewGuestUser(UserSignupDTO userSignupDTO) {
-        //Generate ID using previous DB User ID
-        String id = "U00"+sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME);
-        //encode string of password
-        String password = passwordEncoder.encode(userSignupDTO.getSignup_password());
-
-        //--------------------------------------------Send data into User MicroService
+        ArrayList<TransactionDTO> transactionDTOArrayList = new ArrayList<>();
         try {
-            // Create a RestTemplate instance
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            // Create a request entity with the request body and headers
-            HttpEntity<UserReqNewClientSaveDTO> requestEntity = new HttpEntity<>(
-                    UserReqNewClientSaveDTO.builder()
-                            .token( apiGatewayJwtAccessTokenServiceBackend.generateToken() ) //create a session token to connect with microservice check this request is valid request
-                            .id(id)
-                            .address(userSignupDTO.getSignup_address())
-                            .nic_or_passport(userSignupDTO.getSignup_nic_or_passport())
-                            .profile_image(userSignupDTO.getSignup_profile_image())
-                            .name_with_initial(userSignupDTO.getSignup_name_with_initial())
-                            .build(), headers);
+            String id = "U00"+sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME);
+            String password = passwordEncoder.encode(userSignupDTO.getSignup_password());
 
-            ResponseEntity<RespondDTO> responseEntity = restTemplate.exchange(
-                    RqRpURLs.User_Service_save_with_reg_user,
-                    HttpMethod.POST,
-                    requestEntity,
-                    RespondDTO.class
+            //User Save On Gateway DB -task 1
+            Optional<User> savedUser = Optional.of(
+                    userRepository.save(
+                            User.builder()
+                                    .id(id)
+                                    .name(userSignupDTO.getSignup_name())
+                                    .email(userSignupDTO.getSignup_email())
+                                    .password(password)
+                                    .role_type(RoleTypes.ROLE_CLIENT)
+                                    .build())
             );
-            //##---------------First Response authentication-----------------------------
-            String token = (String) responseEntity.getBody().getToken();
-            if(apiGatewayJwtAccessTokenServiceBackend.isTokenValid(token)){ //check recieved token first
-                //check if not saved throw exception
-                if(!responseEntity.getStatusCode().equals(HttpStatus.CREATED)){
-                    throw new InternalServerException("This User not saved! User Micro Serive Error!");
-                }
-            }else {
-                throw new InternalServerException("Not valid token received! User Micro Serive Error!");
-            }
 
-        }catch (Exception e){
-            throw new InternalServerException("This User not saved! User Micro Serive Error!");
-        }
+            //send data into transaction Coordinator for prepare
 
-        ///--------------------------------------save data AuthUser Repo
-        userRepository.save(
-                                User.builder()
-                                        .id(id)
-                                        .name(userSignupDTO.getSignup_name())
-                                        .email(userSignupDTO.getSignup_email())
-                                        .password(password)
-                                        .role_type(RoleTypes.ROLE_CLIENT)
-                                        .build());
-        //Check saved and Generate tokens and save and return
-        Optional<User> authUser = userRepository.findAuthUserByName(userSignupDTO.getSignup_name());
-
-        //----------------------------Create Jwtaccess token and create,save data Refresh token
-        if(authUser.isPresent()){   //first check already saved AuthUser
-            FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder()
-                    .access_username(authUser.get().getName())
-                    .access_jwt_token(APIGatewayJwtAccessTokenServiceFrontend.generateToken(authUser.get().getName())) //create access token and assign it
-                    .access_refresh_token(refreshTokenServiceFrontend.createRefreshToken(authUser.get()))  //create refresh token and save and assign it
-                    .build();
-
-            //send confirmation mail to register user
-            //send mail
-            mailService.sendEmailForNewUserSignup(userSignupDTO.getSignup_email(), userSignupDTO.getSignup_name());
-
-            //----------------------------------------------return if all are done
-            return new ResponseEntity<RespondDTO> (
-                    RespondDTO.builder()
-                            .rspd_code(RespondCodes.Response_DATA_SAVED)
-                            .token(frontendTokenDTO)
-                            .data(null)
+            transactionDTOArrayList.add(
+                    TransactionDTO.builder()      //send data into User Service - task2
+                            .url(RqRpURLs.User_Service_save_with_reg_user) //url
+                            .httpMethod(HttpMethod.POST)  //http method
+                            .data(
+                                    UserReqNewClientSaveDTO.builder()
+                                            .token( apiGatewayJwtAccessTokenServiceBackend.generateToken() ) //create a session token to connect with microservice check this request is valid request
+                                            .id(id)
+                                            .address(userSignupDTO.getSignup_address())
+                                            .nic_or_passport(userSignupDTO.getSignup_nic_or_passport())
+                                            .profile_image(userSignupDTO.getSignup_profile_image())
+                                            .name_with_initial(userSignupDTO.getSignup_name_with_initial())
+                                            .build()
+                            )
                             .build()
-                    ,
-                    HttpStatus.CREATED);
-        }else{
+            );
+            //add transactiondto arraylist for commit
+            boolean isAllMicroServiceTasksCommited =false;
+            isAllMicroServiceTasksCommited = transactionCordinator.preparePhaseForCreate(transactionDTOArrayList);
+
+            if(
+                    savedUser.isPresent() && isAllMicroServiceTasksCommited
+            ){
+                //commit
+                transactionCordinator.commitPhaseForCreate(transactionDTOArrayList);
+
+                //Access Token Create Get On Gateway DB
+                String newAccessToken = APIGatewayJwtAccessTokenServiceFrontend.generateToken(userSignupDTO.getSignup_name()); //create and get JWT access token
+
+                //UserRefreshToken Save On Gateway DB
+                String newRefreshToken = refreshTokenServiceFrontend.createRefreshToken(savedUser.get()); //create get and save refresh token
+
+                FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder()
+                        .access_username(savedUser.get().getName())
+                        .access_jwt_token(newAccessToken) //create access token and assign it
+                        .access_refresh_token(newRefreshToken)  //create refresh token and save and assign it
+                        .build();
+
+                //send mail
+                mailService.sendEmailForNewUserSignup(userSignupDTO.getSignup_email(), userSignupDTO.getSignup_name());
+
+                //----------------------------------------------return if all are done
+                return new ResponseEntity<RespondDTO> (
+                        RespondDTO.builder()
+                                .rspd_code(RespondCodes.Respond_DATA_SAVED)
+                                .token(frontendTokenDTO)
+                                .data(savedUser.get().getRole_type())
+                                .build()
+                        ,
+                        HttpStatus.CREATED);
+            }else {
+                System.out.println("ïnvoked");
+                //abrot User
+                userRepository.delete(userRepository.findAuthUserByName(userSignupDTO.getSignup_name()).get());
+                System.out.println("ïnvoked");
+                //abrot Client
+                transactionCordinator.rollbackPhaseForCreate(transactionDTOArrayList);
+
+                throw new InternalServerException("This User not saved!");
+            }
+        } catch (Exception e){
+
+            //abrot User
+            userRepository.delete(userRepository.findAuthUserByName(userSignupDTO.getSignup_name()).get());
+
+            //abrot Client
+            transactionCordinator.rollbackPhaseForCreate(transactionDTOArrayList);
+
             throw new InternalServerException("This User not saved!");
         }
+
+
     }
 
 }

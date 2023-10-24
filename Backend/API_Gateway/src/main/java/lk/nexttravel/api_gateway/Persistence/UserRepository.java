@@ -22,4 +22,5 @@ import java.util.Optional;
 public interface UserRepository extends MongoRepository<User, String> {
     Optional<User> findAuthUserByName(String Username);
     boolean existsByName(String username);
+    boolean deleteByName(String name);
 }

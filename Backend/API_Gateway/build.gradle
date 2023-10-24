@@ -41,6 +41,10 @@ dependencies {
 
     //------apache velocity dependency
     implementation 'org.apache.velocity:velocity-engine-core:2.3'
+
+    //----------modelmapper
+    implementation 'org.modelmapper:modelmapper:3.1.1'
+
 }
 
 tasks.named('test') {

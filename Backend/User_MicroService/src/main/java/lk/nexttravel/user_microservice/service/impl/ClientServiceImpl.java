@@ -9,8 +9,8 @@ package lk.nexttravel.user_microservice.service.impl;
 import lk.nexttravel.user_microservice.advice.util.InternalServerException;
 import lk.nexttravel.user_microservice.advice.util.NotfoundException;
 import lk.nexttravel.user_microservice.dto.ReqNewClientSaveDTO;
+import lk.nexttravel.user_microservice.dto.RequestServicesDTO;
 import lk.nexttravel.user_microservice.dto.RespondDTO;
-import lk.nexttravel.user_microservice.dto.security.InternalTokenDTO;
 import lk.nexttravel.user_microservice.entity.Client;
 import lk.nexttravel.user_microservice.persistence.ClientRepository;
 import lk.nexttravel.user_microservice.service.ClientService;
@@ -18,11 +18,9 @@ import lk.nexttravel.user_microservice.service.security.APIGatewayJwtAccessToken
 import lk.nexttravel.user_microservice.util.RespondCodes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -35,43 +33,88 @@ import java.util.Optional;
 public class ClientServiceImpl implements ClientService {
 
     @Autowired
-    APIGatewayJwtAccessTokenServiceBackend apiGatewayJwtAccessTokenServiceBackend;
+    private APIGatewayJwtAccessTokenServiceBackend apiGatewayJwtAccessTokenServiceBackend;
 
     @Autowired
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
-    public ResponseEntity<RespondDTO> saveNewClient(ReqNewClientSaveDTO reqNewClientSaveDTO) {
+    public ResponseEntity<String> SaveNewClient_Prepare(ReqNewClientSaveDTO reqNewClientSaveDTO) {
         //check authentication
-        if(apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqNewClientSaveDTO.getToken())){  //check gateway token
-            //save into database
-            clientRepository.save(
-                    Client.builder()
-                            .id(reqNewClientSaveDTO.getId())
-                            .name_with_initial(reqNewClientSaveDTO.getName_with_initial())
-                            .address(reqNewClientSaveDTO.getAddress())
-                            .profile_image(reqNewClientSaveDTO.getProfile_image())
-                            .nic_or_passport(reqNewClientSaveDTO.getNic_or_passport())
-                            .build()
-            );
-            //check done saved
-            Optional<Client> client = clientRepository.findClientById(reqNewClientSaveDTO.getId());
-            if(client.isPresent()){
-                return new ResponseEntity<RespondDTO>(
-                        (RespondDTO.builder()
-                                .rspd_code(RespondCodes.Response_DATA_SAVED)
-                                .rspd_code("Client Saved! - Backend User Micro Service")
-                                .token(reqNewClientSaveDTO.getToken()) //send recieved token
-                                .data(client)
+        try {
+            if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqNewClientSaveDTO.getToken())) {  //check gateway token
+                //save into database
+                clientRepository.save(
+                        Client.builder()
+                                .id(reqNewClientSaveDTO.getId())
+                                .name_with_initial(reqNewClientSaveDTO.getName_with_initial())
+                                .address(reqNewClientSaveDTO.getAddress())
+                                .profile_image(reqNewClientSaveDTO.getProfile_image())
+                                .nic_or_passport(reqNewClientSaveDTO.getNic_or_passport())
+                                .transaction_state(RespondCodes.PENDING)
                                 .build()
-                        ),
-                        HttpStatus.CREATED
                 );
-            }else{
-                throw new NotfoundException("Not saved this Client! - Backend User Micro Service");
+
+                return new ResponseEntity<>(RespondCodes.Respond_DATA_SAVED, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
             }
-        }else {
-            throw new InternalServerException("Internal token non authenticated!");
+        }catch (Exception e){
+            return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<String> SaveNewClient_Commit(ReqNewClientSaveDTO reqNewClientSaveDTO) {
+        //check authentication
+        try {
+            if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqNewClientSaveDTO.getToken())) {  //check gateway token
+                //save into database
+                clientRepository.save(
+                        Client.builder()
+                                .id(reqNewClientSaveDTO.getId())
+                                .name_with_initial(reqNewClientSaveDTO.getName_with_initial())
+                                .address(reqNewClientSaveDTO.getAddress())
+                                .profile_image(reqNewClientSaveDTO.getProfile_image())
+                                .nic_or_passport(reqNewClientSaveDTO.getNic_or_passport())
+                                .transaction_state(RespondCodes.COMMITED)
+                                .build()
+                );
+
+                return new ResponseEntity<>(RespondCodes.Respond_DATA_SAVED, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<String> SaveNewClient_Abrot(ReqNewClientSaveDTO reqNewClientSaveDTO) {
+        //check authentication
+        try {
+            if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqNewClientSaveDTO.getToken())) {  //check gateway token
+                //delete
+                clientRepository.delete(
+                        Client.builder()
+                                .id(reqNewClientSaveDTO.getId())
+                                .name_with_initial(reqNewClientSaveDTO.getName_with_initial())
+                                .address(reqNewClientSaveDTO.getAddress())
+                                .profile_image(reqNewClientSaveDTO.getProfile_image())
+                                .nic_or_passport(reqNewClientSaveDTO.getNic_or_passport())
+                                .build()
+                );
+
+                return new ResponseEntity<>(RespondCodes.Respond_DATA_DELETED, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

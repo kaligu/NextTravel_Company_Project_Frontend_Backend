@@ -7,6 +7,7 @@
 package lk.nexttravel.user_microservice.api;
 
 import lk.nexttravel.user_microservice.dto.ReqNewClientSaveDTO;
+import lk.nexttravel.user_microservice.dto.RequestServicesDTO;
 import lk.nexttravel.user_microservice.dto.RespondDTO;
 import lk.nexttravel.user_microservice.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,18 @@ public class ClientController {
     @Autowired
     ClientService clientService;
 
+    //----------Save New Client ------
     @PostMapping(value = "/save_new_client")
-    public ResponseEntity<RespondDTO> saveNewClient(@RequestBody ReqNewClientSaveDTO reqNewClientSaveDTO){
-        System.out.println("inb");
-        return clientService.saveNewClient(reqNewClientSaveDTO);
+    public ResponseEntity<String> SaveNewClient_Prepare(@RequestBody ReqNewClientSaveDTO reqNewClientSaveDTO){
+        return clientService.SaveNewClient_Prepare(reqNewClientSaveDTO);
+    }
+    @PutMapping(value = "/save_new_client")
+    public ResponseEntity<String> SaveNewClient_Commit(@RequestBody ReqNewClientSaveDTO reqNewClientSaveDTO){
+        return clientService.SaveNewClient_Prepare(reqNewClientSaveDTO);
+    }
+    @DeleteMapping(value = "/save_new_client")
+    public ResponseEntity<String> SaveNewClient_Abrot(@RequestBody ReqNewClientSaveDTO reqNewClientSaveDTO){
+        return clientService.SaveNewClient_Abrot(reqNewClientSaveDTO);
     }
 
 }

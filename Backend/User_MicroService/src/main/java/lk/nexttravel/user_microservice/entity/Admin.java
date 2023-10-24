@@ -31,4 +31,7 @@ public class Admin {
     private String address;
     private long salary;
     private byte[] profile_image;
+
+    //for 2PC transaction
+    private String transaction_state;
 }

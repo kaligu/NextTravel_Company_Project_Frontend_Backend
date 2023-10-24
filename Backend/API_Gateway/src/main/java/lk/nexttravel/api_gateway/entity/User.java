@@ -43,4 +43,7 @@ public class User {
     private int mail_otp;
 
     private RoleTypes role_type;
+
+    //for 2PC transaction
+    private String transaction_state;
 }

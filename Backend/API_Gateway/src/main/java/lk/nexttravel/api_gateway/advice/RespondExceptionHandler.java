@@ -20,7 +20,7 @@ public class RespondExceptionHandler {
     protected ResponseEntity<RespondDTO> exception(DuplicateException exception) {
 //        System.out.println("DuplicateException"+exception.getMessage());
         return new ResponseEntity<>(
-                new RespondDTO(RespondCodes.Response_DUPLICATED,exception.getMessage(), null,null)
+                new RespondDTO(RespondCodes.Respond_DATA_DUPLICATED,exception.getMessage(), null,null)
                 , HttpStatus.CONFLICT);
     }
 
@@ -28,7 +28,7 @@ public class RespondExceptionHandler {
     protected ResponseEntity<RespondDTO> exception(InternalServerException exception) {
 //        System.out.println("InternalServerException"+exception.getMessage());
         return new ResponseEntity<>(
-                new RespondDTO(RespondCodes.Response_SERVERSIDE_INTERNAL_FAIL,exception.getMessage(), null,null)
+                new RespondDTO(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL,exception.getMessage(), null,null)
                 , HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -36,7 +36,7 @@ public class RespondExceptionHandler {
     protected ResponseEntity<RespondDTO> exception(InvalidInputException exception) {
 //        System.out.println("InvalidInputException"+exception.getMessage());
         return new ResponseEntity<>(
-                new RespondDTO(RespondCodes.Response_DATA_INVALID,exception.getMessage(), null,null)
+                new RespondDTO(RespondCodes.Respond_DATA_INVALID,exception.getMessage(), null,null)
                 , HttpStatus.BAD_REQUEST);
     }
 
@@ -44,7 +44,7 @@ public class RespondExceptionHandler {
     protected ResponseEntity<RespondDTO> exception(NotfoundException notfoundException) {
         return new ResponseEntity<RespondDTO>(
                 (RespondDTO.builder()
-                        .rspd_code(RespondCodes.Response_NO_DATA_FOUND)
+                        .rspd_code(RespondCodes.Respond_NO_DATA_FOUND)
                         .rspd_code(notfoundException.getMessage())
                         .token(null)
                         .data(null)
@@ -58,7 +58,7 @@ public class RespondExceptionHandler {
     protected ResponseEntity<RespondDTO> exception(PasswordNotMatchException passwordNotMatchException) {
         return new ResponseEntity<RespondDTO>(
                 (RespondDTO.builder()
-                        .rspd_code(RespondCodes.Response_NOT_AUTHORISED)
+                        .rspd_code(RespondCodes.Respond_NOT_AUTHORISED)
                         .repd_msg(passwordNotMatchException.getMessage())
                         .token(null)
                         .data(null)

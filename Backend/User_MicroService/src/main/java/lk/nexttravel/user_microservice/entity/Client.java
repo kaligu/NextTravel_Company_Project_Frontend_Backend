@@ -37,4 +37,7 @@ public class Client {
     private long Tell;
     private String Remarks;
     private int age;
+
+    //for 2PC transaction
+    private String transaction_state;
 }

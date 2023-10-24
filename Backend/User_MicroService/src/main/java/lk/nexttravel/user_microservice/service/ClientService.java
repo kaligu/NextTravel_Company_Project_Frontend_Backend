@@ -7,6 +7,7 @@
 package lk.nexttravel.user_microservice.service;
 
 import lk.nexttravel.user_microservice.dto.ReqNewClientSaveDTO;
+import lk.nexttravel.user_microservice.dto.RequestServicesDTO;
 import lk.nexttravel.user_microservice.dto.RespondDTO;
 import org.springframework.http.ResponseEntity;
 
@@ -16,5 +17,9 @@ import org.springframework.http.ResponseEntity;
  * Time    : 2:43 PM
  */
 public interface ClientService {
-    ResponseEntity<RespondDTO> saveNewClient(ReqNewClientSaveDTO reqNewClientSaveDTO);
+    ResponseEntity<String> SaveNewClient_Prepare(ReqNewClientSaveDTO reqNewClientSaveDTO);
+
+    ResponseEntity<String> SaveNewClient_Commit(ReqNewClientSaveDTO reqNewClientSaveDTO);
+
+    ResponseEntity<String> SaveNewClient_Abrot(ReqNewClientSaveDTO reqNewClientSaveDTO);
 }

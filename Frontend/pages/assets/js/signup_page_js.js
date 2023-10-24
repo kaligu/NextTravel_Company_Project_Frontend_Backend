@@ -1,11 +1,5 @@
 //////////////////////////////////----variable must
 
-let RespondCodes = {
-    Response_SUCCESS: "00",
-    Response_NO_DATA_FOUND: "01",
-    Response_DUPLICATED   : "06",
-    Response_INTERNAL_SERVER_FAIL  :"15"
-}
 
 //--------------------------------------------------------save tokens and usernames on local localStorage
 localStorage.setItem("secure_data_username", "");
@@ -95,7 +89,7 @@ function isUsernameAvailable(username) {
             processData: false,
             contentType: false,
             success: function (data) {
-                if (data.rspd_code === RespondCodes.Response_SUCCESS) {
+                if (data.rspd_code === RespondCodes.Respond_THIS_USER_NOT_REGISTERED_YET) {
                     console.log("Done! No Users of this username...");
                     resolve(true);
                 } else {
@@ -370,29 +364,46 @@ function sendSignupDataIntoServer(){
         contentType: false,
         data: formData,
         success: function (data) {
-            //save local storage secured data
-            localStorage.setItem("secure_data_username", data.token.access_username);
-            localStorage.setItem("secure_data_jwt_access_token", data.token.access_jwt_token);
-            localStorage.setItem("secure_data_refresh_token", data.token.access_refresh_token);
+            if(data.rspd_code === RespondCodes.Respond_DATA_SAVED) {
+                //save local storage secured data
+                localStorage.setItem("secure_data_username", data.token.access_username);
+                localStorage.setItem("secure_data_jwt_access_token", data.token.access_jwt_token);
+                localStorage.setItem("secure_data_refresh_token", data.token.access_refresh_token);
 
-            //hide loading model
-            loadingModel.modal('hide');
+                //hide loading model
+                loadingModel.modal('hide');
 
 
+                loadingModel.on('hidden.bs.modal', function () {
+                    // Show alert after the modal is completely hidden
+                    alertModel_title.text("Done");
+                    alertModel_content.text("You registered successfully!");
+                    alertModel.modal('show');
 
-            loadingModel.on('hidden.bs.modal', function () {
-                // Show alert after the modal is completely hidden
-                alertModel_title.text("Done");
-                alertModel_content.text("You registered successfully!");
-                alertModel.modal('show');
+                    // Remove the event listener to avoid multiple executions
+                    loadingModel.off('hidden.bs.modal');
 
-                // Remove the event listener to avoid multiple executions
-                loadingModel.off('hidden.bs.modal');
+                    location.reload();
 
-                location.reload();
+                    window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/client_main_page.html?_ijt=65d3q769nd0k24e1vqus1m71m7&_ij_reload=RELOAD_ON_SAVE';
+                });
+            }else{
+                //hide loading model
+                loadingModel.modal('hide');
 
-                window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/client_main_page.html?_ijt=65d3q769nd0k24e1vqus1m71m7&_ij_reload=RELOAD_ON_SAVE';
-            });
+                loadingModel.on('hidden.bs.modal', function () {
+                    // Show alert after the modal is completely hidden
+
+                    alertModel_title.text("Error has occurred!");
+                    alertModel_content.text("Server Error found! User Registered Error!  Try again");
+                    alertModel.modal('show');
+
+                    // Remove event listener to avoid multiple executions
+                    loadingModel.off('hidden.bs.modal');
+
+                    location.reload();
+                });
+            }
         },
         error: function (xhr, exception) {
 
