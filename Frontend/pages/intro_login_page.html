@@ -82,7 +82,7 @@
     </div>
 </div>
 
-<div class="container-fluid" id="forgot_pswd_get_username_container" style="display: block">
+<div class="container-fluid" id="forgot_pswd_get_username_container" style="display: none">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -106,29 +106,71 @@
     </div>
 </div>
 
-<!--<div class="container-fluid" id="forgot_pswd_get_otp_container" style="display: block">-->
-<!--    <div class="container py-5 h-100">-->
-<!--        <div class="row d-flex justify-content-center align-items-center h-100">-->
-<!--            <div class="col-12 col-md-8 col-lg-6 col-xl-5">-->
-<!--                <div class="card bg-dark text-white" style="border-radius: 1rem;">-->
-<!--                    <div class="card-body p-5 text-center">-->
-<!--                        <img src="assets/images/logomain.png" alt="logo" style="width: 20rem; height: 7rem; margin-left: -2rem">-->
-<!--                        <h2 class="fw-bold mb-2 text-uppercase">Find Your Account</h2>-->
-<!--                        <br>-->
-<!--                        <br>-->
-<!--                        <p>Please enter your email address or mobile number to search for your account....</p>-->
-<!--                        <div class="mb-4">-->
-<!--                            <label for="pswd_recovery_login_username" >Username</label>-->
-<!--                            <input type="text" class="form-control" id="pswd_recovery_login_username" >-->
-<!--                            <br>-->
-<!--                            <button class="btn btn-outline-light btn-lg px-5" type="button" id="pswd_recovery_login_search_btn" onclick="pswdRecoveryLoginSearchBtnClicked()" >Search & Send OTP</button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div class="container-fluid" id="forgot_pswd_get_otp_container" style="display: none">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <img src="assets/images/logomain.png" alt="logo" style="width: 20rem; height: 7rem; margin-left: -2rem">
+                        <br><br>
+                        <h2 class="fw-bold mb-2 text-uppercase">Check Your Email !</h2>
+                        <br>
+                        <img src="./assets/images/mail.gif" alt="mail gif">
+                        <br><br>
+                        <p>Please enter 4-digit verification code that was sent.</p>
+                        <div class="mb-4">
+                            <label for="pswd_recovery_login_otp" ></label>
+                            <input type="text" class="form-control" id="pswd_recovery_login_otp" >
+                            <br>
+                            <button class="btn btn-outline-light btn-lg px-5" type="button" id="pswd_recovery_login_otp_btn" onclick="pswdRecoveryLoginOTOCheckBtnClicked()" >Verify OTP</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid" id="change_username_password_container" style="display: block">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <img src="assets/images/logomain.png" alt="logo" style="width: 20rem; height: 7rem; margin-left: -0.4rem">
+                        <br>
+                        <h2 class="fw-bold mb-2 text-uppercase">Change Password</h2>
+                        <br>
+                        <div class="form-outline form-white mb-4">
+                            <label class="form-label" for="login_username">New Password</label>
+                            <input type="email" id="login_username" class="form-control form-control-lg" />
+                        </div>
+
+                        <div class="form-outline form-white mb-4">
+                            <label class="form-label" for="login_passwprd">Change Password</label>
+                            <input type="password" id="login_passwprd" class="form-control form-control-lg" />
+                        </div>
+
+                        <p class="small mb-2 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+
+                        <button class="btn btn-outline-light btn-lg px-5" type="button" id="user_login_btn">Save Changes</button>
+
+                        <div>
+                            <br><br>
+                            <p class="mb-1">Don't have an account? <a href="http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/intro_signup_page.html?_ijt=ejb87a1f1an92q1gro5nkuden0&_ij_reload=RELOAD_ON_SAVE"  class="text-white-50 fw-bold">Sign Up</a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- loading window -->
 <!-- use Modal -->

@@ -8,7 +8,7 @@ const alertModel = $('#alert-model-send-otp');
 const alertModel_title =  $('#alert-model-title');
 const alertModel_content = $('#alert-model-content');
 
-///////////////////////////////////////////////
+//////--------------------------password recovery username get
 
 function pswdRecoveryLoginSearchBtnClicked(){
     //show loading model
@@ -34,4 +34,11 @@ function pswdRecoveryLoginSearchBtnClicked(){
             console.log("Exception occured!");
         }
     });
+}
+
+///-------OTP varification
+const pswd_recovery_login_otp_txtfld = $('#pswd_recovery_login_otp');
+
+function pswdRecoveryLoginOTOCheckBtnClicked(){
+
 }
