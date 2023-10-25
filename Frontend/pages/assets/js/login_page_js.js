@@ -211,7 +211,7 @@ function loginFormBtnClicked() {
                         }, 1500); // 2000 milliseconds
                     });
 
-                }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_VEHICLEE){
+                }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_VEHICLE){
 
                     loadingModel.on('hidden.bs.modal', function () {
                         // Show alert after the modal is completely hidden
