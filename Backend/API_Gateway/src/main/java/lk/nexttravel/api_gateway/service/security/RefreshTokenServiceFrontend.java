@@ -85,8 +85,8 @@ public class RefreshTokenServiceFrontend {
                 //delte it
                 refreshTokenRepository.delete(Token);
                 //generate new one
-                if(userRepository.findAuthUserByName(username).isPresent()){
-                    String tokenkey = createRefreshToken(userRepository.findAuthUserByName(username).get());
+                if(userRepository.findUserByName(username).isPresent()){
+                    String tokenkey = createRefreshToken(userRepository.findUserByName(username).get());
                     internalRefreshTUserDTO.setRefreshToken(tokenkey);
                     internalRefreshTUserDTO.setUserAuthenticated(true);
                     return internalRefreshTUserDTO;

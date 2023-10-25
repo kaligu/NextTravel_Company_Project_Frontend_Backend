@@ -133,7 +133,7 @@ public class APIGatewayJwtAccessTokenServiceFrontend {
     }
 
     public Optional<RoleTypes> getRoleByUsername(String username) {
-        Optional<User> user = userRepository.findAuthUserByName(username);
+        Optional<User> user = userRepository.findUserByName(username);
         if (user.isPresent()) {
             return Optional.of(user.get().getRole_type());
         } else {

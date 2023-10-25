@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
-    Optional<User> findAuthUserByName(String Username);
+    Optional<User> findUserByName(String name);
     boolean existsByName(String username);
     boolean deleteByName(String name);
 }

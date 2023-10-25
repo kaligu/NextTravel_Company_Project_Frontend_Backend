@@ -58,11 +58,25 @@
                         <div class="form-outline form-white mb-4">
                             <input type="email" id="login_Username" class="form-control form-control-lg" />
                             <label class="form-label" for="login_Username">Username</label>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                * Must be at least 5 characters
+                            </div>
                         </div>
 
                         <div class="form-outline form-white mb-4">
                             <input type="password" id="login_Password" class="form-control form-control-lg" />
                             <label class="form-label" for="login_Password">Password</label>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                * Must be at least 8 characters long
+                                * Must contain at least one digit, lowercase letter, uppercase letter, and other character
+                                *Examples:`Password123!`, `MyStrongPassword2023`
+                            </div>
                         </div>
 
                         <p class="small mb-2 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
@@ -191,6 +205,24 @@
     </div>
 </div>
 
+<!-- alert window -->
+<!-- Modal -->
+<div class="modal fade" id="login-alert-model" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="login-alert-model-title">title</h5>
+            </div>
+            <div class="modal-body">
+                <p class="modal-dialog-centered" id="login-alert-model-content">content</p>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-primary bg-success w-25" onclick="closeAlertModel()" id="alert-model-btn"> Ok </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--&lt;!&ndash; alert window &ndash;&gt;-->
 <!--&lt;!&ndash; alert-model-send-otp  &ndash;&gt;-->
 <!--<div class="modal fade" id="alert-model-send-otp" tabindex="-1" role="dialog"  aria-hidden="true">-->
@@ -226,6 +258,7 @@
 <!--    });-->
 <!--</script>-->
 <script src="./assets/js/util/RespondCodes.js"></script>
+<script src="./assets/js/util/RoleTypes.js"></script>
 <script src="./assets/js/login_page_js.js"></script>
 </body>
 </html>

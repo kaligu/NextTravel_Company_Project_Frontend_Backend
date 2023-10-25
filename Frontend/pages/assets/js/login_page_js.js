@@ -4,9 +4,9 @@ const pswd_recovery_login_username_txtfld = $('#pswd_recovery_login_username');
 
 const loadingModel = $('#loading-model');
 
-const alertModel = $('#alert-model-send-otp');
-const alertModel_title =  $('#alert-model-title');
-const alertModel_content = $('#alert-model-content');
+const alertModel = $('#login-alert-model');
+const alertModel_title =  $('#login-alert-model-title');
+const alertModel_content = $('#login-alert-model-content');
 
 ////////---------- login operation
 //fields variables
@@ -102,38 +102,73 @@ function loginFormBtnClicked() {
             password: loginPassword.val()
         },
         success:function (data){
-            // console.log("rspd_code : "+data.rspd_code);
-            // console.log("rspd_message : "+data.rspd_message)
-            // console.log("access_username : "+data.access_username)
-            // console.log("access_token : "+data.token.access_jwt_token)
-            // console.log("refresh_token : "+data.token.access_refresh_token)
-            // console.log("data : "+data.data)
-            //
-            // /////////////////////////////////////////////
-            // //save tokens on local localStorage
-            // localStorage.setItem("secure_data_username", data.token.access_username);
-            // localStorage.setItem("secure_data_access_token", data.token.access_jwt_token);
-            // localStorage.setItem("secure_data_refresh_token", data.token.access_refresh_token);
-            //
-            // ////////////////////////////////////////////////
-            //
-            // //hide loading model
-            // loadingModel.modal('hide');
-            //
-            // //check role and move there page
-            // if(data.data === "ROLE_CLIENT"){
-            //     window.location.href = '../pages/user_adminpage.html';
-            // }else if(data.data === "ROLE_ADMIN_SERVICE_VEHICLE"){
-            //     window.location.href = '../pages/vehicle_adminpage.html';
-            // }else if(data.data === "ROLE_ADMIN_SERVICE_HOTEL"){
-            //     window.location.href = '../pages/hotel_adminpage.html';
-            // }else if(data.data === "ROLE_ADMIN_SERVICE_USER"){
-            //     window.location.href = '../pages/user_adminpage.html';
-            // }else if (data.data === "ROLE_ADMIN_SERVICE_TRAVELPACKAGE"){
-            //     window.location.href = '../pages/travelpackage_adminpage.html';
-            // }else if (data.data === "ROLE_ADMIN_SERVICE_GUIDE"){
-            //     window.location.href = '../pages/guide_adminpage.html';
-            // }
+            console.log("rspd_code : "+data.rspd_code);
+            console.log("rspd_message : "+data.rspd_message)
+            console.log("access_username : "+data.access_username)
+            console.log("access_token : "+data.token.access_jwt_token)
+            console.log("refresh_token : "+data.token.access_refresh_token)
+            console.log("data : "+data.data)
+
+            /////////////////////////////////////////////
+            //save tokens on local localStorage
+            localStorage.setItem("secure_data_username", data.token.access_username);
+            localStorage.setItem("secure_data_access_token", data.token.access_jwt_token);
+            localStorage.setItem("secure_data_refresh_token", data.token.access_refresh_token);
+
+            ////////////////////////////////////////////////
+
+            //hide loading model
+            loadingModel.modal('hide');
+
+            if(data.rspd_code === RespondCodes.Respond_PASSWORD_MATCHED){
+
+                if(data.data === RoleTypes.ROLE_CLIENT){
+
+                    loadingModel.on('hidden.bs.modal', function () {
+                        // Show alert after the modal is completely hidden
+
+                        alertModel_title.text("Welcome Again!");
+                        alertModel_content.text("Have a Nice Day Mr."+data.token.access_username);
+                        alertModel.modal('show');
+
+                        // Remove event listener to avoid multiple executions
+                        loadingModel.off('hidden.bs.modal');
+                    });
+
+                    window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/client_main_page.html?_ijt=lgk33b09l42ffpce17ruvb5qhv&_ij_reload=RELOAD_ON_SAVE';
+
+                }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_USER){
+
+                    loadingModel.on('hidden.bs.modal', function () {
+                        // Show alert after the modal is completely hidden
+
+                        alertModel_title.text("Welcome Again!");
+                        alertModel_content.text("Have a Nice Day Mr."+data.token.access_username);
+                        alertModel.modal('show');
+
+                        // Remove event listener to avoid multiple executions
+                        loadingModel.off('hidden.bs.modal');
+                    });
+
+                    window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/user_admin_main_page.html?_ijt=lgk33b09l42ffpce17ruvb5qhv&_ij_reload=RELOAD_ON_SAVE';
+                }
+            }else if(data.rspd_code === RespondCodes.Respond_PASSWORD_NOT_MATCHED){
+                loginUsername = "";
+                loginPassword = "";
+
+                loadingModel.on('hidden.bs.modal', function () {
+                    // Show alert after the modal is completely hidden
+
+                    alertModel_title.text("Username or Password Mismatched!");
+                    alertModel_content.text("Try again!");
+                    alertModel.modal('show');
+
+                    // Remove event listener to avoid multiple executions
+                    loadingModel.off('hidden.bs.modal');
+                });
+
+                location.reload();
+            }
 
         },
         error: function (xhr,exception){
@@ -143,13 +178,14 @@ function loginFormBtnClicked() {
             loadingModel.on('hidden.bs.modal', function () {
                 // Show alert after the modal is completely hidden
 
-                alertModel_title.innerText = "Error has occured!";
-                alertModel_content.innerText = xhr+","+exception;
+                alertModel_title.text("Error has occured!");
+                alertModel_content.text(xhr+","+exception);
                 alertModel.modal('show');
 
                 // Remove event listener to avoid multiple executions
                 loadingModel.off('hidden.bs.modal');
             });
+            location.reload();
         }
     })
 }

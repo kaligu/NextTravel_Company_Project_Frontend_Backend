@@ -9,6 +9,7 @@ package lk.nexttravel.api_gateway.service.impl;
 import lk.nexttravel.api_gateway.Persistence.UserRepository;
 import lk.nexttravel.api_gateway.advice.util.DuplicateException;
 import lk.nexttravel.api_gateway.advice.util.InternalServerException;
+import lk.nexttravel.api_gateway.advice.util.NotfoundException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.TransactionDTO;
 import lk.nexttravel.api_gateway.dto.auth.UserSignupDTO;
@@ -158,7 +159,7 @@ public class UserServiceImpl implements UserService {
                 //commit
                 transactionCordinator.commitPhaseForCreate(transactionDTOArrayList);
 
-                //Access Token Create Get On Gateway DB
+                //Access Token Create Get
                 String newAccessToken = APIGatewayJwtAccessTokenServiceFrontend.generateToken(userSignupDTO.getSignup_name()); //create and get JWT access token
 
                 //UserRefreshToken Save On Gateway DB
@@ -184,7 +185,7 @@ public class UserServiceImpl implements UserService {
                         HttpStatus.CREATED);
             }else {
                 //abrot User
-                userRepository.delete(userRepository.findAuthUserByName(userSignupDTO.getSignup_name()).get());
+                userRepository.delete(userRepository.findUserByName(userSignupDTO.getSignup_name()).get());
 
                 //abrot Client
                 transactionCordinator.rollbackPhaseForCreate(transactionDTOArrayList);
@@ -194,7 +195,7 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e){
 
             //abrot User
-            userRepository.delete(userRepository.findAuthUserByName(userSignupDTO.getSignup_name()).get());
+            userRepository.delete(userRepository.findUserByName(userSignupDTO.getSignup_name()).get());
 
             //abrot Client
             transactionCordinator.rollbackPhaseForCreate(transactionDTOArrayList);
@@ -203,6 +204,56 @@ public class UserServiceImpl implements UserService {
         }
 
 
+    }
+
+    @Override
+    public ResponseEntity<RespondDTO> checkUsernamePasswordUserLogin(String username, String password) {
+       try{
+           Optional<User> user =  userRepository.findUserByName(username);
+           if(user.isPresent()){
+               //check Username password matched
+               if(
+                       user.get().getName().equals(username)
+                               &&
+                               passwordEncoder.matches(user.get().getPassword(), password)
+               ){
+                   //if matched
+                   //Access Token Create Get
+                   String newAccessToken = APIGatewayJwtAccessTokenServiceFrontend.generateToken(user.get().getName()); //create and get JWT access token
+
+                   //UserRefreshToken Save On Gateway DB
+                   String newRefreshToken = refreshTokenServiceFrontend.createRefreshToken(user.get()); //create get and save refresh token
+
+                   FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder()
+                           .access_username(user.get().getName())
+                           .access_jwt_token(newAccessToken) //create access token and assign it
+                           .access_refresh_token(newRefreshToken)  //create refresh token and save and assign it
+                           .build();
+
+                   return new ResponseEntity<RespondDTO> (
+                           RespondDTO.builder()
+                                   .rspd_code(RespondCodes.Respond_PASSWORD_MATCHED)
+                                   .token(frontendTokenDTO)
+                                   .data(user.get().getRole_type())
+                                   .build()
+                           ,
+                           HttpStatus.CREATED);
+               }else{
+                   return new ResponseEntity<RespondDTO> (
+                           RespondDTO.builder()
+                                   .rspd_code(RespondCodes.Respond_PASSWORD_NOT_MATCHED)
+                                   .token(null)
+                                   .data(null)
+                                   .build()
+                           ,
+                           HttpStatus.BAD_REQUEST);
+               }
+           }else {
+               throw new NotfoundException("This Username not found");
+           }
+       }catch (Exception e){
+           throw new InternalServerException(e+"Internal Server Error !");
+       }
     }
 
 }

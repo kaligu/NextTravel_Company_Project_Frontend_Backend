@@ -113,7 +113,7 @@ public class UserController {
 
     //user login
     @GetMapping(value = "/user-login")
-    public void userLogin(
+    public Mono<ResponseEntity<RespondDTO>> userLogin(
             @RequestParam("username") @NonNull String username ,
             @RequestParam("password") @NonNull String password
     ) {
@@ -121,9 +121,12 @@ public class UserController {
         if ( username.matches("^[a-zA-Z0-9_.-]{5,30}$") &&                         //check Username Regax
                 password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$")         //check Password Regax
         ) {
-            System.out.println("done : "+username+" "+password);
+            return Mono.just(
+                    userService.checkUsernamePasswordUserLogin(username,password)
+            );
+
         } else {
-            System.out.println("error");
+            throw new InvalidInputException("Username or Password invalid!");
         }
 
     }
