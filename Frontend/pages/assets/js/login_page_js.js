@@ -211,7 +211,7 @@ function loginFormBtnClicked() {
                         }, 1500); // 2000 milliseconds
                     });
 
-                }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_USER){
+                }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_VEHICLEE){
 
                     loadingModel.on('hidden.bs.modal', function () {
                         // Show alert after the modal is completely hidden
@@ -224,7 +224,7 @@ function loginFormBtnClicked() {
                         loadingModel.off('hidden.bs.modal');
 
                         setTimeout(function () {
-                            window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/user_admin_main_page.html?_ijt=lgk33b09l42ffpce17ruvb5qhv&_ij_reload=RELOAD_ON_SAVE';
+                            window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/vehicle_admin_main_page.html?_ijt=lfe5pib42qssa1523t2ctc28hn&_ij_reload=RELOAD_ON_SAVE';
                         }, 1500); // 2000 milliseconds
                     });
 
