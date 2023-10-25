@@ -113,19 +113,24 @@ public class UserServiceImpl implements UserService {
         try {
             String id = "U00"+sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME);
             String password = passwordEncoder.encode(userSignupDTO.getSignup_password());
+            Optional<User> savedUser;
+            if(!userRepository.existsByName(userSignupDTO.getSignup_name())){
+                //User Save On Gateway DB -task 1
+                savedUser = Optional.of(
+                        userRepository.save(
+                                User.builder()
+                                        .id(id)
+                                        .name(userSignupDTO.getSignup_name())
+                                        .email(userSignupDTO.getSignup_email())
+                                        .password(password)
+                                        .role_type(RoleTypes.ROLE_CLIENT)
+                                        .transaction_state(RespondCodes.PENDING)
+                                        .build())
+                );
+            }else {
+                throw new DuplicateException("This user already saved!");
+            }
 
-            //User Save On Gateway DB -task 1
-            Optional<User> savedUser = Optional.of(
-                    userRepository.save(
-                            User.builder()
-                                    .id(id)
-                                    .name(userSignupDTO.getSignup_name())
-                                    .email(userSignupDTO.getSignup_email())
-                                    .password(password)
-                                    .role_type(RoleTypes.ROLE_CLIENT)
-                                    .transaction_state(RespondCodes.PENDING)
-                                    .build())
-            );
 
             //send data into transaction Coordinator for prepare
 
@@ -254,6 +259,111 @@ public class UserServiceImpl implements UserService {
        }catch (Exception e){
            throw new InternalServerException(e+"Internal Server Error !");
        }
+    }
+
+    //---------------------------------- Only Testing for save admins
+    //------------------------------------------------------------------------
+    public ResponseEntity<RespondDTO> saveNewAdminUserOnlyTesting(UserSignupDTO userSignupDTO) {
+        ArrayList<TransactionDTO> transactionDTOArrayList = new ArrayList<>();
+        try {
+            String id = "U00"+sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME);
+            String password = passwordEncoder.encode(userSignupDTO.getSignup_password());
+            Optional<User> savedUser;
+            if(!userRepository.existsByName(userSignupDTO.getSignup_name())){
+                //User Save On Gateway DB -task 1
+                savedUser = Optional.of(
+                        userRepository.save(
+                                User.builder()
+                                        .id(id)
+                                        .name(userSignupDTO.getSignup_name())
+                                        .email(userSignupDTO.getSignup_email())
+                                        .password(password)
+                                        .role_type(RoleTypes.ROLE_CLIENT)
+                                        .transaction_state(RespondCodes.PENDING)
+                                        .build())
+                );
+            }else {
+                throw new DuplicateException("This user already saved!");
+            }
+
+
+            //send data into transaction Coordinator for prepare
+
+            transactionDTOArrayList.add(
+                    TransactionDTO.builder()      //send data into User Service - task2
+                            .url(RqRpURLs.User_Service_save_with_reg_user) //url
+                            .httpMethod(HttpMethod.POST)  //http method
+                            .data(
+                                    UserReqNewClientSaveDTO.builder()
+                                            .token( apiGatewayJwtAccessTokenServiceBackend.generateToken() ) //create a session token to connect with microservice check this request is valid request
+                                            .id(id)
+                                            .address(userSignupDTO.getSignup_address())
+                                            .nic_or_passport(userSignupDTO.getSignup_nic_or_passport())
+                                            .profile_image(userSignupDTO.getSignup_profile_image())
+                                            .name_with_initial(userSignupDTO.getSignup_name_with_initial())
+                                            .build()
+                            )
+                            .build()
+            );
+            //add transactiondto arraylist for commit
+            boolean isAllMicroServiceTasksCommited =false;
+            isAllMicroServiceTasksCommited = transactionCordinator.preparePhaseForCreate(transactionDTOArrayList);
+
+            if(
+                    savedUser.isPresent() && isAllMicroServiceTasksCommited
+            ){
+                //commit user
+                savedUser.get().setTransaction_state(RespondCodes.COMMITED);
+                userRepository.save(savedUser.get());
+
+                //commit
+                transactionCordinator.commitPhaseForCreate(transactionDTOArrayList);
+
+                //Access Token Create Get
+                String newAccessToken = APIGatewayJwtAccessTokenServiceFrontend.generateToken(userSignupDTO.getSignup_name()); //create and get JWT access token
+
+                //UserRefreshToken Save On Gateway DB
+                String newRefreshToken = refreshTokenServiceFrontend.createRefreshToken(savedUser.get()); //create get and save refresh token
+
+                FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder()
+                        .access_username(savedUser.get().getName())
+                        .access_jwt_token(newAccessToken) //create access token and assign it
+                        .access_refresh_token(newRefreshToken)  //create refresh token and save and assign it
+                        .build();
+
+                //send mail
+                mailService.sendEmailForNewUserSignup(userSignupDTO.getSignup_email(), userSignupDTO.getSignup_name());
+
+                //----------------------------------------------return if all are done
+                return new ResponseEntity<RespondDTO> (
+                        RespondDTO.builder()
+                                .rspd_code(RespondCodes.Respond_DATA_SAVED)
+                                .token(frontendTokenDTO)
+                                .data(savedUser.get().getRole_type())
+                                .build()
+                        ,
+                        HttpStatus.CREATED);
+            }else {
+                //abrot User
+                userRepository.delete(userRepository.findUserByName(userSignupDTO.getSignup_name()).get());
+
+                //abrot Client
+                transactionCordinator.rollbackPhaseForCreate(transactionDTOArrayList);
+
+                throw new InternalServerException("This User not saved!");
+            }
+        } catch (Exception e){
+
+            //abrot User
+            userRepository.delete(userRepository.findUserByName(userSignupDTO.getSignup_name()).get());
+
+            //abrot Client
+            transactionCordinator.rollbackPhaseForCreate(transactionDTOArrayList);
+
+            throw new InternalServerException("This User not saved!");
+        }
+
+
     }
 
 }

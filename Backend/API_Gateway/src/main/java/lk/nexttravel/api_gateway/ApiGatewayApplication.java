@@ -1,8 +1,10 @@
 package lk.nexttravel.api_gateway;
 
 import lk.nexttravel.api_gateway.Persistence.UserRepository;
+import lk.nexttravel.api_gateway.dto.auth.UserSignupDTO;
 import lk.nexttravel.api_gateway.entity.User;
 import lk.nexttravel.api_gateway.service.SequenceGeneratorService;
+import lk.nexttravel.api_gateway.service.UserService;
 import lk.nexttravel.api_gateway.util.RoleTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,6 +20,9 @@ public class ApiGatewayApplication {
     UserRepository userRepository;
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     SequenceGeneratorService sequenceGeneratorService;
 
     @Autowired
@@ -30,14 +35,17 @@ public class ApiGatewayApplication {
     @Bean
     public CommandLineRunner init(){
         return args -> {
+
             if(!userRepository.existsByName("admin")){
-                userRepository.save(
-                        User.builder()
-                                .id("U00"+sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME))
-                                .email("chethiyakaligu2@gmail.com")
-                                .name("admin")
-                                .password(passwordEncoder.encode("Root@1234"))
-                                .role_type(RoleTypes.ROLE_ADMIN_SERVICE_USER)
+                userService.saveNewGuestUser(
+                        UserSignupDTO.builder()
+                                .signup_name(name)
+                                .signup_name_with_initial(nameWithInitial)
+                                .signup_address(addres)
+                                .signup_email(email)
+                                .signup_nic_or_passport(nicOrPassport)
+                                .signup_password(password)
+                                .signup_profile_image(image)
                                 .build()
                 );
             }
