@@ -8,6 +8,7 @@ package lk.nexttravel.api_gateway.service;
 
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.auth.UserSignupDTO;
+import lk.nexttravel.api_gateway.util.RoleTypes;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -22,4 +23,6 @@ public interface UserService {
     ResponseEntity<RespondDTO> saveNewGuestUser(UserSignupDTO userSignupDTO);
 
     ResponseEntity<RespondDTO> checkUsernamePasswordUserLogin(String username, String password);
+
+    void saveNewAdminUserOnlyTesting(UserSignupDTO userSignupDTO, RoleTypes roleTypes);
 }

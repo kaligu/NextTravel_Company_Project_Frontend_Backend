@@ -263,12 +263,14 @@ public class UserServiceImpl implements UserService {
 
     //---------------------------------- Only Testing for save admins
     //------------------------------------------------------------------------
-    public ResponseEntity<RespondDTO> saveNewAdminUserOnlyTesting(UserSignupDTO userSignupDTO) {
+    @Override
+    public void saveNewAdminUserOnlyTesting(UserSignupDTO userSignupDTO, RoleTypes roleTypes) {
         ArrayList<TransactionDTO> transactionDTOArrayList = new ArrayList<>();
+        Optional<User> savedUser = null;
         try {
             String id = "U00"+sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME);
             String password = passwordEncoder.encode(userSignupDTO.getSignup_password());
-            Optional<User> savedUser;
+
             if(!userRepository.existsByName(userSignupDTO.getSignup_name())){
                 //User Save On Gateway DB -task 1
                 savedUser = Optional.of(
@@ -283,7 +285,7 @@ public class UserServiceImpl implements UserService {
                                         .build())
                 );
             }else {
-                throw new DuplicateException("This user already saved!");
+
             }
 
 
@@ -335,7 +337,7 @@ public class UserServiceImpl implements UserService {
                 mailService.sendEmailForNewUserSignup(userSignupDTO.getSignup_email(), userSignupDTO.getSignup_name());
 
                 //----------------------------------------------return if all are done
-                return new ResponseEntity<RespondDTO> (
+                new ResponseEntity<RespondDTO> (
                         RespondDTO.builder()
                                 .rspd_code(RespondCodes.Respond_DATA_SAVED)
                                 .token(frontendTokenDTO)
@@ -350,7 +352,6 @@ public class UserServiceImpl implements UserService {
                 //abrot Client
                 transactionCordinator.rollbackPhaseForCreate(transactionDTOArrayList);
 
-                throw new InternalServerException("This User not saved!");
             }
         } catch (Exception e){
 
@@ -360,7 +361,6 @@ public class UserServiceImpl implements UserService {
             //abrot Client
             transactionCordinator.rollbackPhaseForCreate(transactionDTOArrayList);
 
-            throw new InternalServerException("This User not saved!");
         }
 
 
