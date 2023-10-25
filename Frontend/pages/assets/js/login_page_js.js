@@ -93,6 +93,8 @@ function loginFormBtnClicked() {
     //show loading model
     loadingModel.modal('show');
 
+    console.log("success");
+
     $.ajax({
         method:"GET",
         contentType:"application/json",
@@ -103,6 +105,8 @@ function loginFormBtnClicked() {
             password: loginPassword.val()
         },
         success:function (data){
+            console.log("done");
+
             loginUsername = "";
             loginPassword = "";
 
@@ -250,8 +254,12 @@ function loginFormBtnClicked() {
 
         },
         error: function (xhr,exception){
-            throw exception;
+            //hide loading model
+            loadingModel.modal('hide');
 
+            alertModel_title.text("Not Found!");
+            alertModel_content.text("This user is not registered. Please register and try again!");
+            alertModel.modal('show');
         }
     })
 }
