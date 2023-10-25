@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class ApiGatewayApplication {
@@ -18,6 +19,9 @@ public class ApiGatewayApplication {
 
     @Autowired
     SequenceGeneratorService sequenceGeneratorService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public static void main(String[] args) {
         SpringApplication.run(ApiGatewayApplication.class, args);
@@ -29,9 +33,9 @@ public class ApiGatewayApplication {
             userRepository.save(
                     User.builder()
                             .id("U00"+sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME))
-                            .email(" chethiyakaligu2@gmail.com")
-                            .name("Admin Test")
-                            .password("1234")
+                            .email("chethiyakaligu2@gmail.com")
+                            .name("admin")
+                            .password(passwordEncoder.encode("Root@1234"))
                             .role_type(RoleTypes.ROLE_ADMIN_SERVICE_USER)
                             .build()
             );
