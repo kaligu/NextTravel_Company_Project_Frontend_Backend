@@ -411,21 +411,12 @@ function sendSignupDataIntoServer(){
             localStorage.setItem("secure_data_jwt_access_token", "");
             localStorage.setItem("secure_data_refresh_token", "");
 
-            //hide loading model
-            loadingModel.modal('hide');
+//hide loading model
 
-            loadingModel.on('hidden.bs.modal', function () {
-                // Show alert after the modal is completely hidden
 
-                alertModel_title.text("Error has occurred!");
-                alertModel_content.text("Server Error found! User Registered Error!  Try again");
-                alertModel.modal('show');
-
-                // Remove event listener to avoid multiple executions
-                loadingModel.off('hidden.bs.modal');
-
-                location.reload();
-            });
+            alertModel_title.text("Error has occurred!");
+            alertModel_content.text("Server Error found! User Registered Error!  Try again");
+            alertModel.modal('show');
         }
     })
 }
@@ -434,4 +425,6 @@ function sendSignupDataIntoServer(){
 //when click alert model's close button close the model
 function closeAlertModel(){
     alertModel.modal('hide');
+    window.location.reload();
+    loadingModel.modal('hide');
 }

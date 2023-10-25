@@ -6,6 +6,7 @@
 */
 package lk.nexttravel.api_gateway.service.impl;
 
+import lk.nexttravel.api_gateway.advice.util.InternalServerException;
 import lk.nexttravel.api_gateway.dto.TransactionDTO;
 import lk.nexttravel.api_gateway.dto.user.UserReqNewClientSaveDTO;
 import lk.nexttravel.api_gateway.service.TransactionCordinator;
@@ -28,32 +29,47 @@ public class TransactionCoordinatorImpl implements TransactionCordinator {
 
     @Override
     public boolean preparePhaseForCreate(List<TransactionDTO> transactionDTOList) {
-        boolean allResponsesSuccessful = true; // Assume all responses are successful by default
+        try {
+            boolean allResponsesSuccessful = true; // Assume all responses are successful by default
 
-        for (TransactionDTO transactionDTO : transactionDTOList) {
-            boolean responseSuccessful = sendToCreate(transactionDTO);
+            for (TransactionDTO transactionDTO : transactionDTOList) {
+                boolean responseSuccessful = sendToCreate(transactionDTO);
 
-            if (!responseSuccessful) {
-                allResponsesSuccessful = false;
-                break; // Exit the loop early if any response is not successful
+                if (!responseSuccessful) {
+                    allResponsesSuccessful = false;
+                    break; // Exit the loop early if any response is not successful
+                }
             }
+
+            return allResponsesSuccessful;
+        }catch (Exception e){
+            throw new InternalServerException("cc");
         }
 
-        return allResponsesSuccessful;
     }
 
     @Override
     public void commitPhaseForCreate(List<TransactionDTO> transactionDTOList) {
-        for (TransactionDTO transactionDTO : transactionDTOList){
-            sendToCommit(transactionDTO);
+        try {
+            for (TransactionDTO transactionDTO : transactionDTOList){
+                sendToCommit(transactionDTO);
+            }
+        }catch (Exception e){
+            throw new InternalServerException("cc");
         }
+
     }
 
     @Override
     public void rollbackPhaseForCreate(List<TransactionDTO> transactionDTOList) {
-        for (TransactionDTO transactionDTO : transactionDTOList){
-            sendToDelete(transactionDTO);
+        try {
+            for (TransactionDTO transactionDTO : transactionDTOList){
+                sendToDelete(transactionDTO);
+            }
+        }catch (Exception e){
+            throw new InternalServerException("cc");
         }
+
     }
 
     @Override
@@ -110,54 +126,67 @@ public class TransactionCoordinatorImpl implements TransactionCordinator {
     }
 
     private boolean sendToCreate(TransactionDTO data){
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+            ResponseEntity<String> responseEntity = restTemplate.exchange(
+                    data.getUrl(),
+                    HttpMethod.POST,
+                    new HttpEntity<Object> (
+                            data.getData()
+                            ,
+                            headers
+                    ),
+                    String.class
+            );
 
-        ResponseEntity<String> responseEntity = restTemplate.exchange(
-                data.getUrl(),
-                HttpMethod.POST,
-                new HttpEntity<Object> (
-                        data.getData()
-                        ,
-                        headers
-                ),
-                String.class
-        );
+            return responseEntity.getStatusCode()==HttpStatus.CREATED; //if done return true
+        }catch (Exception e){
+            return false;
+        }
 
-        return responseEntity.getStatusCode()==HttpStatus.CREATED; //if done return true
     }
 
     private void sendToCommit(TransactionDTO data){
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+            ResponseEntity<String> responseEntity = restTemplate.exchange(
+                    data.getUrl(),
+                    HttpMethod.PUT,
+                    new HttpEntity<Object> (
+                            data.getData()
+                            ,
+                            headers
+                    ),
+                    String.class
+            );
+        }catch (Exception e){
+            System.out.println("eror");
+        }
 
-        ResponseEntity<String> responseEntity = restTemplate.exchange(
-                data.getUrl(),
-                HttpMethod.PUT,
-                new HttpEntity<Object> (
-                        data.getData()
-                        ,
-                        headers
-                ),
-                String.class
-        );
     }
 
     private void sendToDelete(TransactionDTO data){
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
 
-        ResponseEntity<String> responseEntity = restTemplate.exchange(
-                data.getUrl(),
-                HttpMethod.DELETE,
-                new HttpEntity<Object> (
-                        data.getData()
-                        ,
-                        headers
-                ),
-                String.class
-        );
+            ResponseEntity<String> responseEntity = restTemplate.exchange(
+                    data.getUrl(),
+                    HttpMethod.DELETE,
+                    new HttpEntity<Object> (
+                            data.getData()
+                            ,
+                            headers
+                    ),
+                    String.class
+            );
+        }catch (Exception e){
+            System.out.println("eror");
+        }
+
     }
 }

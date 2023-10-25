@@ -209,13 +209,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<RespondDTO> checkUsernamePasswordUserLogin(String username, String password) {
        try{
-           Optional<User> user =  userRepository.findUserByName(username);
+           Optional<User> user=userRepository.findUserByName(username);
            if(user.isPresent()){
                //check Username password matched
                if(
                        user.get().getName().equals(username)
                                &&
-                               passwordEncoder.matches(user.get().getPassword(), password)
+                               passwordEncoder.matches( password, user.get().getPassword())
                ){
                    //if matched
                    //Access Token Create Get
@@ -246,7 +246,7 @@ public class UserServiceImpl implements UserService {
                                    .data(null)
                                    .build()
                            ,
-                           HttpStatus.BAD_REQUEST);
+                           HttpStatus.OK);
                }
            }else {
                throw new NotfoundException("This Username not found");

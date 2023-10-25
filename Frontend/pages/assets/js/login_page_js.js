@@ -7,6 +7,7 @@ const loadingModel = $('#loading-model');
 const alertModel = $('#login-alert-model');
 const alertModel_title =  $('#login-alert-model-title');
 const alertModel_content = $('#login-alert-model-content');
+const alertModel_btn = $('#alert-model-btn');
 
 ////////---------- login operation
 //fields variables
@@ -102,25 +103,25 @@ function loginFormBtnClicked() {
             password: loginPassword.val()
         },
         success:function (data){
-            console.log("rspd_code : "+data.rspd_code);
-            console.log("rspd_message : "+data.rspd_message)
-            console.log("access_username : "+data.access_username)
-            console.log("access_token : "+data.token.access_jwt_token)
-            console.log("refresh_token : "+data.token.access_refresh_token)
-            console.log("data : "+data.data)
-
-            /////////////////////////////////////////////
-            //save tokens on local localStorage
-            localStorage.setItem("secure_data_username", data.token.access_username);
-            localStorage.setItem("secure_data_access_token", data.token.access_jwt_token);
-            localStorage.setItem("secure_data_refresh_token", data.token.access_refresh_token);
-
-            ////////////////////////////////////////////////
+            loginUsername = "";
+            loginPassword = "";
 
             //hide loading model
             loadingModel.modal('hide');
 
+            //save tokens on local localStorage
+            localStorage.setItem("secure_data_username", " ");
+            localStorage.setItem("secure_data_access_token", " ");
+            localStorage.setItem("secure_data_refresh_token", " ");
+
             if(data.rspd_code === RespondCodes.Respond_PASSWORD_MATCHED){
+                //save tokens on local localStorage
+                localStorage.setItem("secure_data_username", data.token.access_username);
+                localStorage.setItem("secure_data_access_token", data.token.access_jwt_token);
+                localStorage.setItem("secure_data_refresh_token", data.token.access_refresh_token);
+
+                //close alert's ok btn
+                alertModel_btn.hide();
 
                 if(data.data === RoleTypes.ROLE_CLIENT){
 
@@ -133,9 +134,14 @@ function loginFormBtnClicked() {
 
                         // Remove event listener to avoid multiple executions
                         loadingModel.off('hidden.bs.modal');
+
+                        //thread sleep
+                        setTimeout(function () {
+                            window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/client_main_page.html?_ijt=lgk33b09l42ffpce17ruvb5qhv&_ij_reload=RELOAD_ON_SAVE';
+                        }, 1500);
                     });
 
-                    window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/client_main_page.html?_ijt=lgk33b09l42ffpce17ruvb5qhv&_ij_reload=RELOAD_ON_SAVE';
+
 
                 }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_USER){
 
@@ -148,13 +154,19 @@ function loginFormBtnClicked() {
 
                         // Remove event listener to avoid multiple executions
                         loadingModel.off('hidden.bs.modal');
+
+                        setTimeout(function () {
+                            window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/user_admin_main_page.html?_ijt=lgk33b09l42ffpce17ruvb5qhv&_ij_reload=RELOAD_ON_SAVE';
+                        }, 1500); // 2000 milliseconds
                     });
 
-                    window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/user_admin_main_page.html?_ijt=lgk33b09l42ffpce17ruvb5qhv&_ij_reload=RELOAD_ON_SAVE';
                 }
             }else if(data.rspd_code === RespondCodes.Respond_PASSWORD_NOT_MATCHED){
-                loginUsername = "";
-                loginPassword = "";
+                //show alert's btn
+                alertModel_btn.show();
+
+                //hide loading model
+                loadingModel.modal('hide');
 
                 loadingModel.on('hidden.bs.modal', function () {
                     // Show alert after the modal is completely hidden
@@ -166,26 +178,12 @@ function loginFormBtnClicked() {
                     // Remove event listener to avoid multiple executions
                     loadingModel.off('hidden.bs.modal');
                 });
-
-                location.reload();
             }
 
         },
         error: function (xhr,exception){
-            //hide loading model
-            loadingModel.modal('hide');
+            throw exception;
 
-            loadingModel.on('hidden.bs.modal', function () {
-                // Show alert after the modal is completely hidden
-
-                alertModel_title.text("Error has occured!");
-                alertModel_content.text(xhr+","+exception);
-                alertModel.modal('show');
-
-                // Remove event listener to avoid multiple executions
-                loadingModel.off('hidden.bs.modal');
-            });
-            location.reload();
         }
     })
 }
@@ -214,6 +212,7 @@ function pswdRecoveryLoginSearchBtnClicked(){
         error: function (xhr, exception) {
             resolve(false);
             console.log("Exception occured!");
+            throw exception;
         }
     });
 }
@@ -223,4 +222,12 @@ const pswd_recovery_login_otp_txtfld = $('#pswd_recovery_login_otp');
 
 function pswdRecoveryLoginOTOCheckBtnClicked(){
 
+}
+
+
+////////////////////////-------------------------------------------------------------close alert model
+//when click alert model's close button close the model
+function closeAlertModel(){
+    alertModel.modal('hide');
+    location.reload();
 }
