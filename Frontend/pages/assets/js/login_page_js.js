@@ -99,7 +99,7 @@ function loginFormBtnClicked() {
         method:"GET",
         contentType:"application/json",
         url:"http://localhost:1010/main/user/user-login",
-        async:true,
+        async:false,
         data: {
             username: loginUsername.val(),
             password: loginPassword.val()
@@ -272,7 +272,7 @@ function pswdRecoveryLoginSearchBtnClicked(){
 
     $.ajax({
         method: "GET",
-        async: true,
+        async: false,
         url: 'http://localhost:1010/main/user/search-user-send-otp?username=' + encodeURIComponent(pswd_recovery_login_username_txtfld.val()),
         processData: false,
         contentType: false,

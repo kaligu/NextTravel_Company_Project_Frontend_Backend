@@ -280,7 +280,7 @@ public class UserServiceImpl implements UserService {
                                         .name(userSignupDTO.getSignup_name())
                                         .email(userSignupDTO.getSignup_email())
                                         .password(password)
-                                        .role_type(RoleTypes.ROLE_CLIENT)
+                                        .role_type(roleTypes)
                                         .transaction_state(RespondCodes.PENDING)
                                         .build())
                 );
