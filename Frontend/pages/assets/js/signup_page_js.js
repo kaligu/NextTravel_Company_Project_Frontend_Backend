@@ -1,7 +1,7 @@
 //////////////////////////////////----variable must
 
 
-//--------------------------------------------------------save tokens and usernames on local localStorage
+//--------------------------------------------------------clear & save tokens and usernames on local localStorage
 localStorage.setItem("secure_data_username", "");
 localStorage.setItem("secure_data_jwt_access_token", "");
 localStorage.setItem("secure_data_refresh_token", "");
@@ -406,6 +406,10 @@ function sendSignupDataIntoServer(){
             }
         },
         error: function (xhr, exception) {
+
+            localStorage.setItem("secure_data_username", "");
+            localStorage.setItem("secure_data_jwt_access_token", "");
+            localStorage.setItem("secure_data_refresh_token", "");
 
             //hide loading model
             loadingModel.modal('hide');

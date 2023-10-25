@@ -21,4 +21,5 @@ public interface UserService {
 
     ResponseEntity<RespondDTO> saveNewGuestUser(UserSignupDTO userSignupDTO);
 
+    ResponseEntity<RespondDTO> checkUsernamePasswordUserLogin(String username, String password);
 }
