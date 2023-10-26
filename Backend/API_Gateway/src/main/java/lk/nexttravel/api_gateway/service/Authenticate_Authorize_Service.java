@@ -6,10 +6,13 @@
 */
 package lk.nexttravel.api_gateway.service;
 
+import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
+
 /**
  * @author : H.C.Kaligu Jayanath
  * Date    : 10/27/2023
  * Time    : 4:53 AM
  */
 public interface Authenticate_Authorize_Service {
+    InternalSecurityCheckDTO validateRequestsAndGetMetaData(FrontendTokenDTO frontendTokenDTO);
 }
