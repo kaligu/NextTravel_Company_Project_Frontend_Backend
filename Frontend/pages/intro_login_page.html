@@ -8,9 +8,9 @@
 
     <!-- favicon img -->
     <link rel="shortcut icon" type="image/icon" href="assets/images/faviconlogo.png"/>
-    <script src="./assets/js/jquery-3.6.1.min.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
     <style>
         body {
             /* Fallback for old browsers with a background color */
@@ -46,7 +46,17 @@
     </style>
 </head>
 <body style="background-color: black">
-<div class="container-fluid" id="login_container" style="display: block">
+<!--<div class="container-fluid" style="position: absolute; z-index: 5000; width: 700px">-->
+<!--    <div class="alert alert-success  " role="alert" >-->
+<!--        <h4 class="alert-heading">Well done!</h4>-->
+<!--        <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>-->
+<!--        <hr>-->
+<!--        <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<div class="container-fluid" id="login_container" style="display: block;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -188,7 +198,7 @@
 
 <!-- loading window -->
 <!-- use Modal -->
-<div class="modal fade" id="loading-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-bs-backdrop='static'>
+<div class="modal fade" id="intro-login-pg-loading-model" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0, 0, 0, 0.25);">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <!--          <div class="modal-header">-->
@@ -199,29 +209,59 @@
 
             </div>
             <div class="modal-footer justify-content-center bg-info">
-                <h6 class="modal-title text-white" id="exampleModalLongTitle">Please Wait... </h6>
+                <h6 class="modal-title text-white" >Please Wait... </h6>
             </div>
         </div>
     </div>
 </div>
 
-<!-- alert window -->
+<!-- Error alert model -->
 <!-- Modal -->
-<div class="modal fade" id="login-alert-model" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="login-alert-model-title">title</h5>
+<div class="modal fade" id="intro-login-pg-alert-model-error"  tabindex="-1" role="dialog"  aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.25);">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-danger text-white">
+            <div class="modal-header ">
+                <h5 class="modal-title" id="intro-login-pg-alert-model-title-error">title</h5>
             </div>
             <div class="modal-body">
-                <p class="modal-dialog-centered" id="login-alert-model-content">content</p>
-            </div>
-            <div class="modal-footer ">
-                <button type="button" class="btn btn-primary bg-success w-25" onclick="closeAlertModel()" id="alert-model-btn"> Ok </button>
+                <p class="modal-dialog-centered" id="intro-login-pg-alert-model-content-error">content</p>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Done alert model -->
+<!-- Modal -->
+<div class="modal fade" id="intro-login-pg-alert-model-done"  tabindex="-1" role="dialog"  aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0, 0, 0, 0.3);">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-primary text-white">
+            <div class="modal-header ">
+                <h5 class="modal-title" id="intro-login-pg-alert-model-title-done">title</h5>
+            </div>
+            <div class="modal-body">
+                <p class="modal-dialog-centered" id="intro-login-pg-alert-model-content-done">content</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--&lt;!&ndash; alert window &ndash;&gt;-->
+<!--&lt;!&ndash; Modal &ndash;&gt;-->
+<!--<div class="modal fade" id="intro-login-pg-alert-model"  tabindex="-1" role="dialog"  aria-hidden="true">-->
+<!--    <div class="modal-dialog" role="document">-->
+<!--        <div class="modal-content bg-danger text-warning">-->
+<!--            <div class="modal-header ">-->
+<!--                <h5 class="modal-title" id="intro-login-pg-alert-model-title">title</h5>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <p class="modal-dialog-centered" id="intro-login-pg-alert-model-content">content</p>-->
+<!--            </div>-->
+<!--            <div class="modal-footer ">-->
+<!--                <button type="button" class="btn btn-primary bg-success w-25" onclick="closeAlertModel()" id="intro-login-pg-alert-model-btn"> Ok </button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <!--&lt;!&ndash; alert window &ndash;&gt;-->
 <!--&lt;!&ndash; alert-model-send-otp  &ndash;&gt;-->
@@ -257,6 +297,9 @@
 <!--        window.location.href = "";-->
 <!--    });-->
 <!--</script>-->
+<script src="./assets/js/jquery-3.6.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 <script src="./assets/js/util/RespondCodes.js"></script>
 <script src="./assets/js/util/RoleTypes.js"></script>
 <script src="./assets/js/login_page_js.js"></script>

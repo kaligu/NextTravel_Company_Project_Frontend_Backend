@@ -2,12 +2,15 @@
 
 const pswd_recovery_login_username_txtfld = $('#pswd_recovery_login_username');
 
-const loadingModel = $('#loading-model');
+const intrologin_pg_loadingModel = $('#intro-login-pg-loading-model');
 
-const alertModel = $('#login-alert-model');
-const alertModel_title =  $('#login-alert-model-title');
-const alertModel_content = $('#login-alert-model-content');
-const alertModel_btn = $('#alert-model-btn');
+const intrologin_pg_alertModelError = $('#intro-login-pg-alert-model-error');
+const intrologin_pg_alertModelError_title =  $('#intro-login-pg-alert-model-title-error');
+const intrologin_pg_alertModelError_content = $('#intro-login-pg-alert-model-content-error');
+
+const intrologin_pg_alertModelDone = $('#intro-login-pg-alert-model-done');
+const intrologin_pg_alertModelDone_title =  $('#intro-login-pg-alert-model-title-done');
+const intrologin_pg_alertModelDone_content = $('#intro-login-pg-alert-model-content-done');
 
 ////////---------- login operation
 //fields variables
@@ -85,13 +88,9 @@ function readyToEnableLoginBtn() {
 }
 
 function loginFormBtnClicked() {
-    //clear old saved secure datas
-    localStorage.setItem("secure_data_username", "");
-    localStorage.setItem("secure_data_jwt_access_token", "");
-    localStorage.setItem("secure_data_refresh_token", "");
 
     //show loading model
-    loadingModel.modal('show');
+    intrologin_pg_loadingModel.modal('show');
 
     console.log("success");
 
@@ -105,161 +104,184 @@ function loginFormBtnClicked() {
             password: loginPassword.val()
         },
         success:function (data){
-            console.log("done");
-
-            loginUsername = "";
-            loginPassword = "";
-
-            //hide loading model
-            loadingModel.modal('hide');
-
-            //save tokens on local localStorage
-            localStorage.setItem("secure_data_username", " ");
-            localStorage.setItem("secure_data_access_token", " ");
-            localStorage.setItem("secure_data_refresh_token", " ");
-
             if(data.rspd_code === RespondCodes.Respond_PASSWORD_MATCHED){
+
                 //save tokens on local localStorage
                 localStorage.setItem("secure_data_username", data.token.access_username);
                 localStorage.setItem("secure_data_access_token", data.token.access_jwt_token);
                 localStorage.setItem("secure_data_refresh_token", data.token.access_refresh_token);
 
-                //close alert's ok btn
-                alertModel_btn.hide();
-
                 if(data.data === RoleTypes.ROLE_CLIENT){
 
-                    loadingModel.on('hidden.bs.modal', function () {
-                        // Show alert after the modal is completely hidden
+                    setTimeout(function () {
+s
+                        //hide loading model
+                        intrologin_pg_loadingModel.modal('hide');
 
-                        alertModel_title.text("Welcome Again!");
-                        alertModel_content.text("Have a Nice Day Mr."+data.token.access_username);
-                        alertModel.modal('show');
-
-                        // Remove event listener to avoid multiple executions
-                        loadingModel.off('hidden.bs.modal');
-
-                        //thread sleep
                         setTimeout(function () {
-                            window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/client_main_page.html?_ijt=lgk33b09l42ffpce17ruvb5qhv&_ij_reload=RELOAD_ON_SAVE';
-                        }, 1500);
-                    });
 
+                            intrologin_pg_alertModelDone_title.text("Welcome Again!");
+                            intrologin_pg_alertModelDone_content.text("Have a Nice Day Mr."+data.token.access_username);
+                            intrologin_pg_alertModelDone.modal('show');
 
+                            setTimeout(function () {
+                                window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/client_main_page.html?_ijt=lgk33b09l42ffpce17ruvb5qhv&_ij_reload=RELOAD_ON_SAVE';
+                            }, 3100); // delay
+
+                        }, 100); // delay
+
+                    }, 500); // delay
 
                 }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_USER){
 
-                    loadingModel.on('hidden.bs.modal', function () {
-                        // Show alert after the modal is completely hidden
+                    setTimeout(function () {
 
-                        alertModel_title.text("Welcome Again!");
-                        alertModel_content.text("Have a Nice Day Mr."+data.token.access_username);
-                        alertModel.modal('show');
-
-                        // Remove event listener to avoid multiple executions
-                        loadingModel.off('hidden.bs.modal');
+                        //hide loading model
+                        intrologin_pg_loadingModel.modal('hide');
 
                         setTimeout(function () {
-                            window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/user_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
-                        }, 1500); // 2000 milliseconds
-                    });
+
+                            intrologin_pg_alertModelDone_title.text("Welcome Again!");
+                            intrologin_pg_alertModelDone_content.text("Have a Nice Day Mr."+data.token.access_username);
+                            intrologin_pg_alertModelDone.modal('show');
+
+                            setTimeout(function () {
+                                window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/user_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
+                            }, 3100); // delay
+
+                        }, 100); // delay
+
+                    }, 500); // delay
 
                 }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_TRAVELPACKAGE){
 
-                    loadingModel.on('hidden.bs.modal', function () {
-                        // Show alert after the modal is completely hidden
+                    setTimeout(function () {
 
-                        alertModel_title.text("Welcome Again!");
-                        alertModel_content.text("Have a Nice Day Mr."+data.token.access_username);
-                        alertModel.modal('show');
-
-                        // Remove event listener to avoid multiple executions
-                        loadingModel.off('hidden.bs.modal');
+                        //hide loading model
+                        intrologin_pg_loadingModel.modal('hide');
 
                         setTimeout(function () {
-                            window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/travelpackage_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
-                        }, 1500); // 2000 milliseconds
-                    });
+
+                            intrologin_pg_alertModelDone_title.text("Welcome Again!");
+                            intrologin_pg_alertModelDone_content.text("Have a Nice Day Mr."+data.token.access_username);
+                            intrologin_pg_alertModelDone.modal('show');
+
+                            setTimeout(function () {
+                                window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/travelpackage_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
+                            }, 3100); // delay
+
+                        }, 100); // delay
+
+                    }, 500); // delay
 
                 }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_HOTEL){
 
-                    loadingModel.on('hidden.bs.modal', function () {
-                        // Show alert after the modal is completely hidden
+                    setTimeout(function () {
 
-                        alertModel_title.text("Welcome Again!");
-                        alertModel_content.text("Have a Nice Day Mr."+data.token.access_username);
-                        alertModel.modal('show');
-
-                        // Remove event listener to avoid multiple executions
-                        loadingModel.off('hidden.bs.modal');
+                        //hide loading model
+                        intrologin_pg_loadingModel.modal('hide');
 
                         setTimeout(function () {
-                            window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/hotel_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
-                        }, 1500); // 2000 milliseconds
-                    });
+
+                            intrologin_pg_alertModelDone_title.text("Welcome Again!");
+                            intrologin_pg_alertModelDone_content.text("Have a Nice Day Mr."+data.token.access_username);
+                            intrologin_pg_alertModelDone.modal('show');
+
+                            setTimeout(function () {
+                                window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/hotel_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
+                            }, 3100); // delay
+
+                        }, 100); // delay
+
+                    }, 500); // delay
 
                 }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_GUIDE){
 
-                    loadingModel.on('hidden.bs.modal', function () {
-                        // Show alert after the modal is completely hidden
+                    setTimeout(function () {
 
-                        alertModel_title.text("Welcome Again!");
-                        alertModel_content.text("Have a Nice Day Mr."+data.token.access_username);
-                        alertModel.modal('show');
-
-                        // Remove event listener to avoid multiple executions
-                        loadingModel.off('hidden.bs.modal');
+                        //hide loading model
+                        intrologin_pg_loadingModel.modal('hide');
 
                         setTimeout(function () {
-                            window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/guide_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
-                        }, 1500); // 2000 milliseconds
-                    });
+
+                            intrologin_pg_alertModelDone_title.text("Welcome Again!");
+                            intrologin_pg_alertModelDone_content.text("Have a Nice Day Mr."+data.token.access_username);
+                            intrologin_pg_alertModelDone.modal('show');
+
+                            setTimeout(function () {
+                                window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/guide_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
+                            }, 3100); // delay
+
+                        }, 100); // delay
+
+                    }, 500); // delay
 
                 }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_VEHICLE){
 
-                    loadingModel.on('hidden.bs.modal', function () {
-                        // Show alert after the modal is completely hidden
+                    setTimeout(function () {
 
-                        alertModel_title.text("Welcome Again!");
-                        alertModel_content.text("Have a Nice Day Mr."+data.token.access_username);
-                        alertModel.modal('show');
-
-                        // Remove event listener to avoid multiple executions
-                        loadingModel.off('hidden.bs.modal');
+                        //hide loading model
+                        intrologin_pg_loadingModel.modal('hide');
 
                         setTimeout(function () {
-                            window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/vehicle_admin_main_page.html?_ijt=lfe5pib42qssa1523t2ctc28hn&_ij_reload=RELOAD_ON_SAVE';
-                        }, 1500); // 2000 milliseconds
-                    });
+
+                            intrologin_pg_alertModelDone_title.text("Welcome Again!");
+                            intrologin_pg_alertModelDone_content.text("Have a Nice Day Mr."+data.token.access_username);
+                            intrologin_pg_alertModelDone.modal('show');
+
+                            setTimeout(function () {
+                                window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/vehicle_admin_main_page.html?_ijt=lfe5pib42qssa1523t2ctc28hn&_ij_reload=RELOAD_ON_SAVE';
+                            }, 3100); // delay
+
+                        }, 100); // delay
+
+                    }, 500); // delay
 
                 }
             }else if(data.rspd_code === RespondCodes.Respond_PASSWORD_NOT_MATCHED){
-                //show alert's btn
-                alertModel_btn.show();
 
-                //hide loading model
-                loadingModel.modal('hide');
+                setTimeout(function () {
 
-                loadingModel.on('hidden.bs.modal', function () {
-                    // Show alert after the modal is completely hidden
+                    //hide loading model
+                    intrologin_pg_loadingModel.modal('hide');
 
-                    alertModel_title.text("Username or Password Mismatched!");
-                    alertModel_content.text("Try again!");
-                    alertModel.modal('show');
+                    setTimeout(function () {
 
-                    // Remove event listener to avoid multiple executions
-                    loadingModel.off('hidden.bs.modal');
-                });
+                        intrologin_pg_alertModelError_title.text("Username or Password Mismatched!");
+                        intrologin_pg_alertModelError_content.text("Try again!");
+                        intrologin_pg_alertModelError.modal('show');
+
+                        setTimeout(function () {
+                            location.reload(); //reload
+                        }, 2800); // 2000 milliseconds
+
+                    }, 100); // 2000 milliseconds
+
+                }, 500); // 2000 milliseconds
+
             }
 
         },
         error: function (xhr,exception){
-            //hide loading model
-            loadingModel.modal('hide');
+            setTimeout(function () {
 
-            alertModel_title.text("Not Found!");
-            alertModel_content.text("This user is not registered. Please register and try again!");
-            alertModel.modal('show');
+                //hide loading model
+                intrologin_pg_loadingModel.modal('hide');
+
+                setTimeout(function () {
+
+                    intrologin_pg_alertModelError_title.text("Not Found!");
+                    intrologin_pg_alertModelError_content.text("This user is not registered. Please register and try again!");
+                    intrologin_pg_alertModelError.modal('show');
+
+                    setTimeout(function () {
+                        location.reload(); //reload
+                    }, 2800); // 2000 milliseconds
+
+                }, 100); // 2000 milliseconds
+
+            }, 500); // 2000 milliseconds
+
         }
     })
 }
@@ -268,7 +290,7 @@ function loginFormBtnClicked() {
 
 function pswdRecoveryLoginSearchBtnClicked(){
     //show loading model
-    loadingModel.modal('show');
+    intrologin_pg_loadingModel.modal('show');
 
     $.ajax({
         method: "GET",
@@ -286,8 +308,7 @@ function pswdRecoveryLoginSearchBtnClicked(){
             }
         },
         error: function (xhr, exception) {
-            resolve(false);
-            console.log("Exception occured!");
+            intrologin_pg_loadingModel.modal('hide');
             throw exception;
         }
     });

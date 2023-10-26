@@ -118,16 +118,17 @@ public class UserController {
             @RequestParam("username") @NonNull String username ,
             @RequestParam("password") @NonNull String password
     ) {
-        if ( username.matches("^[a-zA-Z0-9_.-]{5,30}$") &&                         //check Username Regax
-                password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$")         //check Password Regax
-        ) {
-            return Mono.just(
-                    userService.checkUsernamePasswordUserLogin(username,password)
-            );
-
-        } else {
-            throw new InvalidInputException("Username or Password invalid!");
-        }
+        return userService.checkUsernamePasswordUserLogin(username,password);
+//        if ( username.matches("^[a-zA-Z0-9_.-]{5,30}$") &&                         //check Username Regax
+//                password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$")         //check Password Regax
+//        ) {
+//            return Mono.just(
+//                    userService.checkUsernamePasswordUserLogin(username,password)
+//            );
+//
+//        } else {
+//            throw new InvalidInputException("Username or Password invalid!");
+//        }
 
     }
 }

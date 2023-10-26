@@ -34,6 +34,8 @@ import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -212,7 +214,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<RespondDTO> checkUsernamePasswordUserLogin(String username, String password) {
+    public Mono<ResponseEntity<RespondDTO>> checkUsernamePasswordUserLogin(String username, String password) {
        try{
            Optional<User> user=userRepository.findUserByName(username);
            if(user.isPresent()){
@@ -235,29 +237,22 @@ public class UserServiceImpl implements UserService {
                            .access_refresh_token(newRefreshToken)  //create refresh token and save and assign it
                            .build();
 
-                   return new ResponseEntity<RespondDTO> (
+                   return Mono.just(new ResponseEntity<RespondDTO> (
                            RespondDTO.builder()
                                    .rspd_code(RespondCodes.Respond_PASSWORD_MATCHED)
                                    .token(frontendTokenDTO)
                                    .data(user.get().getRole_type())
                                    .build()
                            ,
-                           HttpStatus.CREATED);
+                           HttpStatus.CREATED));
                }else{
-                   return new ResponseEntity<RespondDTO> (
-                           RespondDTO.builder()
-                                   .rspd_code(RespondCodes.Respond_PASSWORD_NOT_MATCHED)
-                                   .token(null)
-                                   .data(null)
-                                   .build()
-                           ,
-                           HttpStatus.OK);
+                   return Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username or Password invalid"));
                }
            }else {
-               throw new NotfoundException("This Username not found");
+               return Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username or Password invalid"));
            }
        }catch (Exception e){
-           throw new InternalServerException(e+"Internal Server Error !");
+           return Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username or Password invalid"));
        }
     }
 
