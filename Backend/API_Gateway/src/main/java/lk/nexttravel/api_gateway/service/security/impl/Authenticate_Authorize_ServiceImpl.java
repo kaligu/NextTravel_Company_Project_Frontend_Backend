@@ -24,12 +24,32 @@ public class Authenticate_Authorize_ServiceImpl implements Authenticate_Authoriz
 
     @Autowired
     RefreshTokenServiceFrontend refreshTokenServiceFrontend;
+
     @Autowired
     APIGatewayJwtAccessTokenServiceFrontend apiGatewayJwtAccessTokenServiceFrontend;
 
+    @Autowired
+    InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO;
+
     @Override
     public InternalFrontendSecurityCheckDTO validateRequestsAndGetMetaData(FrontendTokenDTO frontendTokenDTO) {
-
-        return null;
+        InternalJWTUserDTO internalJWTUserDTO = this.jwtAccessTokenService.validateUpdateGetUserJWT(frontendTokenDTO.getAccess_jwt_token(), frontendTokenDTO.getAccess_username());
+        InternalRefreshTUserDTO internalRefreshTUserDTO = this.refreshTokenService.validateUpdateGetUserJWT(frontendTokenDTO.getAccess_refresh_token(), frontendTokenDTO.getAccess_username());
+        InternalSecurityCheckDTO internalSecurityCheckDTO = new InternalSecurityCheckDTO();
+        if (internalJWTUserDTO.isUserAuthorized() && internalRefreshTUserDTO.isUserAuthenticated()) {
+            internalSecurityCheckDTO.setUsername(frontendTokenDTO.getAccess_username());
+            internalSecurityCheckDTO.setAccess_token(internalJWTUserDTO.getAccessToken());
+            internalSecurityCheckDTO.setRefresh_token(internalRefreshTUserDTO.getRefreshToken());
+            internalSecurityCheckDTO.setRole(internalJWTUserDTO.getRole());
+            internalSecurityCheckDTO.setAccesssible(true);
+            return internalSecurityCheckDTO;
+        } else {
+            internalSecurityCheckDTO.setUsername((String)null);
+            internalSecurityCheckDTO.setAccess_token((String)null);
+            internalSecurityCheckDTO.setRole((RoleTypes)null);
+            internalSecurityCheckDTO.setRefresh_token((String)null);
+            internalSecurityCheckDTO.setAccesssible(false);
+            return internalSecurityCheckDTO;
+        }
     }
 }
