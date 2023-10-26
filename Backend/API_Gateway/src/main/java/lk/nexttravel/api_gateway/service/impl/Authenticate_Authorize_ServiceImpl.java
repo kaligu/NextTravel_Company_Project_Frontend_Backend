@@ -6,6 +6,8 @@
 */
 package lk.nexttravel.api_gateway.service.impl;
 
+import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
+import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
 import lk.nexttravel.api_gateway.service.Authenticate_Authorize_Service;
 
 /**
@@ -14,4 +16,8 @@ import lk.nexttravel.api_gateway.service.Authenticate_Authorize_Service;
  * Time    : 4:56 AM
  */
 public class Authenticate_Authorize_ServiceImpl implements Authenticate_Authorize_Service {
+    @Override
+    public InternalFrontendSecurityCheckDTO validateRequestsAndGetMetaData(FrontendTokenDTO frontendTokenDTO) {
+        return null;
+    }
 }
