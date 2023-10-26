@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.File;
+import java.util.Base64;
 
 @SpringBootApplication
 public class ApiGatewayApplication {
@@ -37,6 +38,16 @@ public class ApiGatewayApplication {
     @Bean
     public CommandLineRunner init(){
         return args -> {
+            ClassLoader classLoader = getClass().getClassLoader();
+            File inputFile = new File(classLoader
+                    .getResource(inputFilePath)
+                    .getFile());
+
+            byte[] fileContent = FileUtils.readFileToByteArray(inputFile);
+            String encodedString = Base64
+                    .getEncoder()
+                    .encodeToString(fileContent);
+
             if(!userRepository.existsByName("useradmin")){
                 userService.saveNewAdminUserOnlyTesting(
                         UserSignupDTO.builder()
