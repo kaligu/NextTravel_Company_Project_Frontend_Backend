@@ -38,6 +38,7 @@ import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Optional;
 
 /**
@@ -115,6 +116,8 @@ public class UserServiceImpl implements UserService {
         try {
             String id = "U00"+sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME);
             String password = passwordEncoder.encode(userSignupDTO.getSignup_password());
+            String encodedImage = Base64.getEncoder().encodeToString(userSignupDTO.getSignup_profile_image());
+
             Optional<User> savedUser;
             if(!userRepository.existsByName(userSignupDTO.getSignup_name())){
                 //User Save On Gateway DB -task 1
@@ -146,7 +149,7 @@ public class UserServiceImpl implements UserService {
                                             .id(id)
                                             .address(userSignupDTO.getSignup_address())
                                             .nic_or_passport(userSignupDTO.getSignup_nic_or_passport())
-                                            .profile_image(userSignupDTO.getSignup_profile_image())
+                                            .profile_image(encodedImage)
                                             .name_with_initial(userSignupDTO.getSignup_name_with_initial())
                                             .build()
                             )
@@ -265,6 +268,7 @@ public class UserServiceImpl implements UserService {
         try {
             String id = "U00"+sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME);
             String password = passwordEncoder.encode(userSignupDTO.getSignup_password());
+            String encodedImage = Base64.getEncoder().encodeToString(userSignupDTO.getSignup_profile_image());
 
             if(!userRepository.existsByName(userSignupDTO.getSignup_name())){
                 //User Save On Gateway DB -task 1
@@ -296,7 +300,7 @@ public class UserServiceImpl implements UserService {
                                             .id(id)
                                             .address(userSignupDTO.getSignup_address())
                                             .nic_or_passport(userSignupDTO.getSignup_nic_or_passport())
-                                            .profile_image(userSignupDTO.getSignup_profile_image())
+                                            .profile_image(encodedImage)
                                             .name_with_initial(userSignupDTO.getSignup_name_with_initial())
                                             .build()
                             )

@@ -44,11 +44,12 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ResponseEntity<String> SaveNewClient_Prepare(ReqNewClientSaveDTO reqNewClientSaveDTO) {
+
         //check authentication
         try {
             if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqNewClientSaveDTO.getToken())) {  //check gateway token
                 //save into database
-                clientRepository.save(
+                Client client = clientRepository.save(
                         Client.builder()
                                 .id(reqNewClientSaveDTO.getId())
                                 .name_with_initial(reqNewClientSaveDTO.getName_with_initial())
@@ -58,6 +59,8 @@ public class ClientServiceImpl implements ClientService {
                                 .transaction_state(RespondCodes.PENDING)
                                 .build()
                 );
+
+                System.out.println("start:" + client.getProfile_image() + ":end");
 
                 return new ResponseEntity<>(RespondCodes.Respond_DATA_SAVED, HttpStatus.CREATED);
             } else {

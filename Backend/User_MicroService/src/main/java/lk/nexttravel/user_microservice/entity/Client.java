@@ -29,7 +29,7 @@ public class Client {
     private String id;
     private String name_with_initial;
     private String address;
-    private byte[] profile_image;
+    private String profile_image;
     private String nic_or_passport;
     private byte[] nic_or_passport_front_view;
     private byte[] nic_or_passport_rear_view;
