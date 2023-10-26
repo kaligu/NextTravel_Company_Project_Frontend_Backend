@@ -20,9 +20,10 @@
             background-image: url("assets/images/wave_image.gif"); /* Replace with your image URL */
 
             /* Set background properties for the image */
-            background-size: cover; /* Adjust as needed */
+            background-size: cover;
             background-repeat: no-repeat;
-            background-position: center center;
+            background-attachment: fixed; /* Keeps the background fixed within the window */
+            background-position: center;
 
         }
         ::-webkit-scrollbar {
@@ -43,6 +44,17 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
+
+        #login_container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <body style="background-color: black">
@@ -56,8 +68,8 @@
 <!--</div>-->
 
 
-<div class="container-fluid" id="login_container" style="display: block;">
-    <div class="container py-5 h-100">
+<div class="container-fluid " id="login_container" style="display: block;">
+    <div class="container py-5 h-100 ">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card bg-dark text-white" style="border-radius: 1rem;">
@@ -66,8 +78,8 @@
                         <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                         <br>
                         <div class="form-outline form-white mb-4">
-                            <input type="email" id="login_Username" class="form-control " />
-                            <label class="form-label" for="login_Username">Username</label>
+                            <input type="email" id="login_Username" class="form-control " placeholder="Username ..."/>
+
 <!--                            <div class="valid-feedback">-->
 <!--                                Looks good!-->
 <!--                            </div>-->
@@ -77,8 +89,8 @@
                         </div>
 
                         <div class="form-outline form-white mb-4">
-                            <input type="password" id="login_Password" class="form-control " />
-                            <label class="form-label" for="login_Password">Password</label>
+                            <input type="password" id="login_Password" class="form-control " placeholder="Password ..."/>
+
 <!--                            <div class="valid-feedback">-->
 <!--                                Looks good!-->
 <!--                            </div>-->
