@@ -4,12 +4,11 @@
   @ Date         : 10/24/2023
   @ Time         : 12:25 PM
 */
-package lk.nexttravel.api_gateway.service.impl;
+package lk.nexttravel.api_gateway.service.transaction.impl;
 
 import lk.nexttravel.api_gateway.advice.util.InternalServerException;
 import lk.nexttravel.api_gateway.dto.TransactionDTO;
-import lk.nexttravel.api_gateway.dto.user.UserReqNewClientSaveDTO;
-import lk.nexttravel.api_gateway.service.TransactionCordinator;
+import lk.nexttravel.api_gateway.service.transaction.TransactionCordinator;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

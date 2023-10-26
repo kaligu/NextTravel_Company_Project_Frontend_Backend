@@ -4,7 +4,7 @@
   @ Date         : 10/24/2023
   @ Time         : 12:25 PM
 */
-package lk.nexttravel.api_gateway.service;
+package lk.nexttravel.api_gateway.service.transaction;
 
 import lk.nexttravel.api_gateway.dto.TransactionDTO;
 

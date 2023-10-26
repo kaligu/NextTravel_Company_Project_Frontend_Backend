@@ -4,7 +4,7 @@
   @ Date         : 10/21/2023
   @ Time         : 11:10 AM
 */
-package lk.nexttravel.api_gateway.service.security;
+package lk.nexttravel.api_gateway.service.security.util;
 
 import lk.nexttravel.api_gateway.Persistence.UserRepository;
 import lk.nexttravel.api_gateway.Persistence.RefreshTokenRepository;

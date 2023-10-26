@@ -4,7 +4,7 @@
   @ Date         : 10/22/2023
   @ Time         : 1:36 AM
 */
-package lk.nexttravel.api_gateway.service.security;
+package lk.nexttravel.api_gateway.service.security.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

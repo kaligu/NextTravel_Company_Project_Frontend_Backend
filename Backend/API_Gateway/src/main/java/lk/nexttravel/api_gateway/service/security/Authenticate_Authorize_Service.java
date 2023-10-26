@@ -4,7 +4,7 @@
   @ Date         : 10/27/2023
   @ Time         : 4:53 AM
 */
-package lk.nexttravel.api_gateway.service;
+package lk.nexttravel.api_gateway.service.security;
 
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
