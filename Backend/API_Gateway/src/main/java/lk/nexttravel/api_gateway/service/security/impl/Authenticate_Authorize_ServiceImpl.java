@@ -11,6 +11,7 @@ import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
 import lk.nexttravel.api_gateway.service.security.Authenticate_Authorize_Service;
 import lk.nexttravel.api_gateway.service.security.util.APIGatewayJwtAccessTokenServiceFrontend;
 import lk.nexttravel.api_gateway.service.security.util.RefreshTokenServiceFrontend;
+import lk.nexttravel.api_gateway.util.RoleTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,19 +38,19 @@ public class Authenticate_Authorize_ServiceImpl implements Authenticate_Authoriz
         InternalRefreshTUserDTO internalRefreshTUserDTO = this.refreshTokenService.validateUpdateGetUserJWT(frontendTokenDTO.getAccess_refresh_token(), frontendTokenDTO.getAccess_username());
         InternalSecurityCheckDTO internalSecurityCheckDTO = new InternalSecurityCheckDTO();
         if (internalJWTUserDTO.isUserAuthorized() && internalRefreshTUserDTO.isUserAuthenticated()) {
-            internalSecurityCheckDTO.setUsername(frontendTokenDTO.getAccess_username());
-            internalSecurityCheckDTO.setAccess_token(internalJWTUserDTO.getAccessToken());
-            internalSecurityCheckDTO.setRefresh_token(internalRefreshTUserDTO.getRefreshToken());
-            internalSecurityCheckDTO.setRole(internalJWTUserDTO.getRole());
-            internalSecurityCheckDTO.setAccesssible(true);
-            return internalSecurityCheckDTO;
+            internalFrontendSecurityCheckDTO.setUsername(frontendTokenDTO.getAccess_username());
+            internalFrontendSecurityCheckDTO.setAccess_token(internalJWTUserDTO.getAccessToken());
+            internalFrontendSecurityCheckDTO.setRefresh_token(internalRefreshTUserDTO.getRefreshToken());
+            internalFrontendSecurityCheckDTO.setRole(internalJWTUserDTO.getRole());
+            internalFrontendSecurityCheckDTO.setAccesssible(true);
+            return internalFrontendSecurityCheckDTO;
         } else {
-            internalSecurityCheckDTO.setUsername((String)null);
-            internalSecurityCheckDTO.setAccess_token((String)null);
-            internalSecurityCheckDTO.setRole((RoleTypes)null);
-            internalSecurityCheckDTO.setRefresh_token((String)null);
-            internalSecurityCheckDTO.setAccesssible(false);
-            return internalSecurityCheckDTO;
+            internalFrontendSecurityCheckDTO.setUsername((String)null);
+            internalFrontendSecurityCheckDTO.setAccess_token((String)null);
+            internalFrontendSecurityCheckDTO.setRole((RoleTypes)null);
+            internalFrontendSecurityCheckDTO.setRefresh_token((String)null);
+            internalFrontendSecurityCheckDTO.setAccesssible(false);
+            return internalFrontendSecurityCheckDTO;
         }
     }
 }
