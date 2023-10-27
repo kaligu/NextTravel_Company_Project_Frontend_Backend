@@ -1,7 +1,5 @@
 //////////////////////--------------component variables
 
-const login_container = $('#login_container');
-
 const pswdrecover_pg_loadingModel = $('#pswrdrecover-pg-loading-model');
 
 const pswdrecover_pg_alertModelError = $('#pswdrecover-pg-alert-model-error');
@@ -13,8 +11,9 @@ const pswdrecover_pg_alertModelDone_title =  $('#pswdrecover-pg-alert-model-titl
 const pswdrecover_pg_alertModelDone_content = $('#pswdrecover-pg-alert-model-content-done');
 
 const pswd_recovery_login_username_txtfld = $('#pswd_recovery_login_username');
-const pswd_recovery_login_username_container = $('#forgot_pswd_get_username_container');
 
+const pswdrecover_pg_forgot_pswd_get_otp_container = $('#forgot_pswd_get_otp_container');
+const pswdrecover_pg_forgot_pswd_get_username_container = $('#forgot_pswd_get_username_container');
 
 //////--------------------------password recovery username
 
@@ -39,6 +38,14 @@ function pswdRecoveryUsernameSearchBtnClicked(){
                         pswdrecover_pg_alertModelDone_title.text("OTP sent to you'r Mail...");
                         pswdrecover_pg_alertModelDone_content.text("Please check your e-mail account for the OTP we just sent you and enter that ...");
                         pswdrecover_pg_alertModelDone.modal('show');
+
+                        setTimeout(function () {
+                            pswdrecover_pg_alertModelDone.modal('hide');
+
+                            pswdrecover_pg_forgot_pswd_get_username_container.css('display','block');
+                            pswdrecover_pg_forgot_pswd_get_otp_container.css('display','none');
+
+                        }, 3000); // delay
                     } else {
                         pswdrecover_pg_alertModelError_title.text("Not Found!");
                         pswdrecover_pg_alertModelError_content.text("This User not Registerd yet.Try again or register please!");
