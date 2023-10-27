@@ -127,7 +127,7 @@ public class UserServiceImpl implements UserService {
                 }
 
                 //send mail
-                boolean isSentMail = mailService.sendEmailForNewUserSignup(user.get().getEmail(), user.get().getName());
+                boolean isSentMail = mailService.sendEmailForSendOTPRecoverPassword(user.get().getEmail(), user.get().getName(), otp.toString());
                 if(!isSentMail){
                     throw new InternalServerException("Username Check Exception Internal!");
                 }

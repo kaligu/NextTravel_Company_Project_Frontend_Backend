@@ -34,10 +34,27 @@ public class MailService {
         }catch (Exception e){
             return false;
         }
-
-
     }
 
+    public boolean sendEmailForSendOTPRecoverPassword(String address, String name, String otp) {
+        try{
+            final MailDTO mail = new MailBuilder()
+                    .From("nexttravelcompany@gmail.com") // For gmail, this field is ignored.
+                    .To(address)
+                    .Template("mail-template-recover-password-send-otp.html")
+                    .AddContext("name", name)
+                    .AddContext("otp", otp)
+                    .Subject("Your Registration Confirmed!")
+                    .createMail();
+            sendHTMLEmail(mail);
+
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    //for normal mails not use apache
     public void sendHTMLEmail(MailDTO message) throws MessagingException {
         MimeMessage emailMessage = mailSender.createMimeMessage();
         MimeMessageHelper mailBuilder = new MimeMessageHelper(emailMessage, true);
