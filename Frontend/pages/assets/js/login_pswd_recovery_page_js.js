@@ -29,17 +29,51 @@ function pswdRecoveryUsernameSearchBtnClicked(){
         processData: false,
         contentType: false,
         success: function (data) {
-            if (data.rspd_code === RespondCodes.Respond_THIS_USER_ALREADY_REGISTERED) {
-                console.log("Done! Checked Username and sent otp to your mail...");
-                resolve(true);
-            } else {
-                console.log("Error occured!");
-                resolve(false);
-            }
+            // if (data.rspd_code === RespondCodes.Respond_THIS_USER_ALREADY_REGISTERED) {
+            //     console.log("Done! Checked Username and sent otp to your mail...");
+            //     resolve(true);
+            // } else {
+            //     console.log("Error occured!");
+            //     resolve(false);
+            // }
+            setTimeout(function () {
+
+                //hide loading model
+                pswdrecover_pg_loadingModel.modal('hide');
+
+                setTimeout(function () {
+
+                    pswdrecover_pg_alertModelDone_title.text("Welcome Again!");
+                    pswdrecover_pg_alertModelDone_content.text("Have a Nice Day Mr."+data.token.access_username);
+                    pswdrecover_pg_alertModelDone.modal('show');
+
+                    setTimeout(function () {
+
+                    }, 3100); // delay
+
+                }, 100); // delay
+
+            }, 500); // delay
         },
         error: function (xhr, exception) {
-            intrologin_pg_loadingModel.modal('hide');
-            throw exception;
+            setTimeout(function () {
+
+                //hide loading model
+                pswdrecover_pg_loadingModel.modal('hide');
+
+                setTimeout(function () {
+
+                    pswdrecover_pg_alertModelError_title.text("Username or Password Mismatched!");
+                    pswdrecover_pg_alertModelError_content.text("Try again!");
+                    pswdrecover_pg_alertModelError.modal('show');
+
+                    setTimeout(function () {
+                        location.reload(); //reload
+                    }, 2800); // 2000 milliseconds
+
+                }, 100); // 2000 milliseconds
+
+            }, 500); // 2000 milliseconds
         }
     });
 }
