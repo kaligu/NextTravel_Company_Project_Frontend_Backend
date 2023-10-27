@@ -40,7 +40,7 @@ public class User {
 
     private String password;
 
-    private int mail_otp;
+    private String mail_otp;
 
     private RoleTypes role_type;
 

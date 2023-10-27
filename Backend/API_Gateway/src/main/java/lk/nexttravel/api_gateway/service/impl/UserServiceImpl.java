@@ -117,17 +117,21 @@ public class UserServiceImpl implements UserService {
                     otp.append(digit);
                 }
 
-                System.out.println("* "+otp);
                 //save otp on DB
                 Optional<User> user = userRepository.findUserByName(username);
                 if(user.isPresent()){
-                    user.get().setMail_otp(Integer.parseInt(String.valueOf(otp)));
+                    user.get().setMail_otp(otp.toString());
                     userRepository.save(user.get()); //save in DB
                 }else{
                     throw new InternalServerException("Username Check Exception Internal!");
                 }
 
-                System.out.println("*** :"+otp);
+                //send mail
+                boolean isSentMail = mailService.sendEmailForNewUserSignup(user.get().getEmail(), user.get().getName());
+                if(!isSentMail){
+                    throw new InternalServerException("Username Check Exception Internal!");
+                }
+
                 //Existed
                 return new ResponseEntity<RespondDTO>(
                         RespondDTO.builder()
