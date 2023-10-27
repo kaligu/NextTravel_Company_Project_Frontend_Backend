@@ -146,7 +146,27 @@ public class UserController {
         } else {
             return Mono.error( new InvalidInputException(""));
         }
+    }
 
+    //verify Username with there OTP
+    @GetMapping(value = "/user-login-with-recoverd-password")
+    public Mono<ResponseEntity<RespondDTO>> userLoginWithRecoverdPassword(
+            @RequestParam("username") @NonNull String username
+            ,
+            @RequestParam("otp") @NonNull String otp
+            ,
+            @RequestParam("password") @NonNull String password
+    ) {
+        if (username.matches("^[a-zA-Z0-9_.-]{5,30}$")
+                &&
+                otp.matches("\\b\\d{4}\\b")
+                &&
+                password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$")
+        ) {   //check Username Regax
+            return Mono.just( userService.userLoginWithRecoverdPassword(username, otp, password) );
+        } else {
+            return Mono.error( new InvalidInputException("Username or otp is invalid!") );
+        }
     }
 
 }

@@ -156,3 +156,185 @@ function pswdRecoveryLoginOTOCheckBtnClicked(){
         }
     });
 }
+
+//----------create new password and login to system
+function pswdRecoveryCreatePswdAndLogin(){
+    let pswd_recovery_login_pswd_txtfld_value;
+
+    //confiremed and enterd password if matched
+    if(
+        $('#pswrdrecover-pg-pswdadding-model-new-pswd-txtfld').val() === $('#pswrdrecover-pg-pswdadding-model-confiremed-pswd-txtfld').val()
+    ){
+        pswd_recovery_login_pswd_txtfld_value=$('#pswrdrecover-pg-pswdadding-model-confiremed-pswd-txtfld').val()
+    }
+
+    //show loading model
+    pswdrecover_pg_loadingModel.modal('show');
+
+    $.ajax({
+        method: "GET",
+        async: true,
+        url: 'http://localhost:1010/main/user/user-login-with-recoverd-password?username=' + encodeURIComponent(pswd_recovery_login_username_txtfld_value)+'&otp='+encodeURIComponent(pswd_recovery_login_otp_txtfld_value)+'&password='+encodeURIComponent(pswd_recovery_login_pswd_txtfld_value),
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            setTimeout(function () {
+
+                //hide loading model
+                pswdrecover_pg_loadingModel.modal('hide');
+
+                setTimeout(function () {
+                    if (data.rspd_code === RespondCodes.Respond_NEW_PASSWORD_CREATED_AND_LOGIN_SUCCEED) {
+                        pswdrecover_pg_alertModelDone_title.text("Great...");
+                        pswdrecover_pg_alertModelDone_content.text("Password Created Succesfully and You will be login to the system...Please wait");
+                        pswdrecover_pg_alertModelDone.modal('show');
+
+                        setTimeout(function () {
+
+                            //save tokens on local localStorage
+                            localStorage.setItem("secure_data_username", data.token.access_username);
+                            localStorage.setItem("secure_data_access_token", data.token.access_jwt_token);
+                            localStorage.setItem("secure_data_refresh_token", data.token.access_refresh_token);
+
+                            if(data.data === RoleTypes.ROLE_CLIENT){
+
+                                setTimeout(function () {
+                                    //open to enter password
+                                    pswdrecover_pg_pswdadding_model.modal('hide');
+                                    pswdrecover_pg_alertModelDone.modal('hide');
+
+                                    pswdrecover_pg_alertModelDone_title.text("Welcome Again!");
+                                    pswdrecover_pg_alertModelDone_content.text("Have a Nice Day Mr."+data.token.access_username);
+                                    pswdrecover_pg_alertModelDone.modal('show');
+
+                                    setTimeout(function () {
+                                        window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/client_main_page.html?_ijt=lgk33b09l42ffpce17ruvb5qhv&_ij_reload=RELOAD_ON_SAVE';
+                                    }, 100); // delay
+
+                                }, 1000); // delay
+
+                            }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_USER){
+
+                                setTimeout(function () {
+                                    //open to enter password
+                                    pswdrecover_pg_pswdadding_model.modal('hide');
+                                    pswdrecover_pg_alertModelDone.modal('hide');
+
+                                    pswdrecover_pg_alertModelDone_title.text("Welcome Again!");
+                                    pswdrecover_pg_alertModelDone_content.text("Have a Nice Day Mr."+data.token.access_username);
+                                    pswdrecover_pg_alertModelDone.modal('show');
+
+                                    setTimeout(function () {
+                                        window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/user_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
+                                    }, 100); // delay
+
+                                }, 1000); // delay
+
+                            }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_TRAVELPACKAGE){
+
+                                setTimeout(function () {
+                                    //open to enter password
+                                    pswdrecover_pg_pswdadding_model.modal('hide');
+                                    pswdrecover_pg_alertModelDone.modal('hide');
+
+                                    pswdrecover_pg_alertModelDone_title.text("Welcome Again!");
+                                    pswdrecover_pg_alertModelDone_content.text("Have a Nice Day Mr."+data.token.access_username);
+                                    pswdrecover_pg_alertModelDone.modal('show');
+
+                                    setTimeout(function () {
+                                        window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/travelpackage_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
+                                    }, 100); // delay
+
+                                }, 1000); // delay
+
+                            }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_HOTEL){
+
+                                    setTimeout(function () {
+                                        //open to enter password
+                                        pswdrecover_pg_pswdadding_model.modal('hide');
+                                        pswdrecover_pg_alertModelDone.modal('hide');
+
+                                        pswdrecover_pg_alertModelDone_title.text("Welcome Again!");
+                                        pswdrecover_pg_alertModelDone_content.text("Have a Nice Day Mr."+data.token.access_username);
+                                        pswdrecover_pg_alertModelDone.modal('show');
+
+                                        setTimeout(function () {
+                                            window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/hotel_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
+                                        }, 100); // delay
+
+                                    }, 1000); // delay
+
+                            }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_GUIDE){
+
+                                    setTimeout(function () {
+                                        //open to enter password
+                                        pswdrecover_pg_pswdadding_model.modal('hide');
+                                        pswdrecover_pg_alertModelDone.modal('hide');
+
+                                        pswdrecover_pg_alertModelDone_title.text("Welcome Again!");
+                                        pswdrecover_pg_alertModelDone_content.text("Have a Nice Day Mr."+data.token.access_username);
+                                        pswdrecover_pg_alertModelDone.modal('show');
+
+                                        setTimeout(function () {
+                                            window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/guide_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
+                                        }, 100); // delay
+
+                                    }, 1000); // delay
+
+                            }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_VEHICLE){
+
+                                setTimeout(function () {
+                                    //open to enter password
+                                    pswdrecover_pg_pswdadding_model.modal('hide');
+                                    pswdrecover_pg_alertModelDone.modal('hide');
+
+                                    pswdrecover_pg_alertModelDone_title.text("Welcome Again!");
+                                    pswdrecover_pg_alertModelDone_content.text("Have a Nice Day Mr."+data.token.access_username);
+                                    pswdrecover_pg_alertModelDone.modal('show');
+
+                                    setTimeout(function () {
+                                        window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/vehicle_admin_main_page.html?_ijt=lfe5pib42qssa1523t2ctc28hn&_ij_reload=RELOAD_ON_SAVE';
+                                    }, 100); // delay
+
+                                }, 1000); // delay
+
+                            }
+                        }, 600); // delay
+                    } else {
+                        pswdrecover_pg_alertModelError_title.text("Eror has occurd!");
+                        pswdrecover_pg_alertModelError_content.text("Try again...!");
+                        pswdrecover_pg_alertModelError.modal('show');
+
+                        setTimeout(function () {
+                            pswdrecover_pg_alertModelError.modal('hide');
+
+                        }, 1000); // delay
+                    }
+
+                }, 100); // delay
+
+            }, 500); // delay
+        },
+        error: function (xhr, exception) {
+            setTimeout(function () {
+
+                //hide loading model
+                pswdrecover_pg_loadingModel.modal('hide');
+
+                setTimeout(function () {
+
+                    pswdrecover_pg_alertModelError_title.text("Eror has occurd!");
+                    pswdrecover_pg_alertModelError_content.text("Type correct OTP and password Try again...!");
+                    pswdrecover_pg_alertModelError.modal('show');
+
+                    setTimeout(function () {
+                        pswdrecover_pg_alertModelError.modal('hide');
+
+                    }, 1000); // delay
+
+                }, 100); // 2000 milliseconds
+
+            }, 500); // 2000 milliseconds
+        }
+    });
+}

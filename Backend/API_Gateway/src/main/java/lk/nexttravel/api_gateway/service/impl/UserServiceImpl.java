@@ -342,6 +342,58 @@ public class UserServiceImpl implements UserService {
        }
     }
 
+    @Override
+    public ResponseEntity<RespondDTO> userLoginWithRecoverdPassword(String username, String otp, String password) {
+        try{
+            Optional<User> user=userRepository.findUserByName(username);
+            if(user.isPresent()){
+                //check Username password matched
+                if(
+                        user.get().getName().equals(username)
+                                &&
+                                user.get().getMail_otp().equals(otp)
+                ){
+                    //if matched
+                    //delete generated otp
+                    user.get().setMail_otp("");
+
+                    //set new password
+                    user.get().setPassword(passwordEncoder.encode(password));
+
+                    //save user into DB with new values
+                    userRepository.save(user.get());
+
+                    //Access Token Create Get
+                    String newAccessToken = APIGatewayJwtAccessTokenServiceFrontend.generateToken(user.get().getName()); //create and get JWT access token
+
+                    //UserRefreshToken Save On Gateway DB
+                    String newRefreshToken = refreshTokenServiceFrontend.createRefreshToken(user.get()); //create get and save refresh token
+
+                    FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder()
+                            .access_username(user.get().getName())
+                            .access_jwt_token(newAccessToken) //create access token and assign it
+                            .access_refresh_token(newRefreshToken)  //create refresh token and save and assign it
+                            .build();
+
+                    return new ResponseEntity<RespondDTO> (
+                            RespondDTO.builder()
+                                    .rspd_code(RespondCodes.Respond_NEW_PASSWORD_CREATED_AND_LOGIN_SUCCEED)
+                                    .token(frontendTokenDTO)
+                                    .data(user.get().getRole_type())
+                                    .build()
+                            ,
+                            HttpStatus.CREATED);
+                }else{
+                    throw new InternalServerException("Username Check Exception Internal!");
+                }
+            }else {
+                throw new InternalServerException("Username Check Exception Internal!");
+            }
+        }catch (Exception e){
+            throw new InternalServerException("Username Check Exception Internal!");
+        }
+    }
+
     //---------------------------------- Only Testing for save admins
     //------------------------------------------------------------------------
     @Override

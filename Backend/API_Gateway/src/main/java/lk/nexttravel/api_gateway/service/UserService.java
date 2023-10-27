@@ -25,6 +25,8 @@ public interface UserService {
 
     ResponseEntity<RespondDTO> verifyUsernameWithOTP(String username, String otp);
 
+    ResponseEntity<RespondDTO> userLoginWithRecoverdPassword(String username, String otp, String password);
+
     ResponseEntity<RespondDTO> saveNewGuestUser(UserSignupDTO userSignupDTO);
 
     Mono<ResponseEntity<RespondDTO>> checkUsernamePasswordUserLogin(String username, String password);

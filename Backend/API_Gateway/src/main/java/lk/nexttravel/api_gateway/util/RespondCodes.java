@@ -38,6 +38,8 @@ public class RespondCodes {
 
     public static final String Respond_USERNAME_AND_OTP_VERIFIED = "19";
 
+    public static final String Respond_NEW_PASSWORD_CREATED_AND_LOGIN_SUCCEED = "20";
+
     public static final String PENDING = "PENDING";
     public static final String COMMITED = "COMMITED";
 

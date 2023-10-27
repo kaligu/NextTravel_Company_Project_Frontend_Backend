@@ -8,5 +8,7 @@ let RespondCodes = {
     Respond_PASSWORD_MATCHED  :"17",
     Respond_PASSWORD_NOT_MATCHED  :"18",
 
-    Respond_USERNAME_AND_OTP_VERIFIED  :"19"
+    Respond_USERNAME_AND_OTP_VERIFIED  :"19",
+
+    Respond_NEW_PASSWORD_CREATED_AND_LOGIN_SUCCEED  :"20",
 }
