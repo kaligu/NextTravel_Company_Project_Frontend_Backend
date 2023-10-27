@@ -12,7 +12,7 @@ const pswdrecover_pg_alertModelDone_content = $('#pswdrecover-pg-alert-model-con
 
 const pswd_recovery_login_username_txtfld = $('#pswd_recovery_login_username');
 
-const pswd_recovery_login_otp_txtfld = $('#pswd_recovery_login_otp');
+const pswd_recovery_login_otp_txtfld = $('#pswd_recovery_login_otp_txtfld');
 
 const pswdrecover_pg_forgot_pswd_get_otp_container = $('#forgot_pswd_get_otp_container');
 const pswdrecover_pg_forgot_pswd_get_username_container = $('#forgot_pswd_get_username_container');
@@ -86,9 +86,7 @@ function pswdRecoveryUsernameSearchBtnClicked(){
 }
 
 ///-------OTP varification
-
-
 function pswdRecoveryLoginOTOCheckBtnClicked(){
-
-
+    console.log(pswd_recovery_login_username_txtfld.val());
+    console.log(pswd_recovery_login_otp_txtfld.val());
 }

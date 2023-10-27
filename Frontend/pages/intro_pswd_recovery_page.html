@@ -70,7 +70,7 @@
 
 
 <!-- if lost password - first sub page-->
-<div class="container-fluid" id="forgot_pswd_get_username_container" style="display: none">
+<div class="container-fluid" id="forgot_pswd_get_username_container" style="display: block">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -94,7 +94,7 @@
 </div>
 
 <!-- if lost password - second sub page-->
-<div class="container-fluid" id="forgot_pswd_get_otp_container" style="display: block">
+<div class="container-fluid" id="forgot_pswd_get_otp_container" style="display: none">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -108,8 +108,8 @@
                         <br><br>
                         <p>Please enter 4-digit verification code that was sent.</p>
                         <div class="mb-4">
-                            <label for="pswd_recovery_login_otp" ></label>
-                            <input type="text" class="form-control" id="pswd_recovery_login_otp" >
+                            <label for="pswd_recovery_login_otp_txtfld" ></label>
+                            <input type="text" class="form-control" id="pswd_recovery_login_otp_txtfld" >
                             <br>
                             <button class="btn btn-outline-light btn-lg px-5" type="button" id="pswd_recovery_login_otp_btn" onclick="pswdRecoveryLoginOTOCheckBtnClicked()" data-bs-toggle="modal" data-bs-target="#pswrdrecover-pg-pswdadding-model">Verify OTP</button>
                         </div>
