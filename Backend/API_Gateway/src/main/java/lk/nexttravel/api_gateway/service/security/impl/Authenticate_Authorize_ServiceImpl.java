@@ -8,6 +8,8 @@ package lk.nexttravel.api_gateway.service.security.impl;
 
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
+import lk.nexttravel.api_gateway.dto.auth.InternalJWTUserDTO;
+import lk.nexttravel.api_gateway.dto.auth.InternalRefreshTUserDTO;
 import lk.nexttravel.api_gateway.service.security.Authenticate_Authorize_Service;
 import lk.nexttravel.api_gateway.service.security.util.APIGatewayJwtAccessTokenServiceFrontend;
 import lk.nexttravel.api_gateway.service.security.util.RefreshTokenServiceFrontend;
@@ -36,7 +38,7 @@ public class Authenticate_Authorize_ServiceImpl implements Authenticate_Authoriz
     public InternalFrontendSecurityCheckDTO validateRequestsAndGetMetaData(FrontendTokenDTO frontendTokenDTO) {
         InternalJWTUserDTO internalJWTUserDTO = this.jwtAccessTokenService.validateUpdateGetUserJWT(frontendTokenDTO.getAccess_jwt_token(), frontendTokenDTO.getAccess_username());
         InternalRefreshTUserDTO internalRefreshTUserDTO = this.refreshTokenService.validateUpdateGetUserJWT(frontendTokenDTO.getAccess_refresh_token(), frontendTokenDTO.getAccess_username());
-        InternalSecurityCheckDTO internalSecurityCheckDTO = new InternalSecurityCheckDTO();
+
         if (internalJWTUserDTO.isUserAuthorized() && internalRefreshTUserDTO.isUserAuthenticated()) {
             internalFrontendSecurityCheckDTO.setUsername(frontendTokenDTO.getAccess_username());
             internalFrontendSecurityCheckDTO.setAccess_token(internalJWTUserDTO.getAccessToken());
