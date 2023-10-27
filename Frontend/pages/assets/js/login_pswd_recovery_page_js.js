@@ -2,7 +2,7 @@
 
 const login_container = $('#login_container');
 
-const intrologin_pg_loadingModel = $('#intro-login-pg-loading-model');
+const pswdrecover_pg_loadingModel = $('#pswrdrecover-pg-loading-model');
 
 const pswdrecover_pg_alertModelError = $('#pswdrecover-pg-alert-model-error');
 const pswdrecover_pg_alertModelError_title =  $('#pswdrecover-pg-alert-model-title-error');
@@ -20,7 +20,7 @@ const pswd_recovery_login_username_container = $('#forgot_pswd_get_username_cont
 
 function pswdRecoveryUsernameSearchBtnClicked(){
     //show loading model
-    intrologin_pg_loadingModel.modal('show');
+    pswdrecover_pg_loadingModel.modal('show');
 
     $.ajax({
         method: "GET",
