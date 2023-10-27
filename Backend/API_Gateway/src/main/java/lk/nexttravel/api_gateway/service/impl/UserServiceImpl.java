@@ -162,6 +162,38 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public ResponseEntity<RespondDTO> verifyUsernameWithOTP(String username, String otp) {
+        Optional<User> user = userRepository.findUserByName(username);
+
+        try{
+            if(user.isPresent()){
+                if( user.get().getName().equals(username)
+                        &&
+                        user.get().getMail_otp().equals(otp)
+                ){
+                    //Existed
+                    return new ResponseEntity<RespondDTO>(
+                            RespondDTO.builder()
+                                    .rspd_code(RespondCodes.Respond_USERNAME_AND_OTP_VERIFIED)
+                                    .repd_msg("This User is exists!")
+                                    .token(null)
+                                    .data(null)
+                                    .build()
+                            ,
+                            HttpStatus.ACCEPTED
+                    );
+                }else{
+                    throw new InternalServerException("Username OTP Check Exception Internal!");
+                }
+            }else{
+                throw new InternalServerException("Username Check Exception Internal!");
+            }
+        }catch (Exception e){
+            throw new InternalServerException("Username Check Exception Internal!");
+        }
+    }
+
+    @Override
     public ResponseEntity<RespondDTO> saveNewGuestUser(UserSignupDTO userSignupDTO) {
         ArrayList<TransactionDTO> transactionDTOArrayList = new ArrayList<>();
         try {

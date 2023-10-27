@@ -58,6 +58,23 @@ public class UserController {
         }
     }
 
+    //verify Username with there OTP
+    @GetMapping(value = "/isverify-username-with-otp")
+    public Mono<ResponseEntity<RespondDTO>> verifyUsernameWithOTP(
+            @RequestParam("username") @NonNull String username
+            ,
+            @RequestParam("otp") @NonNull String otp
+            ) {
+        if (username.matches("^[a-zA-Z0-9_.-]{5,30}$")
+              &&
+                otp.matches("\\b\\d{4}\\b")
+        ) {   //check Username Regax
+            return Mono.just( userService.verifyUsernameWithOTP(username, otp) );
+        } else {
+            return Mono.error( new InvalidInputException("Username or otp is invalid!") );
+        }
+    }
+
     //save user
     @PostMapping(value = "/signup-guestuser", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<ResponseEntity<RespondDTO>> saveNewGuestUser(@RequestPart("signup_name") @NonNull String name,

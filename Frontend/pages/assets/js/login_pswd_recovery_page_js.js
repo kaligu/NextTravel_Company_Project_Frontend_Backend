@@ -17,16 +17,23 @@ const pswd_recovery_login_otp_txtfld = $('#pswd_recovery_login_otp_txtfld');
 const pswdrecover_pg_forgot_pswd_get_otp_container = $('#forgot_pswd_get_otp_container');
 const pswdrecover_pg_forgot_pswd_get_username_container = $('#forgot_pswd_get_username_container');
 
+const pswdrecover_pg_pswdadding_model = $('#pswrdrecover-pg-pswdadding-model');
+
+let pswd_recovery_login_username_txtfld_value;
+let pswd_recovery_login_otp_txtfld_value;
+
 //////--------------------------password recovery username
 
 function pswdRecoveryUsernameSearchBtnClicked(){
+    pswd_recovery_login_username_txtfld_value = pswd_recovery_login_username_txtfld.val();
+
     //show loading model
     pswdrecover_pg_loadingModel.modal('show');
 
     $.ajax({
         method: "GET",
         async: true,
-        url: 'http://localhost:1010/main/user/ischeck-username-and-send-otp?username=' + encodeURIComponent(pswd_recovery_login_username_txtfld.val()),
+        url: 'http://localhost:1010/main/user/ischeck-username-and-send-otp?username=' + encodeURIComponent(pswd_recovery_login_username_txtfld_value),
         processData: false,
         contentType: false,
         success: function (data) {
@@ -87,6 +94,65 @@ function pswdRecoveryUsernameSearchBtnClicked(){
 
 ///-------OTP varification
 function pswdRecoveryLoginOTOCheckBtnClicked(){
-    console.log(pswd_recovery_login_username_txtfld.val());
-    console.log(pswd_recovery_login_otp_txtfld.val());
+    pswd_recovery_login_otp_txtfld_value = pswd_recovery_login_otp_txtfld.val();
+
+    //show loading model
+    pswdrecover_pg_loadingModel.modal('show');
+
+    $.ajax({
+        method: "GET",
+        async: true,
+        url: 'http://localhost:1010/main/user/isverify-username-with-otp?username=' + encodeURIComponent(pswd_recovery_login_username_txtfld_value)+'&otp='+encodeURIComponent(pswd_recovery_login_otp_txtfld_value),
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            setTimeout(function () {
+
+                //hide loading model
+                pswdrecover_pg_loadingModel.modal('hide');
+
+                setTimeout(function () {
+                    if (data.rspd_code === RespondCodes.Respond_USERNAME_AND_OTP_VERIFIED) {
+                        pswdrecover_pg_alertModelDone_title.text("OTP Matched...");
+                        pswdrecover_pg_alertModelDone_content.text("Create a new password and you can login here ...");
+                        pswdrecover_pg_alertModelDone.modal('show');
+
+                        setTimeout(function () {
+                            //open to enter password
+                            pswdrecover_pg_pswdadding_model.modal('show');
+                            pswdrecover_pg_alertModelDone.modal('hide');
+
+                        }, 1000); // delay
+                    } else {
+                        pswdrecover_pg_alertModelError_title.text("OTP Not Matched!");
+                        pswdrecover_pg_alertModelError_content.text("Type correct OTP and Try again...!");
+                        pswdrecover_pg_alertModelError.modal('show');
+                    }
+
+                }, 100); // delay
+
+            }, 500); // delay
+        },
+        error: function (xhr, exception) {
+            setTimeout(function () {
+
+                //hide loading model
+                pswdrecover_pg_loadingModel.modal('hide');
+
+                setTimeout(function () {
+
+                    pswdrecover_pg_alertModelError_title.text("OTP Not Matched!");
+                    pswdrecover_pg_alertModelError_content.text("Type correct OTP and Try again...!");
+                    pswdrecover_pg_alertModelError.modal('show');
+
+                    setTimeout(function () {
+                        pswdrecover_pg_alertModelError.modal('hide');
+
+                    }, 1000); // delay
+
+                }, 100); // 2000 milliseconds
+
+            }, 500); // 2000 milliseconds
+        }
+    });
 }

@@ -23,6 +23,8 @@ public interface UserService {
 
     ResponseEntity<RespondDTO> checkUsernameAndSendOTP(String username);
 
+    ResponseEntity<RespondDTO> verifyUsernameWithOTP(String username, String otp);
+
     ResponseEntity<RespondDTO> saveNewGuestUser(UserSignupDTO userSignupDTO);
 
     Mono<ResponseEntity<RespondDTO>> checkUsernamePasswordUserLogin(String username, String password);

@@ -6,5 +6,7 @@ let RespondCodes = {
     Respond_DATA_SAVED  :"14",
 
     Respond_PASSWORD_MATCHED  :"17",
-    Respond_PASSWORD_NOT_MATCHED  :"18"
+    Respond_PASSWORD_NOT_MATCHED  :"18",
+
+    Respond_USERNAME_AND_OTP_VERIFIED  :"19"
 }
