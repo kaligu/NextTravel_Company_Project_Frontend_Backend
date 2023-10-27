@@ -12,6 +12,8 @@ const pswdrecover_pg_alertModelDone_content = $('#pswdrecover-pg-alert-model-con
 
 const pswd_recovery_login_username_txtfld = $('#pswd_recovery_login_username');
 
+const pswd_recovery_login_otp_txtfld = $('#pswd_recovery_login_otp');
+
 const pswdrecover_pg_forgot_pswd_get_otp_container = $('#forgot_pswd_get_otp_container');
 const pswdrecover_pg_forgot_pswd_get_username_container = $('#forgot_pswd_get_username_container');
 
@@ -84,18 +86,9 @@ function pswdRecoveryUsernameSearchBtnClicked(){
 }
 
 ///-------OTP varification
-const pswd_recovery_login_otp_txtfld = $('#pswd_recovery_login_otp');
+
 
 function pswdRecoveryLoginOTOCheckBtnClicked(){
 
 
-
-}
-
-
-////////////////////////-------------------------------------------------------------close alert model
-//when click alert model's close button close the model
-function closeAlertModel(){
-    alertModel.modal('hide');
-    location.reload();
 }

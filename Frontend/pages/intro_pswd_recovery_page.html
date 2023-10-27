@@ -55,6 +55,7 @@
             justify-content: center;
             align-items: center;
         }
+
     </style>
 </head>
 <body style="background-color: black">
@@ -69,7 +70,7 @@
 
 
 <!-- if lost password - first sub page-->
-<div class="container-fluid" id="forgot_pswd_get_username_container" style="display: block">
+<div class="container-fluid" id="forgot_pswd_get_username_container" style="display: none">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -93,7 +94,7 @@
 </div>
 
 <!-- if lost password - second sub page-->
-<div class="container-fluid" id="forgot_pswd_get_otp_container" style="display: none">
+<div class="container-fluid" id="forgot_pswd_get_otp_container" style="display: block">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -110,7 +111,7 @@
                             <label for="pswd_recovery_login_otp" ></label>
                             <input type="text" class="form-control" id="pswd_recovery_login_otp" >
                             <br>
-                            <button class="btn btn-outline-light btn-lg px-5" type="button" id="pswd_recovery_login_otp_btn" onclick="pswdRecoveryLoginOTOCheckBtnClicked()" >Verify OTP</button>
+                            <button class="btn btn-outline-light btn-lg px-5" type="button" id="pswd_recovery_login_otp_btn" onclick="pswdRecoveryLoginOTOCheckBtnClicked()" data-bs-toggle="modal" data-bs-target="#pswrdrecover-pg-pswdadding-model">Verify OTP</button>
                         </div>
                     </div>
                 </div>
@@ -173,6 +174,57 @@
             </div>
             <div class="modal-footer justify-content-center bg-info">
                 <h6 class="modal-title text-white" >Please Wait... </h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- recover password add passwords model -->
+<!-- Modal -->
+<!-- Modal -->
+<div class="modal fade" id="pswrdrecover-pg-pswdadding-model" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content " style="background-color: rgb(0,0,0)">
+            <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+                    <img src="assets/images/logomain.png" alt="logo" style="width: 20rem; height: 7rem; margin-left: -2rem">
+
+                    <br><br>
+                    <h2 class="fw-bold mb-2 text-uppercase">Create a New Password</h2>
+                    <br>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+                        <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                    </svg>
+                    <br><br>
+                    <div class="form-outline form-white mb-4">
+                        <label for="pswrdrecover-pg-pswdadding-model-new-pswd-txtfld" >Type a New Password</label><br>
+                        <input type="password" id="pswrdrecover-pg-pswdadding-model-new-pswd-txtfld" class="form-control " placeholder="Password ..."/>
+
+                        <!--                            <div class="valid-feedback">-->
+                        <!--                                Looks good!-->
+                        <!--                            </div>-->
+                        <div class="invalid-feedback">
+                            * Must be at least 8 characters long
+                            * Must contain at least one digit, lowercase letter, uppercase letter, and other character
+                            *Examples:`Password123!`, `MyStrongPassword2023`
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-outline form-white mb-4">
+                        <label for="pswrdrecover-pg-pswdadding-model-confiremed-pswd-txtfld" >Rtype to Confirm Password</label><br>
+                        <input type="password" id="pswrdrecover-pg-pswdadding-model-confiremed-pswd-txtfld" class="form-control " placeholder="Password ..."/>
+
+                        <!--                            <div class="valid-feedback">-->
+                        <!--                                Looks good!-->
+                        <!--                            </div>-->
+                        <div class="invalid-feedback">
+                            * Must be at least 8 characters long
+                            * Must contain at least one digit, lowercase letter, uppercase letter, and other character
+                            *Examples:`Password123!`, `MyStrongPassword2023`
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-light btn-lg px-5" type="button" id="user_login_btn" onclick="" disabled>Save & Login</button>
+                </div>
             </div>
         </div>
     </div>

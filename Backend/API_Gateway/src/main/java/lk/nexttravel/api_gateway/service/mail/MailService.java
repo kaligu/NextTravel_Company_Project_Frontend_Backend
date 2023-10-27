@@ -44,7 +44,7 @@ public class MailService {
                     .Template("mail-template-recover-password-send-otp.html")
                     .AddContext("name", name)
                     .AddContext("otp", otp)
-                    .Subject("Your Registration Confirmed!")
+                    .Subject("OTP recieved!")
                     .createMail();
             sendHTMLEmail(mail);
 
