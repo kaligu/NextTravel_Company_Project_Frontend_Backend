@@ -390,7 +390,6 @@ pswd_recovery_login_not_confirm_pswd_txtfld.on('keyup', function () {
     const tinvalidFeedback = pswd_recovery_login_not_confirm_pswd_txtfld.siblings('.invalid-feedback');
     const tvalidFeedback = pswd_recovery_login_not_confirm_pswd_txtfld.siblings('.valid-feedback');
     if (isUsernamepswdRegexLogin(pswd_recovery_login_not_confirm_pswd_txtfld.val())
-        && pswd_recovery_login_not_confirm_pswd_txtfld.val() === pswd_recovery_login_confirmed_pswd_txtfld.val()
     ) {
         pswd_recovery_login_not_confirm_pswd_txtfld.removeClass('is-invalid');
         pswd_recovery_login_not_confirm_pswd_txtfld.addClass('is-valid');
