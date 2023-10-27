@@ -23,8 +23,8 @@ function pswdRecoveryUsernameSearchBtnClicked(){
 
     $.ajax({
         method: "GET",
-        async: false,
-        url: 'http://localhost:1010/main/user/search-user-send-otp?username=' + encodeURIComponent(pswd_recovery_login_username_txtfld.val()),
+        async: true,
+        url: 'http://localhost:1010/main/user/ischeck-username?username=' + encodeURIComponent(pswd_recovery_login_username_txtfld.val()),
         processData: false,
         contentType: false,
         success: function (data) {
@@ -42,10 +42,10 @@ function pswdRecoveryUsernameSearchBtnClicked(){
                         setTimeout(function () {
                             pswdrecover_pg_alertModelDone.modal('hide');
 
-                            pswdrecover_pg_forgot_pswd_get_username_container.css('display','block');
-                            pswdrecover_pg_forgot_pswd_get_otp_container.css('display','none');
+                            pswdrecover_pg_forgot_pswd_get_username_container.css('display','none');
+                            pswdrecover_pg_forgot_pswd_get_otp_container.css('display','block');
 
-                        }, 3000); // delay
+                        }, 3400); // delay
                     } else {
                         pswdrecover_pg_alertModelError_title.text("Not Found!");
                         pswdrecover_pg_alertModelError_content.text("This User not Registerd yet.Try again or register please!");
