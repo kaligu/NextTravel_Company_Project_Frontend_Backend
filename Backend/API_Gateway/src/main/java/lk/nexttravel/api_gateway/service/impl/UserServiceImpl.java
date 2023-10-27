@@ -33,10 +33,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author : H.C.Kaligu Jayanath
@@ -111,11 +108,16 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<RespondDTO> checkUsernameAndSendOTP(String username) {
         try{
             if(userRepository.existsByName(username)){
-                //create otp
-                UUID uuid = UUID.randomUUID();
-                String createdotp = uuid.toString().substring(0, 4);
+                //-------create otp--------
+                Random random = new Random();
+                StringBuilder otp = new StringBuilder();
+                // Generate four random numeric digits
+                for (int i = 0; i < 4; i++) {
+                    int digit = random.nextInt(10); // Generates a random number between 0 and 9
+                    otp.append(digit);
+                }
 
-                System.out.println("*** :"+createdotp);
+                System.out.println("*** :"+otp);
                 //Existed
                 return new ResponseEntity<RespondDTO>(
                         RespondDTO.builder()
