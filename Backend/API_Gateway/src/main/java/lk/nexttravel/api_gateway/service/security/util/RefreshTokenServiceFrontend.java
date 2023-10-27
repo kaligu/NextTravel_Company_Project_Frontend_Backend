@@ -32,6 +32,9 @@ public class RefreshTokenServiceFrontend {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    InternalRefreshTUserDTO internalRefreshTUserDTO;
+
     public String createRefreshToken(User user) {
         //check has old saved tokens
         if(refreshTokenRepository.existsById(user.getId())){
@@ -56,8 +59,10 @@ public class RefreshTokenServiceFrontend {
     }
 
 
-    public Optional<RefreshToken> findByToken(String token) {
-        return refreshTokenRepository.findByToken(token);
+    public Optional<RefreshToken> findToken(String username) {
+        return refreshTokenRepository.findByToken(
+                userRepository.findUserByName(username).get().getId()
+        );
     }
 
 
@@ -71,30 +76,36 @@ public class RefreshTokenServiceFrontend {
 
 
     public InternalRefreshTUserDTO validateUpdateGetUserJWT(String refreshtoken, String username){
-        InternalRefreshTUserDTO internalRefreshTUserDTO = new InternalRefreshTUserDTO();
+        Optional<RefreshToken> DBtoken = findToken(username);
         //check this token saved on DB
-        if(findByToken(refreshtoken).isPresent()){
-            RefreshToken Token = findByToken(refreshtoken).get();
-            //check it expired
-            if(!isExpired(Token)){
-                internalRefreshTUserDTO.setRefreshToken(refreshtoken);
-                internalRefreshTUserDTO.setUserAuthenticated(true);
-                return internalRefreshTUserDTO;
-            }else{
-                //if expired
-                //delte it
-                refreshTokenRepository.delete(Token);
-                //generate new one
-                if(userRepository.findUserByName(username).isPresent()){
-                    String tokenkey = createRefreshToken(userRepository.findUserByName(username).get());
-                    internalRefreshTUserDTO.setRefreshToken(tokenkey);
+        if(DBtoken.isPresent()){
+
+            //check DBtoken and recieved token matched
+            if(DBtoken.get().getToken().equals(refreshtoken)){
+                //check it expired
+                if(!isExpired(DBtoken.get())){
+                    internalRefreshTUserDTO.setRefreshToken(refreshtoken);
                     internalRefreshTUserDTO.setUserAuthenticated(true);
                     return internalRefreshTUserDTO;
                 }else{
-                    //not in db
-                    internalRefreshTUserDTO.setUserAuthenticated(false);
-                    return internalRefreshTUserDTO;
+                    //if expired
+                    //delte it
+                    refreshTokenRepository.delete(DBtoken.get());
+                    //generate new one
+                    if(userRepository.findUserByName(username).isPresent()){
+                        String tokenkey = createRefreshToken(userRepository.findUserByName(username).get());
+                        internalRefreshTUserDTO.setRefreshToken(tokenkey);
+                        internalRefreshTUserDTO.setUserAuthenticated(true);
+                        return internalRefreshTUserDTO;
+                    }else{
+                        //not in db
+                        internalRefreshTUserDTO.setUserAuthenticated(false);
+                        return internalRefreshTUserDTO;
+                    }
                 }
+            }else{
+                internalRefreshTUserDTO.setUserAuthenticated(false);
+                return internalRefreshTUserDTO;
             }
         }else{
             internalRefreshTUserDTO.setUserAuthenticated(false);

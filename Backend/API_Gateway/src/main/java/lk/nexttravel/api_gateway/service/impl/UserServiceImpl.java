@@ -245,7 +245,7 @@ public class UserServiceImpl implements UserService {
                            ,
                            HttpStatus.CREATED));
                }else{
-                   return Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username or Password invalid"));
+                   return Mono.error(new DuplicateException("ddd"));
                }
            }else {
                return Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username or Password invalid"));

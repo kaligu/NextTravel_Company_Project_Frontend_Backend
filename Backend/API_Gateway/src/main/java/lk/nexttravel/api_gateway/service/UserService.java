@@ -26,4 +26,7 @@ public interface UserService {
     Mono<ResponseEntity<RespondDTO>> checkUsernamePasswordUserLogin(String username, String password);
 
     void saveNewAdminUserOnlyTesting(UserSignupDTO userSignupDTO, RoleTypes roleTypes);
+
+
+    Mono<ResponseEntity<RespondDTO>> getUserProfileImage(String username);
 }

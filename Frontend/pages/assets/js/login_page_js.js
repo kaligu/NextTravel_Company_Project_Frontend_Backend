@@ -286,6 +286,11 @@ s
     })
 }
 
+///---------------open username add form for recover password
+function openRecoveryPasswordUserbaneAddPage(){
+    console.log("done");
+}
+
 //////--------------------------password recovery username
 
 function pswdRecoveryLoginSearchBtnClicked(){

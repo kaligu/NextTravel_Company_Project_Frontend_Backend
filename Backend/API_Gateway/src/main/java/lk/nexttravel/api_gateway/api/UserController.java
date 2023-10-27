@@ -8,8 +8,11 @@ package lk.nexttravel.api_gateway.api;
 
 import lk.nexttravel.api_gateway.advice.util.InvalidInputException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
+import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
+import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
 import lk.nexttravel.api_gateway.dto.auth.UserSignupDTO;
 import lk.nexttravel.api_gateway.service.UserService;
+import lk.nexttravel.api_gateway.service.security.Authenticate_Authorize_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +34,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    Authenticate_Authorize_Service authenticate_authorize_service;
 
     //checkUsername
     @GetMapping(value = "/ischeck-username")
@@ -118,17 +124,16 @@ public class UserController {
             @RequestParam("username") @NonNull String username ,
             @RequestParam("password") @NonNull String password
     ) {
-        return userService.checkUsernamePasswordUserLogin(username,password);
-//        if ( username.matches("^[a-zA-Z0-9_.-]{5,30}$") &&                         //check Username Regax
-//                password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$")         //check Password Regax
-//        ) {
-//            return Mono.just(
-//                    userService.checkUsernamePasswordUserLogin(username,password)
-//            );
-//
-//        } else {
-//            throw new InvalidInputException("Username or Password invalid!");
-//        }
+
+        if ( username.matches("^[a-zA-Z0-9_.-]{5,30}$") &&                         //check Username Regax
+                password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$")         //check Password Regax
+        ) {
+            return userService.checkUsernamePasswordUserLogin(username,password);
+
+        } else {
+            return Mono.error( new InvalidInputException(""));
+        }
 
     }
+
 }
