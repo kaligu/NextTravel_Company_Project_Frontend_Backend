@@ -8,16 +8,13 @@ package lk.nexttravel.api_gateway.api;
 
 import lk.nexttravel.api_gateway.advice.util.InvalidInputException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
-import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
-import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
 import lk.nexttravel.api_gateway.dto.auth.UserSignupDTO;
-import lk.nexttravel.api_gateway.service.UserService;
+import lk.nexttravel.api_gateway.service.SystemUserService;
 import lk.nexttravel.api_gateway.service.security.Authenticate_Authorize_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -33,7 +30,7 @@ import reactor.core.publisher.Mono;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    SystemUserService systemUserService;
 
     @Autowired
     Authenticate_Authorize_Service authenticate_authorize_service;
@@ -42,7 +39,7 @@ public class UserController {
     @GetMapping(value = "/ischeck-username")
     public Mono<ResponseEntity<RespondDTO>> checkUsername(@RequestParam("username") @NonNull String username) {
         if (username.matches("^[a-zA-Z0-9_.-]{5,30}$")) {   //check Username Regax
-            return Mono.just( userService.ischeckUsernameAlreadyTaken(username) );
+            return Mono.just( systemUserService.ischeckUsernameAlreadyTaken(username) );
         } else {
             return Mono.error( new InvalidInputException("Username is invalid!") );
         }
@@ -52,7 +49,7 @@ public class UserController {
     @GetMapping(value = "/ischeck-username-and-send-otp")
     public Mono<ResponseEntity<RespondDTO>> checkUsernameAndSendOTP(@RequestParam("username") @NonNull String username) {
         if (username.matches("^[a-zA-Z0-9_.-]{5,30}$")) {   //check Username Regax
-            return Mono.just( userService.checkUsernameAndSendOTP(username) );
+            return Mono.just( systemUserService.checkUsernameAndSendOTP(username) );
         } else {
             return Mono.error( new InvalidInputException("Username is invalid!") );
         }
@@ -69,7 +66,7 @@ public class UserController {
               &&
                 otp.matches("\\b\\d{4}\\b")
         ) {   //check Username Regax
-            return Mono.just( userService.verifyUsernameWithOTP(username, otp) );
+            return Mono.just( systemUserService.verifyUsernameWithOTP(username, otp) );
         } else {
             return Mono.error( new InvalidInputException("Username or otp is invalid!") );
         }
@@ -94,7 +91,7 @@ public class UserController {
                                 if (image != null) {
 
                                     return Mono.just(
-                                            userService.saveNewGuestUser(
+                                            systemUserService.saveNewGuestUser(
                                                     UserSignupDTO.builder()
                                                             .signup_name(name)
                                                             .signup_name_with_initial(nameWithInitial)
@@ -141,7 +138,7 @@ public class UserController {
         if ( username.matches("^[a-zA-Z0-9_.-]{5,30}$") &&                         //check Username Regax
                 password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$")         //check Password Regax
         ) {
-            return userService.checkUsernamePasswordUserLogin(username,password);
+            return systemUserService.checkUsernamePasswordUserLogin(username,password);
 
         } else {
             return Mono.error( new InvalidInputException(""));
@@ -163,7 +160,7 @@ public class UserController {
                 &&
                 password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$")
         ) {   //check Username Regax
-            return Mono.just( userService.userLoginWithRecoverdPassword(username, otp, password) );
+            return Mono.just( systemUserService.userLoginWithRecoverdPassword(username, otp, password) );
         } else {
             return Mono.error( new InvalidInputException("Username or otp is invalid!") );
         }

@@ -7,6 +7,10 @@
 package lk.nexttravel.api_gateway.api;
 
 import lk.nexttravel.api_gateway.dto.RespondDTO;
+import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
+import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
+import lk.nexttravel.api_gateway.service.security.Authenticate_Authorize_Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +28,9 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/user-service")
 @CrossOrigin(origins = "http://localhost:63342/")
 public class UserServiceController {
+
+    @Autowired
+    Authenticate_Authorize_Service authenticate_authorize_service;
 
     //user login
     @GetMapping(value = "/user-login")

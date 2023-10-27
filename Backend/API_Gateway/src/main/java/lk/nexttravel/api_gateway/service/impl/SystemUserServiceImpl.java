@@ -16,7 +16,7 @@ import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.user.UserReqNewClientSaveDTO;
 import lk.nexttravel.api_gateway.entity.User;
 import lk.nexttravel.api_gateway.service.transaction.TransactionCordinator;
-import lk.nexttravel.api_gateway.service.UserService;
+import lk.nexttravel.api_gateway.service.SystemUserService;
 import lk.nexttravel.api_gateway.service.SequenceGeneratorService;
 import lk.nexttravel.api_gateway.service.mail.MailService;
 import lk.nexttravel.api_gateway.service.security.util.APIGatewayJwtAccessTokenServiceBackend;
@@ -42,7 +42,7 @@ import java.util.*;
  */
 
 @Service
-public class UserServiceImpl implements UserService {
+public class SystemUserServiceImpl implements SystemUserService {
     @Autowired
     private MailService mailService;
 

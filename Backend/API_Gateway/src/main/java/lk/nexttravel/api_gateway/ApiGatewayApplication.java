@@ -2,9 +2,8 @@ package lk.nexttravel.api_gateway;
 
 import lk.nexttravel.api_gateway.Persistence.UserRepository;
 import lk.nexttravel.api_gateway.dto.auth.UserSignupDTO;
-import lk.nexttravel.api_gateway.entity.User;
 import lk.nexttravel.api_gateway.service.SequenceGeneratorService;
-import lk.nexttravel.api_gateway.service.UserService;
+import lk.nexttravel.api_gateway.service.SystemUserService;
 import lk.nexttravel.api_gateway.util.RoleTypes;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.File;
 import java.net.URL;
-import java.util.Base64;
 
 @SpringBootApplication
 public class ApiGatewayApplication {
@@ -25,7 +23,7 @@ public class ApiGatewayApplication {
     UserRepository userRepository;
 
     @Autowired
-    UserService userService;
+    SystemUserService systemUserService;
 
     @Autowired
     SequenceGeneratorService sequenceGeneratorService;
@@ -51,7 +49,7 @@ public class ApiGatewayApplication {
             }
 
             if(!userRepository.existsByName("useradmin")){
-                userService.saveNewAdminUserOnlyTesting(
+                systemUserService.saveNewAdminUserOnlyTesting(
                         UserSignupDTO.builder()
                                 .signup_name("useradmin")
                                 .signup_name_with_initial("User Admin")
@@ -66,7 +64,7 @@ public class ApiGatewayApplication {
                 );
             }
             if(!userRepository.existsByName("vehicleadmin")){
-                userService.saveNewAdminUserOnlyTesting(
+                systemUserService.saveNewAdminUserOnlyTesting(
                         UserSignupDTO.builder()
                                 .signup_name("vehicleadmin")
                                 .signup_name_with_initial("Vehicle Admin")
@@ -81,7 +79,7 @@ public class ApiGatewayApplication {
                 );
             }
             if(!userRepository.existsByName("travelpackageadmin")){
-                userService.saveNewAdminUserOnlyTesting(
+                systemUserService.saveNewAdminUserOnlyTesting(
                         UserSignupDTO.builder()
                                 .signup_name("travelpackageadmin")
                                 .signup_name_with_initial("Travel Package Admin")
@@ -96,7 +94,7 @@ public class ApiGatewayApplication {
                 );
             }
             if(!userRepository.existsByName("hoteladmin")){
-                userService.saveNewAdminUserOnlyTesting(
+                systemUserService.saveNewAdminUserOnlyTesting(
                         UserSignupDTO.builder()
                                 .signup_name("hoteladmin")
                                 .signup_name_with_initial("Hotel Admin")
@@ -111,7 +109,7 @@ public class ApiGatewayApplication {
                 );
             }
             if(!userRepository.existsByName("guideadmin")){
-                userService.saveNewAdminUserOnlyTesting(
+                systemUserService.saveNewAdminUserOnlyTesting(
                         UserSignupDTO.builder()
                                 .signup_name("guideadmin")
                                 .signup_name_with_initial("Guide Admin")
