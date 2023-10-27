@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
                                 .data(null)
                                 .build()
                         ,
-                        HttpStatus.OK
+                        HttpStatus.ACCEPTED
                 );
             }else{
                 //not Existed

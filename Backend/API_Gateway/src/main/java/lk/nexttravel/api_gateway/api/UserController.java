@@ -42,13 +42,10 @@ public class UserController {
     @GetMapping(value = "/ischeck-username")
     public Mono<ResponseEntity<RespondDTO>> checkUsername(@RequestParam("username") @NonNull String username) {
         if (username.matches("^[a-zA-Z0-9_.-]{5,30}$")) {   //check Username Regax
-            return Mono.just(
-                    userService.ischeckUsernameAlreadyTaken(username)
-            );
+            return Mono.just( userService.ischeckUsernameAlreadyTaken(username) );
         } else {
-            throw new InvalidInputException("Username is invalid!");
+            return Mono.error( new InvalidInputException("Username is invalid!") );
         }
-
     }
 
     //save user

@@ -29,27 +29,25 @@ function pswdRecoveryUsernameSearchBtnClicked(){
         processData: false,
         contentType: false,
         success: function (data) {
-            // if (data.rspd_code === RespondCodes.Respond_THIS_USER_ALREADY_REGISTERED) {
-            //     console.log("Done! Checked Username and sent otp to your mail...");
-            //     resolve(true);
-            // } else {
-            //     console.log("Error occured!");
-            //     resolve(false);
-            // }
             setTimeout(function () {
 
                 //hide loading model
                 pswdrecover_pg_loadingModel.modal('hide');
 
                 setTimeout(function () {
+                    if (data.rspd_code === RespondCodes.Respond_THIS_USER_ALREADY_REGISTERED) {
+                        pswdrecover_pg_alertModelDone_title.text("OTP sent to you'r Mail...");
+                        pswdrecover_pg_alertModelDone_content.text("Please check your e-mail account for the OTP we just sent you and enter that ...");
+                        pswdrecover_pg_alertModelDone.modal('show');
+                    } else {
+                        pswdrecover_pg_alertModelError_title.text("Not Found!");
+                        pswdrecover_pg_alertModelError_content.text("This User not Registerd yet.Try again or register please!");
+                        pswdrecover_pg_alertModelError.modal('show');
 
-                    pswdrecover_pg_alertModelDone_title.text("Welcome Again!");
-                    pswdrecover_pg_alertModelDone_content.text("Have a Nice Day Mr."+data.token.access_username);
-                    pswdrecover_pg_alertModelDone.modal('show');
-
-                    setTimeout(function () {
-
-                    }, 3100); // delay
+                        setTimeout(function () {
+                            location.reload(); //reload
+                        }, 2800); // delay
+                    }
 
                 }, 100); // delay
 
@@ -63,8 +61,8 @@ function pswdRecoveryUsernameSearchBtnClicked(){
 
                 setTimeout(function () {
 
-                    pswdrecover_pg_alertModelError_title.text("Username or Password Mismatched!");
-                    pswdrecover_pg_alertModelError_content.text("Try again!");
+                    pswdrecover_pg_alertModelError_title.text("Try Again!");
+                    pswdrecover_pg_alertModelError_content.text("Register or Type another one ...!");
                     pswdrecover_pg_alertModelError.modal('show');
 
                     setTimeout(function () {

@@ -19,19 +19,19 @@ import reactor.core.publisher.Mono;
  * Time    : 9:18 AM
  */
 public class UserAdminController {
-
-    //user login
-    @GetMapping(value = "/user-login")
-    public Mono<ResponseEntity<RespondDTO>> getUsernameAndProfileImage(FrontendTokenDTO frontendTokenDTO){
-        InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
-        if(
-                internalFrontendSecurityCheckDTO.isAccesssible()
-                        &&
-                        internalFrontendSecurityCheckDTO.getRole().equals(Roliy)
-        ){
-
-        }else{
-
-        }
-    }
+//
+//    //user login
+//    @GetMapping(value = "/user-login")
+//    public Mono<ResponseEntity<RespondDTO>> getUsernameAndProfileImage(FrontendTokenDTO frontendTokenDTO){
+//        InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
+//        if(
+//                internalFrontendSecurityCheckDTO.isAccesssible()
+//                        &&
+//                        internalFrontendSecurityCheckDTO.getRole().equals(Roliy)
+//        ){
+//
+//        }else{
+//
+//        }
+//    }
 }

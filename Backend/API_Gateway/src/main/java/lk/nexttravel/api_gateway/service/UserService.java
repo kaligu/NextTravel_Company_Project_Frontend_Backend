@@ -28,5 +28,5 @@ public interface UserService {
     void saveNewAdminUserOnlyTesting(UserSignupDTO userSignupDTO, RoleTypes roleTypes);
 
 
-    Mono<ResponseEntity<RespondDTO>> getUserProfileImage(String username);
+//    Mono<ResponseEntity<RespondDTO>> getUserProfileImage(String username);
 }
