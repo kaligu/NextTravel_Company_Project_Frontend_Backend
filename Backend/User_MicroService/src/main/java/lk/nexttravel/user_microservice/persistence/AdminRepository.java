@@ -10,6 +10,8 @@ import lk.nexttravel.user_microservice.entity.Admin;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * @author : H.C.Kaligu Jayanath
  * Date    : 10/21/2023
@@ -18,4 +20,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdminRepository extends MongoRepository<Admin, Long> {
+    Optional<Admin> findAdminById(String id);
 }

@@ -224,7 +224,7 @@ public class UserServiceImpl implements UserService {
 
             transactionDTOArrayList.add(
                     TransactionDTO.builder()      //send data into User Service - task2
-                            .url(RqRpURLs.User_Service_save_with_reg_user) //url
+                            .url(RqRpURLs.User_Service_New_Client_Save_Signup) //url
                             .httpMethod(HttpMethod.POST)  //http method
                             .data(
                                     UserReqNewClientSaveDTO.builder()
@@ -427,7 +427,7 @@ public class UserServiceImpl implements UserService {
 
             transactionDTOArrayList.add(
                     TransactionDTO.builder()      //send data into User Service - task2
-                            .url(RqRpURLs.User_Service_save_with_reg_user) //url
+                            .url(RqRpURLs.User_Service_New_Admin_Save_Signup) //url
                             .httpMethod(HttpMethod.POST)  //http method
                             .data(
                                     UserReqNewClientSaveDTO.builder()

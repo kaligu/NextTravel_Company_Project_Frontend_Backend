@@ -7,5 +7,7 @@ package lk.nexttravel.api_gateway.util;
  */
 public class RqRpURLs {
     //Client Service - API Gateway Services
-    public static final String User_Service_save_with_reg_user              = "http://localhost:1020/api/client/save_new_client";
+    public static final String User_Service_New_Client_Save_Signup              = "http://localhost:1020/api/client/save_new_client";
+
+    public static final String User_Service_New_Admin_Save_Signup              = "http://localhost:1020/api/admin/save_new_admin";
 }

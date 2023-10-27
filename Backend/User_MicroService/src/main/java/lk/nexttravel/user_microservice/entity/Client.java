@@ -31,8 +31,8 @@ public class Client {
     private String address;
     private String profile_image;
     private String nic_or_passport;
-    private byte[] nic_or_passport_front_view;
-    private byte[] nic_or_passport_rear_view;
+    private String nic_or_passport_front_view;
+    private String nic_or_passport_rear_view;
     private GenderTypes gender;
     private long Tell;
     private String Remarks;

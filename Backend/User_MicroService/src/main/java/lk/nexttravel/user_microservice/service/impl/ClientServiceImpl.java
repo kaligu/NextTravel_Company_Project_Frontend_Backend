@@ -60,8 +60,6 @@ public class ClientServiceImpl implements ClientService {
                                 .build()
                 );
 
-                System.out.println("start:" + client.getProfile_image() + ":end");
-
                 return new ResponseEntity<>(RespondCodes.Respond_DATA_SAVED, HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
