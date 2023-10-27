@@ -48,6 +48,16 @@ public class UserController {
         }
     }
 
+    //checkUsername and send otp
+    @GetMapping(value = "/ischeck-username-and-send-otp")
+    public Mono<ResponseEntity<RespondDTO>> checkUsernameAndSendOTP(@RequestParam("username") @NonNull String username) {
+        if (username.matches("^[a-zA-Z0-9_.-]{5,30}$")) {   //check Username Regax
+            return Mono.just( userService.checkUsernameAndSendOTP(username) );
+        } else {
+            return Mono.error( new InvalidInputException("Username is invalid!") );
+        }
+    }
+
     //save user
     @PostMapping(value = "/signup-guestuser", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<ResponseEntity<RespondDTO>> saveNewGuestUser(@RequestPart("signup_name") @NonNull String name,
@@ -102,17 +112,6 @@ public class UserController {
         } else {
             throw new InvalidInputException("Username is invalid!");
         }
-    }
-
-    //searchUserAndsendOTP
-    @GetMapping(value = "/search-user-send-otp")
-    public void searchUserAndSendOTP(@RequestParam("username") @NonNull String username) {
-        if (username.matches("^[a-zA-Z0-9_.-]{5,30}$")) {   //check Username Regax
-            System.out.println("done : "+username);
-        } else {
-            System.out.println("error");
-        }
-
     }
 
     //user login

@@ -36,6 +36,7 @@ import reactor.core.publisher.Mono;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author : H.C.Kaligu Jayanath
@@ -77,6 +78,44 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<RespondDTO> ischeckUsernameAlreadyTaken(String username) {
         try{
             if(userRepository.existsByName(username)){
+                //Existed
+                return new ResponseEntity<RespondDTO>(
+                        RespondDTO.builder()
+                                .rspd_code(RespondCodes.Respond_THIS_USER_ALREADY_REGISTERED)
+                                .repd_msg("This User is exists!")
+                                .token(null)
+                                .data(null)
+                                .build()
+                        ,
+                        HttpStatus.ACCEPTED
+                );
+            }else{
+                //not Existed
+                return new ResponseEntity<RespondDTO>(
+                        RespondDTO.builder()
+                                .rspd_code(RespondCodes.Respond_THIS_USER_NOT_REGISTERED_YET)
+                                .repd_msg("This User not exists!")
+                                .token(null)
+                                .data(null)
+                                .build()
+                        ,
+                        HttpStatus.OK
+                );
+            }
+        }catch (Exception e){
+            throw new InternalServerException("Username Check Exception Internal!");
+        }
+    }
+
+    @Override
+    public ResponseEntity<RespondDTO> checkUsernameAndSendOTP(String username) {
+        try{
+            if(userRepository.existsByName(username)){
+                //create otp
+                UUID uuid = UUID.randomUUID();
+                String createdotp = uuid.toString().substring(0, 4);
+
+                System.out.println("*** :"+createdotp);
                 //Existed
                 return new ResponseEntity<RespondDTO>(
                         RespondDTO.builder()

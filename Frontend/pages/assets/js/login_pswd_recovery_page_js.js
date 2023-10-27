@@ -24,7 +24,7 @@ function pswdRecoveryUsernameSearchBtnClicked(){
     $.ajax({
         method: "GET",
         async: true,
-        url: 'http://localhost:1010/main/user/ischeck-username?username=' + encodeURIComponent(pswd_recovery_login_username_txtfld.val()),
+        url: 'http://localhost:1010/main/user/ischeck-username-and-send-otp?username=' + encodeURIComponent(pswd_recovery_login_username_txtfld.val()),
         processData: false,
         contentType: false,
         success: function (data) {
@@ -45,7 +45,7 @@ function pswdRecoveryUsernameSearchBtnClicked(){
                             pswdrecover_pg_forgot_pswd_get_username_container.css('display','none');
                             pswdrecover_pg_forgot_pswd_get_otp_container.css('display','block');
 
-                        }, 3400); // delay
+                        }, 3300); // delay
                     } else {
                         pswdrecover_pg_alertModelError_title.text("Not Found!");
                         pswdrecover_pg_alertModelError_content.text("This User not Registerd yet.Try again or register please!");

@@ -21,6 +21,8 @@ public interface UserService {
 
     ResponseEntity<RespondDTO> ischeckUsernameAlreadyTaken(String username);
 
+    ResponseEntity<RespondDTO> checkUsernameAndSendOTP(String username);
+
     ResponseEntity<RespondDTO> saveNewGuestUser(UserSignupDTO userSignupDTO);
 
     Mono<ResponseEntity<RespondDTO>> checkUsernamePasswordUserLogin(String username, String password);
