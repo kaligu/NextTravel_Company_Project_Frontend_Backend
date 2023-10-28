@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/admin")
 @CrossOrigin("*")
-public class UserAdminController {
+public class AdminController {
 
     @Autowired
     AdminService adminService;
@@ -43,11 +43,31 @@ public class UserAdminController {
 
     //get profile image - user admin
     @GetMapping(value = "/user-admin-get-profile-image")
-    public ResponseEntity<String> GetProfileImage(
+    public ResponseEntity<String> userAdminGetProfileImage(
             @RequestParam String id ,
             @RequestParam String token
     ){
         return adminService.userAdminGetProfileImage(id,token);
     }
+
+    //get profile image - user admin
+    @GetMapping(value = "/vehicle-admin-get-profile-image")
+    public ResponseEntity<String> vehicleAdminGetProfileImage(
+            @RequestParam String id ,
+            @RequestParam String token
+    ){
+        return adminService.userAdminGetProfileImage(id,token);
+    }
+
+    //get profile image - user admin
+    @GetMapping(value = "/hotel-admin-get-profile-image")
+    public ResponseEntity<String> hotelAdminGetProfileImage(
+            @RequestParam String id ,
+            @RequestParam String token
+    ){
+        return adminService.userAdminGetProfileImage(id,token);
+    }
+
+
 
 }
