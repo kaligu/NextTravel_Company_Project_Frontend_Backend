@@ -1,8 +1,8 @@
 //-----------------varibales--------
-const user_admin_main_pg_loading_model = $('#user_admin_main_pg-loading-model');
+const guide_admin_main_pg_loading_model = $('#guide_admin_main_pg-loading-model');
 
-const user_admin_main_pg_profile_img = $("#user_admin_main_pg_profile_img");
-const user_admin_main_pg_top_admin_name = $("#user_admin_main_pg_top_admin_name")
+const guide_admin_main_pg_profile_img = $("#guide_admin_main_pg_profile_img");
+const guide_admin_main_pg_top_admin_name = $("#guide_admin_main_pg_top_admin_name")
 //---------------------------------------------
 
 //---------------load profile image and username---------------------
@@ -13,7 +13,7 @@ $(document).ready(function() {
     // console.log(localStorage.getItem("secure_data_refresh_token"));
 
     //show loading model
-    user_admin_main_pg_loading_model.modal('show');
+    guide_admin_main_pg_loading_model.modal('show');
 
     $.ajax({
         method: "GET",
@@ -33,12 +33,12 @@ $(document).ready(function() {
                 localStorage.setItem("secure_data_refresh_token", data.token.access_refresh_token);
 
                 // Set image from base64 data
-                user_admin_main_pg_profile_img.attr('src', 'data:image/png;base64,' + data.data);
-                user_admin_main_pg_top_admin_name.text("Mr. "+data.token.access_username+" [Admin]");
+                guide_admin_main_pg_profile_img.attr('src', 'data:image/png;base64,' + data.data);
+                guide_admin_main_pg_top_admin_name.text("Mr. "+data.token.access_username+" [Admin]");
 
                 //hide loading model
                 setTimeout(function () {
-                    user_admin_main_pg_loading_model.modal('hide');
+                    guide_admin_main_pg_loading_model.modal('hide');
                 }, 1000); // delay
 
             } else {
