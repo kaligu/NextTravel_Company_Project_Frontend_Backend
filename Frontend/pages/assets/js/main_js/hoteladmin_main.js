@@ -8,9 +8,9 @@ const hotel_admin_main_pg_top_admin_name = $("#hotel_admin_main_pg_top_admin_nam
 //---------------load profile image and username---------------------
 
 $(document).ready(function() {
-    console.log(localStorage.getItem("secure_data_username"));
-    console.log(localStorage.getItem("secure_data_access_token"));
-    console.log(localStorage.getItem("secure_data_refresh_token"));
+    console.log(localStorage.getItem("secure_data_hotel_admin_username"));
+    console.log(localStorage.getItem("secure_data_hotel_admin_access_token"));
+    console.log(localStorage.getItem("secure_data_hotel_admin_refresh_token"));
 
     //show loading model
     hotel_admin_main_pg_loading_model.modal('show');
