@@ -18,7 +18,7 @@ $(document).ready(function() {
     $.ajax({
         method: "GET",
         contentType: "application/json",
-        url: 'http://localhost:1010/main/user-service/user-admin-get-profile-image',
+        url: 'http://localhost:1010/main/hotel-service/hotel-admin-get-profile-image',
         async: true,
         data: {
             access_username: localStorage.getItem("secure_data_hotel_admin_username"),
