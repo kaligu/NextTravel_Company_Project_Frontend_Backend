@@ -5,7 +5,7 @@ const travelpackage_admin_main_pg_profile_img = $("#travelpackage_admin_main_pg_
 const travelpackage_admin_main_pg_top_admin_name = $("#travelpackage_admin_main_pg_top_admin_name")
 //---------------------------------------------
 
-//---------------load profile image and username---------------------
+//---------------load profile image and username----------------------
 
 $(document).ready(function() {
     console.log(localStorage.getItem("secure_data_travelpackage_admin_username"));
@@ -18,7 +18,7 @@ $(document).ready(function() {
     $.ajax({
         method: "GET",
         contentType: "application/json",
-        url: 'http://localhost:1010/main/user-service/user-admin-get-profile-image',
+        url: 'http://localhost:1010/main/travelpackage-service/travelpackage-admin-get-profile-image',
         async: true,
         data: {
             access_username: localStorage.getItem("secure_data_travelpackage_admin_username"),
