@@ -78,7 +78,9 @@ $(document).ready(function() {
                 user_admin_main_pg_top_admin_name.text("Mr. "+data.token.access_username+" [Admin]");
 
                 //hide loading model
-                user_admin_main_pg_loading_model.modal('hide');
+                setTimeout(function () {
+                    user_admin_main_pg_loading_model.modal('hide');
+                }, 1000); // delay
 
             } else {
                 console.log("Profile image retrieval failed");
