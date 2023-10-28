@@ -67,4 +67,18 @@ public class RespondExceptionHandler {
                 HttpStatus.UNAUTHORIZED
         );
     }
+
+    @ExceptionHandler(UnauthorizeException.class)
+    protected ResponseEntity<RespondDTO> exception(UnauthorizeException unauthorizeException) {
+        return new ResponseEntity<RespondDTO>(
+                (RespondDTO.builder()
+                        .rspd_code(RespondCodes.Respond_NOT_AUTHORISED)
+                        .repd_msg(unauthorizeException.getMessage())
+                        .token(null)
+                        .data(null)
+                        .build()
+                ),
+                HttpStatus.UNAUTHORIZED
+        );
+    }
 }

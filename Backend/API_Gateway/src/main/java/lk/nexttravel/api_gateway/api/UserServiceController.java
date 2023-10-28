@@ -17,6 +17,7 @@ import lk.nexttravel.api_gateway.util.RoleTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -38,9 +39,20 @@ public class UserServiceController {
     UserService userService;
 
     //user login
-    @GetMapping(value = "/user-admin-get-profile-image")
-    public Mono<ResponseEntity<RespondDTO>> userAdminGetProfileImage(@RequestBody  FrontendTokenDTO frontendTokenDTO){
-        System.out.println("invoked");
-        return Mono.just(userService.UserAdminGetProfileImage(frontendTokenDTO)) ;
+    @GetMapping(value = {"/user-admin-get-profile-image"}, consumes = {"application/json"})
+    public Mono<ResponseEntity<RespondDTO>> userAdminGetProfileImage(
+            @RequestParam("access_username") @NonNull String access_username
+            ,
+            @RequestParam("access_jwt_token") @NonNull String access_jwt_token
+            ,
+            @RequestParam("access_refresh_token") @NonNull String access_refresh_token
+    ){
+        return userService.UserAdminGetProfileImage(
+                access_username
+                ,
+                access_jwt_token
+                ,
+                access_refresh_token
+        );
     }
 }

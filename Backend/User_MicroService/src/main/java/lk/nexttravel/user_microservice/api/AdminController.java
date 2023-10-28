@@ -44,10 +44,10 @@ public class AdminController {
     //get profile image
     @GetMapping(value = "/user-admin-get-profile-image")
     public ResponseEntity<String> GetProfileImage(
-            @RequestParam String username ,
+            @RequestParam String id ,
             @RequestParam String token
     ){
-        return adminService.userAdminGetProfileImage(username,token);
+        return adminService.userAdminGetProfileImage(id,token);
     }
 
 }

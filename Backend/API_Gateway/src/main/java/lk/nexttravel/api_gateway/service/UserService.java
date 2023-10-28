@@ -9,6 +9,7 @@ package lk.nexttravel.api_gateway.service;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import org.springframework.http.ResponseEntity;
+import reactor.core.publisher.Mono;
 
 /**
  * @author : H.C.Kaligu Jayanath
@@ -17,5 +18,5 @@ import org.springframework.http.ResponseEntity;
  */
 public interface UserService {
     //get user admin profile image
-    ResponseEntity<RespondDTO> UserAdminGetProfileImage(FrontendTokenDTO frontendTokenDTO);
+    Mono<ResponseEntity<RespondDTO>> UserAdminGetProfileImage(String access_username, String access_jwt_token, String access_refresh_token);
 }

@@ -8,6 +8,7 @@ package lk.nexttravel.api_gateway.service.impl;
 
 import lk.nexttravel.api_gateway.Persistence.UserRepository;
 import lk.nexttravel.api_gateway.advice.util.InternalServerException;
+import lk.nexttravel.api_gateway.advice.util.UnauthorizeException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
@@ -22,6 +23,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
@@ -47,29 +49,32 @@ public class UserServiceImpl implements UserService {
     APIGatewayJwtAccessTokenServiceBackend apiGatewayJwtAccessTokenServiceBackend;
 
     @Override
-    public ResponseEntity<RespondDTO> UserAdminGetProfileImage(FrontendTokenDTO frontendTokenDTO) {
+    public Mono<ResponseEntity<RespondDTO>> UserAdminGetProfileImage(String access_username, String access_jwt_token, String access_refresh_token) {
         try{
+            FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder().access_jwt_token(access_jwt_token).access_username(access_username).access_refresh_token(access_refresh_token).build();
             InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
             if(
                     internalFrontendSecurityCheckDTO.isAccesssible()
                             &&
                             internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_USER)
             ) {
+                System.out.println("Auhtorised");
                 //get data using restcontroller
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_JSON);
                 HttpEntity<String> entity = new HttpEntity<>(null, headers); // Sending an empty body
 
                 ResponseEntity<String> responseEntity = restTemplate.exchange(
-                        "http://localhost:1020/api/admin/user-admin-get-profile-image?username=" + frontendTokenDTO.getAccess_username() + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
+                        "http://localhost:1020/api/admin/user-admin-get-profile-image?id=" + userRepository.findUserByName(frontendTokenDTO.getAccess_username()).get().getId() + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
                         HttpMethod.GET,
                         entity,
                         String.class
                 );
-                String responseBody = responseEntity.getBody();
-                System.out.println(responseBody);
-                return new ResponseEntity<RespondDTO>(
+                //send to front
+                return Mono.just(new ResponseEntity<RespondDTO>(
                         RespondDTO.builder()
+                                .rspd_code(RespondCodes.Respond_SUCCESS)
+                                .data(responseEntity.getBody())
                                 .token(
                                         FrontendTokenDTO.builder()
                                                 .access_username(internalFrontendSecurityCheckDTO.getUsername())
@@ -80,19 +85,14 @@ public class UserServiceImpl implements UserService {
                                 .build()
                         ,
                         HttpStatus.OK
-                );
+                ));
             }else {
-                return  new ResponseEntity<RespondDTO>(
-                        RespondDTO.builder()
-                                .rspd_code(RespondCodes.Respond_NOT_AUTHORISED)
-                                .repd_msg("espond_NOT_AUTHORISED")
-                                .token(null)
-                                .data(null).build()
-                        ,
-                        HttpStatus.UNAUTHORIZED );
+                System.out.println("Not authorized");
+                return Mono.error(new UnauthorizeException("Unauthorized request"));
             }
         }catch (Exception e){
-            throw new InternalServerException("0");
+            System.out.println("internal server error");
+            throw new InternalServerException("Internal server Error");
         }
     }
 }

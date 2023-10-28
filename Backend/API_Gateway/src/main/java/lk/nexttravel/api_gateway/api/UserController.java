@@ -8,6 +8,7 @@ package lk.nexttravel.api_gateway.api;
 
 import lk.nexttravel.api_gateway.advice.util.InvalidInputException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
+import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.auth.UserSignupDTO;
 import lk.nexttravel.api_gateway.service.SystemUserService;
 import lk.nexttravel.api_gateway.service.security.Authenticate_Authorize_Service;

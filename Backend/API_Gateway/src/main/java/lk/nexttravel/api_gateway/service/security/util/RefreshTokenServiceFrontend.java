@@ -59,13 +59,6 @@ public class RefreshTokenServiceFrontend {
     }
 
 
-    public Optional<RefreshToken> findToken(String username) {
-        return refreshTokenRepository.findByToken(
-                userRepository.findUserByName(username).get().getId()
-        );
-    }
-
-
     public boolean isExpired(RefreshToken token) {
         if (token.getExpiredate().compareTo(Instant.now()) < 0) {
             return true;
@@ -76,10 +69,11 @@ public class RefreshTokenServiceFrontend {
 
 
     public InternalRefreshTUserDTO validateUpdateGetUserJWT(String refreshtoken, String username){
-        Optional<RefreshToken> DBtoken = findToken(username);
+        Optional<User> user = userRepository.findUserByName(username);
+        Optional<RefreshToken> DBtoken = refreshTokenRepository.findRefreshTokenById(user.get().getId());
         //check this token saved on DB
         if(DBtoken.isPresent()){
-
+            System.out.println("DB "+DBtoken);
             //check DBtoken and recieved token matched
             if(DBtoken.get().getToken().equals(refreshtoken)){
                 //check it expired

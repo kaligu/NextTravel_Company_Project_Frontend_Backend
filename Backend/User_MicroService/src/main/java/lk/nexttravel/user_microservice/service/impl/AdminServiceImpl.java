@@ -116,18 +116,16 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public ResponseEntity<String> userAdminGetProfileImage(String username, String token) {
+    public ResponseEntity<String> userAdminGetProfileImage(String id, String token) {
         try {
 
             if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(token)) {  //check gateway token
-
                 //get image string
-                Optional<String> image = adminRepository.findProfile_imageById(username);
+                Optional<Admin> admin = adminRepository.findAdminById(id);
 
-                if(image.isPresent()){
-                    System.out.println(image.get());
+                if(admin.isPresent()){
 
-                    return  new ResponseEntity<String> ( image.get() , HttpStatus.OK);
+                    return  new ResponseEntity<String> ( admin.get().getProfile_image() , HttpStatus.OK);
 
                 }else{
                     return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);

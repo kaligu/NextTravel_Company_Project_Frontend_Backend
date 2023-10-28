@@ -22,5 +22,5 @@ import java.util.Optional;
 public interface AdminRepository extends MongoRepository<Admin, Long> {
     Optional<Admin> findAdminById(String id);
 
-    Optional<String> findProfile_imageById(String id);
+
 }

@@ -39,7 +39,7 @@ public class ApiGatewayApplication {
     public CommandLineRunner init(){
         return args -> {
             ClassLoader classLoader = getClass().getClassLoader();
-            URL resourceUrl = classLoader.getResource("testimage.jpg");
+            URL resourceUrl = classLoader.getResource("testimage.jpeg");
             byte[] fileContent =null;
             if (resourceUrl != null) {
                 File inputFile = new File(resourceUrl.getFile());
