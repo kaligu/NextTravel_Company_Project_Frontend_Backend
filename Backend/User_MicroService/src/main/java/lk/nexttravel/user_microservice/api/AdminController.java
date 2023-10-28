@@ -41,4 +41,13 @@ public class AdminController {
         return adminService.SaveNewClient_Abrot(reqNewClientSaveDTO);
     }
 
+    //get profile image
+    @GetMapping(value = "/user-admin-get-profile-image")
+    public ResponseEntity<String> GetProfileImage(
+            @RequestParam String username ,
+            @RequestParam String token
+    ){
+        return adminService.userAdminGetProfileImage(username,token);
+    }
+
 }

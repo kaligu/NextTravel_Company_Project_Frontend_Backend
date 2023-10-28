@@ -20,4 +20,7 @@ public interface AdminService {
     ResponseEntity<String> SaveNewClient_Commit(ReqNewClientSaveDTO reqNewClientSaveDTO);
 
     ResponseEntity<String> SaveNewClient_Abrot(ReqNewClientSaveDTO reqNewClientSaveDTO);
+
+    //get user admin profile image
+    ResponseEntity<String> userAdminGetProfileImage(String username, String token);
 }

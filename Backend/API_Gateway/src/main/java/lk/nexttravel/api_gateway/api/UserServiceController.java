@@ -6,16 +6,18 @@
 */
 package lk.nexttravel.api_gateway.api;
 
+import lk.nexttravel.api_gateway.advice.util.InternalServerException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
+import lk.nexttravel.api_gateway.service.UserService;
 import lk.nexttravel.api_gateway.service.security.Authenticate_Authorize_Service;
+import lk.nexttravel.api_gateway.util.RespondCodes;
+import lk.nexttravel.api_gateway.util.RoleTypes;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 /**
@@ -32,18 +34,13 @@ public class UserServiceController {
     @Autowired
     Authenticate_Authorize_Service authenticate_authorize_service;
 
+    @Autowired
+    UserService userService;
+
     //user login
-    @GetMapping(value = "/user-login")
-    public Mono<ResponseEntity<RespondDTO>> getUsernameAndProfileImage(FrontendTokenDTO frontendTokenDTO){
-        InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
-        if(
-                internalFrontendSecurityCheckDTO.isAccesssible()
-                        &&
-                        internalFrontendSecurityCheckDTO.getRole().equals(Roliy)
-        ){
-
-        }else{
-
-        }
+    @GetMapping(value = "/user-admin-get-profile-image")
+    public Mono<ResponseEntity<RespondDTO>> userAdminGetProfileImage(@RequestBody  FrontendTokenDTO frontendTokenDTO){
+        System.out.println("invoked");
+        return Mono.just(userService.UserAdminGetProfileImage(frontendTokenDTO)) ;
     }
 }

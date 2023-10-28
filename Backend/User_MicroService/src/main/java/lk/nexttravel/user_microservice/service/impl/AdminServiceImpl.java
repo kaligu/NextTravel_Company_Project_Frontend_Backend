@@ -20,6 +20,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * @author : H.C.Kaligu Jayanath
  * Date    : 10/21/2023
@@ -108,6 +110,33 @@ public class AdminServiceImpl implements AdminService {
             } else {
                 return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
             }
+        }catch (Exception e){
+            return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<String> userAdminGetProfileImage(String username, String token) {
+        try {
+
+            if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(token)) {  //check gateway token
+
+                //get image string
+                Optional<String> image = adminRepository.findProfile_imageById(username);
+
+                if(image.isPresent()){
+                    System.out.println(image.get());
+
+                    return  new ResponseEntity<String> ( image.get() , HttpStatus.OK);
+
+                }else{
+                    return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+
+            }else{
+                return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
+            }
+
         }catch (Exception e){
             return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
         }
