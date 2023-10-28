@@ -77,6 +77,13 @@ public class AdminController {
         return adminService.userAdminGetProfileImage(id,token);
     }
 
-
+    //get profile image - guide admin
+    @GetMapping(value = "/travelpackage-admin-get-profile-image")
+    public ResponseEntity<String> travelpackageAdminGetProfileImage(
+            @RequestParam String id ,
+            @RequestParam String token
+    ){
+        return adminService.userAdminGetProfileImage(id,token);
+    }
 
 }
