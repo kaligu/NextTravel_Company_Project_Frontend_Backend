@@ -22,12 +22,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/admin")
 @CrossOrigin("*")
-public class AdminController {
+public class UserAdminController {
 
     @Autowired
     AdminService adminService;
 
-    //----------Save New Client ------
+    //----------Save New Admin ------
     @PostMapping(value = "/save_new_admin")
     public ResponseEntity<String> SaveNewClient_Prepare(@RequestBody ReqNewClientSaveDTO reqNewClientSaveDTO){
         return adminService.SaveNewClient_Prepare(reqNewClientSaveDTO);
@@ -41,7 +41,7 @@ public class AdminController {
         return adminService.SaveNewClient_Abrot(reqNewClientSaveDTO);
     }
 
-    //get profile image
+    //get profile image - user admin
     @GetMapping(value = "/user-admin-get-profile-image")
     public ResponseEntity<String> GetProfileImage(
             @RequestParam String id ,

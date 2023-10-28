@@ -109,12 +109,12 @@ function loginFormBtnClicked() {
         success:function (data){
             if(data.rspd_code === RespondCodes.Respond_PASSWORD_MATCHED){
 
-                //save tokens on local localStorage
-                localStorage.setItem("secure_data_username", data.token.access_username);
-                localStorage.setItem("secure_data_access_token", data.token.access_jwt_token);
-                localStorage.setItem("secure_data_refresh_token", data.token.access_refresh_token);
-
                 if(data.data === RoleTypes.ROLE_CLIENT){
+
+                    //save tokens on local localStorage - user admin
+                    localStorage.setItem("secure_data_client_username", data.token.access_username);
+                    localStorage.setItem("secure_data_client_access_token", data.token.access_jwt_token);
+                    localStorage.setItem("secure_data_client_refresh_token", data.token.access_refresh_token);
 
                     setTimeout(function () {
 s
@@ -137,6 +137,11 @@ s
 
                 }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_USER){
 
+                    //save tokens on local localStorage - user admin
+                    localStorage.setItem("secure_data_user_admin_username", data.token.access_username);
+                    localStorage.setItem("secure_data_user_admin_access_token", data.token.access_jwt_token);
+                    localStorage.setItem("secure_data_user_admin_refresh_token", data.token.access_refresh_token);
+
                     setTimeout(function () {
 
                         //hide loading model
@@ -157,6 +162,11 @@ s
                     }, 500); // delay
 
                 }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_TRAVELPACKAGE){
+
+                    //save tokens on local localStorage - user admin
+                    localStorage.setItem("secure_data_travelpackage_admin_username", data.token.access_username);
+                    localStorage.setItem("secure_data_travelpackage_admin_access_token", data.token.access_jwt_token);
+                    localStorage.setItem("secure_data_travelpackage_admin_refresh_token", data.token.access_refresh_token);
 
                     setTimeout(function () {
 
@@ -179,6 +189,11 @@ s
 
                 }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_HOTEL){
 
+                    //save tokens on local localStorage - user admin
+                    localStorage.setItem("secure_data_hotel_admin_username", data.token.access_username);
+                    localStorage.setItem("secure_data_hotel_admin_access_token", data.token.access_jwt_token);
+                    localStorage.setItem("secure_data_hotel_admin_refresh_token", data.token.access_refresh_token);
+
                     setTimeout(function () {
 
                         //hide loading model
@@ -200,6 +215,11 @@ s
 
                 }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_GUIDE){
 
+                    //save tokens on local localStorage - user admin
+                    localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
+                    localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
+                    localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
+
                     setTimeout(function () {
 
                         //hide loading model
@@ -220,6 +240,11 @@ s
                     }, 500); // delay
 
                 }else if(data.data === RoleTypes.ROLE_ADMIN_SERVICE_VEHICLE){
+
+                    //save tokens on local localStorage - user admin
+                    localStorage.setItem("secure_data_vehicle_admin_username", data.token.access_username);
+                    localStorage.setItem("secure_data_vehicle_admin_access_token", data.token.access_jwt_token);
+                    localStorage.setItem("secure_data_vehicle_admin_refresh_token", data.token.access_refresh_token);
 
                     setTimeout(function () {
 

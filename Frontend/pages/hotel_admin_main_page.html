@@ -64,7 +64,7 @@
     </ul>
     <div class="dropdown border-top ">
         <a href="#" class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" width="45" height="45" class="rounded-circle">
+            <img src="" id="hotel_admin_main_pg_profile_img" alt="mdo" width="52" height="52" class="rounded-circle">
         </a>
         <ul class="dropdown-menu text-small shadow" >
             <li><a class="dropdown-item" href="#">Settings</a></li>
@@ -82,7 +82,7 @@
             <p style="color: white; font-size: 20px; position: absolute; margin-top: 0.05rem; margin-left: 3rem; font-weight: bold" >Next Travels</p>
         </div>
         <p style="color: white; margin-left: 1rem; font-size: 18px">Hotels Manage Console -</p>
-        <p style="color: #c5c5c5; margin-left: 0.3rem; font-style: italic; font-size: 15px">Mr.Kaligu [Admin]</p>
+        <p style="color: #c5c5c5; margin-left: 0.3rem; font-style: italic; font-size: 15px" id="hotel_admin_main_pg_top_admin_name">Mr.test [Admin]</p>
         <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
             <p style="color: white; font-size: 16px">5.56AM 10/08/2023</p>
         </div>
@@ -302,18 +302,18 @@
 
 <!-- loading window -->
 <!-- use Modal -->
-<div class="modal fade" id="loading-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-bs-backdrop='static'>
+<div class="modal fade " id="hotel_admin_main_pg-loading-model" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0,0,0,0.25); backdrop-filter: blur(3px)">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <!--          <div class="modal-header">-->
             <!--            -->
             <!--          </div>-->
-            <div class="modal-body text-center bg-info">
-                <img src="assets/logoloading.gif" class="img-fluid" alt="Responsive image" style="width: 50%; height: 50%">
+            <div class="modal-body text-center flex-box" style="background-color: #882200">
+                <img src="assets/images/logoloading.gif" class="img-fluid" alt="Responsive image" style="width: 50%; height: 50%">
 
             </div>
-            <div class="modal-footer justify-content-center bg-info">
-                <h6 class="modal-title text-white" id="exampleModalLongTitle">Please Wait... </h6>
+            <div class="modal-footer justify-content-center " style="background-color: #882200">
+                <h6 class="modal-title text-white" >Please Wait... </h6>
             </div>
         </div>
     </div>
@@ -342,6 +342,8 @@
         $('[data-toggle="tooltip"]').tooltip()
     })
 </script>
-<script src=""></script>
+<script src="./assets/js/util/RespondCodes.js"></script>
+<script src="./assets/js/util/RoleTypes.js"></script>
+<script src="assets/js/main_js/hoteladmin_main.js"></script>
 </body>
 </html>

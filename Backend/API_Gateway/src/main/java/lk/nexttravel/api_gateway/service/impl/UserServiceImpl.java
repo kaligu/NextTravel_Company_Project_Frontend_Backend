@@ -58,7 +58,6 @@ public class UserServiceImpl implements UserService {
                             &&
                             internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_USER)
             ) {
-                System.out.println("Auhtorised");
                 //get data using restcontroller
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_JSON);
