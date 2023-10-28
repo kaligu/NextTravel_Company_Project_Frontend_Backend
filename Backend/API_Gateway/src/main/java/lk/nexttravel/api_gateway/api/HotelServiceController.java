@@ -6,9 +6,14 @@
 */
 package lk.nexttravel.api_gateway.api;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lk.nexttravel.api_gateway.dto.RespondDTO;
+import lk.nexttravel.api_gateway.service.HotelService;
+import lk.nexttravel.api_gateway.service.security.Authenticate_Authorize_Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 /**
  * @author : H.C.Kaligu Jayanath
@@ -20,4 +25,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/hotel-service")
 @CrossOrigin(origins = "http://localhost:63342/")
 public class HotelServiceController {
+
+    @Autowired
+    Authenticate_Authorize_Service authenticate_authorize_service;
+
+    @Autowired
+    HotelService hotelService;
+
+    //user login
+    @GetMapping(value = {"/hotel-admin-get-profile-image"}, consumes = {"application/json"})
+    public Mono<ResponseEntity<RespondDTO>> userAdminGetProfileImage(
+            @RequestParam("access_username") @NonNull String access_username
+            ,
+            @RequestParam("access_jwt_token") @NonNull String access_jwt_token
+            ,
+            @RequestParam("access_refresh_token") @NonNull String access_refresh_token
+    ){
+        return hotelService.UserAdminGetProfileImage(
+                access_username
+                ,
+                access_jwt_token
+                ,
+                access_refresh_token
+        );
+    }
 }
