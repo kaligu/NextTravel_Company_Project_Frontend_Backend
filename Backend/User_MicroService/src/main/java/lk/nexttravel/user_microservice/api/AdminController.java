@@ -50,7 +50,7 @@ public class AdminController {
         return adminService.userAdminGetProfileImage(id,token);
     }
 
-    //get profile image - user admin
+    //get profile image - vehicle admin
     @GetMapping(value = "/vehicle-admin-get-profile-image")
     public ResponseEntity<String> vehicleAdminGetProfileImage(
             @RequestParam String id ,
@@ -59,9 +59,18 @@ public class AdminController {
         return adminService.userAdminGetProfileImage(id,token);
     }
 
-    //get profile image - user admin
+    //get profile image - hotel admin
     @GetMapping(value = "/hotel-admin-get-profile-image")
     public ResponseEntity<String> hotelAdminGetProfileImage(
+            @RequestParam String id ,
+            @RequestParam String token
+    ){
+        return adminService.userAdminGetProfileImage(id,token);
+    }
+
+    //get profile image - guide admin
+    @GetMapping(value = "/guide-admin-get-profile-image")
+    public ResponseEntity<String> guideAdminGetProfileImage(
             @RequestParam String id ,
             @RequestParam String token
     ){

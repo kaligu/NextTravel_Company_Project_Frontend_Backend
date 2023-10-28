@@ -27,9 +27,6 @@ import reactor.core.publisher.Mono;
 public class HotelServiceController {
 
     @Autowired
-    Authenticate_Authorize_Service authenticate_authorize_service;
-
-    @Autowired
     HotelService hotelService;
 
     //user login

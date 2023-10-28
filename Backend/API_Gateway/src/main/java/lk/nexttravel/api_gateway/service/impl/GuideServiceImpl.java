@@ -53,7 +53,7 @@ public class GuideServiceImpl implements GuideService {
             if(
                     internalFrontendSecurityCheckDTO.isAccesssible()
                             &&
-                            internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_HOTEL)
+                            internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_GUIDE)
             ) {
                 //get data using restcontroller
                 HttpHeaders headers = new HttpHeaders();
@@ -61,7 +61,7 @@ public class GuideServiceImpl implements GuideService {
                 HttpEntity<String> entity = new HttpEntity<>(null, headers); // Sending an empty body
 
                 ResponseEntity<String> responseEntity = restTemplate.exchange(
-                        "http://localhost:1020/api/admin/hotel-admin-get-profile-image?id=" + userRepository.findUserByName(frontendTokenDTO.getAccess_username()).get().getId() + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
+                        "http://localhost:1020/api/admin/guide-admin-get-profile-image?id=" + userRepository.findUserByName(frontendTokenDTO.getAccess_username()).get().getId() + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
                         HttpMethod.GET,
                         entity,
                         String.class
