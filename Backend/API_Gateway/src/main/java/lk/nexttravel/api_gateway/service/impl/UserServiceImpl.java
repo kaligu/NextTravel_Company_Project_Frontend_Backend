@@ -94,4 +94,51 @@ public class UserServiceImpl implements UserService {
             throw new InternalServerException("Internal server Error");
         }
     }
+
+    @Override
+    public Mono<ResponseEntity<RespondDTO>> getAllAdminsBySearch(String search_keyword, String access_username, String access_jwt_token, String access_refresh_token) {
+        try{
+            FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder().access_jwt_token(access_jwt_token).access_username(access_username).access_refresh_token(access_refresh_token).build();
+            InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
+            if(
+                    internalFrontendSecurityCheckDTO.isAccesssible()
+                            &&
+                            internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_USER)
+            ) {
+                //get data using restcontroller
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                HttpEntity<String> entity = new HttpEntity<>(null, headers); // Sending an empty body
+
+                ResponseEntity<String> responseEntity = restTemplate.exchange(
+                        "http://localhost:1020/api/admin/user-admin-get-profile-image?id=" + userRepository.findUserByName(frontendTokenDTO.getAccess_username()).get().getId() + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
+                        HttpMethod.GET,
+                        entity,
+                        String.class
+                );
+                //send to front
+                return Mono.just(new ResponseEntity<RespondDTO>(
+                        RespondDTO.builder()
+                                .rspd_code(RespondCodes.Respond_SUCCESS)
+                                .data(responseEntity.getBody())
+                                .token(
+                                        FrontendTokenDTO.builder()
+                                                .access_username(internalFrontendSecurityCheckDTO.getUsername())
+                                                .access_jwt_token(internalFrontendSecurityCheckDTO.getAccess_token())
+                                                .access_refresh_token(internalFrontendSecurityCheckDTO.getRefresh_token())
+                                                .build()
+                                )
+                                .build()
+                        ,
+                        HttpStatus.OK
+                ));
+            }else {
+                System.out.println("Not authorized");
+                return Mono.error(new UnauthorizeException("Unauthorized request"));
+            }
+        }catch (Exception e){
+            System.out.println("internal server error");
+            throw new InternalServerException("Internal server Error");
+        }
+    }
 }
