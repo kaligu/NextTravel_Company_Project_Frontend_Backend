@@ -20,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -139,4 +140,30 @@ public class AdminServiceImpl implements AdminService {
             return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Override
+    public ResponseEntity<Admin> getAllAdminsSataNySearch(String id, String token) {
+        try {
+
+            if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(token)) {  //check gateway token
+                //get image string
+                Optional<Admin> admin = adminRepository.findAdminById(id);
+
+                if(admin.isPresent()){
+
+                    return  new ResponseEntity<Admin> ( admin.get() , HttpStatus.OK);
+
+                }else{
+                    return new ResponseEntity<Admin>((Admin) null, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+
+            }else{
+                return new ResponseEntity<Admin>((Admin) null, HttpStatus.UNAUTHORIZED);
+            }
+
+        }catch (Exception e){
+            return new ResponseEntity<Admin>((Admin) null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

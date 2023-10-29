@@ -84,8 +84,58 @@ function loadAdminMngWindoewSearchAdminTabel(){
                 localStorage.setItem("secure_data_user_admin_username", data.token.access_username);
                 localStorage.setItem("secure_data_user_admin_access_token", data.token.access_jwt_token);
                 localStorage.setItem("secure_data_user_admin_refresh_token", data.token.access_refresh_token);
+                document.getElementById("adminTableBody").innerHTML = "";
+                // Assuming data.data is an array of admins
+                data.data.forEach(function(admin) {
+                    // Example of accessing admin properties
+                    // Assuming data.data is an array of admins
+                    // Create a new table row
+                    var newRow = document.createElement("tr");
 
+                    // Add table data for each admin property
+                    newRow.innerHTML = `
+        <td>
+            <p class="fw-normal mb-1">${admin.id}</p>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">${admin.role_type}</p>
+        </td>
+        <td>
+            <div class="d-flex align-items-center">
+                <img src="data:image/png;base64, ${admin.profile_image}" alt="Profile Image" style="width: 45px; height: 45px" class="rounded-circle" />
+                <div class="ms-3">
+                    <p class="fw-bold mb-1">${admin.name}</p>
+                </div>
+            </div>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">${admin.signup_name_with_initial}</p>
+        </td>
+        <td>
+            <p class="text-muted mb-1">${admin.email}</p>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">${admin.nic_or_passport}</p>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">${admin.address}</p>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">${admin.salary}</p>
+        </td>
+        <td>
+            <button type="button" class="btn btn-link btn-sm btn-rounded">Edit</button>
+        </td>
+        <td>
+            <button type="button" class="btn btn-link btn-sm btn-rounded">Delete</button>
+        </td>
+    `;
 
+                    // Append the new row to the table body
+                    document.getElementById("adminTableBody").appendChild(newRow);
+                    // Process each admin as needed and populate in the UI
+                    // For example, add them to a table or generate HTML elements to display admin information.
+                });
 
                 //hide loading model
                 // setTimeout(function () {

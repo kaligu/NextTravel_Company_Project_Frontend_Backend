@@ -7,11 +7,15 @@
 package lk.nexttravel.user_microservice.api;
 
 import lk.nexttravel.user_microservice.dto.ReqNewClientSaveDTO;
+import lk.nexttravel.user_microservice.entity.Admin;
 import lk.nexttravel.user_microservice.service.AdminService;
 import lk.nexttravel.user_microservice.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : H.C.Kaligu Jayanath
@@ -87,6 +91,12 @@ public class AdminController {
     }
 
     //search all admins
-
+    @GetMapping(value = "/get-admin-data")
+    public ResponseEntity<Admin> getAllAdminsSataNySearch(
+            @RequestParam String search_keyword ,
+            @RequestParam String token
+    ){
+        return adminService.getAllAdminsSataNySearch(search_keyword,token);
+    }
 
 }

@@ -12,6 +12,7 @@ import lk.nexttravel.api_gateway.advice.util.UnauthorizeException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
+import lk.nexttravel.api_gateway.dto.user.AdminDTO;
 import lk.nexttravel.api_gateway.dto.user.UserAdminDTO;
 import lk.nexttravel.api_gateway.entity.User;
 import lk.nexttravel.api_gateway.service.UserService;
@@ -110,27 +111,38 @@ public class UserServiceImpl implements UserService {
                             internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_USER)
             ) {
 
-             System.out.println("Keyword "+search_keyword);
-             List<User> userAdminDTOS = new ArrayList<>();
+             ArrayList<UserAdminDTO> userAdminDTOS = new ArrayList<>();
 
                 //get on User DB admin datas
                 ArrayList<User> userArrayList = userRepository.findAllByNameContains(search_keyword);
 
-                //get User Service - all admins
-                //get data using restcontroller
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentType(MediaType.APPLICATION_JSON);
-                HttpEntity<String> entity = new HttpEntity<>(null, headers); // Sending an empty body
-
-                ResponseEntity<ArrayList> responseEntity = restTemplate.exchange(
-                        "http://localhost:1020/api/admin/user-admin-get-profile-image?id=" + userRepository.findUserByName(frontendTokenDTO.getAccess_username()).get().getId() + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
-                        HttpMethod.GET,
-                        entity,
-                        ArrayList.class
-                );
-
+                //fill and add
                 for (User user:userArrayList){
-                    System.out.println(user.toString());
+                    UserAdminDTO userAdminDTO = new UserAdminDTO();
+                    userAdminDTO.setId(user.getId());
+                    userAdminDTO.setName(user.getName());
+                    userAdminDTO.setEmail(user.getEmail());
+                    userAdminDTO.setRole_type(user.getRole_type());
+
+                    //get data using restcontroller
+                    HttpHeaders headers = new HttpHeaders();
+                    headers.setContentType(MediaType.APPLICATION_JSON);
+                    HttpEntity<String> entity = new HttpEntity<>(null, headers); // Sending an empty body
+
+                    ResponseEntity<AdminDTO> adminDTOResponseEntity = restTemplate.exchange(
+                            "http://localhost:1020/api/admin/get-admin-data?search_keyword=" + user.getId() + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
+                            HttpMethod.GET,
+                            entity,
+                            AdminDTO.class
+                    );
+                    userAdminDTO.setSignup_name_with_initial(adminDTOResponseEntity.getBody().getSignup_name_with_initial());
+                    userAdminDTO.setNic_or_passport(adminDTOResponseEntity.getBody().getNic_or_passport());
+                    userAdminDTO.setAddress(adminDTOResponseEntity.getBody().getAddress());
+                    userAdminDTO.setSalary(adminDTOResponseEntity.getBody().getSalary());
+                    userAdminDTO.setProfile_image(adminDTOResponseEntity.getBody().getProfile_image());
+
+                    //add dto to list
+                    userAdminDTOS.add(userAdminDTO);
                 }
 
                 //send to front
