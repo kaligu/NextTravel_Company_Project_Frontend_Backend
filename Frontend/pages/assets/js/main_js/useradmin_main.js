@@ -28,9 +28,9 @@ $(document).ready(function() {
         success: function(data) {
             if (data.rspd_code === RespondCodes.Response_SUCCESS) {
                 // Save tokens to localStorage
-                localStorage.setItem("secure_data_username", data.token.access_username);
-                localStorage.setItem("secure_data_access_token", data.token.access_jwt_token);
-                localStorage.setItem("secure_data_refresh_token", data.token.access_refresh_token);
+                localStorage.setItem("secure_data_user_admin_username", data.token.access_username);
+                localStorage.setItem("secure_data_user_admin_access_token", data.token.access_jwt_token);
+                localStorage.setItem("secure_data_user_admin_refresh_token", data.token.access_refresh_token);
 
                 // Set image from base64 data
                 user_admin_main_pg_profile_img.attr('src', 'data:image/png;base64,' + data.data);

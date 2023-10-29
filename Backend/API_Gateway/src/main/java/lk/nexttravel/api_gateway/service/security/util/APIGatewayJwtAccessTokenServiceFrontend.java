@@ -37,16 +37,6 @@ public class APIGatewayJwtAccessTokenServiceFrontend {
 
     public final String JWT_TOKEN_KEY = SecurityCodes.FRONTEND_APIGATEWAY_JWT_TOKEN_KEY;
 
-    //retrieve username from jwt token
-    public String getUsernameFromToken(String token) {
-        return getClaimFromToken(token, Claims::getSubject);
-    }
-
-    //retrieve expiration date from jwt token
-    public Date getExpirationDateFromToken(String token) {
-        return getClaimFromToken(token, Claims::getExpiration);
-    }
-
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
@@ -55,12 +45,6 @@ public class APIGatewayJwtAccessTokenServiceFrontend {
     //for retrieveing any information from token we will need the secret key
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser().setSigningKey(JWT_TOKEN_KEY).parseClaimsJws(token).getBody();
-    }
-
-    //check if the token has expired
-    private Boolean isTokenExpired(String token) {
-        final Date expiration = getExpirationDateFromToken(token);
-        return expiration.before(new Date());
     }
 
     //generate token for user
@@ -79,20 +63,6 @@ public class APIGatewayJwtAccessTokenServiceFrontend {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
                 .signWith(SignatureAlgorithm.HS512, JWT_TOKEN_KEY).compact();
-    }
-
-    //validate token
-    public void validateToken(String token) {
-        try {
-            Jwts.parser()
-                    .setSigningKey( new SecretKeySpec(Base64.getDecoder().decode(JWT_TOKEN_KEY), SignatureAlgorithm.HS512.getJcaName()))
-                    .parseClaimsJws(token);
-        } catch (ExpiredJwtException e) {
-            System.out.println("Token expired"+e);
-        } catch (Exception e) {
-            System.out.println("Token not validated"+e);
-        }
-
     }
 
     //validateUpdateGetUserJWT  - this method check JWT and if it expired create new and role and user name return

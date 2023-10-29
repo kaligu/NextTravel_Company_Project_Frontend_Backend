@@ -11,6 +11,8 @@ import lk.nexttravel.api_gateway.Persistence.RefreshTokenRepository;
 import lk.nexttravel.api_gateway.dto.auth.InternalRefreshTUserDTO;
 import lk.nexttravel.api_gateway.entity.User;
 import lk.nexttravel.api_gateway.entity.RefreshToken;
+import lk.nexttravel.api_gateway.util.RespondCodes;
+import lk.nexttravel.api_gateway.util.security.SecurityCodes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,24 +37,15 @@ public class RefreshTokenServiceFrontend {
     @Autowired
     InternalRefreshTUserDTO internalRefreshTUserDTO;
 
+
     public String createRefreshToken(User user) {
-        //check has old saved tokens
-        if(refreshTokenRepository.existsById(user.getId())){
-            Optional<RefreshToken> refreshToken = refreshTokenRepository.findById(user.getId());
-            if(refreshToken.isPresent()){
-                //if has existing token delete it
-                refreshTokenRepository.delete(refreshToken.get());
-            }
-        }
-        //after deleting ort no create amd add new one
-        //create token using UUID
         String token = UUID.randomUUID().toString();
 
         refreshTokenRepository.save(
                 RefreshToken.builder()
                         .id(user.getId())
                         .token(token)
-                        .expiredate(Instant.now().plusMillis(600000))
+                        .expiredate(Instant.now().plusMillis(SecurityCodes.FRONTEND_APIGATEWAY_REFRESH_TOKEN_KEY_VALIDITY))
                         .build()
         );
         return token;
@@ -73,7 +66,6 @@ public class RefreshTokenServiceFrontend {
         Optional<RefreshToken> DBtoken = refreshTokenRepository.findRefreshTokenById(user.get().getId());
         //check this token saved on DB
         if(DBtoken.isPresent()){
-            System.out.println("DB "+DBtoken);
             //check DBtoken and recieved token matched
             if(DBtoken.get().getToken().equals(refreshtoken)){
                 //check it expired
@@ -86,16 +78,10 @@ public class RefreshTokenServiceFrontend {
                     //delte it
                     refreshTokenRepository.delete(DBtoken.get());
                     //generate new one
-                    if(userRepository.findUserByName(username).isPresent()){
-                        String tokenkey = createRefreshToken(userRepository.findUserByName(username).get());
-                        internalRefreshTUserDTO.setRefreshToken(tokenkey);
-                        internalRefreshTUserDTO.setUserAuthenticated(true);
-                        return internalRefreshTUserDTO;
-                    }else{
-                        //not in db
-                        internalRefreshTUserDTO.setUserAuthenticated(false);
-                        return internalRefreshTUserDTO;
-                    }
+                    String tokenkey = createRefreshToken(userRepository.findUserByName(username).get());
+                    internalRefreshTUserDTO.setRefreshToken(tokenkey);
+                    internalRefreshTUserDTO.setUserAuthenticated(true);
+                    return internalRefreshTUserDTO;
                 }
             }else{
                 internalRefreshTUserDTO.setUserAuthenticated(false);
