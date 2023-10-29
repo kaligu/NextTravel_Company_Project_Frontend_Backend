@@ -84,59 +84,75 @@ function loadAdminMngWindoewSearchAdminTabel(){
                 localStorage.setItem("secure_data_user_admin_username", data.token.access_username);
                 localStorage.setItem("secure_data_user_admin_access_token", data.token.access_jwt_token);
                 localStorage.setItem("secure_data_user_admin_refresh_token", data.token.access_refresh_token);
-                document.getElementById("adminTableBody").innerHTML = "";
+
+                //clear table
+                $("#adminTableBody").html("");
                 // Assuming data.data is an array of admins
                 data.data.forEach(function(admin) {
-                    // Example of accessing admin properties
-                    // Assuming data.data is an array of admins
-                    // Create a new table row
-                    var newRow = document.createElement("tr");
 
-                    // Add table data for each admin property
-                    newRow.innerHTML = `
-        <td>
-            <p class="fw-normal mb-1">${admin.id}</p>
-        </td>
-        <td>
-            <p class="fw-normal mb-1">${admin.role_type}</p>
-        </td>
-        <td>
-            <div class="d-flex align-items-center">
-                <img src="data:image/png;base64, ${admin.profile_image}" alt="Profile Image" style="width: 45px; height: 45px" class="rounded-circle" />
-                <div class="ms-3">
-                    <p class="fw-bold mb-1">${admin.name}</p>
+                    var newRow = $("<tr></tr>");
+
+                    newRow.html(`
+            <td>
+                <p class="fw-normal mb-1">${admin.id}</p>
+            </td>
+            <td>
+                <p class="fw-normal mb-1">${admin.role_type}</p>
+            </td>
+            <td>
+                <div class="d-flex align-items-center">
+                    <img src="data:image/png;base64, ${admin.profile_image}" alt="Profile Image" style="width: 45px; height: 45px" class="rounded-circle" />
+                    <div class="ms-3">
+                        <p class="fw-bold mb-1">${admin.name}</p>
+                    </div>
                 </div>
-            </div>
+            </td>
+            <td>
+                <p class="fw-normal mb-1">${admin.signup_name_with_initial}</p>
+            </td>
+            <td>
+                <p class="text-muted mb-1">${admin.email}</p>
+            </td>
+            <td>
+                <p class="fw-normal mb-1">${admin.nic_or_passport}</p>
+            </td>
+            <td>
+                <p class="fw-normal mb-1">${admin.address}</p>
+            </td>
+            <td>
+                <p class="fw-normal mb-1">${admin.salary}</p>
+            </td>
+            <td>
+            <button type="button" id="edit-btn${admin.id}" class="btn btn-link btn-sm btn-rounded edit-btn" data-admin-id="${admin.id}">Edit</button>
         </td>
         <td>
-            <p class="fw-normal mb-1">${admin.signup_name_with_initial}</p>
+            <button type="button" class="btn btn-link btn-sm btn-rounded delete-btn" data-admin-id="${admin.id}">Delete</button>
         </td>
-        <td>
-            <p class="text-muted mb-1">${admin.email}</p>
-        </td>
-        <td>
-            <p class="fw-normal mb-1">${admin.nic_or_passport}</p>
-        </td>
-        <td>
-            <p class="fw-normal mb-1">${admin.address}</p>
-        </td>
-        <td>
-            <p class="fw-normal mb-1">${admin.salary}</p>
-        </td>
-        <td>
-            <button type="button" class="btn btn-link btn-sm btn-rounded">Edit</button>
-        </td>
-        <td>
-            <button type="button" class="btn btn-link btn-sm btn-rounded">Delete</button>
-        </td>
-    `;
+        `);
 
-                    // Append the new row to the table body
-                    document.getElementById("adminTableBody").appendChild(newRow);
-                    // Process each admin as needed and populate in the UI
-                    // For example, add them to a table or generate HTML elements to display admin information.
+
+                    $("#adminTableBody").append(newRow);
+                });//end array loop
+
+                $(".edit-btn").on('click', function() {
+                    var adminId = $(this).data('admin-id');
+
+                    // Assuming 'adminData' is the array of admin objects
+                    var admin = data.data.find(function(item) {
+                        return item.id === adminId;
+                    });
+
+                    // Populate modal with admin's information
+                    // Set modal field values with corresponding admin data
+                    $('#admin-manage-container-add-new-admin-model').find('#a_m_n_a_a_username').val(admin.name);
+                    $('#admin-manage-container-add-new-admin-model').find('#a_m_n_a_a_email').val(admin.email);
+                    $('#admin-manage-container-add-new-admin-model').find('#a_m_n_a_a_password').val(admin.password); // Assuming you have this in your data
+                    $('#admin-manage-container-add-new-admin-model').find('#a_m_n_a_a_nic').val(admin.nic_or_passport);
+                    $('#admin-manage-container-add-new-admin-model').find('#a_m_n_a_a_address').val(admin.address);
+                    // Set other fields as needed
+
+                    $('#admin-manage-container-add-new-admin-model').modal('show');
                 });
-
                 //hide loading model
                 // setTimeout(function () {
                 //     user_admin_main_pg_loading_model.modal('hide');
