@@ -12,23 +12,101 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 10px; /* You can adjust the size */
+        }
+
+        /* Change the height of the horizontal scrollbar */
+        ::-webkit-scrollbar {
+            height: 18px; /* You can adjust the size */
         }
 
         /* Track */
         ::-webkit-scrollbar-track {
-            background: #618264;
+            background: #740088;
         }
 
         /* Handle */
         ::-webkit-scrollbar-thumb {
-            background: #5d5d5d;
+            background: #8f8f8f;
         }
 
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
-            background: #555;
+            background: #8f8f8f;
         }
+
+        .btn-primary {
+            color: #212529;
+            background-color: #9f02ba;
+            border-color: #740088
+        }
+
+        .btn-primary:hover {
+            color: #212529;
+            background-color: #740088;
+            border-color: #a803c4
+        }
+
+        .btn-primary:focus,
+        .btn-primary.focus {
+            box-shadow: 0 0 0 .2rem rgb(135, 13, 217)
+        }
+
+        table thead tr th:nth-child(1) {
+            background-color: #870dd9; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        table thead tr th:nth-child(2) {
+            background-color: #870dd9; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        table thead tr th:nth-child(3) {
+            background-color: #870dd9; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        table thead tr th:nth-child(4) {
+            background-color: #870dd9; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        table thead tr th:nth-child(5) {
+            background-color: #870dd9; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        table thead tr th:nth-child(6) {
+            background-color: #870dd9; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        table thead tr th:nth-child(7) {
+            background-color: #870dd9; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        table thead tr th:nth-child(8) {
+            background-color: #870dd9; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        table thead tr th:nth-child(9) {
+            background-color: #0d73d9; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        table thead tr th:nth-child(10) {
+            background-color: #d90d0d; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+
+
+
+        /*.table-wrapper {*/
+        /*    width: 100%; !* Ensure the table doesn't overflow its container *!*/
+        /*    overflow-x: auto; !* Add horizontal scroll *!*/
+        /*}*/
+
+        /*!* Optional: Adjust scrollbar style *!*/
+        /*.table-scroll {*/
+        /*    border-collapse: separate;*/
+        /*    border-spacing: 0;*/
+        /*    width: max-content; !* Set the table's width to its content *!*/
+        /*}*/
+
     </style>
 
 
@@ -108,21 +186,18 @@
 <!--</div>-->
 
 
-<!--admin manage container-->
-<div class="container-fluid" id="admin_manage_container">
-
-
+<!--user manage container-->
+<div class="container-fluid" id="user_manage_container" style="display: none">
 
     <h2 style="color: rgba(162,160,160,0.74); margin-top: 4rem; margin-left: 5.5rem; font-style: italic; "> Users Manage</h2>
     <div class="card" style="width: 94%; margin-top: 1rem; margin-left: 5rem; border-color:black; border-width: 0.05rem; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
         <div class="card-body">
             <div class="input-group rounded w-25">
 <!--                add new admin button-->
-                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#admin-manage-container-add-new-admin-model" ><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#admin-manage-container-add-new-admin-model" ><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16" >
                     <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                     <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
                 </svg> | Add New Admin</button>
-                <button onclick="getUsernameProfileimageAndAddIntoUI()">fddddddff</button>
             </div>
         </div>
     </div>
@@ -142,7 +217,8 @@
                     <th>Title</th>
                     <th>Status</th>
                     <th>Position</th>
-                    <th>Actions</th>
+                    <th>    </th>
+                    <th>    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -243,9 +319,590 @@
                         </button>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                    src="https://mdbootstrap.com/img/new/avatars/7.jpg"
+                                    class="rounded-circle"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                            />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">Kate Hunington</p>
+                                <p class="text-muted mb-0">kate.hunington@gmail.com</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">Designer</p>
+                        <p class="text-muted mb-0">UI/UX</p>
+                    </td>
+                    <td>
+                        <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
+                    </td>
+                    <td>Senior</td>
+                    <td>
+                        <button
+                                type="button"
+                                class="btn btn-link btn-rounded btn-sm fw-bold"
+                                data-mdb-ripple-color="dark"
+                        >
+                            Edit
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                    src="https://mdbootstrap.com/img/new/avatars/7.jpg"
+                                    class="rounded-circle"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                            />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">Kate Hunington</p>
+                                <p class="text-muted mb-0">kate.hunington@gmail.com</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">Designer</p>
+                        <p class="text-muted mb-0">UI/UX</p>
+                    </td>
+                    <td>
+                        <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
+                    </td>
+                    <td>Senior</td>
+                    <td>
+                        <button
+                                type="button"
+                                class="btn btn-link btn-rounded btn-sm fw-bold"
+                                data-mdb-ripple-color="dark"
+                        >
+                            Edit
+                        </button>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+</div>
+
+<!--admin manage container-->
+<div class="container-fluid" id="admin_manage_container" style="display: block">
+    <br>
+    <h2 style="color: rgba(162,160,160,0.74); margin-top: 4rem; margin-left: 5.5rem; font-style: italic; "> Admin Manage</h2>
+    <div class="card container-fluid "  style="width: 94%; margin-top: 1rem; margin-left: 5rem; border-color:grey; border-width: 0.05rem; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
+        <div class="card-body container-fluid ">
+            <div class="input-group rounded w-25">
+                <!--      add new admin button   -->
+                <button style="margin-left: -9px" type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#admin-manage-container-add-new-admin-model" ><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                </svg> | Add New Admin</button>
+            </div>
+        </div>
+    </div>
+    <div class="card " style="width: 94%; margin-top: 1rem; margin-left: 5rem; margin-right: 2rem; border-color:grey; border-width: 0.05rem; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
+        <div class="card-body" >
+            <div class="input-group rounded w-25">
+                <input type="search" class="form-control rounded" placeholder="Search here . . ." aria-label="Search" aria-describedby="search-addon" style="border-width: 0.2rem"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="margin-left: 0.6rem; margin-top: 0.7rem">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </div>
+            <br>
+
+            <!--Tabel-->
+            <table class="table align-middle mb-0 "  >
+                <thead>
+                <tr >
+                    <th>ID</th>
+                    <th>Role</th>
+                    <th>Name</th>
+                    <th>Name with Initial</th>
+                    <th>EMail</th>
+                    <th>NIC / Passport</th>
+                    <th>Physical Address</th>
+                    <th>Salary</th>
+                    <th>      </th>
+                    <th>      </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">U001</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">User-Service-Admin</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                            />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">Haputhanthirige Chethiya Kaligu Jayanth</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">H.C.K.Jaynath</p>
+                    </td>
+                    <td>
+                        <p class="text-muted mb-1">john.doe@gmail.com</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">200133702832</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">50000</p>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Edit
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">U001</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">User-Service-Admin</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                            />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">Haputhanthirige Chethiya Kaligu Jayanth</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">H.C.K.Jaynath</p>
+                    </td>
+                    <td>
+                        <p class="text-muted mb-1">john.doe@gmail.com</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">200133702832</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">50000</p>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Edit
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">U001</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">User-Service-Admin</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                            />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">Haputhanthirige Chethiya Kaligu Jayanth</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">H.C.K.Jaynath</p>
+                    </td>
+                    <td>
+                        <p class="text-muted mb-1">john.doe@gmail.com</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">200133702832</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">50000</p>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Edit
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">U001</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">User-Service-Admin</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                            />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">Haputhanthirige Chethiya Kaligu Jayanth</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">H.C.K.Jaynath</p>
+                    </td>
+                    <td>
+                        <p class="text-muted mb-1">john.doe@gmail.com</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">200133702832</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">50000</p>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Edit
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">U001</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">User-Service-Admin</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                            />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">Haputhanthirige Chethiya Kaligu Jayanth</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">H.C.K.Jaynath</p>
+                    </td>
+                    <td>
+                        <p class="text-muted mb-1">john.doe@gmail.com</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">200133702832</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">50000</p>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Edit
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">U001</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">User-Service-Admin</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                            />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">Haputhanthirige Chethiya Kaligu Jayanth</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">H.C.K.Jaynath</p>
+                    </td>
+                    <td>
+                        <p class="text-muted mb-1">john.doe@gmail.com</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">200133702832</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">50000</p>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Edit
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">U001</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">User-Service-Admin</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                            />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">Haputhanthirige Chethiya Kaligu Jayanth</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">H.C.K.Jaynath</p>
+                    </td>
+                    <td>
+                        <p class="text-muted mb-1">john.doe@gmail.com</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">200133702832</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">50000</p>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Edit
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">U001</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">User-Service-Admin</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                            />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">Haputhanthirige Chethiya Kaligu Jayanth</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">H.C.K.Jaynath</p>
+                    </td>
+                    <td>
+                        <p class="text-muted mb-1">john.doe@gmail.com</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">200133702832</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">50000</p>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Edit
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">U001</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">User-Service-Admin</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                            />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">Haputhanthirige Chethiya Kaligu Jayanth</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">H.C.K.Jaynath</p>
+                    </td>
+                    <td>
+                        <p class="text-muted mb-1">john.doe@gmail.com</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">200133702832</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">50000</p>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Edit
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">U001</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">User-Service-Admin</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                            />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">Haputhanthirige Chethiya Kaligu Jayanth</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">H.C.K.Jaynath</p>
+                    </td>
+                    <td>
+                        <p class="text-muted mb-1">john.doe@gmail.com</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">200133702832</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">50000</p>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Edit
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+
+
+
+
+
+
+                </tbody>
+            </table>
+            </div>
+
     </div>
 </div>
 
@@ -345,7 +1002,15 @@
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
-    })
+    });
+
+    // $(document).ready(function () {
+    //     $('#dtHorizontalVerticalExample').DataTable({
+    //         "scrollX": false,
+    //         "scrollY": true,
+    //     });
+    //     $('.dataTables_length').addClass('bs-select');
+    // });
 </script>
 <script src="./assets/js/util/RespondCodes.js"></script>
 <script src="./assets/js/util/RoleTypes.js"></script>
