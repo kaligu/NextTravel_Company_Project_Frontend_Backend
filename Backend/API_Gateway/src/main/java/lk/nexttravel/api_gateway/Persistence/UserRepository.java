@@ -10,6 +10,7 @@ import lk.nexttravel.api_gateway.entity.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -23,4 +24,5 @@ public interface UserRepository extends MongoRepository<User, String> {
     Optional<User> findUserByName(String name);
     boolean existsByName(String username);
     boolean deleteByName(String name);
+    ArrayList<User> findAllByNameContains(String keyword);
 }

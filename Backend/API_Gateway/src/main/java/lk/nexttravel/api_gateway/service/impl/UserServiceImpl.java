@@ -12,6 +12,8 @@ import lk.nexttravel.api_gateway.advice.util.UnauthorizeException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
+import lk.nexttravel.api_gateway.dto.user.UserAdminDTO;
+import lk.nexttravel.api_gateway.entity.User;
 import lk.nexttravel.api_gateway.service.UserService;
 import lk.nexttravel.api_gateway.service.security.Authenticate_Authorize_Service;
 import lk.nexttravel.api_gateway.service.security.util.APIGatewayJwtAccessTokenServiceBackend;
@@ -25,6 +27,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -105,22 +109,35 @@ public class UserServiceImpl implements UserService {
                             &&
                             internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_USER)
             ) {
+
+             System.out.println("Keyword "+search_keyword);
+             List<User> userAdminDTOS = new ArrayList<>();
+
+                //get on User DB admin datas
+                ArrayList<User> userArrayList = userRepository.findAllByNameContains(search_keyword);
+
+                //get User Service - all admins
                 //get data using restcontroller
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_JSON);
                 HttpEntity<String> entity = new HttpEntity<>(null, headers); // Sending an empty body
 
-                ResponseEntity<String> responseEntity = restTemplate.exchange(
+                ResponseEntity<ArrayList> responseEntity = restTemplate.exchange(
                         "http://localhost:1020/api/admin/user-admin-get-profile-image?id=" + userRepository.findUserByName(frontendTokenDTO.getAccess_username()).get().getId() + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
                         HttpMethod.GET,
                         entity,
-                        String.class
+                        ArrayList.class
                 );
+
+                for (User user:userArrayList){
+                    System.out.println(user.toString());
+                }
+
                 //send to front
                 return Mono.just(new ResponseEntity<RespondDTO>(
                         RespondDTO.builder()
                                 .rspd_code(RespondCodes.Respond_SUCCESS)
-                                .data(responseEntity.getBody())
+                                .data(userAdminDTOS)
                                 .token(
                                         FrontendTokenDTO.builder()
                                                 .access_username(internalFrontendSecurityCheckDTO.getUsername())
@@ -132,8 +149,8 @@ public class UserServiceImpl implements UserService {
                         ,
                         HttpStatus.OK
                 ));
+
             }else {
-                System.out.println("Not authorized");
                 return Mono.error(new UnauthorizeException("Unauthorized request"));
             }
         }catch (Exception e){

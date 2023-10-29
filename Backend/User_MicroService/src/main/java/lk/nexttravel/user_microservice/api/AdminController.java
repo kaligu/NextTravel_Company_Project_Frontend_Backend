@@ -86,4 +86,7 @@ public class AdminController {
         return adminService.userAdminGetProfileImage(id,token);
     }
 
+    //search all admins
+
+
 }
