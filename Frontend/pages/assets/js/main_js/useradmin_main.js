@@ -193,7 +193,10 @@ function saveEditAdmin(){
         var baseString;
         reader.onloadend = function () {
             baseString = reader.result;
-            console.log(baseString);
+            console.log(baseString); // This is the base64 string of the image
+
+            // Update the 'src' attribute of the image element
+            $('#e_m_n_a_a_image').attr('src', baseString);
         };
         reader.readAsDataURL(newImageFile);
     } else {
