@@ -94,10 +94,10 @@ function loadAdminMngWindoewSearchAdminTabel(){
 
                     newRow.html(`
             <td>
-                <p class="fw-normal mb-1">${admin.id}</p>
+                <p class="fw-bold mb-1">${admin.id}</p>
             </td>
             <td>
-                <p class="fw-normal mb-1">${admin.role_type}</p>
+                <p class="fw-bold mb-1">${admin.role_type}</p>
             </td>
             <td>
                 <div class="d-flex align-items-center">
@@ -125,9 +125,7 @@ function loadAdminMngWindoewSearchAdminTabel(){
             <td>
             <button type="button" id="edit-btn${admin.id}" class="btn btn-link btn-sm btn-rounded edit-btn" data-admin-id="${admin.id}">Edit</button>
         </td>
-        <td>
-            <button type="button" class="btn btn-link btn-sm btn-rounded delete-btn" data-admin-id="${admin.id}">Delete</button>
-        </td>
+    
         `);
 
 
@@ -144,14 +142,19 @@ function loadAdminMngWindoewSearchAdminTabel(){
 
                     // Populate modal with admin's information
                     // Set modal field values with corresponding admin data
-                    $('#admin-manage-container-add-new-admin-model').find('#a_m_n_a_a_username').val(admin.name);
-                    $('#admin-manage-container-add-new-admin-model').find('#a_m_n_a_a_email').val(admin.email);
-                    $('#admin-manage-container-add-new-admin-model').find('#a_m_n_a_a_password').val(admin.password); // Assuming you have this in your data
-                    $('#admin-manage-container-add-new-admin-model').find('#a_m_n_a_a_nic').val(admin.nic_or_passport);
-                    $('#admin-manage-container-add-new-admin-model').find('#a_m_n_a_a_address').val(admin.address);
+                    $('#admin-manage-container-edit-admin-model').find('#e_m_n_a_a_username').val(admin.name);
+                    $('#admin-manage-container-edit-admin-model').find('#e_m_n_a_a_nameinitial').val(admin.signup_name_with_initial);
+                    $('#admin-manage-container-edit-admin-model').find('#e_m_n_a_a_email').val(admin.email);
+                    $('#admin-manage-container-edit-admin-model').find('#e_m_n_a_a_nic').val(admin.nic_or_passport);
+                    $('#admin-manage-container-edit-admin-model').find('#e_m_n_a_a_address').val(admin.address);
+                    $('#admin-manage-container-edit-admin-model').find('#e_m_n_a_a_salary').val(admin.salary);
+                    // Change this line to correctly set the 'src' attribute of the image
+                    $('#admin-manage-container-edit-admin-model').find('#e_m_n_a_a_image').attr('src', `data:image/png;base64, ${admin.profile_image}`);
+
+
                     // Set other fields as needed
 
-                    $('#admin-manage-container-add-new-admin-model').modal('show');
+                    $('#admin-manage-container-edit-admin-model').modal('show');
                 });
                 //hide loading model
                 // setTimeout(function () {

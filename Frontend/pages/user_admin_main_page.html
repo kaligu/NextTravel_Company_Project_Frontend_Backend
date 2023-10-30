@@ -93,6 +93,22 @@
             color: white; /* Change the text color to white */
         }
 
+        /*edit image*/
+        .product-holder {
+            position: relative;
+            display: block;
+            margin-top: 85px;
+            margin-left: -30px;
+        }
+
+        #plus-image {
+            left: 50%;
+            top: 50%;
+            position: absolute;
+            margin-top: 48px;
+            margin-left: -125px;
+        }
+
 
 
         /*.table-wrapper {*/
@@ -406,8 +422,8 @@
             </div>
         </div>
     </div>
-    <div class="card " style="width: 94%; margin-top: 1rem; margin-left: 5rem; margin-right: 2rem; border-color:grey; border-width: 0.05rem; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
-        <div class="card-body" >
+    <div class="card container-fluid" style="width: 94%; margin-top: 1rem; margin-left: 5rem; margin-right: 2rem; border-color:grey; border-width: 0.05rem; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
+        <div class="card-body container-fluid" >
             <div class="input-group rounded w-25">
                 <input type="search" id="user_admin_main_pg_admin_mng_search_admins_txtfld" class="form-control rounded" placeholder="Name Search here . . ." aria-label="Search" aria-describedby="search-addon" style="border-width: 0.2rem"/>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="margin-left: 0.6rem; margin-top: 0.7rem">
@@ -417,7 +433,7 @@
             <br>
 
             <!--Tabel-->
-            <table id="adminTable" class="table align-middle mb-0 "  >
+            <table id="adminTable" class="table align-middle mb-0"  >
                 <thead>
                 <tr >
                     <th>ID</th>
@@ -428,7 +444,6 @@
                     <th>NIC / Passport</th>
                     <th>Physical Address</th>
                     <th>Salary</th>
-                    <th>      </th>
                     <th>      </th>
                 </tr>
                 </thead>
@@ -544,57 +559,62 @@
 <!--    </div>-->
 <!--</div>-->
 
-<!--admin manage container - sub content - add new admin model-->
+<!--admin manage container - sub content - edit admin model-->
 <!-- Modal -->
-<div class="modal fade" id="admin-manage-container-add-new-admin-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
-    <div class="modal-dialog">
+<div class="modal fade" id="admin-manage-container-edit-admin-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add New Admin</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Existing Admin</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form class="justify-content-center">
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_username" class="form-label" >Username</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_username" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
+            <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
+                <div style="display: flex;">
+                    <div style="flex-direction: column; width: 600px;">
+                        <div class="mb-4">
+                            <div class="row text-center">
+                                <div class="col-xs-6 text-center" style="background-color: none; margin-top: 10px;">
+                                    <div class='product-holder'>
+                                        <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" width="300" height="300" class='product-image' id="e_m_n_a_a_image" style="border: 1px solid #000; border-radius: 50%; filter: brightness(90%)">
+                                            <input id="plus-image" class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px; width: 250px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_email" class="form-label" >Email</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_email" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
+                    <div style="flex-direction: column; width: 800px; height: 480px; overflow-y: auto;">
+                        <div data-spy="scroll" data-target="#navbar-example3" data-offset="0">
+                            <div class="mb-4">
+                                <label for="e_m_n_a_a_username" class="form-label">Username</label>
+                                <input type="email" class="form-control" id="e_m_n_a_a_username" aria-describedby="emailHelp" style="width: 95%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                            </div>
+                            <div class="mb-4">
+                                <label for="e_m_n_a_a_nameinitial" class="form-label">Name with Initial</label>
+                                <input type="email" class="form-control" id="e_m_n_a_a_nameinitial" aria-describedby="emailHelp" style="width: 95%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                            </div>
+                            <div class="mb-4">
+                                <label for="e_m_n_a_a_email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="e_m_n_a_a_email" aria-describedby="emailHelp" style="width: 95%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                            </div>
+                            <div class="mb-4">
+                                <label for="e_m_n_a_a_nic" class="form-label">NIC / Passport</label>
+                                <input type="email" class="form-control" id="e_m_n_a_a_nic" aria-describedby="emailHelp" style="width: 95%; background-color:#f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                            </div>
+                            <div class="mb-4">
+                                <label for="e_m_n_a_a_address" class="form-label">Physical Address</label>
+                                <input type="email" class="form-control" id="e_m_n_a_a_address" aria-describedby="emailHelp" style="width: 95%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                            </div>
+                            <div class="mb-4">
+                                <label for="e_m_n_a_a_salary" class="form-label">Salary</label>
+                                <input type="email" class="form-control" id="e_m_n_a_a_salary" aria-describedby="emailHelp" style="width: 95%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_password" class="form-label" >Password</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_password" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_nic" class="form-label" >NIC / Passport</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_nic" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_address" class="form-label" >Address</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_address" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_profile_image" class="form-label">Profile Image</label>
-                        <input class="form-control" type="file" id="a_m_n_a_a_profile_image" accept=".jpg, .jpeg, .webp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_service_type" class="form-label" >Service Type</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_service_type" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
-                    </div>
-                </form>
-
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="a_m_n_a_a_savebtn" onclick="saveNewAdmin()">Save</button>
+                <button type="button" class="btn btn-primary text-white" id="a_m_n_a_a_savebtn" onclick="saveNewAdmin()">Save</button>
             </div>
         </div>
     </div>

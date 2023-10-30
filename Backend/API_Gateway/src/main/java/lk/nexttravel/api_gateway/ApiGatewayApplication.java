@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 @SpringBootApplication
@@ -36,28 +37,19 @@ public class ApiGatewayApplication {
     }
 
     @Bean
-    public CommandLineRunner init(){
+    public CommandLineRunner init() throws IOException {
         return args -> {
-            ClassLoader classLoader = getClass().getClassLoader();
-            URL resourceUrl = classLoader.getResource("testimage.jpeg");
-            byte[] fileContent =null;
-            if (resourceUrl != null) {
-                File inputFile = new File(resourceUrl.getFile());
-                fileContent = FileUtils.readFileToByteArray(inputFile);
-            } else {
-                System.out.println("Resource not found.");
-            }
 
             if(!userRepository.existsByName("useradmin")){
                 systemUserService.saveNewAdminUserOnlyTesting(
                         UserSignupDTO.builder()
-                                .signup_name("useradmin")
-                                .signup_name_with_initial("User Admin")
-                                .signup_address("address")
+                                .signup_name("kaligu")
+                                .signup_name_with_initial("H.C.K.Jayanath")
+                                .signup_address("Horana")
                                 .signup_email("chethiyakaligu2@gmail.com")
-                                .signup_nic_or_passport("nicOrPassport")
-                                .signup_password("UserAdmin@1234")
-                                .signup_profile_image(fileContent)
+                                .signup_nic_or_passport("200133702832")
+                                .signup_password("Kaligu@1234")
+                                .signup_profile_image(getimage("DSC0822.JPG"))
                                 .build()
                         ,
                         RoleTypes.ROLE_ADMIN_SERVICE_USER
@@ -72,7 +64,7 @@ public class ApiGatewayApplication {
                                 .signup_email("chethiyakaligu2@gmail.com")
                                 .signup_nic_or_passport("nicOrPassport")
                                 .signup_password("VehicleAdmin@1234")
-                                .signup_profile_image(fileContent)
+                                .signup_profile_image(getimage("testimage.jpeg"))
                                 .build()
                         ,
                         RoleTypes.ROLE_ADMIN_SERVICE_VEHICLE
@@ -87,7 +79,7 @@ public class ApiGatewayApplication {
                                 .signup_email("chethiyakaligu2@gmail.com")
                                 .signup_nic_or_passport("nicOrPassport")
                                 .signup_password("TravelPackageAdmin@1234")
-                                .signup_profile_image(fileContent)
+                                .signup_profile_image(getimage("testimage.jpeg"))
                                 .build()
                         ,
                         RoleTypes.ROLE_ADMIN_SERVICE_TRAVELPACKAGE
@@ -102,7 +94,7 @@ public class ApiGatewayApplication {
                                 .signup_email("chethiyakaligu2@gmail.com")
                                 .signup_nic_or_passport("nicOrPassport")
                                 .signup_password("HotelAdmin@1234")
-                                .signup_profile_image(fileContent)
+                                .signup_profile_image(getimage("testimage.jpeg"))
                                 .build()
                         ,
                         RoleTypes.ROLE_ADMIN_SERVICE_HOTEL
@@ -117,7 +109,7 @@ public class ApiGatewayApplication {
                                 .signup_email("chethiyakaligu2@gmail.com")
                                 .signup_nic_or_passport("nicOrPassport")
                                 .signup_password("GuideAdmin@1234")
-                                .signup_profile_image(fileContent)
+                                .signup_profile_image(getimage("testimage.jpeg"))
                                 .build()
                         ,
                         RoleTypes.ROLE_ADMIN_SERVICE_GUIDE
@@ -126,6 +118,21 @@ public class ApiGatewayApplication {
 
 
         };
+
+
+    }
+
+    public byte[] getimage(String url) throws IOException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resourceUrl = classLoader.getResource("DSC0822.JPG");
+        byte[] fileContent =null;
+        if (resourceUrl != null) {
+            File inputFile = new File(resourceUrl.getFile());
+            return fileContent = FileUtils.readFileToByteArray(inputFile);
+        } else {
+            System.out.println("Resource not found.");
+        }
+        return fileContent;
     }
 
 }

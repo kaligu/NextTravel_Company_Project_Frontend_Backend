@@ -47,12 +47,15 @@ public class AdminServiceImpl implements AdminService {
         //check authentication
         try {
             if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqNewClientSaveDTO.getToken())) {  //check gateway token
+
+                System.out.println(reqNewClientSaveDTO.getName_with_initial());
                 //save into database
                 Admin admin = adminRepository.save(
                         Admin.builder()
                                 .id(reqNewClientSaveDTO.getId())
                                 .address(reqNewClientSaveDTO.getAddress())
                                 .profile_image(reqNewClientSaveDTO.getProfile_image())
+                                .signup_name_with_initial(reqNewClientSaveDTO.getName_with_initial())
                                 .nic_or_passport(reqNewClientSaveDTO.getNic_or_passport())
                                 .transaction_state(RespondCodes.PENDING)
                                 .build()
@@ -78,6 +81,7 @@ public class AdminServiceImpl implements AdminService {
                                 .id(reqNewClientSaveDTO.getId())
                                 .address(reqNewClientSaveDTO.getAddress())
                                 .profile_image(reqNewClientSaveDTO.getProfile_image())
+                                .signup_name_with_initial(reqNewClientSaveDTO.getName_with_initial())
                                 .nic_or_passport(reqNewClientSaveDTO.getNic_or_passport())
                                 .transaction_state(RespondCodes.COMMITED)
                                 .build()
@@ -103,6 +107,7 @@ public class AdminServiceImpl implements AdminService {
                                 .id(reqNewClientSaveDTO.getId())
                                 .address(reqNewClientSaveDTO.getAddress())
                                 .profile_image(reqNewClientSaveDTO.getProfile_image())
+                                .signup_name_with_initial(reqNewClientSaveDTO.getName_with_initial())
                                 .nic_or_passport(reqNewClientSaveDTO.getNic_or_passport())
                                 .build()
                 );
