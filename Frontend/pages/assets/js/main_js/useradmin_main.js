@@ -181,7 +181,7 @@ function saveEditAdmin(){
     //image
 
 
-    console.log("new "+$('#e_m_n_a_a_image').attr('src'));
+    console.log("image "+$('#e_m_n_a_a_image').attr('src'));
     console.log("new "+newImageFile);
     // For demonstration, printing the retrieved data to the console
     console.log('Username:', username);

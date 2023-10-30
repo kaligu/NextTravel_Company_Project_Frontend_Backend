@@ -407,8 +407,99 @@
     </div>
 </div>
 
+<!--client manage container-->
+<div class="container-fluid" id="client_manage_container" style="display: block">
+    <br>
+    <h2 style="color: rgba(162,160,160,0.74); margin-top: 4rem; margin-left: 5.5rem; font-style: italic; "> Admin Manage</h2>
+    <div class="card container-fluid" style="width: 94%; margin-top: 1rem; margin-left: 5rem; margin-right: 2rem; border-color:grey; border-width: 0.05rem; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
+        <div class="card-body">
+            <div class="input-group rounded w-25">
+                <!--                add new admin button-->
+                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#admin-manage-container-add-new-admin-model" ><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16" >
+                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                </svg> | Add New Admin</button>
+            </div>
+        </div>
+        <div class="card-body container-fluid" >
+            <div class="input-group rounded w-25">
+                <input type="search" id="user_admin_main_pg_client_mng_search_admins_txtfld" class="form-control rounded" placeholder="Name Search here . . ." aria-label="Search" aria-describedby="search-addon" style="border-width: 0.2rem"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="margin-left: 0.6rem; margin-top: 0.7rem">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </div>
+            <br>
+
+            <!--Tabel-->
+            <table id="clientTable" class="table align-middle mb-0"  >
+                <thead>
+                <tr >
+                    <th>ID</th>
+                    <th>Role</th>
+                    <th>Name</th>
+                    <th>Name with Initial</th>
+                    <th>EMail</th>
+                    <th>NIC / Passport</th>
+                    <th>Physical Address</th>
+                    <th>Salary</th>
+                    <th>      </th>
+                </tr>
+                </thead>
+                <tbody id="clientTableBody">
+                <!--                <tr>-->
+                <!--                    <td>-->
+                <!--                        <p class="fw-normal mb-1">U001</p>-->
+                <!--                    </td>-->
+                <!--                    <td>-->
+                <!--                        <p class="fw-normal mb-1">User-Service-Admin</p>-->
+                <!--                    </td>-->
+                <!--                    <td>-->
+                <!--                        <div class="d-flex align-items-center">-->
+                <!--                            <img-->
+                <!--                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"-->
+                <!--                                    alt=""-->
+                <!--                                    style="width: 45px; height: 45px"-->
+                <!--                                    class="rounded-circle"-->
+                <!--                            />-->
+                <!--                            <div class="ms-3">-->
+                <!--                                <p class="fw-bold mb-1">Haputhanthirige Chethiya Kaligu Jayanth</p>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </td>-->
+                <!--                    <td>-->
+                <!--                        <p class="fw-normal mb-1">H.C.K.Jaynath</p>-->
+                <!--                    </td>-->
+                <!--                    <td>-->
+                <!--                        <p class="text-muted mb-1">john.doe@gmail.com</p>-->
+                <!--                    </td>-->
+                <!--                    <td>-->
+                <!--                        <p class="fw-normal mb-1">200133702832</p>-->
+                <!--                    </td>-->
+                <!--                    <td>-->
+                <!--                        <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>-->
+                <!--                    </td>-->
+                <!--                    <td>-->
+                <!--                        <p class="fw-normal mb-1">50000</p>-->
+                <!--                    </td>-->
+                <!--                    <td>-->
+                <!--                        <button type="button" class="btn btn-link btn-sm btn-rounded">-->
+                <!--                            Edit-->
+                <!--                        </button>-->
+                <!--                    </td>-->
+                <!--                    <td>-->
+                <!--                        <button type="button" class="btn btn-link btn-sm btn-rounded">-->
+                <!--                            Delete-->
+                <!--                        </button>-->
+                <!--                    </td>-->
+                <!--                </tr>-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <!--admin manage container-->
-<div class="container-fluid" id="admin_manage_container" style="display: block">
+<div class="container-fluid" id="admin_manage_container" style="display: none">
     <br>
     <h2 style="color: rgba(162,160,160,0.74); margin-top: 4rem; margin-left: 5.5rem; font-style: italic; "> Admin Manage</h2>
     <div class="card container-fluid" style="width: 94%; margin-top: 1rem; margin-left: 5rem; margin-right: 2rem; border-color:grey; border-width: 0.05rem; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
@@ -486,7 +577,6 @@
                 </tbody>
             </table>
             </div>
-
     </div>
 </div>
 
