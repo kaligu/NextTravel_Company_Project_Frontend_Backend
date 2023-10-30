@@ -38,7 +38,7 @@ function loadUserAdminProfileImageAndUsername(){
                 localStorage.setItem("secure_data_user_admin_refresh_token", data.token.access_refresh_token);
 
                 // Set image from base64 data
-                user_admin_main_pg_profile_img.attr('src', 'data:image/png;base64,' + data.data);
+                user_admin_main_pg_profile_img.attr('src', data.data);
                 user_admin_main_pg_top_admin_name.text("Mr. "+data.token.access_username+" [Admin]");
 
                 //hide loading model
