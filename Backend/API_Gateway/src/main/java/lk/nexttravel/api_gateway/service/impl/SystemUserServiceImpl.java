@@ -199,7 +199,7 @@ public class SystemUserServiceImpl implements SystemUserService {
         try {
             String id = "U00"+sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME);
             String password = passwordEncoder.encode(userSignupDTO.getSignup_password());
-            String encodedImage = Base64.getEncoder().encodeToString(userSignupDTO.getSignup_profile_image());
+//            String encodedImage = Base64.getEncoder().encodeToString(userSignupDTO.getSignup_profile_image());
 
             Optional<User> savedUser;
             if(!userRepository.existsByName(userSignupDTO.getSignup_name())){
@@ -232,7 +232,7 @@ public class SystemUserServiceImpl implements SystemUserService {
                                             .id(id)
                                             .address(userSignupDTO.getSignup_address())
                                             .nic_or_passport(userSignupDTO.getSignup_nic_or_passport())
-                                            .profile_image(encodedImage)
+                                            .profile_image("encodedImage")
                                             .name_with_initial(userSignupDTO.getSignup_name_with_initial())
                                             .build()
                             )
@@ -434,7 +434,7 @@ public class SystemUserServiceImpl implements SystemUserService {
                                             .id(id)
                                             .address(userSignupDTO.getSignup_address())
                                             .nic_or_passport(userSignupDTO.getSignup_nic_or_passport())
-                                            .profile_image(Base64.getEncoder().encodeToString(userSignupDTO.getSignup_profile_image()))
+                                            .profile_image(userSignupDTO.getSignup_profile_image())
                                             .name_with_initial(userSignupDTO.getSignup_name_with_initial())
                                             .build()
                             )

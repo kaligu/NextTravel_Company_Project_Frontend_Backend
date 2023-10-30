@@ -58,6 +58,7 @@ function loadUserAdminProfileImageAndUsername(){
 
 //---------------load admin manage window search all admin views ----------
 const user_admin_main_pg_admin_mng_search_admins_txtfld = $("#user_admin_main_pg_admin_mng_search_admins_txtfld");
+const admin_manage_container_edit_admin_model = $("#admin-manage-container-edit-admin-model");
 
 user_admin_main_pg_admin_mng_search_admins_txtfld.on('keyup', function () {
     loadAdminMngWindoewSearchAdminTabel();
@@ -101,7 +102,7 @@ function loadAdminMngWindoewSearchAdminTabel(){
             </td>
             <td>
                 <div class="d-flex align-items-center">
-                    <img src="data:image/png;base64, ${admin.profile_image}" alt="Profile Image" style="width: 45px; height: 45px" class="rounded-circle" />
+                    <img src="${admin.profile_image}" alt="Profile Image" style="width: 45px; height: 45px" class="rounded-circle" />
                     <div class="ms-3">
                         <p class="fw-bold mb-1">${admin.name}</p>
                     </div>
@@ -127,8 +128,6 @@ function loadAdminMngWindoewSearchAdminTabel(){
         </td>
     
         `);
-
-
                     $("#adminTableBody").append(newRow);
                 });//end array loop
 
@@ -142,19 +141,16 @@ function loadAdminMngWindoewSearchAdminTabel(){
 
                     // Populate modal with admin's information
                     // Set modal field values with corresponding admin data
-                    $('#admin-manage-container-edit-admin-model').find('#e_m_n_a_a_username').val(admin.name);
-                    $('#admin-manage-container-edit-admin-model').find('#e_m_n_a_a_nameinitial').val(admin.signup_name_with_initial);
-                    $('#admin-manage-container-edit-admin-model').find('#e_m_n_a_a_email').val(admin.email);
-                    $('#admin-manage-container-edit-admin-model').find('#e_m_n_a_a_nic').val(admin.nic_or_passport);
-                    $('#admin-manage-container-edit-admin-model').find('#e_m_n_a_a_address').val(admin.address);
-                    $('#admin-manage-container-edit-admin-model').find('#e_m_n_a_a_salary').val(admin.salary);
+                    admin_manage_container_edit_admin_model.find('#e_m_n_a_a_username').val(admin.name);
+                    admin_manage_container_edit_admin_model.find('#e_m_n_a_a_nameinitial').val(admin.signup_name_with_initial);
+                    admin_manage_container_edit_admin_model.find('#e_m_n_a_a_email').val(admin.email);
+                    admin_manage_container_edit_admin_model.find('#e_m_n_a_a_nic').val(admin.nic_or_passport);
+                    admin_manage_container_edit_admin_model.find('#e_m_n_a_a_address').val(admin.address);
+                    admin_manage_container_edit_admin_model.find('#e_m_n_a_a_salary').val(admin.salary);
                     // Change this line to correctly set the 'src' attribute of the image
-                    $('#admin-manage-container-edit-admin-model').find('#e_m_n_a_a_image').attr('src', `data:image/png;base64, ${admin.profile_image}`);
+                    admin_manage_container_edit_admin_model.find('#e_m_n_a_a_image').attr('src', `${admin.profile_image}`);
 
-
-                    // Set other fields as needed
-
-                    $('#admin-manage-container-edit-admin-model').modal('show');
+                    admin_manage_container_edit_admin_model.modal('show');
                 });
                 //hide loading model
                 // setTimeout(function () {
@@ -169,4 +165,38 @@ function loadAdminMngWindoewSearchAdminTabel(){
             console.log("Profile image retrieval failed");
         }
     });console.log(user_admin_main_pg_admin_mng_search_admins_txtfld.val());
+}
+
+function saveEditAdmin(){
+    // Retrieve data from text fields
+    var username = $('#e_m_n_a_a_username').val();
+    var nameWithInitial = $('#e_m_n_a_a_nameinitial').val();
+    var email = $('#e_m_n_a_a_email').val();
+    var nicOrPassport = $('#e_m_n_a_a_nic').val();
+    var address = $('#e_m_n_a_a_address').val();
+    var salary = $('#e_m_n_a_a_salary').val();
+    var newImageFile = $('#plus-image')[0].files[0];
+
+    console.log("new "+$('#e_m_n_a_a_image').attr('src'));
+    console.log("new "+newImageFile);
+    // For demonstration, printing the retrieved data to the console
+    console.log('Username:', username);
+    console.log('Name with Initial:', nameWithInitial);
+    console.log('Email:', email);
+    console.log('NIC / Passport:', nicOrPassport);
+    console.log('Physical Address:', address);
+    console.log('Salary:', salary);
+
+    //check image added or not
+    if (newImageFile) {
+        var reader = new FileReader();
+        var baseString;
+        reader.onloadend = function () {
+            baseString = reader.result;
+            console.log(baseString);
+        };
+        reader.readAsDataURL(newImageFile);
+    } else {
+
+    }
 }

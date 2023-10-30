@@ -31,6 +31,6 @@ public class UserSignupDTO {
     private String signup_password;
     private String signup_nic_or_passport;
     private String signup_address;
-    private byte[] signup_profile_image;
+    private String signup_profile_image;
 
 }
