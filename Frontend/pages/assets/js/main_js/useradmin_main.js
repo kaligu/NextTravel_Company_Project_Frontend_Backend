@@ -167,6 +167,9 @@ function loadAdminMngWindoewSearchAdminTabel(){
     });console.log(user_admin_main_pg_admin_mng_search_admins_txtfld.val());
 }
 
+const newImageFile = $('#plus-image')[0].files[0];
+
+//if ecit save btn clicked action
 function saveEditAdmin(){
     // Retrieve data from text fields
     var username = $('#e_m_n_a_a_username').val();
@@ -175,7 +178,8 @@ function saveEditAdmin(){
     var nicOrPassport = $('#e_m_n_a_a_nic').val();
     var address = $('#e_m_n_a_a_address').val();
     var salary = $('#e_m_n_a_a_salary').val();
-    var newImageFile = $('#plus-image')[0].files[0];
+    //image
+
 
     console.log("new "+$('#e_m_n_a_a_image').attr('src'));
     console.log("new "+newImageFile);
@@ -189,17 +193,29 @@ function saveEditAdmin(){
 
     //check image added or not
     if (newImageFile) {
-        var reader = new FileReader();
-        var baseString;
-        reader.onloadend = function () {
-            baseString = reader.result;
-            console.log(baseString); // This is the base64 string of the image
 
-            // Update the 'src' attribute of the image element
-            $('#e_m_n_a_a_image').attr('src', baseString);
-        };
-        reader.readAsDataURL(newImageFile);
     } else {
 
     }
 }
+
+// admin edit save form image add after action
+$(document).ready(function() {
+    $('#plus-image').on('change', function () {
+        var newImageFile = this.files[0]; // Get the file when a change occurs in the input
+
+        if (newImageFile) { // Check if a file is selected
+            var reader = new FileReader();
+            var baseString;
+            reader.onload = function () {
+                baseString = reader.result;
+
+                // Update the 'src' attribute of the image element
+                $('#e_m_n_a_a_image').attr('src', baseString);
+            };
+            reader.readAsDataURL(newImageFile);
+        } else {
+            console.error('No file selected');
+        }
+    });
+});
