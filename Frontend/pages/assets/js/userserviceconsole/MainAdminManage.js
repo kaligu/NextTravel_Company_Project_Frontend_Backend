@@ -45,11 +45,30 @@ function UserManageConsoleLogout(){
 
                     setTimeout(function () {
                         user_admin_main_pg_alert_model_done.modal('hide');
+
+                        window.open("http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/index.html?_ijt=52ammnccq57t2dg07p5m351hpu&_ij_reload=RELOAD_ON_SAVE");
                     }, 5000); // delay
                 }, 1000); // delay
 
-            } else if(data.rspd_code === RespondCodes.Respond_NOT_AUTHORISED) {
+            }else {
+
                 //hide loading model
+                setTimeout(function () {
+                    user_admin_main_pg_loading_model.modal('hide');
+
+                    user_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    user_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    user_admin_main_pg_alert_model_error.modal('show');
+
+                    setTimeout(function () {
+                        user_admin_main_pg_alert_model_error.modal('hide');
+                    }, 1000); // delay
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 401){
                 setTimeout(function () {
                     user_admin_main_pg_loading_model.modal('hide');
 
@@ -71,21 +90,6 @@ function UserManageConsoleLogout(){
                 }, 1000); // delay
                 console.log("fail to logout exception");
             }
-        },
-        error: function(xhr, status, error) {
-            //hide loading model
-            setTimeout(function () {
-                user_admin_main_pg_loading_model.modal('hide');
-
-                user_admin_main_pg_alert_model_title_error.text("Error has occurd!");
-                user_admin_main_pg_alert_model_content_error.text("Try Again!");
-                user_admin_main_pg_alert_model_error.modal('show');
-
-                setTimeout(function () {
-                    user_admin_main_pg_alert_model_error.modal('hide');
-                }, 1000); // delay
-            }, 1000); // delay
-            console.log("fail to logout exception");
         }
     });
 }
