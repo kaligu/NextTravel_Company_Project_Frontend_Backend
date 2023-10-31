@@ -49,8 +49,13 @@ function UserManageConsoleLogout(){
                 }, 1000); // delay
 
             } else if(data.rspd_code === RespondCodes.Respond_NOT_AUTHORISED) {
-                alert("******* You Unauthorized , logout and login again ********");
-                console.log("******* You Unauthorized , logout and login again ********");
+                //hide loading model
+                setTimeout(function () {
+                    user_admin_main_pg_loading_model.modal('hide');
+
+                    user_admin_main_pg_alert_model_unauthorise_error.modal('show');
+
+                }, 1000); // delay
             }else {
                 //hide loading model
                 setTimeout(function () {
@@ -68,14 +73,19 @@ function UserManageConsoleLogout(){
             }
         },
         error: function(xhr, status, error) {
-//hide loading model
+            //hide loading model
             setTimeout(function () {
                 user_admin_main_pg_loading_model.modal('hide');
 
-                user_admin_main_pg_alert_model_unauthorise_error.modal('show');
+                user_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                user_admin_main_pg_alert_model_content_error.text("Try Again!");
+                user_admin_main_pg_alert_model_error.modal('show');
 
-
+                setTimeout(function () {
+                    user_admin_main_pg_alert_model_error.modal('hide');
+                }, 1000); // delay
             }, 1000); // delay
+            console.log("fail to logout exception");
         }
     });
 }
