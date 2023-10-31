@@ -6,6 +6,7 @@
     <file type="web" url="file://$PROJECT_DIR$/Backend/Guide_MicroService" />
     <file type="web" url="file://$PROJECT_DIR$/Backend/Hotel_MicroService" />
     <file type="web" url="file://$PROJECT_DIR$/Backend/User_MicroService" />
+    <file type="web" url="file://$PROJECT_DIR$/Backend/Vehicle_MicroService" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
