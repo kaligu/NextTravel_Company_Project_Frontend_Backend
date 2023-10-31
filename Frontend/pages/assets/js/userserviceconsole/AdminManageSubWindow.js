@@ -17,7 +17,7 @@ function loadUserAdminProfileImageAndUsername(){
     // console.log(localStorage.getItem("secure_data_user_admin_refresh_token"));
 
     //show loading model
-    // user_admin_main_pg_loading_model.modal('show');
+    user_admin_main_pg_loading_model.modal('show');
 
     $.ajax({
         method: "GET",
@@ -37,20 +37,55 @@ function loadUserAdminProfileImageAndUsername(){
                 localStorage.setItem("secure_data_user_admin_refresh_token", data.token.access_refresh_token);
 
                 // Set image from base64 data
-                user_admin_main_pg_profile_img.attr('src', data.data);
+                user_admin_main_pg_profile_img.attr('src', data.data.profile_image);
                 user_admin_main_pg_top_admin_name.text("Mr. "+data.token.access_username+" [Admin]");
 
+                //fill setting form
+                $('#p_s_username').val(data.data.name);
+                $('#p_s_email').val(data.data.email);
+                $('#p_s_nameinitial').val(data.data.name_with_initial);
+                $('#p_s_nic').val(data.data.nic_or_passport);
+                $('#p_s_address').val(data.data.address);
+                $('#p_s_image').attr('src', data.data.profile_image);
+
                 //hide loading model
-                // setTimeout(function () {
-                //     user_admin_main_pg_loading_model.modal('hide');
-                // }, 1000); // delay
+                setTimeout(function () {
+                    user_admin_main_pg_loading_model.modal('hide');
+                }, 1000); // delay
 
             } else {
-                console.log("Profile image retrieval failed");
+                //hide loading model
+                setTimeout(function () {
+                    user_admin_main_pg_loading_model.modal('hide');
+
+                    user_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    user_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    user_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
             }
         },
         error: function(xhr, status, error) {
-            console.log("Profile image retrieval failed");
+            if (xhr.status === 401){
+                setTimeout(function () {
+                    user_admin_main_pg_loading_model.modal('hide');
+
+                    user_admin_main_pg_alert_model_unauthorise_error.modal('show');
+
+                }, 1000); // delay
+            }else {
+                //hide loading model
+                setTimeout(function () {
+                    user_admin_main_pg_loading_model.modal('hide');
+
+                    user_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    user_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    user_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
         }
     });
 }

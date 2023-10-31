@@ -60,9 +60,6 @@ function UserManageConsoleLogout(){
                     user_admin_main_pg_alert_model_content_error.text("Try Again!");
                     user_admin_main_pg_alert_model_error.modal('show');
 
-                    setTimeout(function () {
-                        user_admin_main_pg_alert_model_error.modal('hide');
-                    }, 1000); // delay
                 }, 1000); // delay
                 console.log("fail to logout exception");
             }
@@ -84,9 +81,6 @@ function UserManageConsoleLogout(){
                     user_admin_main_pg_alert_model_content_error.text("Try Again!");
                     user_admin_main_pg_alert_model_error.modal('show');
 
-                    setTimeout(function () {
-                        user_admin_main_pg_alert_model_error.modal('hide');
-                    }, 1000); // delay
                 }, 1000); // delay
                 console.log("fail to logout exception");
             }
