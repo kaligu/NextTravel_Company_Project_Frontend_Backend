@@ -6,6 +6,7 @@
 */
 package lk.nexttravel.api_gateway.service.impl;
 
+import lk.nexttravel.api_gateway.Persistence.RefreshTokenRepository;
 import lk.nexttravel.api_gateway.Persistence.UserRepository;
 import lk.nexttravel.api_gateway.advice.util.InternalServerException;
 import lk.nexttravel.api_gateway.advice.util.UnauthorizeException;
@@ -14,6 +15,7 @@ import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
 import lk.nexttravel.api_gateway.dto.user.AdminDTO;
 import lk.nexttravel.api_gateway.dto.user.UserAdminDTO;
+import lk.nexttravel.api_gateway.entity.RefreshToken;
 import lk.nexttravel.api_gateway.entity.User;
 import lk.nexttravel.api_gateway.service.UserService;
 import lk.nexttravel.api_gateway.service.security.Authenticate_Authorize_Service;
@@ -53,6 +55,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     APIGatewayJwtAccessTokenServiceBackend apiGatewayJwtAccessTokenServiceBackend;
 
+    @Autowired
+    RefreshTokenRepository refreshTokenRepository;
+
     @Override
     public Mono<ResponseEntity<RespondDTO>> UserAdminGetProfileImage(String access_username, String access_jwt_token, String access_refresh_token) {
         try{
@@ -91,11 +96,9 @@ public class UserServiceImpl implements UserService {
                         HttpStatus.OK
                 ));
             }else {
-                System.out.println("Not authorized");
                 return Mono.error(new UnauthorizeException("Unauthorized request"));
             }
         }catch (Exception e){
-            System.out.println("internal server error");
             throw new InternalServerException("Internal server Error");
         }
     }
@@ -167,6 +170,42 @@ public class UserServiceImpl implements UserService {
             }
         }catch (Exception e){
             System.out.println("internal server error");
+            throw new InternalServerException("Internal server Error");
+        }
+    }
+
+    @Override
+    public Mono<ResponseEntity<RespondDTO>> requestToLogout(String access_username, String access_jwt_token, String access_refresh_token) {
+        try{
+            FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder().access_jwt_token(access_jwt_token).access_username(access_username).access_refresh_token(access_refresh_token).build();
+            InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
+            if(
+                    internalFrontendSecurityCheckDTO.isAccesssible()
+                            &&
+                            internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_USER)
+            ) {
+
+                //delelte saved refresh token on DB
+                RefreshToken refreshToken = refreshTokenRepository.findRefreshTokenById(userRepository.findUserByName(access_username).get().getId()).get();
+                refreshToken.setToken("");
+
+                //save
+                refreshTokenRepository.save(refreshToken);
+
+                //send to front
+                return Mono.just(new ResponseEntity<RespondDTO>(
+                        RespondDTO.builder()
+                                .rspd_code(RespondCodes.Respond_SUCCESS)
+                                .data(null)
+                                .token(null)
+                                .build()
+                        ,
+                        HttpStatus.OK
+                ));
+            }else {
+                return Mono.error(new UnauthorizeException("Unauthorized request"));
+            }
+        }catch (Exception e){
             throw new InternalServerException("Internal server Error");
         }
     }

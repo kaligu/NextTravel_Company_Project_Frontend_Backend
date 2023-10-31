@@ -29,4 +29,10 @@ public interface UserService {
             String access_username,
             String access_jwt_token,
             String access_refresh_token);
+
+    //request to logout
+    Mono<ResponseEntity<RespondDTO>> requestToLogout(
+            String access_username,
+            String access_jwt_token,
+            String access_refresh_token);
 }
