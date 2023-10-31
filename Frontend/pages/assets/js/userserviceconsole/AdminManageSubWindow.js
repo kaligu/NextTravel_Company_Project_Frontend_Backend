@@ -50,6 +50,7 @@ function loadUserAdminProfileImageAndUsername(){
                 p_s_address.val(data.data.address);
                 p_s_image.attr('src', data.data.profile_image);
 
+
                 //check textflds validations after adding data
                 checkSettingsAddedDataAtTextflds();
 
