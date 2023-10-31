@@ -6,8 +6,6 @@
 */
 package lk.nexttravel.guide_microservice.service.impl;
 
-import lk.nexttravel.api_gateway.entity.util.DatabaseSequence;
-import lk.nexttravel.api_gateway.service.SequenceGeneratorService;
 import lk.nexttravel.guide_microservice.entity.util.DatabaseSequence;
 import lk.nexttravel.guide_microservice.service.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;

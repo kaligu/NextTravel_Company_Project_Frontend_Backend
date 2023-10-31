@@ -8,6 +8,7 @@ package lk.nexttravel.guide_microservice.entity;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -24,6 +25,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Guide")
 public class Guide {
+
+    @Transient
+    public static final String SEQUENCE_NAME = "guides_sequence";
 
     @Id
     private String id;
