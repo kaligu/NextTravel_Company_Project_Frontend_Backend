@@ -14,6 +14,15 @@
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Backend/Hotel_MicroService" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/Backend/Hotel_MicroService" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/Backend/User_MicroService" />
         <option name="modules">
           <set>
