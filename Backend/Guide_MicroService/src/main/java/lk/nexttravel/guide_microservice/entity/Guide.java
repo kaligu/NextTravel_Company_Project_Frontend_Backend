@@ -38,6 +38,8 @@ public class Guide {
 
     private int experience;
 
+    private String nic;
+
     private String nic_front_view;
 
     private String nic_rear_view;
