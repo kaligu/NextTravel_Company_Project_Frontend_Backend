@@ -11,6 +11,21 @@ const user_admin_main_pg_alert_model_done = $('#user_admin_main_pg-alert-model-d
 const user_admin_main_pg_alert_model_title_done =  $('#user_admin_main_pg_alert-model-title-done');
 const user_admin_main_pg_alert_model_content_done = $('#user_admin_main_pg_alert-model-content-done');
 
+const p_s_username = $('#p_s_username');
+const p_s_email = $('#p_s_email');
+const p_s_nameinitial = $('#p_s_nameinitial');
+const p_s_nic = $('#p_s_nic');
+const p_s_address = $('#p_s_address');
+const p_s_image = $('#p_s_image')
+const p_s_password = $('#p_s_password');
+
+let pstxtfld1 = false;
+let pstxtfld2 = false;
+let pstxtfld3 = false;
+let pstxtfld4 = false;
+let pstxtfld5 = false;
+let pstxtfld6 = false;
+let pstxtfld7 = true; //image
 
 //-----logout-----------
 function UserManageConsoleLogout(){
@@ -170,17 +185,9 @@ $(document).ready(function() {
 //--------------update profile Settings---------
 
 
-
 //validations
-let pstxtfld1 = false;
-let pstxtfld2 = false;
-let pstxtfld3 = false;
-let pstxtfld4 = false;
-let pstxtfld5 = false;
-let pstxtfld6 = false;
-let pstxtfld7 = false;
 
-const p_s_password = $('#p_s_password');
+
 
 p_s_username.on('keyup', function () {
     if(isUsernameCheckedRegex(p_s_username.val())){
@@ -200,12 +207,12 @@ p_s_nameinitial.on('keyup', function () {
     if(isSignUpNameWithInitialCheckedRegex(p_s_nameinitial.val())){
         p_s_nameinitial.removeClass('is-invalid');
         p_s_nameinitial.addClass('is-valid');
-        txtfld2=true;
+        pstxtfld2=true;
         settingUpdateBtnTrigger();
     }else{
         p_s_nameinitial.addClass('is-invalid');
         p_s_nameinitial.removeClass('is-valid');
-        txtfld2=false;
+        pstxtfld2=false;
         settingUpdateBtnTrigger();
     }
 
@@ -215,12 +222,12 @@ p_s_email.on('keyup', function () {
     if(isSignUpEmailCheckedRegex(p_s_email.val())){
         p_s_email.removeClass('is-invalid');
         p_s_email.addClass('is-valid');
-        txtfld3=true;
+        pstxtfld3=true;
         settingUpdateBtnTrigger();
     }else{
         p_s_email.addClass('is-invalid');
         p_s_email.removeClass('is-valid');
-        txtfld3=true;
+        pstxtfld3=false;
         settingUpdateBtnTrigger();
     }
 });
@@ -229,12 +236,12 @@ p_s_address.on('keyup', function () {
     if(isSignUpNAddressCheckedRegex(p_s_address.val())){
         p_s_address.removeClass('is-invalid');
         p_s_address.addClass('is-valid');
-        txtfld4=true;
+        pstxtfld4=true;
         settingUpdateBtnTrigger();
     }else{
         p_s_address.addClass('is-invalid');
         p_s_address.removeClass('is-valid');
-        txtfld4=true;
+        pstxtfld4=false;
         settingUpdateBtnTrigger();
     }
 });
@@ -243,12 +250,12 @@ p_s_nic.on('keyup', function () {
     if(isSignUpNicOrPassportCheckedRegex(p_s_nic.val())){
         p_s_nic.removeClass('is-invalid');
         p_s_nic.addClass('is-valid');
-        txtfld5=true;
+        pstxtfld5=true;
         settingUpdateBtnTrigger();
     }else{
         p_s_nic.addClass('is-invalid');
         p_s_nic.removeClass('is-valid');
-        txtfld5=true;
+        pstxtfld5=false;
         settingUpdateBtnTrigger();
     }
 });
@@ -257,12 +264,12 @@ p_s_password.on('keyup', function () {
     if(isSignUpPasswordCheckedRegex(p_s_password.val())){
         p_s_password.removeClass('is-invalid');
         p_s_password.addClass('is-valid');
-        txtfld6=true;
+        pstxtfld6=true;
         settingUpdateBtnTrigger();
     }else{
         p_s_password.addClass('is-invalid');
         p_s_password.removeClass('is-valid');
-        txtfld6=true;
+        pstxtfld6=false;
         settingUpdateBtnTrigger();
     }
 });
@@ -274,6 +281,7 @@ profileImageInput.onchange = () => {
     const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
     const maxFileSize = 2 * 1024 * 1024; // 2MB
 
+
     if (profileImageInput.files.length > 0) {
         const file = profileImageInput.files[0];
         const fileName = file.name.toLowerCase();
@@ -282,19 +290,19 @@ profileImageInput.onchange = () => {
         if (allowedExtensions.includes(fileExtension) && file.size <= maxFileSize) {
             profileImageInput.classList.remove('is-invalid');
             profileImageInput.classList.add('is-valid');
-            mvalidFeedback.css('display','block');
-            minvalidFeedback.css('display','none');
+            mvalidFeedback.css('display', 'block');
+            minvalidFeedback.css('display', 'none');
 
-            txtfld7=true;
+            pstxtfld7 = true;
 
             settingUpdateBtnTrigger();//trigger to enable
         } else {
             profileImageInput.classList.remove('is-valid');
             profileImageInput.classList.add('is-invalid');
-            minvalidFeedback.css('display','block');
-            mvalidFeedback.css('display','none');
+            minvalidFeedback.css('display', 'block');
+            mvalidFeedback.css('display', 'none');
 
-            txtfld7=false;
+            pstxtfld7 = false;
 
             settingUpdateBtnTrigger();//trigger to enable
         }
@@ -304,7 +312,13 @@ profileImageInput.onchange = () => {
 function settingUpdateBtnTrigger(){
 if(pstxtfld1===true && pstxtfld2===true && pstxtfld3===true && pstxtfld4===true && pstxtfld5===true && pstxtfld6===true && pstxtfld7===true){
     // All conditions are true, enable the signup button
-    $('#p_s_updatebtn').prop("disabled", false);
+    $('#p_s_updateSettingbtn').prop("disabled", false);
+}else{
+    $('#p_s_updateSettingbtn').prop("disabled", true);
 }
 }
-//------------------
+//------------------ update on backend Settings
+
+function saveUpdatedProfileSettings(){
+
+}

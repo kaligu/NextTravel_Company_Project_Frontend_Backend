@@ -11,12 +11,7 @@ $(document).ready(function() {
 });
 
 //---------------load profile image and username ---------------------
-const p_s_username = $('#p_s_username');
-const p_s_email = $('#p_s_email');
-const p_s_nameinitial = $('#p_s_nameinitial');
-const p_s_nic = $('#p_s_nic');
-const p_s_address = $('#p_s_address');
-const p_s_image = $('#p_s_image')
+
 
 function loadUserAdminProfileImageAndUsername(){
     // console.log(localStorage.getItem("secure_data_user_admin_username"));
@@ -191,8 +186,10 @@ function loadAdminMngWindoewSearchAdminTabel(){
                     admin_manage_container_edit_admin_model.find('#e_m_n_a_a_nic').val(admin.nic_or_passport);
                     admin_manage_container_edit_admin_model.find('#e_m_n_a_a_address').val(admin.address);
                     admin_manage_container_edit_admin_model.find('#e_m_n_a_a_salary').val(admin.salary);
+
                     // Change this line to correctly set the 'src' attribute of the image
                     admin_manage_container_edit_admin_model.find('#e_m_n_a_a_image').attr('src', `${admin.profile_image}`);
+
 
                     admin_manage_container_edit_admin_model.modal('show');
                 });
@@ -272,46 +269,58 @@ function checkSettingsAddedDataAtTextflds(){
     if(isUsernameCheckedRegex(p_s_username.val())){
         p_s_username.removeClass('is-invalid');
         p_s_username.addClass('is-valid');
+        pstxtfld1 = true;
     }else{
         p_s_username.addClass('is-invalid');
         p_s_username.removeClass('is-valid');
+        pstxtfld1 = false;
     }
 
     //check name with initial
     if(isSignUpNameWithInitialCheckedRegex(p_s_nameinitial.val())){
         p_s_nameinitial.removeClass('is-invalid');
         p_s_nameinitial.addClass('is-valid');
+        pstxtfld2=true;
     }else{
         p_s_nameinitial.addClass('is-invalid');
         p_s_nameinitial.removeClass('is-valid');
+        pstxtfld2=false;
     }
 
     //check email
     if(isSignUpEmailCheckedRegex(p_s_email.val())){
         p_s_email.removeClass('is-invalid');
         p_s_email.addClass('is-valid');
+        pstxtfld3=true;
     }else{
         p_s_email.addClass('is-invalid');
         p_s_email.removeClass('is-valid');
+        pstxtfld3=false;
     }
 
     //check address
     if(isSignUpNAddressCheckedRegex(p_s_address.val())){
         p_s_address.removeClass('is-invalid');
         p_s_address.addClass('is-valid');
+        pstxtfld4=true;
     }else{
         p_s_address.addClass('is-invalid');
         p_s_address.removeClass('is-valid');
+        pstxtfld4=false;
     }
 
     //check nic
     if(isSignUpNicOrPassportCheckedRegex(p_s_nic.val())){
         p_s_nic.removeClass('is-invalid');
         p_s_nic.addClass('is-valid');
+        pstxtfld5=true;
     }else{
         p_s_nic.addClass('is-invalid');
         p_s_nic.removeClass('is-valid');
+        p_s_nic.removeClass('is-valid');
+        pstxtfld5=false;
     }
+
 }
 
 function isUsernameCheckedRegex(username) {
