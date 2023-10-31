@@ -7,6 +7,7 @@
 package lk.nexttravel.user_microservice.api;
 
 import lk.nexttravel.user_microservice.dto.ReqNewClientSaveDTO;
+import lk.nexttravel.user_microservice.dto.ReqProfileDataAdminsDTO;
 import lk.nexttravel.user_microservice.entity.Admin;
 import lk.nexttravel.user_microservice.service.AdminService;
 import lk.nexttravel.user_microservice.service.ClientService;
@@ -46,48 +47,48 @@ public class AdminController {
     }
 
     //get profile image - user admin
-    @GetMapping(value = "/user-admin-get-profile-image")
-    public ResponseEntity<String> userAdminGetProfileImage(
+    @GetMapping(value = "/user-admin-get-profile-data")
+    public ResponseEntity<ReqProfileDataAdminsDTO> userAdminGetProfileData(
             @RequestParam String id ,
             @RequestParam String token
     ){
-        return adminService.userAdminGetProfileImage(id,token);
+        return adminService.userAdminGetProfileData(id,token);
     }
 
     //get profile image - vehicle admin
     @GetMapping(value = "/vehicle-admin-get-profile-image")
-    public ResponseEntity<String> vehicleAdminGetProfileImage(
+    public ResponseEntity<ReqProfileDataAdminsDTO> vehicleAdminGetProfileData(
             @RequestParam String id ,
             @RequestParam String token
     ){
-        return adminService.userAdminGetProfileImage(id,token);
+        return adminService.userAdminGetProfileData(id,token);
     }
 
     //get profile image - hotel admin
     @GetMapping(value = "/hotel-admin-get-profile-image")
-    public ResponseEntity<String> hotelAdminGetProfileImage(
+    public ResponseEntity<ReqProfileDataAdminsDTO> hotelAdminGetProfileData(
             @RequestParam String id ,
             @RequestParam String token
     ){
-        return adminService.userAdminGetProfileImage(id,token);
+        return adminService.userAdminGetProfileData(id,token);
     }
 
     //get profile image - guide admin
     @GetMapping(value = "/guide-admin-get-profile-image")
-    public ResponseEntity<String> guideAdminGetProfileImage(
+    public ResponseEntity<ReqProfileDataAdminsDTO> guideAdminGetProfileData(
             @RequestParam String id ,
             @RequestParam String token
     ){
-        return adminService.userAdminGetProfileImage(id,token);
+        return adminService.userAdminGetProfileData(id,token);
     }
 
     //get profile image - guide admin
     @GetMapping(value = "/travelpackage-admin-get-profile-image")
-    public ResponseEntity<String> travelpackageAdminGetProfileImage(
+    public ResponseEntity<ReqProfileDataAdminsDTO> travelpackageAdminGetProfileData(
             @RequestParam String id ,
             @RequestParam String token
     ){
-        return adminService.userAdminGetProfileImage(id,token);
+        return adminService.userAdminGetProfileData(id,token);
     }
 
     //search all admins

@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
  */
 public interface UserService {
     //get user admin profile image
-    Mono<ResponseEntity<RespondDTO>> UserAdminGetProfileImage(
+    Mono<ResponseEntity<RespondDTO>> UserAdminGetProfileData(
             String access_username,
             String access_jwt_token,
             String access_refresh_token);

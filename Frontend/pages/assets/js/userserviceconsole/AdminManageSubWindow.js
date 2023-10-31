@@ -22,7 +22,7 @@ function loadUserAdminProfileImageAndUsername(){
     $.ajax({
         method: "GET",
         contentType: "application/json",
-        url: 'http://localhost:1010/main/user-service/user-admin-get-profile-image',
+        url: 'http://localhost:1010/main/user-service/user-admin-get-profile-data',
         async: true,
         data: {
             access_username: localStorage.getItem("secure_data_user_admin_username"),

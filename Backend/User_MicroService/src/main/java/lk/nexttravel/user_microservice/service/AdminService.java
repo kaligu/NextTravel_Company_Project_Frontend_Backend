@@ -7,6 +7,7 @@
 package lk.nexttravel.user_microservice.service;
 
 import lk.nexttravel.user_microservice.dto.ReqNewClientSaveDTO;
+import lk.nexttravel.user_microservice.dto.ReqProfileDataAdminsDTO;
 import lk.nexttravel.user_microservice.entity.Admin;
 import org.springframework.http.ResponseEntity;
 
@@ -25,7 +26,7 @@ public interface AdminService {
     ResponseEntity<String> SaveNewClient_Abrot(ReqNewClientSaveDTO reqNewClientSaveDTO);
 
     //get user admin profile image
-    ResponseEntity<String> userAdminGetProfileImage(String id, String token);
+    ResponseEntity<ReqProfileDataAdminsDTO> userAdminGetProfileData(String id, String token);
 
     //get admin by id
     ResponseEntity<Admin> getAllAdminsSataNySearch(String id , String token);

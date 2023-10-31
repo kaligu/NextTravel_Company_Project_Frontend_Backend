@@ -14,7 +14,9 @@ import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
 import lk.nexttravel.api_gateway.dto.user.AdminDTO;
+import lk.nexttravel.api_gateway.dto.user.ReqProfileDataAdminsDTO;
 import lk.nexttravel.api_gateway.dto.user.UserAdminDTO;
+import lk.nexttravel.api_gateway.dto.user.UserReqProfileDataDTO;
 import lk.nexttravel.api_gateway.entity.RefreshToken;
 import lk.nexttravel.api_gateway.entity.User;
 import lk.nexttravel.api_gateway.service.UserService;
@@ -59,7 +61,7 @@ public class UserServiceImpl implements UserService {
     RefreshTokenRepository refreshTokenRepository;
 
     @Override
-    public Mono<ResponseEntity<RespondDTO>> UserAdminGetProfileImage(String access_username, String access_jwt_token, String access_refresh_token) {
+    public Mono<ResponseEntity<RespondDTO>> UserAdminGetProfileData(String access_username, String access_jwt_token, String access_refresh_token) {
         try{
             FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder().access_jwt_token(access_jwt_token).access_username(access_username).access_refresh_token(access_refresh_token).build();
             InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
@@ -73,17 +75,28 @@ public class UserServiceImpl implements UserService {
                 headers.setContentType(MediaType.APPLICATION_JSON);
                 HttpEntity<String> entity = new HttpEntity<>(null, headers); // Sending an empty body
 
-                ResponseEntity<String> responseEntity = restTemplate.exchange(
-                        "http://localhost:1020/api/admin/user-admin-get-profile-image?id=" + userRepository.findUserByName(frontendTokenDTO.getAccess_username()).get().getId() + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
+                User user = userRepository.findUserByName(frontendTokenDTO.getAccess_username()).get();
+
+                ResponseEntity<ReqProfileDataAdminsDTO> reqProfileDataAdminsDTOResponseEntity = restTemplate.exchange(
+                        "http://localhost:1020/api/admin/user-admin-get-profile-data?id=" + user.getId() + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
                         HttpMethod.GET,
                         entity,
-                        String.class
+                        ReqProfileDataAdminsDTO.class
                 );
                 //send to front
                 return Mono.just(new ResponseEntity<RespondDTO>(
                         RespondDTO.builder()
                                 .rspd_code(RespondCodes.Respond_SUCCESS)
-                                .data(responseEntity.getBody())
+                                .data(
+                                        UserReqProfileDataDTO.builder()
+                                                .name(user.getName())
+                                                .name_with_initial(reqProfileDataAdminsDTOResponseEntity.getBody().getName_with_initial())
+                                                .address(reqProfileDataAdminsDTOResponseEntity.getBody().getAddress())
+                                                .email(user.getEmail())
+                                                .profile_image(reqProfileDataAdminsDTOResponseEntity.getBody().getProfile_image())
+                                                .nic_or_passport(reqProfileDataAdminsDTOResponseEntity.getBody().getNic_or_passport())
+                                                .build()
+                                )
                                 .token(
                                         FrontendTokenDTO.builder()
                                                 .access_username(internalFrontendSecurityCheckDTO.getUsername())
