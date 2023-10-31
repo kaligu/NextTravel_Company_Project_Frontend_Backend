@@ -11,6 +11,13 @@ $(document).ready(function() {
 });
 
 //---------------load profile image and username ---------------------
+const p_s_username = $('#p_s_username');
+const p_s_email = $('#p_s_email');
+const p_s_nameinitial = $('#p_s_nameinitial');
+const p_s_nic = $('#p_s_nic');
+const p_s_address = $('#p_s_address');
+const p_s_image = $('#p_s_image')
+
 function loadUserAdminProfileImageAndUsername(){
     // console.log(localStorage.getItem("secure_data_user_admin_username"));
     // console.log(localStorage.getItem("secure_data_user_admin_access_token"));
@@ -41,12 +48,15 @@ function loadUserAdminProfileImageAndUsername(){
                 user_admin_main_pg_top_admin_name.text("Mr. "+data.token.access_username+" [Admin]");
 
                 //fill setting form
-                $('#p_s_username').val(data.data.name);
-                $('#p_s_email').val(data.data.email);
-                $('#p_s_nameinitial').val(data.data.name_with_initial);
-                $('#p_s_nic').val(data.data.nic_or_passport);
-                $('#p_s_address').val(data.data.address);
-                $('#p_s_image').attr('src', data.data.profile_image);
+                p_s_username.val(data.data.name);
+                p_s_email.val(data.data.email);
+                p_s_nameinitial.val(data.data.name_with_initial);
+                p_s_nic.val(data.data.nic_or_passport);
+                p_s_address.val(data.data.address);
+                p_s_image.attr('src', data.data.profile_image);
+
+                //check textflds validations after adding data
+                checkSettingsAddedDataAtTextflds();
 
                 //hide loading model
                 setTimeout(function () {
@@ -254,3 +264,81 @@ $(document).ready(function() {
         }
     });
 });
+
+
+//--------------------------checkSettingsAddedDataAtTextflds()---------------
+function checkSettingsAddedDataAtTextflds(){
+    //check username
+    if(isUsernameCheckedRegex(p_s_username.val())){
+        p_s_username.removeClass('is-invalid');
+        p_s_username.addClass('is-valid');
+    }else{
+        p_s_username.addClass('is-invalid');
+        p_s_username.removeClass('is-valid');
+    }
+
+    //check name with initial
+    if(isSignUpNameWithInitialCheckedRegex(p_s_nameinitial.val())){
+        p_s_nameinitial.removeClass('is-invalid');
+        p_s_nameinitial.addClass('is-valid');
+    }else{
+        p_s_nameinitial.addClass('is-invalid');
+        p_s_nameinitial.removeClass('is-valid');
+    }
+
+    //check email
+    if(isSignUpEmailCheckedRegex(p_s_email.val())){
+        p_s_email.removeClass('is-invalid');
+        p_s_email.addClass('is-valid');
+    }else{
+        p_s_email.addClass('is-invalid');
+        p_s_email.removeClass('is-valid');
+    }
+
+    //check address
+    if(isSignUpNAddressCheckedRegex(p_s_address.val())){
+        p_s_address.removeClass('is-invalid');
+        p_s_address.addClass('is-valid');
+    }else{
+        p_s_address.addClass('is-invalid');
+        p_s_address.removeClass('is-valid');
+    }
+
+    //check nic
+    if(isSignUpNicOrPassportCheckedRegex(p_s_nic.val())){
+        p_s_nic.removeClass('is-invalid');
+        p_s_nic.addClass('is-valid');
+    }else{
+        p_s_nic.addClass('is-invalid');
+        p_s_nic.removeClass('is-valid');
+    }
+}
+
+function isUsernameCheckedRegex(username) {
+    const regex = /^[a-zA-Z0-9_.-]{5,30}$/;
+    return regex.test(username);
+}
+
+function isSignUpEmailCheckedRegex(email) {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
+}
+
+function isSignUpNameWithInitialCheckedRegex(name) {
+    const regex = /^[A-z._\-]+$/;
+    return regex.test(name);
+}
+
+function isSignUpPasswordCheckedRegex(password) {
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    return regex.test(password);
+}
+
+function isSignUpNicOrPassportCheckedRegex(nic) {
+    const regex = /^[a-zA-Z0-9_-]+\S{8,11}$/;
+    return regex.test(nic);
+}
+function isSignUpNAddressCheckedRegex(addresse) {
+    const regex = /^\S+\s*[a-zA-Z0-9,.-]+\S{0,48}$/;
+    return regex.test(addresse);
+}

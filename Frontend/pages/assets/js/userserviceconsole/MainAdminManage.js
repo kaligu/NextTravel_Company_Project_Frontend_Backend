@@ -145,3 +145,166 @@ $(document).ready(function(){
     openHomeContainer();
 });
 //-----------------------
+
+//------- profile setting image set ------------
+$(document).ready(function() {
+    $('#p_s_image_input').on('change', function () {
+        var newImageFile = this.files[0]; // Get the file when a change occurs in the input
+
+        if (newImageFile) { // Check if a file is selected
+            var reader = new FileReader();
+            var baseString;
+            reader.onload = function () {
+                baseString = reader.result;
+
+                // Update the 'src' attribute of the image element
+                p_s_image.attr('src', baseString);
+            };
+            reader.readAsDataURL(newImageFile);
+        } else {
+            console.error('No file selected');
+        }
+    });
+});
+
+//--------------update profile Settings---------
+
+
+
+//validations
+let pstxtfld1 = false;
+let pstxtfld2 = false;
+let pstxtfld3 = false;
+let pstxtfld4 = false;
+let pstxtfld5 = false;
+let pstxtfld6 = false;
+let pstxtfld7 = false;
+
+const p_s_password = $('#p_s_password');
+
+p_s_username.on('keyup', function () {
+    if(isUsernameCheckedRegex(p_s_username.val())){
+        p_s_username.removeClass('is-invalid');
+        p_s_username.addClass('is-valid');
+        pstxtfld1 = true;
+        settingUpdateBtnTrigger();
+    }else{
+        p_s_username.addClass('is-invalid');
+        p_s_username.removeClass('is-valid');
+        pstxtfld1 = false;
+        settingUpdateBtnTrigger();
+    }
+});
+
+p_s_nameinitial.on('keyup', function () {
+    if(isSignUpNameWithInitialCheckedRegex(p_s_nameinitial.val())){
+        p_s_nameinitial.removeClass('is-invalid');
+        p_s_nameinitial.addClass('is-valid');
+        txtfld2=true;
+        settingUpdateBtnTrigger();
+    }else{
+        p_s_nameinitial.addClass('is-invalid');
+        p_s_nameinitial.removeClass('is-valid');
+        txtfld2=false;
+        settingUpdateBtnTrigger();
+    }
+
+});
+
+p_s_email.on('keyup', function () {
+    if(isSignUpEmailCheckedRegex(p_s_email.val())){
+        p_s_email.removeClass('is-invalid');
+        p_s_email.addClass('is-valid');
+        txtfld3=true;
+        settingUpdateBtnTrigger();
+    }else{
+        p_s_email.addClass('is-invalid');
+        p_s_email.removeClass('is-valid');
+        txtfld3=true;
+        settingUpdateBtnTrigger();
+    }
+});
+
+p_s_address.on('keyup', function () {
+    if(isSignUpNAddressCheckedRegex(p_s_address.val())){
+        p_s_address.removeClass('is-invalid');
+        p_s_address.addClass('is-valid');
+        txtfld4=true;
+        settingUpdateBtnTrigger();
+    }else{
+        p_s_address.addClass('is-invalid');
+        p_s_address.removeClass('is-valid');
+        txtfld4=true;
+        settingUpdateBtnTrigger();
+    }
+});
+
+p_s_nic.on('keyup', function () {
+    if(isSignUpNicOrPassportCheckedRegex(p_s_nic.val())){
+        p_s_nic.removeClass('is-invalid');
+        p_s_nic.addClass('is-valid');
+        txtfld5=true;
+        settingUpdateBtnTrigger();
+    }else{
+        p_s_nic.addClass('is-invalid');
+        p_s_nic.removeClass('is-valid');
+        txtfld5=true;
+        settingUpdateBtnTrigger();
+    }
+});
+
+p_s_password.on('keyup', function () {
+    if(isSignUpPasswordCheckedRegex(p_s_password.val())){
+        p_s_password.removeClass('is-invalid');
+        p_s_password.addClass('is-valid');
+        txtfld6=true;
+        settingUpdateBtnTrigger();
+    }else{
+        p_s_password.addClass('is-invalid');
+        p_s_password.removeClass('is-valid');
+        txtfld6=true;
+        settingUpdateBtnTrigger();
+    }
+});
+
+const profileImageInput = document.getElementById('p_s_image_input');
+profileImageInput.onchange = () => {
+    const minvalidFeedback = $('#img-invalid-feedback');
+    const mvalidFeedback = $('#img-valid-feedback');
+    const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    const maxFileSize = 2 * 1024 * 1024; // 2MB
+
+    if (profileImageInput.files.length > 0) {
+        const file = profileImageInput.files[0];
+        const fileName = file.name.toLowerCase();
+        const fileExtension = fileName.split('.').pop();
+
+        if (allowedExtensions.includes(fileExtension) && file.size <= maxFileSize) {
+            profileImageInput.classList.remove('is-invalid');
+            profileImageInput.classList.add('is-valid');
+            mvalidFeedback.css('display','block');
+            minvalidFeedback.css('display','none');
+
+            txtfld7=true;
+
+            settingUpdateBtnTrigger();//trigger to enable
+        } else {
+            profileImageInput.classList.remove('is-valid');
+            profileImageInput.classList.add('is-invalid');
+            minvalidFeedback.css('display','block');
+            mvalidFeedback.css('display','none');
+
+            txtfld7=false;
+
+            settingUpdateBtnTrigger();//trigger to enable
+        }
+    }
+};
+
+function settingUpdateBtnTrigger(){
+if(pstxtfld1===true && pstxtfld2===true && pstxtfld3===true && pstxtfld4===true && pstxtfld5===true && pstxtfld6===true && pstxtfld7===true){
+    // All conditions are true, enable the signup button
+    $('#p_s_updatebtn').prop("disabled", false);
+}
+}
+//------------------
