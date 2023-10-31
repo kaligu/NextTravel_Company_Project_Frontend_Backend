@@ -205,26 +205,34 @@
 <!--Side navigation bar-->
 <div class="d-flex flex-column flex-shrink-0 fixed-top h-100" style="width: 4.5rem; background-color:#740088">
     <ul class="nav nav-pills nav-flush flex-column mb-auto text-center py-5 " style="background-color: #740088">
-<!--        Client Manage-->
-        <li>
-            <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Clients Manage">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="white" class="bi bi-people-fill" viewBox="0 0 16 16">
+<!--Home Manage-->
+        <li onclick="openHomeContainer()">
+            <a  class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Clients Manage">
+                <svg id="home_nav_icon" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="white" class="bi bi-house" viewBox="0 0 16 16">
+                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+                </svg>
+            </a>
+        </li>
+        <!--        Client Manage-->
+        <li onclick="openClientMngContainer()">
+            <a class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Clients Manage">
+                <svg id="client_nav_icon" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="white" class="bi bi-people-fill" viewBox="0 0 16 16">
                     <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
                 </svg>
             </a>
         </li>
 <!--        admin manage navigation button-->
-        <li>
-            <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Admins Manage">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="white" class="bi bi-person-fill-gear" viewBox="0 0 16 16">
+        <li onclick="openAdminMngContainer()">
+            <a  class="nav-link py-3 border-bottom rounded-0 icon-link-hover " data-toggle="tooltip" data-placement="top" title="Admins Manage">
+                <svg id="admin_nav_icon" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="white" class="bi bi-person-fill-gear" viewBox="0 0 16 16">
                     <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Zm9.886-3.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"/>
                 </svg>
             </a>
-        </li>
+        </li >
 <!--        Finance Data -->
-        <li>
-            <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Finance Data">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="white" class="bi bi-graph-up" viewBox="0 0 16 16">
+        <li onclick="openFinanceDataContainer()">
+            <a class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Finance Data">
+                <svg id="finance_nav_icon" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="white" class="bi bi-graph-up" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
                 </svg>
             </a>
@@ -235,9 +243,9 @@
             <img src="" id="user_admin_main_pg_profile_img" alt="profileimage" width="52" height="52" class="rounded-circle">
         </a>
         <ul class="dropdown-menu text-small shadow" >
-            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profile-setting-model">Settings</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item " href="#">Log out</a></li>
+            <li><a class="dropdown-item " onclick="UserManageConsoleLogout()" >Log out</a></li>
         </ul>
     </div>
 </div>
@@ -273,6 +281,124 @@
 <!--        </div>-->
 <!--    </form>-->
 <!--</div>-->
+
+<!--Home container-->
+<div class="container-fluid" id="home_container" style="display: none">
+    <br>
+    <h2 style="color: rgba(162,160,160,0.74); margin-top: 4rem; margin-left: 5.5rem; font-style: italic; ">Home</h2>
+    <div class="card container-fluid" style="width: 94%; height:500px;  margin-top: 1rem; margin-left: 5rem; margin-right: 2rem; border-color:grey; border-width: 0.05rem; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
+        <div class="card-body container-fluid" >
+            <h2>Have a Nice Day...</h2>
+            <br>
+<!--            <div class="input-group rounded w-25">-->
+<!--                &lt;!&ndash;                add new admin button&ndash;&gt;-->
+<!--                <button type="button" class="btn btn-primary w-100 text-white" data-bs-toggle="modal" data-bs-target="#client-manage-container-add-client-model" ><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16" >-->
+<!--                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>-->
+<!--                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>-->
+<!--                </svg> | Add New Client</button>-->
+<!--            </div>-->
+        </div>
+    </div>
+</div>
+
+<!--Finance Data container-->
+<div class="container-fluid" id="finance_data_container" style="display: none">
+    <br>
+    <h2 style="color: rgba(162,160,160,0.74); margin-top: 4rem; margin-left: 5.5rem; font-style: italic; ">Finance Data</h2>
+    <div class="card container-fluid" style="width: 94%; height:500px;  margin-top: 1rem; margin-left: 5rem; margin-right: 2rem; border-color:grey; border-width: 0.05rem; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
+        <div class="card-body container-fluid" >
+            <h2>Grow up</h2>
+            <br>
+            <!--            <div class="input-group rounded w-25">-->
+            <!--                &lt;!&ndash;                add new admin button&ndash;&gt;-->
+            <!--                <button type="button" class="btn btn-primary w-100 text-white" data-bs-toggle="modal" data-bs-target="#client-manage-container-add-client-model" ><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16" >-->
+            <!--                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>-->
+            <!--                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>-->
+            <!--                </svg> | Add New Client</button>-->
+            <!--            </div>-->
+        </div>
+    </div>
+</div>
+
+<!--main window - profile settings model-->
+<!-- Model -->
+<div class="modal fade" id="profile-setting-model" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dd">Profile Setting</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-4">
+                    <div class="row text-center">
+                        <div class="col-xs-6 text-center" style="margin-top: 10px;">
+                            <div class="p_s_image_holder">
+                                <img src="assets/images/userImage.png" width="300" height="310" class="product-image" id="p_s_image" style="border: 1px solid #000; border-radius: 50%; filter: brightness(90%)" alt="">
+                                <input id="p_s_image_input" class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px; width: 250px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="c_m_s_a_username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="c_m_s_a_username" style="width: 100%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.
+                        *Examples: John Doe, Jane M. Doe, Peter B. Brown
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="c_m_s_a_nameinitial" class="form-label">Name with Initial</label>
+                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 100%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.
+                        *Examples: John Doe, Jane M. Doe, Peter B. Brown
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="c_m_s_a_password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="c_m_s_a_password" style="width: 100%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *Use a secure password with a combination of uppercase, lowercase, numbers, and special characters.
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="c_m_s_a_email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="c_m_s_a_email" style="width: 100%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *Please enter a valid email address.
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="c_m_s_a_address" class="form-label">Physical Address</label>
+                    <input type="text" class="form-control" id="c_m_s_a_address" style="width: 100%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="c_m_s_a_nic" class="form-label">NIC / Passport</label>
+                    <input type="text" class="form-control" id="c_m_s_a_nic" style="width: 100%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="width: 10rem; height: 3rem">Close</button>
+                <button type="button" class="btn btn-primary text-white" id="c_m_s_a_savebtn" onclick="saveAddClient()" disabled style="width: 10rem; height: 3rem">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <!--user manage container-->
@@ -481,7 +607,7 @@
 </div>
 
 <!--client manage container-->
-<div class="container-fluid" id="client_manage_container" style="display: block">
+<div class="container-fluid" id="client_manage_container" style="display: none">
     <br>
     <h2 style="color: rgba(162,160,160,0.74); margin-top: 4rem; margin-left: 5.5rem; font-style: italic; "> Clients Manage</h2>
     <div class="card container-fluid" style="width: 94%; margin-top: 1rem; margin-left: 5rem; margin-right: 2rem; border-color:grey; border-width: 0.05rem; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
@@ -862,52 +988,47 @@
                 </tr>
                 </thead>
                 <tbody id="adminTableBody">
-<!--                <tr>-->
-<!--                    <td>-->
-<!--                        <p class="fw-normal mb-1">U001</p>-->
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        <p class="fw-normal mb-1">User-Service-Admin</p>-->
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        <div class="d-flex align-items-center">-->
-<!--                            <img-->
-<!--                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"-->
-<!--                                    alt=""-->
-<!--                                    style="width: 45px; height: 45px"-->
-<!--                                    class="rounded-circle"-->
-<!--                            />-->
-<!--                            <div class="ms-3">-->
-<!--                                <p class="fw-bold mb-1">Haputhanthirige Chethiya Kaligu Jayanth</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        <p class="fw-normal mb-1">H.C.K.Jaynath</p>-->
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        <p class="text-muted mb-1">john.doe@gmail.com</p>-->
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        <p class="fw-normal mb-1">200133702832</p>-->
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>-->
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        <p class="fw-normal mb-1">50000</p>-->
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        <button type="button" class="btn btn-link btn-sm btn-rounded">-->
-<!--                            Edit-->
-<!--                        </button>-->
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        <button type="button" class="btn btn-link btn-sm btn-rounded">-->
-<!--                            Delete-->
-<!--                        </button>-->
-<!--                    </td>-->
-<!--                </tr>-->
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">U001</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">User-Service-Admin</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                            />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">Haputhanthirige Chethiya Kaligu Jayanth</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">H.C.K.Jaynath</p>
+                    </td>
+                    <td>
+                        <p class="text-muted mb-1">john.doe@gmail.com</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">200133702832</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">50000</p>
+                    </td>
+                    <td>
+                        <button type="button " class="btn bg-info">
+                            Edit
+                        </button>
+                    </td>
+                </tr>
                 </tbody>
             </table>
             </div>
@@ -1019,6 +1140,7 @@
 </script>
 <script src="./assets/js/util/RespondCodes.js"></script>
 <script src="./assets/js/util/RoleTypes.js"></script>
+<script src="assets/js/userserviceconsole/MainAdminManage.js"></script>
 <script src="assets/js/userserviceconsole/AdminManageSubWindow.js"></script>
 <script src="assets/js/userserviceconsole/ClientManageSubWindow.js"></script>
 </body>
