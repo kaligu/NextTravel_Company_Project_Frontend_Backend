@@ -129,7 +129,7 @@ s
 
                             setTimeout(function () {
                                 window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/client_main_page.html?_ijt=lgk33b09l42ffpce17ruvb5qhv&_ij_reload=RELOAD_ON_SAVE';
-                            }, 3100); // delay
+                            }, 1000); // delay
 
                         }, 100); // delay
 
@@ -155,7 +155,7 @@ s
 
                             setTimeout(function () {
                                 window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/user_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
-                            }, 3100); // delay
+                            }, 1000); // delay
 
                         }, 100); // delay
 
@@ -181,7 +181,7 @@ s
 
                             setTimeout(function () {
                                 window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/travelpackage_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
-                            }, 3100); // delay
+                            }, 1000); // delay
 
                         }, 100); // delay
 
@@ -207,7 +207,7 @@ s
 
                             setTimeout(function () {
                                 window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/hotel_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
-                            }, 3100); // delay
+                            }, 1000); // delay
 
                         }, 100); // delay
 
@@ -233,7 +233,7 @@ s
 
                             setTimeout(function () {
                                 window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/guide_admin_main_page.html?_ijt=1mvkd5bqbnv72hebvfm2dsuead&_ij_reload=RELOAD_ON_SAVE';
-                            }, 3100); // delay
+                            }, 1000); // delay
 
                         }, 100); // delay
 
@@ -259,7 +259,7 @@ s
 
                             setTimeout(function () {
                                 window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/vehicle_admin_main_page.html?_ijt=lfe5pib42qssa1523t2ctc28hn&_ij_reload=RELOAD_ON_SAVE';
-                            }, 3100); // delay
+                            }, 1000); // delay
 
                         }, 100); // delay
 
@@ -281,7 +281,7 @@ s
 
                         setTimeout(function () {
                             location.reload(); //reload
-                        }, 2800); // 2000 milliseconds
+                        }, 1000); // 2000 milliseconds
 
                     }, 100); // 2000 milliseconds
 
@@ -304,7 +304,7 @@ s
 
                     setTimeout(function () {
                         location.reload(); //reload
-                    }, 2800); // 2000 milliseconds
+                    }, 1000); // 2000 milliseconds
 
                 }, 100); // 2000 milliseconds
 
