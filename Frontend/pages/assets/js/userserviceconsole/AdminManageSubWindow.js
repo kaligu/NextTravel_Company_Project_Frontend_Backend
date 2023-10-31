@@ -1,5 +1,4 @@
-//-----------------varibales--------
-const user_admin_main_pg_loading_model = $('#user_admin_main_pg-loading-model');
+
 
 const user_admin_main_pg_profile_img = $("#user_admin_main_pg_profile_img");
 const user_admin_main_pg_top_admin_name = $("#user_admin_main_pg_top_admin_name")
@@ -164,7 +163,8 @@ function loadAdminMngWindoewSearchAdminTabel(){
         error: function(xhr, status, error) {
             console.log("Profile image retrieval failed");
         }
-    });console.log(user_admin_main_pg_admin_mng_search_admins_txtfld.val());
+    });
+    console.log(user_admin_main_pg_admin_mng_search_admins_txtfld.val());
 }
 
 const newImageFile = $('#plus-image')[0].files[0];

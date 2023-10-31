@@ -11,4 +11,6 @@ let RespondCodes = {
     Respond_USERNAME_AND_OTP_VERIFIED  :"19",
 
     Respond_NEW_PASSWORD_CREATED_AND_LOGIN_SUCCEED  :"20",
+
+    Respond_NOT_AUTHORISED : "02"
 }
