@@ -81,6 +81,9 @@ function openViewGuideContainer(){
 
     search_guide_container.css('display','block');
     view_guide_nav_icon.css('fill', '#00c4ff');
+
+    //load data into container
+    loadDataAfterOpenedViewGuideContainer();
 }
 
 function openReveiwGuideContainer(){
@@ -497,7 +500,82 @@ function saveNewGuideBtnClicked(){
 //                                          View Guides
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+//load data
+function loadDataAfterOpenedViewGuideContainer(){
+    //ajax request and load data into local GuideObjsLocalDB------
 
+    //-----------------------------------------------
+
+    //-----------------load data into table
+    //clear table
+    $("#adminTableBody").html("");
+
+    //add data into table
+    GuideObjsLocalDB.forEach(function(guide) {
+        var newRow = $("<tr></tr>");
+
+        newRow.html(`
+        <td>
+            <p class="fw-normal mb-1">${guide.getGuideName()}</p>
+        </td>
+        <td>
+            <div class="d-flex align-items-center">
+                <img src="${guide.getGuideProfileimage()}" alt="" style="width: 60px; height: 60px" class="rounded-circle" />
+                <div class="ms-3">
+                    <p class="fw-bold mb-1">${guide.getGuideName()}</p>
+                </div>
+            </div>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">${guide.getGuideAddress()}</p>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">${guide.getGuideNic()}</p>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">${guide.getGuideTell()}</p>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">${guide.getGuideExperience()}</p>
+        </td>
+        <td>
+            <p class="text-muted mb-1">${guide.getGuideDob()}</p>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">${guide.getGuidePerdayfee()}</p>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">${guide.getGuideRemarks()}</p>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">${guide.getGuideGender()}</p>
+        </td>
+        <td>
+            <div class="d-flex align-items-center">
+                <img src="${guide.getGuideNicfrontimage()}" alt="" style="width: 280px; height: 140px" />
+            </div>
+        </td>
+        <td>
+            <div class="d-flex align-items-center">
+                <img src="${guide.getGuideNicrearimage()}" alt="" style="width: 280px; height: 140px" />
+            </div>
+        </td>
+        <td>
+            <button type="button" class="btn btn-info text-white">
+                Edit
+            </button>
+        </td>
+        <td>
+            <button type="button" class="btn btn-danger">
+                Delete
+            </button>
+        </td>
+    `);
+
+        $("#guideTableBody").append(newRow);
+    });
+
+}
 
 //-----------------------------------Regax Checking Methods---------------------------------
 
