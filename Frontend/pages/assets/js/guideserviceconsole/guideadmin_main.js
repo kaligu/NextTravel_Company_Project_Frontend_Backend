@@ -4,6 +4,9 @@ const guide_admin_main_pg_loading_model = $('#guide_admin_main_pg-loading-model'
 const guide_admin_main_pg_profile_img = $("#guide_admin_main_pg_profile_img");
 const guide_admin_main_pg_top_admin_name = $("#guide_admin_main_pg_top_admin_name")
 
+//time
+const g_a_time = $('#g_a_time');
+
 //containers
 const home_container = $('#home_container');
 const add_guide_container = $('#add_guide_container');
@@ -15,6 +18,25 @@ const home_nav_icon = $('#home_nav_icon');
 const new_guide_nav_icon = $('#new_guide_nav_icon');
 const view_guide_nav_icon = $('#view_guide_nav_icon');
 const review_guide_nav_icon = $('#review_guide_nav_icon');
+
+//add guide
+const g_a_a_name = $('#g_a_a_name');
+const g_a_a_address = $('#g_a_a_address');
+const g_a_a_nic = $('#g_a_a_nic');
+const g_a_a_tell = $('#g_a_a_tell');
+const g_a_a_experience = $('#g_a_a_experience');
+const g_a_a_age = $('#g_a_a_age');
+const g_a_a_perdayfee = $('#g_a_a_perdayfee');
+const g_a_a_remarks = $('#g_a_a_remarks');
+const g_a_a_gender = $('#g_a_a_gender');
+const g_a_a_image = $('#g_a_a_image');
+const g_a_a_image_input = $('#g_a_a_image_input');
+const g_a_a_nic_front_image = $('#g_a_a_nic_front_image');
+const g_a_a_nic_front_image_input = $('#g_a_a_nic_front_image_input');
+const g_a_a_nic_rear_image = $('#g_a_a_nic_rear_image');
+const g_a_a_nic_rear_image_input = $('#g_a_a_nic_rear_image_input');
+
+const g_a_a_savebtn = $('#g_a_a_savebtn');
 
 //---------------------------------------------------------------------
 
@@ -84,6 +106,315 @@ $(document).ready(function(){
 
 //------------------------------------------------------------------------------------
 
+//--------------------------------- Set time to UI------------------------------------
+$(document).ready(function(){
+    // Function to update the time
+    function updateTime() {
+        const now = new Date();
+        const formattedDate = now.toLocaleString();
+        g_a_time.text(formattedDate);
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+});
+//------------------------------------------------------------------------------------
+
+//----------------------------------New Guide container -add guide from - guide image set to view if select-------------------
+$(document).ready(function() {
+    g_a_a_image_input.on('change', function () {
+        var newImageFile = this.files[0]; // Get the file when a change occurs in the input
+        if (newImageFile) { // Check if a file is selected
+            var reader = new FileReader();
+            var baseString;
+            reader.onload = function () {
+                baseString = reader.result;
+
+                // Update the 'src' attribute of the image element
+                g_a_a_image.attr('src', baseString);
+            };
+            reader.readAsDataURL(newImageFile);
+        } else {
+            console.error('No file selected');
+        }
+    });
+});
+//------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------New Guide container -add guide from - guide ID front view image set to view if select-------------------
+$(document).ready(function() {
+    g_a_a_nic_front_image_input.on('change', function () {
+        var newImageFile = this.files[0]; // Get the file when a change occurs in the input
+        if (newImageFile) { // Check if a file is selected
+            var reader = new FileReader();
+            var baseString;
+            reader.onload = function () {
+                baseString = reader.result;
+
+                // Update the 'src' attribute of the image element
+                g_a_a_nic_front_image.attr('src', baseString);
+            };
+            reader.readAsDataURL(newImageFile);
+        } else {
+            console.error('No file selected');
+        }
+    });
+});
+//-----------------------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------New Guide container -add guide from - guide ID back view image set to view if select-------------------
+$(document).ready(function() {
+    g_a_a_nic_rear_image_input.on('change', function () {
+        var newImageFile = this.files[0]; // Get the file when a change occurs in the input
+        if (newImageFile) { // Check if a file is selected
+            var reader = new FileReader();
+            var baseString;
+            reader.onload = function () {
+                baseString = reader.result;
+
+                // Update the 'src' attribute of the image element
+                g_a_a_nic_rear_image.attr('src', baseString);
+            };
+            reader.readAsDataURL(newImageFile);
+        } else {
+            console.error('No file selected');
+        }
+    });
+});
+//-----------------------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------New Guide container -add guide from - validation all fields-------------------
+let g_a_a_fld_1 = false;
+let g_a_a_fld_2 = false;
+let g_a_a_fld_3 = false;
+let g_a_a_fld_4 = false;
+let g_a_a_fld_5 = false;
+let g_a_a_fld_6 = false;
+let g_a_a_fld_7 = false;
+let g_a_a_fld_8 = false;
+let g_a_a_fld_9 = false;
+let g_a_a_fld_10 = false;
+let g_a_a_fld_11 = false;
+let g_a_a_fld_12 = false;
+
+//validate txt flds
+g_a_a_name.on('keyup', function () {
+    if(isNameRegaxChecked(g_a_a_name.val())){
+        g_a_a_name.removeClass('is-invalid');
+        g_a_a_name.addClass('is-valid');
+        g_a_a_fld_1=true;
+        addGuideSaveBtnIsEnableTrigger();
+    }else{
+        g_a_a_name.addClass('is-invalid');
+        g_a_a_name.removeClass('is-valid');
+        g_a_a_fld_1=false;
+        addGuideSaveBtnIsEnableTrigger();
+    }
+});
+g_a_a_address.on('keyup', function () {
+    if(isAddressRegaxChecked(g_a_a_address.val())){
+        g_a_a_address.removeClass('is-invalid');
+        g_a_a_address.addClass('is-valid');
+        g_a_a_fld_2=true;
+        addGuideSaveBtnIsEnableTrigger();
+    }else{
+        g_a_a_address.addClass('is-invalid');
+        g_a_a_address.removeClass('is-valid');
+        g_a_a_fld_2=false;
+        addGuideSaveBtnIsEnableTrigger();
+    }
+});
+g_a_a_nic.on('keyup', function () {
+    if(isNICRegaxChecked(g_a_a_nic.val())){
+        g_a_a_nic.removeClass('is-invalid');
+        g_a_a_nic.addClass('is-valid');
+        g_a_a_fld_3=true;
+        addGuideSaveBtnIsEnableTrigger();
+    }else{
+        g_a_a_nic.addClass('is-invalid');
+        g_a_a_nic.removeClass('is-valid');
+        g_a_a_fld_3=false;
+        addGuideSaveBtnIsEnableTrigger();
+    }
+});
+g_a_a_tell.on('keyup', function () {
+    if(isTellRegaxChecked(g_a_a_tell.val())){
+        g_a_a_tell.removeClass('is-invalid');
+        g_a_a_tell.addClass('is-valid');
+        g_a_a_fld_4=true;
+        addGuideSaveBtnIsEnableTrigger();
+    }else{
+        g_a_a_tell.addClass('is-invalid');
+        g_a_a_tell.removeClass('is-valid');
+        g_a_a_fld_4=false;
+        addGuideSaveBtnIsEnableTrigger();
+    }
+});
+g_a_a_experience.on('keyup', function () {
+    if(isOnlyNumberRegaxChecked(g_a_a_experience.val())){
+        g_a_a_experience.removeClass('is-invalid');
+        g_a_a_experience.addClass('is-valid');
+        g_a_a_fld_5=true;
+        addGuideSaveBtnIsEnableTrigger();
+    }else{
+        g_a_a_experience.addClass('is-invalid');
+        g_a_a_experience.removeClass('is-valid');
+        g_a_a_fld_5=false;
+        addGuideSaveBtnIsEnableTrigger();
+    }
+});
+g_a_a_age.on('change', function () {
+    if(isDOBRegaxChecked(g_a_a_age.val())){
+        g_a_a_age.removeClass('is-invalid');
+        g_a_a_age.addClass('is-valid');
+        g_a_a_fld_6=true;
+        addGuideSaveBtnIsEnableTrigger();
+    }else{
+        g_a_a_age.addClass('is-invalid');
+        g_a_a_age.removeClass('is-valid');
+        g_a_a_fld_6=false;
+        addGuideSaveBtnIsEnableTrigger();
+    }
+});
+g_a_a_perdayfee.on('keyup', function () {
+    if(isOnlyNumberRegaxChecked(g_a_a_perdayfee.val())){
+        g_a_a_perdayfee.removeClass('is-invalid');
+        g_a_a_perdayfee.addClass('is-valid');
+        g_a_a_fld_7=true;
+        addGuideSaveBtnIsEnableTrigger();
+    }else{
+        g_a_a_perdayfee.addClass('is-invalid');
+        g_a_a_perdayfee.removeClass('is-valid');
+        g_a_a_fld_7=false;
+        addGuideSaveBtnIsEnableTrigger();
+    }
+});
+g_a_a_remarks.on('keyup', function () {
+    if(isTextRegaxChecked(g_a_a_remarks.val())){
+        g_a_a_remarks.removeClass('is-invalid');
+        g_a_a_remarks.addClass('is-valid');
+        g_a_a_fld_8=true;
+        addGuideSaveBtnIsEnableTrigger();
+    }else{
+        g_a_a_remarks.addClass('is-invalid');
+        g_a_a_remarks.removeClass('is-valid');
+        g_a_a_fld_8=false;
+        addGuideSaveBtnIsEnableTrigger();
+    }
+});
+g_a_a_gender.on('change', function () {
+    if(isGenderRegaxChecked(g_a_a_gender.val())){
+        g_a_a_gender.removeClass('is-invalid');
+        g_a_a_gender.addClass('is-valid');
+        g_a_a_fld_9=true;
+        addGuideSaveBtnIsEnableTrigger();
+    }else{
+        g_a_a_gender.addClass('is-invalid');
+        g_a_a_gender.removeClass('is-valid');
+        g_a_a_fld_9=false;
+        addGuideSaveBtnIsEnableTrigger();
+    }
+});
+
+//validate imgs
+const g_a_a_nic_frontimageinput = document.getElementById('g_a_a_nic_front_image_input'); //front nic
+g_a_a_nic_frontimageinput.onchange = () => {
+    const minvalidFeedback = $('#g_a_a_nic_frontimg-invalid-feedback');
+    const mvalidFeedback = $('#g_a_a_nic_frontimg-valid-feedback');
+    const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    const maxFileSize = 2 * 1024 * 1024; // 2MB
+
+    if (g_a_a_nic_frontimageinput.files.length > 0) {
+        const file = g_a_a_nic_frontimageinput.files[0];
+        const fileName = file.name.toLowerCase();
+        const fileExtension = fileName.split('.').pop();
+
+        if (allowedExtensions.includes(fileExtension) && file.size <= maxFileSize) {
+            g_a_a_nic_frontimageinput.classList.remove('is-invalid');
+            g_a_a_nic_frontimageinput.classList.add('is-valid');
+            mvalidFeedback.css('display','block');
+            minvalidFeedback.css('display','none');
+            g_a_a_fld_10=true;
+            addGuideSaveBtnIsEnableTrigger();//trigger to enable
+        } else {
+            g_a_a_nic_frontimageinput.classList.remove('is-valid');
+            g_a_a_nic_frontimageinput.classList.add('is-invalid');
+            minvalidFeedback.css('display','block');
+            mvalidFeedback.css('display','none');
+            g_a_a_fld_10=false;
+            addGuideSaveBtnIsEnableTrigger();//trigger to enable
+        }
+    }
+};
+const g_a_a_nic_rearimageinput = document.getElementById('g_a_a_nic_rear_image_input');  //rear nic
+g_a_a_nic_rearimageinput.onchange = () => {
+    const minvalidFeedback = $('#g_a_a_nic_rearimg-invalid-feedback');
+    const mvalidFeedback = $('#g_a_a_nic_rearimg-valid-feedback');
+    const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    const maxFileSize = 2 * 1024 * 1024; // 2MB
+
+    if (g_a_a_nic_rearimageinput.files.length > 0) {
+        const file = g_a_a_nic_rearimageinput.files[0];
+        const fileName = file.name.toLowerCase();
+        const fileExtension = fileName.split('.').pop();
+
+        if (allowedExtensions.includes(fileExtension) && file.size <= maxFileSize) {
+            g_a_a_nic_rearimageinput.classList.remove('is-invalid');
+            g_a_a_nic_rearimageinput.classList.add('is-valid');
+            mvalidFeedback.css('display','block');
+            minvalidFeedback.css('display','none');
+            g_a_a_fld_11=true;
+            addGuideSaveBtnIsEnableTrigger();//trigger to enable
+        } else {
+            g_a_a_nic_rearimageinput.classList.remove('is-valid');
+            g_a_a_nic_rearimageinput.classList.add('is-invalid');
+            minvalidFeedback.css('display','block');
+            mvalidFeedback.css('display','none');
+            g_a_a_fld_11=false;
+            addGuideSaveBtnIsEnableTrigger();//trigger to enable
+        }
+    }
+};
+const g_a_a_ImageInput = document.getElementById('g_a_a_image_input');  //profile image
+g_a_a_ImageInput.onchange = () => {
+    const minvalidFeedback = $('#g_a_a_img-invalid-feedback');
+    const mvalidFeedback = $('#g_a_a_img-valid-feedback');
+    const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    const maxFileSize = 2 * 1024 * 1024; // 2MB
+
+    if (g_a_a_ImageInput.files.length > 0) {
+        const file = g_a_a_ImageInput.files[0];
+        const fileName = file.name.toLowerCase();
+        const fileExtension = fileName.split('.').pop();
+
+        if (allowedExtensions.includes(fileExtension) && file.size <= maxFileSize) {
+            g_a_a_ImageInput.classList.remove('is-invalid');
+            g_a_a_ImageInput.classList.add('is-valid');
+            mvalidFeedback.css('display','block');
+            minvalidFeedback.css('display','none');
+            g_a_a_fld_12=true;
+            addGuideSaveBtnIsEnableTrigger();//trigger to enable
+        } else {
+            g_a_a_ImageInput.classList.remove('is-valid');
+            g_a_a_ImageInput.classList.add('is-invalid');
+            minvalidFeedback.css('display','block');
+            mvalidFeedback.css('display','none');
+            g_a_a_fld_12=false;
+            addGuideSaveBtnIsEnableTrigger();//trigger to enable
+        }
+    }
+};
+
+
+function addGuideSaveBtnIsEnableTrigger(){
+    if(g_a_a_fld_1===true && g_a_a_fld_2===true && g_a_a_fld_3===true && g_a_a_fld_4===true && g_a_a_fld_5===true && g_a_a_fld_6===true && g_a_a_fld_7===true && g_a_a_fld_8===true && g_a_a_fld_9===true && g_a_a_fld_10===true&& g_a_a_fld_11===true && g_a_a_fld_12===true){
+        g_a_a_savebtn.prop("disabled", false);
+    }else {
+        g_a_a_savebtn.prop("disabled", true);
+    }
+}
+//---------------------------------------------------------------------------------------------------------------
+
 
 //---------------load profile image and username---------------------
 
@@ -131,3 +462,6 @@ $(document).ready(function(){
 //     });
 // });
 
+//-----------------------------------Regax Checking Methods---------------------------------
+
+//------------------------------------------------------------------------------------------
