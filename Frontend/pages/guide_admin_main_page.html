@@ -111,14 +111,10 @@
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(13) {
-            background-color: #609966; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(14) {
             background-color: #0090ff; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
-        #guideTable thead tr th:nth-child(15) {
+        #guideTable thead tr th:nth-child(14) {
             background-color: #ff0000; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
@@ -351,13 +347,12 @@
                     <thead>
                     <tr >
                         <th>ID</th>
-                        <th>Image</th>
                         <th>Name</th>
                         <th>Address</th>
                         <th>NIC</th>
                         <th>Tell</th>
                         <th>Experience</th>
-                        <th>Age</th>
+                        <th>Date of Birth</th>
                         <th>Per day fee</th>
                         <th>Remarks</th>
                         <th>Gender</th>
@@ -367,7 +362,7 @@
                         <th>      </th>
                     </tr>
                     </thead>
-                    <tbody id="clientTableBody">
+                    <tbody id="guideTableBody">
                     <tr>
                         <td>
                             <p class="fw-normal mb-1">U001</p>
@@ -386,93 +381,28 @@
                             </div>
                         </td>
                         <td>
-                            <p class="fw-normal mb-1">H.C.K.Jaynath</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Kaligu@1234</p>
-                        </td>
-                        <td>
-                            <p class="text-muted mb-1">chethiyakaligu2@gmail.com</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                            <p class="fw-normal mb-1">Horana</p>
                         </td>
                         <td>
                             <p class="fw-normal mb-1">200133702832</p>
                         </td>
                         <td>
-                            <div class="d-flex align-items-center">
-                                <img
-                                        src="assets/images/frontnicimage.png"
-                                        alt=""
-                                        style="width: 280px; height: 140px"
-                                />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img
-                                        src="assets/images/frontnicimage.png"
-                                        alt=""
-                                        style="width: 280px; height: 140px"
-                                />
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Male</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">22</p>
-                        </td>
-                        <td>
                             <p class="fw-normal mb-1">0767095344</p>
                         </td>
                         <td>
-                            <p class="fw-normal mb-1">no</p>
+                            <p class="fw-normal mb-1">5</p>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-info text-white">
-                                Edit
-                            </button>
+                            <p class="text-muted mb-1">02/05/2001</p>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-danger">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <p class="fw-normal mb-1">U001</p>
+                            <p class="fw-normal mb-1">5000</p>
                         </td>
                         <td>
-                            <div class="d-flex align-items-center">
-                                <img
-                                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                                        alt=""
-                                        style="width: 60px; height: 60px"
-                                        class="rounded-circle"
-                                />
-                                <div class="ms-3">
-                                    <p class="fw-bold mb-1">kaligu</p>
-                                </div>
-                            </div>
+                            <p class="fw-normal mb-1">No</p>
                         </td>
                         <td>
-                            <p class="fw-normal mb-1">H.C.K.Jaynath</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Kaligu@1234</p>
-                        </td>
-                        <td>
-                            <p class="text-muted mb-1">chethiyakaligu2@gmail.com</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">200133702832</p>
+                            <p class="fw-normal mb-1">male</p>
                         </td>
                         <td>
                             <div class="d-flex align-items-center">
@@ -491,18 +421,6 @@
                                         style="width: 280px; height: 140px"
                                 />
                             </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Male</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">22</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">0767095344</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">no</p>
                         </td>
                         <td>
                             <button type="button" class="btn btn-info text-white">
@@ -575,6 +493,7 @@
 <script src="./assets/js/util/RespondCodes.js"></script>
 <script src="./assets/js/util/RoleTypes.js"></script>
 <script src="./assets/js/util/Regax.js"></script>
+<script src="./assets/js/guideserviceconsole/db/localGuideDB.js"></script>
 <script src="./assets/js/guideserviceconsole/dto/GuideDTO.js"></script>
 <script src="assets/js/guideserviceconsole/guideadmin_main.js"></script>
 </body>

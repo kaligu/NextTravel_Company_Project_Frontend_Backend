@@ -465,19 +465,27 @@ function addGuideSaveBtnIsEnableTrigger(){
 
 //---------------------------------------------New Guide container - add guide from - save Btn Clicked send data into server-----------------------------
 function saveNewGuideBtnClicked(){
-    console.log("profile name"+g_a_a_name.val());
-    console.log("profile address"+g_a_a_address.val());
-    console.log("profile nic"+g_a_a_nic.val());
-    console.log("profile tell"+g_a_a_tell.val());
-    console.log("profile expereience"+g_a_a_experience.val());
-    console.log("profile dob"+g_a_a_age.val());
-    console.log("profile perdayfee"+g_a_a_perdayfee.val());
-    console.log("profile remarks"+g_a_a_remarks.val());
-    console.log("profile gender"+g_a_a_gender.val());
-    console.log("profile image"+guideImage_Base64String);
-    console.log("profile image nic front"+guidNICFrontImage_Base64String);
-    console.log("profile image nic rear"+guidNOCRearImage_Base64String);
-    g_a_a_nic_rear_image.attr('src', guideImage_Base64String);
+
+    var newGuideDTO = new GuideDTO(
+        g_a_a_name.val(),
+        g_a_a_address.val(),
+        g_a_a_nic.val(),
+        g_a_a_tell.val(),
+        g_a_a_experience.val(),
+        g_a_a_age.val(),
+        g_a_a_perdayfee.val(),
+        g_a_a_remarks.val(),
+        g_a_a_gender.val(),
+        guideImage_Base64String,
+        guidNICFrontImage_Base64String,
+        guidNOCRearImage_Base64String
+    );
+
+    //print console
+    newGuideDTO.toString();
+
+    //add into db testing for view table load data
+    GuideObjsLocalDB.push(newGuideDTO);
 }
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -489,11 +497,6 @@ function saveNewGuideBtnClicked(){
 //                                          View Guides
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-//-------------Hotel Objects array
-
-let GuideObjsLocalArray = new Array();
-
-//---------------------------
 
 
 //-----------------------------------Regax Checking Methods---------------------------------

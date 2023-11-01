@@ -108,4 +108,10 @@ function GuideDTO(
     this.setGuideNicrearimage = function (newNicrearimage) {
         __guideNicrearimage = newNicrearimage;
     };
+
+    this.toString = function () {
+        console.log(
+            `Guide Details: \nName: ${__guideName}\nAddress: ${__guideAddress}\nNIC: ${__guideNic}\nTelephone: ${__guideTell}\nExperience: ${__guideExperience}\nDOB: ${__guideDob}\nPer Day Fee: ${__guidePerdayfee}\nRemarks: ${__guideRemakrs}\nGender: ${__guideGender}\nProfile Image: ${__guideProfileimage}\nNIC Front Image: ${__guideNicfrontimage}\nNIC Rear Image: ${__guideNicrearimage}`
+        );
+    };
 }
