@@ -16,47 +16,152 @@
 
         /* Track */
         ::-webkit-scrollbar-track {
-            background: #618264;
+            background: #FFF8EA;
         }
 
         /* Handle */
         ::-webkit-scrollbar-thumb {
-            background: #5d5d5d;
+            background: #594545;
         }
 
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
-            background: #555;
+            background: #9E7676;
+        }
+
+        .btn-primary {
+            color: #ffffff;
+            background-color: #9E7676;
+            border-color: #594545;
+            border-radius: 10px;
+            border-width: 5px;
+        }
+
+        .btn-primary:disabled {
+            color: #000000;
+            background-color: #FFF8EA;
+            border-color: #594545;
+            border-radius: 10px;
+            border-width: 5px;
+        }
+
+        .btn-primary:hover {
+            color: #ffffff;
+            background-color: #594545;
+            border-color: #9E7676;
+            border-radius: 10px;
+            border-width: 5px;
+        }
+
+        .btn-primary:focus,
+        .btn-primary.focus {
+            box-shadow: 0 0 0 .2rem rgb(135, 13, 217)
+        }
+
+        :root{
+            background-color: #FFF8EA;
+        }
+
+        #guideTable thead tr th:nth-child(1) {
+            background-color: #3F72AF; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        #guideTable thead tr th:nth-child(2) {
+            background-color: #3F72AF; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        #guideTable thead tr th:nth-child(3) {
+            background-color: #3F72AF; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        #guideTable thead tr th:nth-child(4) {
+            background-color: #3F72AF; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        #guideTable thead tr th:nth-child(5) {
+            background-color: #3F72AF; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        #guideTable thead tr th:nth-child(6) {
+            background-color: #3F72AF; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        #guideTable thead tr th:nth-child(7) {
+            background-color: #3F72AF; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        #guideTable thead tr th:nth-child(8) {
+            background-color:#3F72AF; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        #guideTable thead tr th:nth-child(9) {
+            background-color: #3F72AF; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        #guideTable thead tr th:nth-child(10) {
+            background-color: #3F72AF; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        #guideTable thead tr th:nth-child(11) {
+            background-color: #3F72AF; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        #guideTable thead tr th:nth-child(12) {
+            background-color: #3F72AF; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        #guideTable thead tr th:nth-child(13) {
+            background-color: #3F72AF; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        #guideTable thead tr th:nth-child(14) {
+            background-color: #0090ff; /* Change the background color to red */
+            color: white; /* Change the text color to white */
+        }
+        #guideTable thead tr th:nth-child(15) {
+            background-color: #ff0000; /* Change the background color to red */
+            color: white; /* Change the text color to white */
         }
     </style>
 
 
 </head>
-<body style="border-color: white">
+<body style="border-color: #FFF8EA">
 
 <!--Side navigation bar-->
-<div class="d-flex flex-column flex-shrink-0 fixed-top h-100" style="width: 4.5rem; background-color:#882200">
-    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center py-5 " style="background-color: #882200">
-        <!--        Client Manage-->
+<div class="d-flex flex-column flex-shrink-0 fixed-top h-100" style="width: 5.5rem; background-color:#594545">
+    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center py-5 " style="background-color: #594545">
+        <br>
+        <!--   Home -->
         <li>
-            <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Clients Manage">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="white" class="bi bi-people-fill" viewBox="0 0 16 16">
-                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+            <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Home Window">
+                <svg id="home_nav_icon" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-house" viewBox="0 0 16 16">
+                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
                 </svg>
             </a>
         </li>
-        <!--        admin manage navigation button-->
+        <!--     add New Guide button-->
         <li>
             <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Admins Manage">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="white" class="bi bi-person-fill-gear" viewBox="0 0 16 16">
-                    <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Zm9.886-3.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-person-plus" viewBox="0 0 16 16">
+                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
                 </svg>
             </a>
         </li>
-        <!--        Finance Data -->
+        <!--    view Guides  -->
         <li>
             <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Finance Data">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="white" class="bi bi-graph-up" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-person-vcard" viewBox="0 0 16 16">
+                    <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5ZM9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8Zm1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Z"/>
+                    <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2ZM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96c.026-.163.04-.33.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1.006 1.006 0 0 1 1 12V4Z"/>
+                </svg>
+            </a>
+        </li>
+        <!--    graph  -->
+        <li>
+            <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Finance Data">
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-graph-up" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
                 </svg>
             </a>
@@ -64,7 +169,7 @@
     </ul>
     <div class="dropdown border-top ">
         <a href="#" class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="" id="hotel_admin_main_pg_profile_img" alt="mdo" width="52" height="52" class="rounded-circle">
+            <img src="" id="guide_admin_main_pg_profile_img" alt="profileimage" width="60" height="60" class="rounded-circle">
         </a>
         <ul class="dropdown-menu text-small shadow" >
             <li><a class="dropdown-item" href="#">Settings</a></li>
@@ -75,245 +180,365 @@
 </div>
 
 <!-- Top Bar -->
-<nav class="navbar navbar-expand-lg fixed-top" style="background-color:#882200;">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color:#594545;">
     <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-start">
-            <img src="assets/images/faviconlogo.png" alt="mdo" width="44" height="44" class="rounded-circle" style="position: absolute; margin-top: -0.5rem; margin-left: 0.1rem;">
-            <p style="color: white; font-size: 20px; position: absolute; margin-top: 0.05rem; margin-left: 3rem; font-weight: bold" >Next Travels</p>
+            <img src="assets/images/logomain.png" alt="mdo" width="185" height="60" class="rounded-circle" style="position: absolute; margin-top: -0.1rem;">
         </div>
         <p style="color: white; margin-left: 1rem; font-size: 18px">Hotels Manage Console -</p>
-        <p style="color: #c5c5c5; margin-left: 0.3rem; font-style: italic; font-size: 15px" id="hotel_admin_main_pg_top_admin_name">Mr.test [Admin]</p>
+        <p style="color: #c5c5c5; margin-left: 0.3rem; font-style: italic; font-size: 15px" id="guide_admin_main_pg_top_admin_name">Mr.test [Admin]</p>
         <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
             <p style="color: white; font-size: 16px">5.56AM 10/08/2023</p>
         </div>
     </div>
 </nav>
 
-<!-- SignUp Form -->
-<!--<div class="container w-50 p-4" id="signupFormContainer">-->
-<!--    <br><br>-->
-<!--    <h1>SignUp Form.</h1>-->
-<!--    <br><br>-->
-<!--    <form class="justify-content-center">-->
-<!--        <div class="mb-4">-->
-<!--            <label for="signup_name" class="form-label" style="color: #011f4b">Username</label>-->
-<!--            <input type="email" class="form-control" id="signup_name" aria-describedby="emailHelp" style="background-color: #b3cde0; border-color: #112D4E; border-width: 2.5px">-->
-<!--        </div>-->
-
-<!--        <button type="button" class="btn btn-primary" onclick="signupFormBtnClicked()">Submit</button>-->
-<!--        <div>-->
-<!--        </div>-->
-<!--    </form>-->
-<!--</div>-->
-
-
-<!--admin manage container-->
-<div class="container-fluid" id="admin_manage_container">
-    <h2 style="color: rgba(162,160,160,0.74); margin-top: 4rem; margin-left: 5.5rem; font-style: italic; "> Hotels Manage</h2>
-    <div class="card" style="width: 94%; margin-top: 1rem; margin-left: 5rem; border-color:black; border-width: 0.05rem; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
+<!--Home container-->
+<div class="container-fluid" id="home_container" style="background-color: #F9F7F7; display: none">
+    <h2 style="color: rgb(63,114,175); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; "> Home</h2>
+    <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
         <div class="card-body">
-            <div class="input-group rounded w-25">
-                <!--                add new admin button-->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#admin-manage-container-add-new-admin-model" ><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
-                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                </svg> | Add New Admin</button>
-            </div>
-        </div>
-    </div>
-    <div class="card" style="width: 94%; margin-top: 1rem; margin-left: 5rem; border-color:black; border-width: 0.05rem; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);">
-        <div class="card-body">
-            <div class="input-group rounded w-25">
-                <input type="search" class="form-control rounded" placeholder="Search here . . ." aria-label="Search" aria-describedby="search-addon" style="border-width: 0.2rem"/>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="margin-left: 0.6rem; margin-top: 0.7rem">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                </svg>
-            </div>
-            <!--Tabel-->
-            <table class="table align-middle mb-0 " >
-                <thead class="bg-light">
-                <tr>
-                    <th>Name</th>
-                    <th>Title</th>
-                    <th>Status</th>
-                    <th>Position</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <img
-                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                                    alt=""
-                                    style="width: 45px; height: 45px"
-                                    class="rounded-circle"
-                            />
-                            <div class="ms-3">
-                                <p class="fw-bold mb-1">John Doe</p>
-                                <p class="text-muted mb-0">john.doe@gmail.com</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">Software engineer</p>
-                        <p class="text-muted mb-0">IT department</p>
-                    </td>
-                    <td>
-                        <span class="badge badge-success rounded-pill d-inline">Active</span>
-                    </td>
-                    <td>Senior</td>
-                    <td>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded">
-                            Edit
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <img
-                                    src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                                    class="rounded-circle"
-                                    alt=""
-                                    style="width: 45px; height: 45px"
-                            />
-                            <div class="ms-3">
-                                <p class="fw-bold mb-1">Alex Ray</p>
-                                <p class="text-muted mb-0">alex.ray@gmail.com</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">Consultant</p>
-                        <p class="text-muted mb-0">Finance</p>
-                    </td>
-                    <td>
-        <span class="badge badge-primary rounded-pill d-inline"
-        >Onboarding</span
-        >
-                    </td>
-                    <td>Junior</td>
-                    <td>
-                        <button
-                                type="button"
-                                class="btn btn-link btn-rounded btn-sm fw-bold"
-                                data-mdb-ripple-color="dark"
-                        >
-                            Edit
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <img
-                                    src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                                    class="rounded-circle"
-                                    alt=""
-                                    style="width: 45px; height: 45px"
-                            />
-                            <div class="ms-3">
-                                <p class="fw-bold mb-1">Kate Hunington</p>
-                                <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">Designer</p>
-                        <p class="text-muted mb-0">UI/UX</p>
-                    </td>
-                    <td>
-                        <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
-                    </td>
-                    <td>Senior</td>
-                    <td>
-                        <button
-                                type="button"
-                                class="btn btn-link btn-rounded btn-sm fw-bold"
-                                data-mdb-ripple-color="dark"
-                        >
-                            Edit
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+
+
         </div>
     </div>
 </div>
 
-<!--admin manage container - sub content - add new admin model-->
-<!-- Modal -->
-<div class="modal fade" id="admin-manage-container-add-new-admin-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add New Admin</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!--New Hotel container-->
+<div class="container-fluid" id="add_guide_container" style="background-color: #FFF8EA; display: none">
+    <h2 style="color: rgb(129,91,91); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; "> New Hotel</h2>
+    <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
+        <div class="card-body">
+            <div style="display: flex; flex-direction: column;">
+                <div class="mb-4">
+                    <div class="row text-center">
+                        <div class="col-xs-6 text-center" style=" margin-top: 10px;">
+                            <div class='product-holder'>
+                                <br><br>
+                                <img src="assets/images/userImage.png" width="300" height="310" class='product-image' id="c_m_s_a_image" style="border: 1px solid #000; border-radius: 50%; filter: brightness(90%)" alt="">
+                                <input id="c_m_s_a_image_input" class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px; width: 250px; margin-left: 41%; margin-top: 10px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <form class="justify-content-center">
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_username" class="form-label" >Username</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_username" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
+            <br>
+            <div style="flex-direction: column; margin-left: 15%">
+                <div class="mb-4">
+                    <label for="c_m_s_a_username" class="form-label" style="margin-left: 40%">Name</label>
+                    <input type="text" class="form-control" id="c_m_s_a_username"  style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
                     </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_email" class="form-label" >Email</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_email" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
+                </div>
+                <div class="mb-4">
+                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 39.5%">Address</label>
+                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
                     </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_password" class="form-label" >Password</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_password" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
+                </div>
+                <div class="mb-4">
+                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 40.5%">NIC</label>
+                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
                     </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_nic" class="form-label" >NIC / Passport</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_nic" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
+                </div>
+                <div class="mb-4">
+                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 40.5%">Tell</label>
+                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
                     </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_address" class="form-label" >Address</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_address" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
+                </div>
+                <div class="mb-4">
+                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 38.5%">Experience</label>
+                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
                     </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_profile_image" class="form-label">Profile Image</label>
-                        <input class="form-control" type="file" id="a_m_n_a_a_profile_image" accept=".jpg, .jpeg, .webp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
+                </div>
+                <div class="mb-4">
+                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 40.5%">Age</label>
+                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676;; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
                     </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_service_type" class="form-label" >Service Type</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_service_type" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
+                </div>
+                <div class="mb-4">
+                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 38.5%">Per day fee</label>
+                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
                     </div>
-                </form>
-
+                </div>
+                <div class="mb-4">
+                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 39%">Remarks</label>
+                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="genderSelect" class="form-label" style="margin-left: 39.5%">Gender</label>
+                    <select class="form-control" id="genderSelect" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <br>
+                <div class="mb-4 " style="display: flex; flex-direction: column">
+                    <label for="c_m_s_a_nic_front_image" class="form-label" style="margin-left: 34%">NIC / Passport - Front View</label>
+                    <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="c_m_s_a_nic_front_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                    <input id="c_m_s_a_nic_front_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px; width: 250px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                    </div>
+                </div>
+                <br>
+                <div class="mb-4" style="display: flex; flex-direction: column">
+                    <label for="c_m_s_a_nic_rear_image" class="form-label" style="margin-left: 34%">NIC / Passport - Rear View</label>
+                    <img src="assets/images/rearnicimage.png" width="85%" height="350"  id="c_m_s_a_nic_rear_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                    <input id="c_m_s_a_nic_rear_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px; width: 250px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                    </div>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="a_m_n_a_a_savebtn" onclick="saveNewAdmin()">Save</button>
+            <br>
+            <div style="margin-left: 39%">
+                <button type="button" class="btn btn-primary  " id="c_m_s_a_savebtn" onclick="saveAddClient()" style="width: 20rem; height: 4rem; font-size: 1.4rem;">Save</button>
             </div>
+            <br><br>
+        </div>
+    </div>
+</div>
+
+<!--Search Hotel container-->
+<div class="container-fluid" id="search_guide_container" style="background-color: #F9F7F7; display: none">
+    <h2 style="color: rgb(63,114,175); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Guides Changes</h2>
+    <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
+        <div class="card-body">
+
+            <div style="width: 100%; height: 540px; overflow-y: auto;">
+                <table id="guideTable" class="table align-middle mb-0"  style="width: 100%">
+                    <thead>
+                    <tr >
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>NIC</th>
+                        <th>Tell</th>
+                        <th>Experience</th>
+                        <th>Age</th>
+                        <th>Per day fee</th>
+                        <th>Remarks</th>
+                        <th>Gender</th>
+                        <th>NIC / Passport - Front View</th>
+                        <th>NIC / Passport - Rear View</th>
+                        <th>      </th>
+                        <th>      </th>
+                    </tr>
+                    </thead>
+                    <tbody id="clientTableBody">
+                    <tr>
+                        <td>
+                            <p class="fw-normal mb-1">U001</p>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center ">
+                                <img
+                                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                        alt=""
+                                        style="width: 60px; height: 60px"
+                                        class="rounded-circle"
+                                />
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">kaligu</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">H.C.K.Jaynath</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">Kaligu@1234</p>
+                        </td>
+                        <td>
+                            <p class="text-muted mb-1">chethiyakaligu2@gmail.com</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">200133702832</p>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img
+                                        src="assets/images/frontnicimage.png"
+                                        alt=""
+                                        style="width: 280px; height: 140px"
+                                />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img
+                                        src="assets/images/frontnicimage.png"
+                                        alt=""
+                                        style="width: 280px; height: 140px"
+                                />
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">Male</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">22</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">0767095344</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">no</p>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-info text-white">
+                                Edit
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p class="fw-normal mb-1">U001</p>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img
+                                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                        alt=""
+                                        style="width: 60px; height: 60px"
+                                        class="rounded-circle"
+                                />
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">kaligu</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">H.C.K.Jaynath</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">Kaligu@1234</p>
+                        </td>
+                        <td>
+                            <p class="text-muted mb-1">chethiyakaligu2@gmail.com</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">200133702832</p>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img
+                                        src="assets/images/frontnicimage.png"
+                                        alt=""
+                                        style="width: 280px; height: 140px"
+                                />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img
+                                        src="assets/images/frontnicimage.png"
+                                        alt=""
+                                        style="width: 280px; height: 140px"
+                                />
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">Male</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">22</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">0767095344</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">no</p>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-info text-white">
+                                Edit
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--graph container-->
+<div class="container-fluid" id="graph_container" style="background-color: #F9F7F7; display: none">
+    <h2 style="color: rgb(63,114,175); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Review</h2>
+    <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
+        <div class="card-body">
+
+
         </div>
     </div>
 </div>
 
 <!-- loading window -->
 <!-- use Modal -->
-<div class="modal fade " id="hotel_admin_main_pg-loading-model" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0,0,0,0.25); backdrop-filter: blur(3px)">
+<div class="modal fade" id="vehicle_admin_main_pg-loading-model" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0,0,0,0); backdrop-filter: blur(6px)">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <!--          <div class="modal-header">-->
             <!--            -->
             <!--          </div>-->
-            <div class="modal-body text-center flex-box" style="background-color: #882200">
-                <img src="assets/images/logoloading.gif" class="img-fluid" alt="Responsive image" style="width: 50%; height: 50%">
-
-            </div>
-            <div class="modal-footer justify-content-center " style="background-color: #882200">
-                <h6 class="modal-title text-white" >Please Wait... </h6>
+            <div class="modal-body text-center" style="background-color: #112D4E">
+                <img src="assets/images/vehiclelogogif.gif" class="img-fluid" alt="Responsive image" style="width: 60%; height: 60%">
+                <h6 class="modal-title text-white" id="exampleModalLongTitle">Please Wait... </h6>
             </div>
         </div>
     </div>
