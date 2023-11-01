@@ -35,8 +35,10 @@ const g_a_a_nic_front_image = $('#g_a_a_nic_front_image');
 const g_a_a_nic_front_image_input = $('#g_a_a_nic_front_image_input');
 const g_a_a_nic_rear_image = $('#g_a_a_nic_rear_image');
 const g_a_a_nic_rear_image_input = $('#g_a_a_nic_rear_image_input');
-
 const g_a_a_savebtn = $('#g_a_a_savebtn');
+var guideImage_Base64String = "";
+var guidNICFrontImage_Base64String = "";
+var guidNOCRearImage_Base64String = "";
 
 //---------------------------------------------------------------------
 
@@ -114,11 +116,60 @@ $(document).ready(function(){
         const formattedDate = now.toLocaleString();
         g_a_time.text(formattedDate);
     }
-
     updateTime();
     setInterval(updateTime, 1000);
 });
 //------------------------------------------------------------------------------------
+
+//---------------load profile image and username---------------------
+
+// $(document).ready(function() {
+//     console.log(localStorage.getItem("secure_data_guide_admin_username"));
+//     console.log(localStorage.getItem("secure_data_guide_admin_access_token"));
+//     console.log(localStorage.getItem("secure_data_guide_admin_refresh_token"));
+//
+//     //show loading model
+//     guide_admin_main_pg_loading_model.modal('show');
+//
+//     $.ajax({
+//         method: "GET",
+//         contentType: "application/json",
+//         url: 'http://localhost:1010/main/guide-service/guide-admin-get-profile-image',
+//         async: true,
+//         data: {
+//             access_username: localStorage.getItem("secure_data_guide_admin_username"),
+//             access_jwt_token: localStorage.getItem("secure_data_guide_admin_access_token"),
+//             access_refresh_token: localStorage.getItem("secure_data_guide_admin_refresh_token")
+//         },
+//         success: function(data) {
+//             if (data.rspd_code === RespondCodes.Response_SUCCESS) {
+//                 // Save tokens to localStorage
+//                 localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
+//                 localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
+//                 localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
+//
+//                 // Set image from base64 data
+//                 guide_admin_main_pg_profile_img.attr('src', 'data:image/png;base64,' + data.data);
+//                 guide_admin_main_pg_top_admin_name.text("Mr. "+data.token.access_username+" [Admin]");
+//
+//                 //hide loading model
+//                 setTimeout(function () {
+//                     guide_admin_main_pg_loading_model.modal('hide');
+//                 }, 1000); // delay
+//
+//             } else {
+//                 console.log("Profile image retrieval failed");
+//             }
+//         },
+//         error: function(xhr, status, error) {
+//             console.log("Profile image retrieval failed");
+//         }
+//     });
+// });
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//                                          Guide Manage
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 //----------------------------------New Guide container -add guide from - guide image set to view if select using base64-------------------
 $(document).ready(function() {
@@ -129,9 +180,8 @@ $(document).ready(function() {
             var baseString;
             reader.onload = function () {
                 baseString = reader.result;
-
-                // Update the 'src' attribute of the image element
                 g_a_a_image.attr('src', baseString);
+                guideImage_Base64String = baseString;
             };
             reader.readAsDataURL(newImageFile);
         } else {
@@ -150,9 +200,8 @@ $(document).ready(function() {
             var baseString;
             reader.onload = function () {
                 baseString = reader.result;
-
-                // Update the 'src' attribute of the image element
                 g_a_a_nic_front_image.attr('src', baseString);
+                guidNICFrontImage_Base64String= baseString;
             };
             reader.readAsDataURL(newImageFile);
         } else {
@@ -171,9 +220,8 @@ $(document).ready(function() {
             var baseString;
             reader.onload = function () {
                 baseString = reader.result;
-
-                // Update the 'src' attribute of the image element
                 g_a_a_nic_rear_image.attr('src', baseString);
+                guidNOCRearImage_Base64String = baseString;
             };
             reader.readAsDataURL(newImageFile);
         } else {
@@ -417,56 +465,31 @@ function addGuideSaveBtnIsEnableTrigger(){
 
 //---------------------------------------------New Guide container -add guide from - save Btn Clicked send data into server-----------------------------
 function saveNewGuideBtnClicked(){
-
-    console.log();
+    console.log("profile name"+g_a_a_name.val());
+    console.log("profile address"+g_a_a_address.val());
+    console.log("profile nic"+g_a_a_nic.val());
+    console.log("profile tell"+g_a_a_tell.val());
+    console.log("profile expereience"+g_a_a_experience.val());
+    console.log("profile dob"+g_a_a_age.val());
+    console.log("profile perdayfee"+g_a_a_perdayfee.val());
+    console.log("profile remarks"+g_a_a_remarks.val());
+    console.log("profile gender"+g_a_a_gender.val());
+    console.log("profile image"+guideImage_Base64String);
+    console.log("profile image nic front"+guidNICFrontImage_Base64String);
+    console.log("profile image nic rear"+guidNOCRearImage_Base64String);
+    g_a_a_nic_rear_image.attr('src', guideImage_Base64String);
 }
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 
-//---------------load profile image and username---------------------
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-// $(document).ready(function() {
-//     console.log(localStorage.getItem("secure_data_guide_admin_username"));
-//     console.log(localStorage.getItem("secure_data_guide_admin_access_token"));
-//     console.log(localStorage.getItem("secure_data_guide_admin_refresh_token"));
-//
-//     //show loading model
-//     guide_admin_main_pg_loading_model.modal('show');
-//
-//     $.ajax({
-//         method: "GET",
-//         contentType: "application/json",
-//         url: 'http://localhost:1010/main/guide-service/guide-admin-get-profile-image',
-//         async: true,
-//         data: {
-//             access_username: localStorage.getItem("secure_data_guide_admin_username"),
-//             access_jwt_token: localStorage.getItem("secure_data_guide_admin_access_token"),
-//             access_refresh_token: localStorage.getItem("secure_data_guide_admin_refresh_token")
-//         },
-//         success: function(data) {
-//             if (data.rspd_code === RespondCodes.Response_SUCCESS) {
-//                 // Save tokens to localStorage
-//                 localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
-//                 localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
-//                 localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
-//
-//                 // Set image from base64 data
-//                 guide_admin_main_pg_profile_img.attr('src', 'data:image/png;base64,' + data.data);
-//                 guide_admin_main_pg_top_admin_name.text("Mr. "+data.token.access_username+" [Admin]");
-//
-//                 //hide loading model
-//                 setTimeout(function () {
-//                     guide_admin_main_pg_loading_model.modal('hide');
-//                 }, 1000); // delay
-//
-//             } else {
-//                 console.log("Profile image retrieval failed");
-//             }
-//         },
-//         error: function(xhr, status, error) {
-//             console.log("Profile image retrieval failed");
-//         }
-//     });
-// });
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//                                          View Guides
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
 
 //-----------------------------------Regax Checking Methods---------------------------------
 
