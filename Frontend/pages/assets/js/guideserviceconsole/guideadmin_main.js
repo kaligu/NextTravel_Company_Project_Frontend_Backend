@@ -120,7 +120,7 @@ $(document).ready(function(){
 });
 //------------------------------------------------------------------------------------
 
-//----------------------------------New Guide container -add guide from - guide image set to view if select-------------------
+//----------------------------------New Guide container -add guide from - guide image set to view if select using base64-------------------
 $(document).ready(function() {
     g_a_a_image_input.on('change', function () {
         var newImageFile = this.files[0]; // Get the file when a change occurs in the input
@@ -139,9 +139,9 @@ $(document).ready(function() {
         }
     });
 });
-//------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------
 
-//----------------------------------New Guide container -add guide from - guide ID front view image set to view if select-------------------
+//----------------------------------New Guide container -add guide from - guide ID front view image set to view if select using base64--------------------
 $(document).ready(function() {
     g_a_a_nic_front_image_input.on('change', function () {
         var newImageFile = this.files[0]; // Get the file when a change occurs in the input
@@ -160,9 +160,9 @@ $(document).ready(function() {
         }
     });
 });
-//-----------------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-//----------------------------------New Guide container -add guide from - guide ID back view image set to view if select-------------------
+//----------------------------------New Guide container -add guide from - guide ID back view image set to view if select using base64--------------------
 $(document).ready(function() {
     g_a_a_nic_rear_image_input.on('change', function () {
         var newImageFile = this.files[0]; // Get the file when a change occurs in the input
@@ -181,7 +181,7 @@ $(document).ready(function() {
         }
     });
 });
-//-----------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //----------------------------------New Guide container -add guide from - validation all fields-------------------
 let g_a_a_fld_1 = false;
@@ -415,6 +415,12 @@ function addGuideSaveBtnIsEnableTrigger(){
 }
 //---------------------------------------------------------------------------------------------------------------
 
+//---------------------------------------------New Guide container -add guide from - save Btn Clicked send data into server-----------------------------
+function saveNewGuideBtnClicked(){
+
+    console.log();
+}
+//------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //---------------load profile image and username---------------------
 
