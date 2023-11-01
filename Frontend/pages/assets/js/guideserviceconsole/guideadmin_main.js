@@ -463,7 +463,7 @@ function addGuideSaveBtnIsEnableTrigger(){
 }
 //---------------------------------------------------------------------------------------------------------------
 
-//---------------------------------------------New Guide container -add guide from - save Btn Clicked send data into server-----------------------------
+//---------------------------------------------New Guide container - add guide from - save Btn Clicked send data into server-----------------------------
 function saveNewGuideBtnClicked(){
     console.log("profile name"+g_a_a_name.val());
     console.log("profile address"+g_a_a_address.val());
@@ -489,6 +489,11 @@ function saveNewGuideBtnClicked(){
 //                                          View Guides
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+//-------------Hotel Objects array
+
+let GuideObjsLocalArray = new Array();
+
+//---------------------------
 
 
 //-----------------------------------Regax Checking Methods---------------------------------
