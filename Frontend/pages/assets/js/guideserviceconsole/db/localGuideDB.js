@@ -1,5 +1,5 @@
 //-------------Hotel Objects array
 
-let GuideObjsLocalDB = new Array();
+let GuideObjsLocalDB = [];
 
 //---------------------------

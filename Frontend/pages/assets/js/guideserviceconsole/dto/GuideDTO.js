@@ -1,4 +1,5 @@
 function GuideDTO(
+    id,
     name,
     address,
     nic,
@@ -12,6 +13,7 @@ function GuideDTO(
     nicefrontimage,
     nicrearimage
 ) {
+    var __guideID = id;
     var __guideName = name;
     var __guideAddress = address;
     var __guideNic = nic;
@@ -24,6 +26,13 @@ function GuideDTO(
     var __guideProfileimage = profileimage;
     var __guideNicfrontimage = nicefrontimage;
     var __guideNicrearimage = nicrearimage;
+
+    this.getGuideID = function () {
+        return __guideID;
+    };
+    this.setGuideID = function (newID) {
+        __guideID = newID;
+    };
 
     this.getGuideName = function () {
         return __guideName;

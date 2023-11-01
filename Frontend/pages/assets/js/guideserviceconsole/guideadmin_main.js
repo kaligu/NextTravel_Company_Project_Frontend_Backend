@@ -470,6 +470,7 @@ function addGuideSaveBtnIsEnableTrigger(){
 function saveNewGuideBtnClicked(){
 
     var newGuideDTO = new GuideDTO(
+        "U001",
         g_a_a_name.val(),
         g_a_a_address.val(),
         g_a_a_nic.val(),
@@ -489,6 +490,7 @@ function saveNewGuideBtnClicked(){
 
     //add into db testing for view table load data
     GuideObjsLocalDB.push(newGuideDTO);
+
 }
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -561,15 +563,15 @@ function loadDataAfterOpenedViewGuideContainer(){
             </div>
         </td>
         <td>
-            <button type="button" class="btn btn-info text-white">
-                Edit
-            </button>
-        </td>
-        <td>
-            <button type="button" class="btn btn-danger">
-                Delete
-            </button>
-        </td>
+                <button type="button" class="btn btn-info text-white edit-btn" data-guide-id="${guide.getGuideID()}">
+                    Edit
+                </button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger delete-btn" data-guide-id="${guide.getGuideID()}">
+                    Delete
+                </button>
+            </td>
     `);
 
         $("#guideTableBody").append(newRow);
@@ -577,6 +579,43 @@ function loadDataAfterOpenedViewGuideContainer(){
 
 }
 
-//-----------------------------------Regax Checking Methods---------------------------------
+//--------------------------Edit & Delete Guide on Guide Table---------------------
+// Event listener for Edit button
+// Event listener for Edit button
+$(document).on("click", ".edit-btn", function() {
+    var guideId = $(this).data("guide-id");
+    console.log("edited", guideId);
+    var guideToEdit = GuideObjsLocalDB.find(guide => guide.getGuideID() === guideId);
 
-//------------------------------------------------------------------------------------------
+    if (guideToEdit) {
+        console.log("Name:", guideToEdit.getGuideName());
+        // Perform edit actions if guideToEdit is found
+    } else {
+        console.log("Guide not found for ID:", guideId);
+    }
+});
+
+$(document).on("click", ".delete-btn", function() {
+    var guideId = $(this).data("guide-id");
+    console.log("Deleted", guideId);
+    var guideToDelete = GuideObjsLocalDB.find(guide => guide.getGuideID() === guideId);
+
+    if (guideToDelete) {
+        console.log("Name:", guideToDelete.getGuideName());
+        // Perform delete actions if guideToDelete is found
+    } else {
+        console.log("Guide not found for ID:", guideId);
+    }
+});
+
+
+//-------------------------------------------------------------------------
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//                                          Admin Profile Settings
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
