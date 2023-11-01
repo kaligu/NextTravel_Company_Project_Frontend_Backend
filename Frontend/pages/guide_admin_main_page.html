@@ -57,11 +57,15 @@
         .btn-primary.focus {
             box-shadow: 0 0 0 .2rem rgb(135, 13, 217)
         }
+
+        :root{
+            background-color: #EDF1D6;
+        }
     </style>
 
 
 </head>
-<body style="border-color: #ffffff">
+<body style="border-color: #EDF1D6">
 
 <!--Side navigation bar-->
 <div class="d-flex flex-column flex-shrink-0 fixed-top h-100" style="width: 5.5rem; background-color:#40513B">
@@ -283,8 +287,8 @@
 <!--    </div>-->
 <!--</div>-->
 
-<!--New Guidecontainer-->
-<div class="container-fluid" id="admin_manage_container" style="background-color: #EDF1D6">
+<!--New Guide container-->
+<div class="container-fluid" id="add_guide_container" style="background-color: #EDF1D6; display: block">
     <h2 style="color: rgb(157,192,139); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; "> New Guide</h2>
     <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
         <div class="card-body">
@@ -414,63 +418,191 @@
     </div>
 </div>
 
+<!--Search Guide container-->
+<div class="container-fluid" id="search_guide_container" style="background-color: #EDF1D6; display: block">
+    <h2 style="color: rgb(157,192,139); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Guides Changes</h2>
+    <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
+        <div class="card-body">
 
+            <div style="width: 100%; height: 540px; overflow-y: auto;">
+                <table id="guideTable" class="table align-middle mb-0"  style="width: 100%">
+                    <thead>
+                    <tr >
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>NIC</th>
+                        <th>Tell</th>
+                        <th>Experience</th>
+                        <th>Age</th>
+                        <th>Per day fee</th>
+                        <th>Remarks</th>
+                        <th>Gender</th>
+                        <th>NIC / Passport - Front View</th>
+                        <th>NIC / Passport - Rear View</th>
+                        <th>      </th>
+                        <th>      </th>
+                    </tr>
+                    </thead>
+                    <tbody id="clientTableBody">
+                    <tr>
+                        <td>
+                            <p class="fw-normal mb-1">U001</p>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center ">
+                                <img
+                                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                        alt=""
+                                        style="width: 60px; height: 60px"
+                                        class="rounded-circle"
+                                />
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">kaligu</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">H.C.K.Jaynath</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">Kaligu@1234</p>
+                        </td>
+                        <td>
+                            <p class="text-muted mb-1">chethiyakaligu2@gmail.com</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">200133702832</p>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img
+                                        src="assets/images/frontnicimage.png"
+                                        alt=""
+                                        style="width: 280px; height: 140px"
+                                />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img
+                                        src="assets/images/frontnicimage.png"
+                                        alt=""
+                                        style="width: 280px; height: 140px"
+                                />
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">Male</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">22</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">0767095344</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">no</p>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-info text-white">
+                                Edit
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
 
-<!--admin manage container - sub content - add new admin model-->
-<!-- Modal -->
-<div class="modal fade" id="admin-manage-container-add-new-admin-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add New Admin</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <tr>
+                        <td>
+                            <p class="fw-normal mb-1">U001</p>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img
+                                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                        alt=""
+                                        style="width: 60px; height: 60px"
+                                        class="rounded-circle"
+                                />
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">kaligu</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">H.C.K.Jaynath</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">Kaligu@1234</p>
+                        </td>
+                        <td>
+                            <p class="text-muted mb-1">chethiyakaligu2@gmail.com</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">200133702832</p>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img
+                                        src="assets/images/frontnicimage.png"
+                                        alt=""
+                                        style="width: 280px; height: 140px"
+                                />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img
+                                        src="assets/images/frontnicimage.png"
+                                        alt=""
+                                        style="width: 280px; height: 140px"
+                                />
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">Male</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">22</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">0767095344</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">no</p>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-info text-white">
+                                Edit
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="modal-body">
-                <form class="justify-content-center">
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_username" class="form-label" >Username</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_username" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
-                    </div>
+        </div>
 
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_email" class="form-label" >Email</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_email" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_password" class="form-label" >Password</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_password" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_nic" class="form-label" >NIC / Passport</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_nic" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_address" class="form-label" >Address</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_address" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_profile_image" class="form-label">Profile Image</label>
-                        <input class="form-control" type="file" id="a_m_n_a_a_profile_image" accept=".jpg, .jpeg, .webp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="a_m_n_a_a_service_type" class="form-label" >Service Type</label>
-                        <input type="email" class="form-control" id="a_m_n_a_a_service_type" aria-describedby="emailHelp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px">
-                    </div>
-                </form>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="a_m_n_a_a_savebtn" onclick="saveNewAdmin()">Save</button>
-            </div>
         </div>
     </div>
 </div>
+
+
 
 <!-- loading window -->
 <!-- use Modal -->
