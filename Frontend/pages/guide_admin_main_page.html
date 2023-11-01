@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NextTravel - Guides Manage</title>
+    <title>NextTravel - Guide Manage</title>
     <!-- favicon img -->
     <link rel="shortcut icon" type="image/icon" href="assets/images/faviconlogo.png"/>
     <script src="assets/js/jquery-3.6.1.min.js"></script>
@@ -133,7 +133,7 @@
     <ul class="nav nav-pills nav-flush flex-column mb-auto text-center py-5 " style="background-color: #40513B">
         <br>
         <!--   Home -->
-        <li>
+        <li onclick="openHomeContainer()">
             <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Home Window">
                 <svg id="home_nav_icon" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-house" viewBox="0 0 16 16">
                     <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
@@ -141,27 +141,27 @@
             </a>
         </li>
         <!--     add New Guide button-->
-        <li>
+        <li onclick="openNewGuideContainer()">
             <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Admins Manage">
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-person-plus" viewBox="0 0 16 16">
+                <svg id="new_guide_nav_icon" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-person-plus" viewBox="0 0 16 16">
                     <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                     <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
                 </svg>
             </a>
         </li>
         <!--    view Guides  -->
-        <li>
+        <li onclick="openViewGuideContainer()">
             <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Finance Data">
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-person-vcard" viewBox="0 0 16 16">
+                <svg id="view_guide_nav_icon" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-person-vcard" viewBox="0 0 16 16">
                     <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5ZM9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8Zm1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Z"/>
                     <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2ZM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96c.026-.163.04-.33.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1.006 1.006 0 0 1 1 12V4Z"/>
                 </svg>
             </a>
         </li>
-        <!--    graph  -->
-        <li>
+        <!--    review  -->
+        <li onclick="openReveiwGuideContainer()">
             <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Finance Data">
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-graph-up" viewBox="0 0 16 16">
+                <svg id="review_guide_nav_icon" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-graph-up" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
                 </svg>
             </a>
@@ -185,7 +185,7 @@
         <div class="collapse navbar-collapse justify-content-start">
             <img src="assets/images/logomain.png" alt="mdo" width="185" height="60" class="rounded-circle" style="position: absolute; margin-top: -0.1rem;">
         </div>
-        <p style="color: white; margin-left: 1rem; font-size: 18px">Guides Manage Console -</p>
+        <p style="color: white; margin-left: 1rem; font-size: 18px">Guide Manage Console -</p>
         <p style="color: #c5c5c5; margin-left: 0.3rem; font-style: italic; font-size: 15px" id="guide_admin_main_pg_top_admin_name">Mr.test [Admin]</p>
         <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
             <p style="color: white; font-size: 16px">5.56AM 10/08/2023</p>
@@ -235,7 +235,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 39.5%">Address</label>
-                        <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; background-color: #EDF1D6; border-color: #112D4E; border-width: 1.5px">
+                        <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; background-color: #EDF1D6; border-color: #EDF1D6; border-width: 1.5px">
                         <div class="invalid-feedback">
                             *Starts with an uppercase letter, followed by one or more lowercase letters.
                             *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
@@ -336,8 +336,8 @@
 </div>
 
 <!--Search Guide container-->
-<div class="container-fluid" id="search_guide_container" style="background-color: #EDF1D6; display: block">
-    <h2 style="color: rgb(157,192,139); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Guides Changes</h2>
+<div class="container-fluid" id="search_guide_container" style="background-color: #EDF1D6; display: none">
+    <h2 style="color: rgb(157,192,139); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Guide Changes</h2>
     <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
         <div class="card-body">
 
@@ -517,8 +517,8 @@
     </div>
 </div>
 
-<!--graph container-->
-<div class="container-fluid" id="graph_container" style="background-color: #EDF1D6; display: none">
+<!--review container-->
+<div class="container-fluid" id="review_container" style="background-color: #EDF1D6; display: none">
     <h2 style="color: rgb(157,192,139); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Review</h2>
     <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
         <div class="card-body">

@@ -13,7 +13,7 @@ $(document).ready(function() {
     console.log(localStorage.getItem("secure_data_hotel_admin_refresh_token"));
 
     //show loading model
-    // hotel_admin_main_pg_loading_model.modal('show');
+    hotel_admin_main_pg_loading_model.modal('show');
 
     $.ajax({
         method: "GET",

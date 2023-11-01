@@ -1,12 +1,92 @@
-// //-----------------varibales--------
-// const guide_admin_main_pg_loading_model = $('#guide_admin_main_pg-loading-model');
-//
-// const guide_admin_main_pg_profile_img = $("#guide_admin_main_pg_profile_img");
-// const guide_admin_main_pg_top_admin_name = $("#guide_admin_main_pg_top_admin_name")
-// //---------------------------------------------
-//
-// //---------------load profile image and username---------------------
-//
+//-----------------  varibales  ---------------------------------------
+const guide_admin_main_pg_loading_model = $('#guide_admin_main_pg-loading-model');
+
+const guide_admin_main_pg_profile_img = $("#guide_admin_main_pg_profile_img");
+const guide_admin_main_pg_top_admin_name = $("#guide_admin_main_pg_top_admin_name")
+
+//containers
+const home_container = $('#home_container');
+const add_guide_container = $('#add_guide_container');
+const search_guide_container = $('#search_guide_container');
+const review_container = $('#review_container');
+
+//side link icons
+const home_nav_icon = $('#home_nav_icon');
+const new_guide_nav_icon = $('#new_guide_nav_icon');
+const view_guide_nav_icon = $('#view_guide_nav_icon');
+const review_guide_nav_icon = $('#review_guide_nav_icon');
+
+//---------------------------------------------------------------------
+
+//------------------- navigate containers -------------------------------------------------------
+
+function hideAllContainers(){
+    home_container.css('display','none');
+    add_guide_container.css('display','none');
+    search_guide_container.css('display','none');
+    review_container.css('display','none');
+
+    home_nav_icon.css('fill', 'white');
+    new_guide_nav_icon.css('fill', 'white');
+    view_guide_nav_icon.css('fill', 'white');
+    review_guide_nav_icon.css('fill', 'white');
+}
+
+function openHomeContainer(){
+    localStorage.setItem("guide_admin_console_current_state", "home");
+
+    hideAllContainers();
+
+    home_container.css('display','block');
+    home_nav_icon.css('fill', '#00c4ff');
+}
+
+function openNewGuideContainer(){
+    localStorage.setItem("guide_admin_console_current_state", "new_guide");
+
+    hideAllContainers();
+
+    add_guide_container.css('display','block');
+    new_guide_nav_icon.css('fill', '#00c4ff');
+}
+
+function openViewGuideContainer(){
+    localStorage.setItem("guide_admin_console_current_state", "view_guide");
+
+    hideAllContainers();
+
+    search_guide_container.css('display','block');
+    view_guide_nav_icon.css('fill', '#00c4ff');
+}
+
+function openReveiwGuideContainer(){
+    localStorage.setItem("guide_admin_console_current_state", "review_guide");
+
+    hideAllContainers();
+
+    review_container.css('display','block');
+    review_guide_nav_icon.css('fill', '#00c4ff');
+}
+//default state
+$(document).ready(function(){
+    if(localStorage.getItem("guide_admin_console_current_state")==="home"){
+        openHomeContainer();
+    }else if(localStorage.getItem("guide_admin_console_current_state")==="new_guide"){
+        openNewGuideContainer();
+    }else if(localStorage.getItem("guide_admin_console_current_state")==="view_guide"){
+        openViewGuideContainer();
+    }else if(localStorage.getItem("guide_admin_console_current_state")==="review_guide"){
+        openReveiwGuideContainer();
+    }else {
+        openHomeContainer();
+    }
+});
+
+//------------------------------------------------------------------------------------
+
+
+//---------------load profile image and username---------------------
+
 // $(document).ready(function() {
 //     console.log(localStorage.getItem("secure_data_guide_admin_username"));
 //     console.log(localStorage.getItem("secure_data_guide_admin_access_token"));
@@ -50,4 +130,4 @@
 //         }
 //     });
 // });
-//
+
