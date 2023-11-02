@@ -46,7 +46,7 @@ public class AdminController {
         return adminService.SaveNewClient_Abrot(reqNewClientSaveDTO);
     }
 
-    //get profile image - user admin
+    //get Profile Data - user admin
     @GetMapping(value = "/user-admin-get-profile-data")
     public ResponseEntity<ReqProfileDataAdminsDTO> userAdminGetProfileData(
             @RequestParam String id ,
@@ -90,6 +90,24 @@ public class AdminController {
     ){
         return adminService.userAdminGetProfileData(id,token);
     }
+
+    //update Profile Data - user admin
+    @GetMapping(value = "/user-admin-update-data")
+    public ResponseEntity<ReqProfileDataAdminsDTO> userAdminUpdateProfileData(
+            @RequestParam String id ,
+            @RequestParam String token
+    ){
+        return adminService.userAdminGetProfileData(id,token);
+    }
+    //update Profile Data - user admin
+    @GetMapping(value = "/user-admin-update-data")
+    public ResponseEntity<ReqProfileDataAdminsDTO> userAdminUpdateProfileData(
+            @RequestParam String id ,
+            @RequestParam String token
+    ){
+        return adminService.userAdminUpdateProfileData(id,token,);
+    }
+
 
     //search all admins
     @GetMapping(value = "/get-admin-data")

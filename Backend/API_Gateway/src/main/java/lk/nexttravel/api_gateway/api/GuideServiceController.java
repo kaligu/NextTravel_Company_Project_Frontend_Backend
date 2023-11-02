@@ -45,4 +45,30 @@ public class GuideServiceController {
                 access_refresh_token
         );
     }
+
+    //update Profile Data - guide admin
+    @GetMapping(value = {"/guide-admin-update-profile-data"}, consumes = {"application/json"})
+    public Mono<ResponseEntity<RespondDTO>> userAdminUpdateProfileData(
+            @RequestParam("username") @NonNull String username
+            ,
+            @RequestParam("address") @NonNull String address
+            ,
+            @RequestParam("email") @NonNull String email
+            ,
+            @RequestParam("nic") @NonNull String nic
+            ,
+            @RequestParam("password") @NonNull String password
+            ,
+            @RequestParam("nameinitial") @NonNull String nameinitial
+            ,
+            @RequestParam("profileImage_Base64String") @NonNull String profileImage_Base64String
+            ,
+            @RequestParam("access_username") @NonNull String access_username
+            ,
+            @RequestParam("access_jwt_token") @NonNull String access_jwt_token
+            ,
+            @RequestParam("access_refresh_token") @NonNull String access_refresh_token
+    ){
+        return adminService.userAdminGetProfileData(id,token);
+    }
 }
