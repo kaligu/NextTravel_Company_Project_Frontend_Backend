@@ -912,6 +912,13 @@ function saveNewGuideBtnClicked(){
         success:function (data){
             //hide loading model
             setTimeout(function () {
+
+                if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
+
+                }else {
+
+                }
+
                 guide_admin_main_pg_loading_model.modal('hide');
 
                 setTimeout(function () {
