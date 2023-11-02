@@ -3,122 +3,129 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NextTravel - Hotels Manage</title>
+    <title>NextTravel - Hotel Manage</title>
     <!-- favicon img -->
     <link rel="shortcut icon" type="image/icon" href="assets/images/faviconlogo.png"/>
     <script src="assets/js/jquery-3.6.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        /* Example CSS for table */
+        #guideTable {
+            border-collapse: collapse;
+        }
+
+        #guideTable th, #guideTable td {
+            border: 0.2px solid #FCDEC0;
+        }
+
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 12px;
         }
 
         /* Track */
         ::-webkit-scrollbar-track {
-            background: #FFF8EA;
+            background: #FCDEC0;
         }
 
         /* Handle */
         ::-webkit-scrollbar-thumb {
-            background: #594545;
+            background: #7D5A50;
         }
 
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
-            background: #9E7676;
+            background: #B4846C;
         }
 
         .btn-primary {
             color: #ffffff;
-            background-color: #9E7676;
-            border-color: #594545;
+            background-color: #B4846C;
+            border-color: #7D5A50;
             border-radius: 10px;
             border-width: 5px;
         }
 
         .btn-primary:disabled {
             color: #000000;
-            background-color: #FFF8EA;
-            border-color: #594545;
+            background-color: #FCDEC0;
+            border-color: #7D5A50;
             border-radius: 10px;
             border-width: 5px;
         }
 
         .btn-primary:hover {
             color: #ffffff;
-            background-color: #594545;
-            border-color: #9E7676;
+            background-color: #7D5A50;
+            border-color: #B4846C;
             border-radius: 10px;
             border-width: 5px;
         }
 
         .btn-primary:focus,
         .btn-primary.focus {
-            box-shadow: 0 0 0 .2rem #594545
+            box-shadow: 0 0 0 .2rem #7D5A50
         }
 
         :root{
-            background-color: #FFF8EA;
+            background-color: #FCDEC0;
         }
 
         #guideTable thead tr th:nth-child(1) {
-            background-color: #9E7676; /* Change the background color to red */
+            background-color: #B4846C; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(2) {
-            background-color: #9E7676; /* Change the background color to red */
+            background-color: #B4846C; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(3) {
-            background-color: #9E7676; /* Change the background color to red */
+            background-color: #B4846C; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(4) {
-            background-color: #9E7676; /* Change the background color to red */
+            background-color: #B4846C; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(5) {
-            background-color: #9E7676; /* Change the background color to red */
+            background-color: #B4846C; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(6) {
-            background-color: #9E7676; /* Change the background color to red */
+            background-color: #B4846C; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(7) {
-            background-color: #9E7676; /* Change the background color to red */
+            background-color: #B4846C; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(8) {
-            background-color:#9E7676; /* Change the background color to red */
+            background-color:#B4846C; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(9) {
-            background-color: #9E7676; /* Change the background color to red */
+            background-color: #B4846C; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(10) {
-            background-color: #9E7676; /* Change the background color to red */
+            background-color: #B4846C; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(11) {
-            background-color: #9E7676; /* Change the background color to red */
+            background-color: #B4846C; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(12) {
-            background-color:#9E7676; /* Change the background color to red */
+            background-color: #B4846C; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(13) {
-            background-color: #9E7676; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(14) {
             background-color: #0090ff; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
-        #guideTable thead tr th:nth-child(15) {
+        #guideTable thead tr th:nth-child(14) {
             background-color: #ff0000; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
@@ -126,42 +133,43 @@
 
 
 </head>
-<body style="border-color: #FFF8EA">
+<body style="border-color: #FCDEC0; display: none" id="body">
 
 <!--Side navigation bar-->
-<div class="d-flex flex-column flex-shrink-0 fixed-top h-100" style="width: 5.5rem; background-color:#594545">
-    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center py-5 " style="background-color: #594545">
+<div class="d-flex flex-column flex-shrink-0 fixed-top h-100" style="width: 5.5rem; background-color:#7D5A50">
+    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center py-5 " style="background-color: #7D5A50">
         <br>
         <!--   Home -->
-        <li>
+        <li onclick="openHomeContainer()">
             <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Home Window">
                 <svg id="home_nav_icon" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-house" viewBox="0 0 16 16">
                     <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
                 </svg>
             </a>
         </li>
-        <!--     add New Guide button-->
-        <li>
+        <!--     add New Hotel button-->
+        <li onclick="openNewGuideContainer()">
             <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Admins Manage">
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-person-plus" viewBox="0 0 16 16">
-                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                <svg id="new_guide_nav_icon" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-building-add" viewBox="0 0 16 16">
+                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Z"/>
+                    <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6.5a.5.5 0 0 1-1 0V1H3v14h3v-2.5a.5.5 0 0 1 .5-.5H8v4H3a1 1 0 0 1-1-1V1Z"/>
+                    <path d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/>
                 </svg>
             </a>
         </li>
         <!--    view Guides  -->
-        <li>
+        <li onclick="openViewGuideContainer()">
             <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Finance Data">
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-person-vcard" viewBox="0 0 16 16">
+                <svg id="view_guide_nav_icon" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-person-vcard" viewBox="0 0 16 16">
                     <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5ZM9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8Zm1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Z"/>
                     <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2ZM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96c.026-.163.04-.33.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1.006 1.006 0 0 1 1 12V4Z"/>
                 </svg>
             </a>
         </li>
-        <!--    graph  -->
-        <li>
+        <!--    review  -->
+        <li onclick="openReveiwGuideContainer()">
             <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Finance Data">
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-graph-up" viewBox="0 0 16 16">
+                <svg id="review_guide_nav_icon" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-graph-up" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
                 </svg>
             </a>
@@ -171,43 +179,166 @@
         <a href="#" class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="" id="guide_admin_main_pg_profile_img" alt="profileimage" width="60" height="60" class="rounded-circle">
         </a>
-        <ul class="dropdown-menu text-small shadow" >
-            <li><a class="dropdown-item" href="#">Settings</a></li>
+        <ul class="dropdown-menu text-lg shadow bg-warning" >
+            <li><a class="dropdown-item btn-success" data-bs-toggle="modal" data-bs-target="#profile-setting-model">Settings</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item " href="#">Log out</a></li>
+            <li><button type="button" class="btn btn-danger w-100" onclick="UserManageConsoleLogout()">Logout</button></li>
         </ul>
     </div>
 </div>
 
 <!-- Top Bar -->
-<nav class="navbar navbar-expand-lg fixed-top" style="background-color:#594545;">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color:#7D5A50;">
     <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-start">
             <img src="assets/images/logomain.png" alt="mdo" width="185" height="60" class="rounded-circle" style="position: absolute; margin-top: -0.1rem;">
         </div>
-        <p style="color: white; margin-left: 1rem; font-size: 18px">Hotels Manage Console -</p>
+        <p style="color: white; margin-left: 1rem; font-size: 18px">Hotel Manage Console -</p>
         <p style="color: #c5c5c5; margin-left: 0.3rem; font-style: italic; font-size: 15px" id="guide_admin_main_pg_top_admin_name">Mr.test [Admin]</p>
         <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
-            <p style="color: white; font-size: 16px">5.56AM 10/08/2023</p>
+            <p id="g_a_time" style="color: white; font-size: 16px">5.56AM 10/08/2023</p>
         </div>
     </div>
 </nav>
 
+<!--main window - profile settings model-->
+<!-- Model -->
+<div class="modal fade" id="profile-setting-model" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dd">Profile Settings</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-4">
+                    <div class="row text-center">
+                        <div class="col-xs-6 text-center" style="margin-top: 10px;">
+                            <div class="p_s_image_holder">
+                                <img src="assets/images/userImage.png" width="300" height="310" class="product-image" id="p_s_image" style="border: 1px solid #FCDEC0; border-radius: 50%; filter: brightness(90%)" alt="">
+                                <input id="p_s_image_input" class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px; width: 250px; margin-left: 24.5%">
+                                <div class="valid-feedback" id="img-valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback" id="img-invalid-feedback">
+                                    Please choose a valid image (JPG, JPEG, PNG, or GIF format) and ensure the file size is less than 2MB.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p id="p_s_id" style="color: grey">UXXXX</p>
+                </div>
+                <div class="mb-4">
+                    <p id="p_s_username" style="color: grey">Username</p>
+                </div>
+                <div class="mb-4">
+                    <label for="p_s_nameinitial" class="form-label">Name with Initial</label>
+                    <input type="text" class="form-control" id="p_s_nameinitial" style="width: 100%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px; ">
+                    <div class="invalid-feedback">
+                        *Enter valid Name with initial.
+                        *It must contains dots , letters like these pattern.
+                        *Ex : H.K.Pam Lowev / C.F.Kamal Perera
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="p_s_password" class="form-label">Create Password</label>
+                    <input type="password" class="form-control" id="p_s_password" style="width: 100%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px; ">
+                    <div class="invalid-feedback">
+                        *Use a secure password with a combination of uppercase, lowercase, numbers, and special characters.
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="p_s_email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="p_s_email" style="width: 100%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px; ">
+                    <div class="invalid-feedback">
+                        *Please enter a valid email address.
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="p_s_address" class="form-label">Physical Address</label>
+                    <input type="text" class="form-control" id="p_s_address" style="width: 100%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px; ">
+                    <div class="invalid-feedback">
+                        *Enter your adress, which must be at least 4 characters long and contain only letters, commas, spaces like these examples.
+                        *Ex:- 123 Main,Street / 456 Elm Street, Apt. 7B / 789 Oak Lane, Suite
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="p_s_nic" class="form-label">NIC / Passport</label>
+                    <input type="text" class="form-control" id="p_s_nic" style="width: 100%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px; ">
+                    <div class="invalid-feedback">
+                        *Enter your correct Srilankan National ID card number.
+                        *Ex:- xxxxxxxxxxxx / xxxxxxxxxv
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="width: 10rem; height: 3rem">Close</button>
+                <button type="button" class="btn btn-success" id="p_s_updateSettingbtn" onclick="saveUpdatedProfileSettings()" disabled style="width: 10rem; height: 3rem">Update Settings</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--Home container-->
-<div class="container-fluid" id="home_container" style="background-color: #F9F7F7; display: block">
-    <h2 style="color: rgb(63,114,175); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; "> Home</h2>
+<div class="container-fluid" id="home_container" style="background-color: #FCDEC0; display: none">
+    <h2 style="color: rgb(180,132,108); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; "> Home</h2>
     <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
         <div class="card-body">
-            <div id="map"></div>
 
-
+            <!--  =============================== dashboard ============================================================================== -->
+            <div class="container-fluid " id="dashboard_container_guide" style="display: block; ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <img src="assets/images/hoteldashlogo.jpg" style="height: 500px" class="img-fluid" alt="">
+                        </div>
+                        <div class="col">
+                            <h1 style="text-align: center; margin-top: 80px; font-style: italic"> Welcome to Hotel Manage Console</h1>
+                            <br><br><br>
+                            <p style="text-align: center">"We extend a warm welcome to our dedicated team of guides who lead the way in offering exceptional experiences to travelers worldwide. At NextTravel, our commitment to excellence drives us to curate unparalleled journeys, ensuring every traveler's exploration is a tapestry of unforgettable moments and discoveries.
+                                "</p>
+                            <!--                            <div class="container" style="margin-top: 40px">-->
+                            <!--                                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3" style="margin-left: 100px">-->
+                            <!--                                    <div class="col">-->
+                            <!--                                        <div class="p-3 border bg-light" style="width: 100px">-->
+                            <!--                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="green" class="bi bi-people-fill" viewBox="0 0 16 16">-->
+                            <!--                                                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>-->
+                            <!--                                            </svg>-->
+                            <!--                                            <h4>40</h4>-->
+                            <!--                                            Total-->
+                            <!--                                        </div>-->
+                            <!--                                    </div>-->
+                            <!--                                    <div class="col">-->
+                            <!--                                        <div class="p-3 border bg-light" style="width: 100px"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="green" class="bi bi-gender-female" viewBox="0 0 16 16">-->
+                            <!--                                            <path fill-rule="evenodd" d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z"/>-->
+                            <!--                                        </svg>-->
+                            <!--                                            <h4>15</h4>-->
+                            <!--                                            Female-->
+                            <!--                                        </div>-->
+                            <!--                                    </div>-->
+                            <!--                                    <div class="col">-->
+                            <!--                                        <div class="p-3 border bg-light" style="width: 100px"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="green" class="bi bi-gender-male" viewBox="0 0 16 16">-->
+                            <!--                                            <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>-->
+                            <!--                                        </svg>-->
+                            <!--                                            <h4>25</h4>-->
+                            <!--                                            Male-->
+                            <!--                                        </div>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <!--New Hotel container-->
-<div class="container-fluid" id="add_guide_container" style="background-color: #FFF8EA; display: none">
-    <h2 style="color: rgb(129,91,91); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; "> New Hotel</h2>
+<div class="container-fluid" id="add_guide_container" style="background-color: #FCDEC0; display: none">
+    <h2 style="color: rgb(180,132,108); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; "> New Hotel</h2>
     <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
         <div class="card-body">
             <div style="display: flex; flex-direction: column;">
@@ -216,8 +347,14 @@
                         <div class="col-xs-6 text-center" style=" margin-top: 10px;">
                             <div class='product-holder'>
                                 <br><br>
-                                <img src="assets/images/userImage.png" width="300" height="310" class='product-image' id="c_m_s_a_image" style="border: 1px solid #000; border-radius: 50%; filter: brightness(90%)" alt="">
-                                <input id="c_m_s_a_image_input" class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px; width: 250px; margin-left: 41%; margin-top: 10px">
+                                <img src="assets/images/hoteladdimg.jpg" width="300" height="310" class='product-image' id="g_a_a_image" style="border: 1px solid #000; border-radius: 50%; filter: brightness(90%)" alt="">
+                                <input id="g_a_a_image_input" class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px; width: 250px; margin-left: 41%; margin-top: 10px">
+                                <div class="valid-feedback" id="g_a_a_img-valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback" id="g_a_a_img-invalid-feedback">
+                                    Please choose a valid image (JPG, JPEG, PNG, or GIF format) and ensure the file size is less than 2MB.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -226,119 +363,118 @@
             <br>
             <div style="flex-direction: column; margin-left: 15%">
                 <div class="mb-4">
-                    <label for="c_m_s_a_username" class="form-label" style="margin-left: 40%">Name</label>
-                    <input type="text" class="form-control" id="c_m_s_a_username"  style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                    <label for="g_a_a_name" class="form-label" style="margin-left: 40%">Name</label>
+                    <input placeholder="Name here..." type="text" class="form-control" id="g_a_a_name"  style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        *Enter your name, which must be at least 4 characters long and contain only letters and spaces.
+                        *Ex:-John Doe, john doe
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 39.5%">Address</label>
-                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                    <label for="g_a_a_address" class="form-label" style="margin-left: 39.5%">Address</label>
+                    <input placeholder="Address here..." type="text" class="form-control" id="g_a_a_address" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        *Enter your adress, which must be at least 4 characters long and contain only letters, commas, spaces like these examples.
+                        *Ex:- 123 Main,Street / 456 Elm Street, Apt. 7B / 789 Oak Lane, Suite
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 40.5%">NIC</label>
-                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                    <label for="g_a_a_nic" class="form-label" style="margin-left: 40.5%">NIC</label>
+                    <input placeholder="NIC here..." type="text" class="form-control" id="g_a_a_nic" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        *Enter your correct Srilankan National ID card number.
+                        *Ex:- xxxxxxxxxxxx / xxxxxxxxxv
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 40.5%">Tell</label>
-                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                    <label for="g_a_a_tell" class="form-label" style="margin-left: 40.5%">Tell</label>
+                    <input placeholder="Tell number here..." type="text" class="form-control" id="g_a_a_tell" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        *Enter your correct Srilankan Telephone number.
+                        *Ex:- 0xxxxxxxxx / +94xxxxxxxxx
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 38.5%">Experience</label>
-                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                    <label for="g_a_a_experience" class="form-label" style="margin-left: 38.5%">Experience</label>
+                    <input placeholder="Expereience type here..." type="number" class="form-control" id="g_a_a_experience" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        *Enter only number value.
+                        *Ex:- 10 / 4
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 40.5%">Age</label>
-                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676;; border-width: 1.5px">
+                    <label for="g_a_a_age" class="form-label" style="margin-left: 39%">Birthday</label>
+                    <input placeholder="Birthday select here..." type="date" class="form-control" id="g_a_a_age" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        *Enter your Birthday, which must included pattern like these example.
+                        *Ex:- year-month-day
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 38.5%">Per day fee</label>
-                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                    <label for="g_a_a_perdayfee" class="form-label" style="margin-left: 38.5%">Per day fee</label>
+                    <input placeholder="Perday fee here..." type="number" class="form-control" id="g_a_a_perdayfee" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        *Enter only number value.
+                        *Ex:- 10 / 4
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 39%">Remarks</label>
-                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                    <label for="g_a_a_remarks" class="form-label" style="margin-left: 39%">Remarks</label>
+                    <input placeholder="Remarks here..." type="text" class="form-control" id="g_a_a_remarks" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
+                        *Ex:- lorem lorem.
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="genderSelect" class="form-label" style="margin-left: 39.5%">Gender</label>
-                    <select class="form-control" id="genderSelect" style="width: 85%; color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px">
+                    <label for="g_a_a_gender" class="form-label" style="margin-left: 39.5%">Gender</label>
+                    <select class="form-control" id="g_a_a_gender" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
+                        <option value="">Select Gender here...</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
+                        <option value="trans">Trans</option>
                     </select>
-                </div>
-                <br>
-                <div class="mb-4 " style="display: flex; flex-direction: column">
-                    <label for="c_m_s_a_nic_front_image" class="form-label" style="margin-left: 34%">NIC / Passport - Front View</label>
-                    <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="c_m_s_a_nic_front_image" style="border: 0.5px solid #000; border-radius: 1%; ">
-                    <input id="c_m_s_a_nic_front_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px; width: 250px">
                     <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        *Select gender here... Male or Femlae
                     </div>
                 </div>
                 <br>
-                <div class="mb-4" style="display: flex; flex-direction: column">
-                    <label for="c_m_s_a_nic_rear_image" class="form-label" style="margin-left: 34%">NIC / Passport - Rear View</label>
-                    <img src="assets/images/rearnicimage.png" width="85%" height="350"  id="c_m_s_a_nic_rear_image" style="border: 0.5px solid #000; border-radius: 1%; ">
-                    <input id="c_m_s_a_nic_rear_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="color:white; background-color: #9E7676; border-color: #9E7676; border-width: 1.5px; width: 250px">
-                    <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                <div class="mb-4 " style="display: flex; flex-direction: column; margin-left: 16%">
+                    <label for="g_a_a_nic_front_image" class="form-label" style="margin-left: 20%">NIC / Passport - Front View</label>
+                    <img src="assets/images/frontnicimage.png" width="600" height="370"  id="g_a_a_nic_front_image" style="border: 0.5px solid #FCDEC0; border-radius: 1%; ">
+                    <input id="g_a_a_nic_front_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #FCDEC0; border: 1.5px solid #FCDEC0; width: 250px">
+                    <div class="valid-feedback" id="g_a_a_nic_frontimg-valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback" id="g_a_a_nic_frontimg-invalid-feedback">
+                        Please choose a valid image (JPG, JPEG, PNG, or GIF format) and ensure the file size is less than 2MB.
+                    </div>
+                </div>
+                <br>
+                <div class="mb-4" style="display: flex; flex-direction: column; margin-left: 16%">
+                    <label for="g_a_a_nic_rear_image" class="form-label" style="margin-left: 20%">NIC / Passport - Rear View</label>
+                    <img src="assets/images/rearnicimage.png" width="600" height="370"  id="g_a_a_nic_rear_image" style="border: 0.5px solid #FCDEC0; border-radius: 1%; ">
+                    <input id="g_a_a_nic_rear_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #FCDEC0; border: 1.5px solid #FCDEC0; border-radius: 1%; width: 250px">
+                    <div class="valid-feedback" id="g_a_a_nic_rearimg-valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback" id="g_a_a_nic_rearimg-invalid-feedback">
+                        Please choose a valid image (JPG, JPEG, PNG, or GIF format) and ensure the file size is less than 2MB.
                     </div>
                 </div>
             </div>
-            <br>
+            <br><br>
             <div style="margin-left: 39%">
-                <button type="button" class="btn btn-primary  " id="c_m_s_a_savebtn" onclick="saveAddClient()" style="width: 20rem; height: 4rem; font-size: 1.4rem;">Save</button>
+                <button type="button" class="btn btn-primary  " id="g_a_a_savebtn" disabled onclick="saveNewGuideBtnClicked()" style="width: 20rem; height: 4rem; font-size: 1.4rem;">Save</button>
             </div>
             <br><br>
         </div>
     </div>
 </div>
 
-<!--Search Hotel container-->
-<div class="container-fluid" id="search_guide_container" style="background-color: #FFF8EA; display: none">
-    <h2 style="color: rgb(158,118,118); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Guides Changes</h2>
+<!--Search Guide container-->
+<div class="container-fluid" id="search_guide_container" style="background-color: #FCDEC0; display: none">
+    <h2 style="color: rgb(180,132,108); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Guide Changes</h2>
     <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
         <div class="card-body">
 
@@ -347,13 +483,12 @@
                     <thead>
                     <tr >
                         <th>ID</th>
-                        <th>Image</th>
                         <th>Name</th>
                         <th>Address</th>
                         <th>NIC</th>
                         <th>Tell</th>
                         <th>Experience</th>
-                        <th>Age</th>
+                        <th>Date of Birth</th>
                         <th>Per day fee</th>
                         <th>Remarks</th>
                         <th>Gender</th>
@@ -363,154 +498,284 @@
                         <th>      </th>
                     </tr>
                     </thead>
-                    <tbody id="clientTableBody">
-                    <tr>
-                        <td>
-                            <p class="fw-normal mb-1">U001</p>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center ">
-                                <img
-                                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                                        alt=""
-                                        style="width: 60px; height: 60px"
-                                        class="rounded-circle"
-                                />
-                                <div class="ms-3">
-                                    <p class="fw-bold mb-1">kaligu</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">H.C.K.Jaynath</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Kaligu@1234</p>
-                        </td>
-                        <td>
-                            <p class="text-muted mb-1">chethiyakaligu2@gmail.com</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">200133702832</p>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img
-                                        src="assets/images/frontnicimage.png"
-                                        alt=""
-                                        style="width: 280px; height: 140px"
-                                />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img
-                                        src="assets/images/frontnicimage.png"
-                                        alt=""
-                                        style="width: 280px; height: 140px"
-                                />
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Male</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">22</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">0767095344</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">no</p>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-info text-white">
-                                Edit
-                            </button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <p class="fw-normal mb-1">U001</p>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img
-                                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                                        alt=""
-                                        style="width: 60px; height: 60px"
-                                        class="rounded-circle"
-                                />
-                                <div class="ms-3">
-                                    <p class="fw-bold mb-1">kaligu</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">H.C.K.Jaynath</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Kaligu@1234</p>
-                        </td>
-                        <td>
-                            <p class="text-muted mb-1">chethiyakaligu2@gmail.com</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">200133702832</p>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img
-                                        src="assets/images/frontnicimage.png"
-                                        alt=""
-                                        style="width: 280px; height: 140px"
-                                />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img
-                                        src="assets/images/frontnicimage.png"
-                                        alt=""
-                                        style="width: 280px; height: 140px"
-                                />
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Male</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">22</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">0767095344</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">no</p>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-info text-white">
-                                Edit
-                            </button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
+                    <tbody id="guideTableBody">
+                    <!--                    <tr>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">U001</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <div class="d-flex align-items-center ">-->
+                    <!--                                <img-->
+                    <!--                                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"-->
+                    <!--                                        alt=""-->
+                    <!--                                        style="width: 60px; height: 60px"-->
+                    <!--                                        class="rounded-circle"-->
+                    <!--                                />-->
+                    <!--                                <div class="ms-3">-->
+                    <!--                                    <p class="fw-bold mb-1">kaligu</p>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">Horana</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">200133702832</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">0767095344</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">5</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="text-muted mb-1">02/05/2001</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">5000</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">No</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">male</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <div class="d-flex align-items-center">-->
+                    <!--                                <img-->
+                    <!--                                        src="assets/images/frontnicimage.png"-->
+                    <!--                                        alt=""-->
+                    <!--                                        style="width: 280px; height: 140px"-->
+                    <!--                                />-->
+                    <!--                            </div>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <div class="d-flex align-items-center">-->
+                    <!--                                <img-->
+                    <!--                                        src="assets/images/frontnicimage.png"-->
+                    <!--                                        alt=""-->
+                    <!--                                        style="width: 280px; height: 140px"-->
+                    <!--                                />-->
+                    <!--                            </div>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <button type="button" class="btn btn-info text-white">-->
+                    <!--                                Edit-->
+                    <!--                            </button>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <button type="button" class="btn btn-danger">-->
+                    <!--                                Delete-->
+                    <!--                            </button>-->
+                    <!--                        </td>-->
+                    <!--                    </tr>                    <tr>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">U001</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <div class="d-flex align-items-center ">-->
+                    <!--                                <img-->
+                    <!--                                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"-->
+                    <!--                                        alt=""-->
+                    <!--                                        style="width: 60px; height: 60px"-->
+                    <!--                                        class="rounded-circle"-->
+                    <!--                                />-->
+                    <!--                                <div class="ms-3">-->
+                    <!--                                    <p class="fw-bold mb-1">kaligu</p>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">Horana</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">200133702832</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">0767095344</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">5</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="text-muted mb-1">02/05/2001</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">5000</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">No</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">male</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <div class="d-flex align-items-center">-->
+                    <!--                                <img-->
+                    <!--                                        src="assets/images/frontnicimage.png"-->
+                    <!--                                        alt=""-->
+                    <!--                                        style="width: 280px; height: 140px"-->
+                    <!--                                />-->
+                    <!--                            </div>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <div class="d-flex align-items-center">-->
+                    <!--                                <img-->
+                    <!--                                        src="assets/images/frontnicimage.png"-->
+                    <!--                                        alt=""-->
+                    <!--                                        style="width: 280px; height: 140px"-->
+                    <!--                                />-->
+                    <!--                            </div>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <button type="button" class="btn btn-info text-white">-->
+                    <!--                                Edit-->
+                    <!--                            </button>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <button type="button" class="btn btn-danger">-->
+                    <!--                                Delete-->
+                    <!--                            </button>-->
+                    <!--                        </td>-->
+                    <!--                    </tr><tr>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">U001</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <div class="d-flex align-items-center ">-->
+                    <!--                                <img-->
+                    <!--                                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"-->
+                    <!--                                        alt=""-->
+                    <!--                                        style="width: 60px; height: 60px"-->
+                    <!--                                        class="rounded-circle"-->
+                    <!--                                />-->
+                    <!--                                <div class="ms-3">-->
+                    <!--                                    <p class="fw-bold mb-1">kaligu</p>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">Horana</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">200133702832</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">0767095344</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">5</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="text-muted mb-1">02/05/2001</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">5000</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">No</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">male</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <div class="d-flex align-items-center">-->
+                    <!--                                <img-->
+                    <!--                                        src="assets/images/frontnicimage.png"-->
+                    <!--                                        alt=""-->
+                    <!--                                        style="width: 280px; height: 140px"-->
+                    <!--                                />-->
+                    <!--                            </div>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <div class="d-flex align-items-center">-->
+                    <!--                                <img-->
+                    <!--                                        src="assets/images/frontnicimage.png"-->
+                    <!--                                        alt=""-->
+                    <!--                                        style="width: 280px; height: 140px"-->
+                    <!--                                />-->
+                    <!--                            </div>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <button type="button" class="btn btn-info text-white">-->
+                    <!--                                Edit-->
+                    <!--                            </button>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <button type="button" class="btn btn-danger">-->
+                    <!--                                Delete-->
+                    <!--                            </button>-->
+                    <!--                        </td>-->
+                    <!--                    </tr>                    <tr>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">U001</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <div class="d-flex align-items-center ">-->
+                    <!--                                <img-->
+                    <!--                                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"-->
+                    <!--                                        alt=""-->
+                    <!--                                        style="width: 60px; height: 60px"-->
+                    <!--                                        class="rounded-circle"-->
+                    <!--                                />-->
+                    <!--                                <div class="ms-3">-->
+                    <!--                                    <p class="fw-bold mb-1">kaligu</p>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">Horana</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">200133702832</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">0767095344</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">5</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="text-muted mb-1">02/05/2001</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">5000</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">No</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <p class="fw-normal mb-1">male</p>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <div class="d-flex align-items-center">-->
+                    <!--                                <img-->
+                    <!--                                        src="assets/images/frontnicimage.png"-->
+                    <!--                                        alt=""-->
+                    <!--                                        style="width: 280px; height: 140px"-->
+                    <!--                                />-->
+                    <!--                            </div>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <div class="d-flex align-items-center">-->
+                    <!--                                <img-->
+                    <!--                                        src="assets/images/frontnicimage.png"-->
+                    <!--                                        alt=""-->
+                    <!--                                        style="width: 280px; height: 140px"-->
+                    <!--                                />-->
+                    <!--                            </div>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <button type="button" class="btn btn-info text-white">-->
+                    <!--                                Edit-->
+                    <!--                            </button>-->
+                    <!--                        </td>-->
+                    <!--                        <td>-->
+                    <!--                            <button type="button" class="btn btn-danger">-->
+                    <!--                                Delete-->
+                    <!--                            </button>-->
+                    <!--                        </td>-->
+                    <!--                    </tr>-->
                     </tbody>
                 </table>
             </div>
@@ -518,50 +783,273 @@
     </div>
 </div>
 
-<!--graph container-->
-<div class="container-fluid" id="graph_container" style="background-color: #F9F7F7; display: none">
-    <h2 style="color: rgb(63,114,175); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Review</h2>
+
+<!--review container-->
+<div class="container-fluid" id="review_container" style="background-color: #FCDEC0; display: none">
+    <h2 style="color: rgb(180,132,108); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Review</h2>
     <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
         <div class="card-body">
-
-
+            <h4 style="color: rgb(229,178,153);font-style: italic; ">Chart of Guide adding efficiency</h4>
+            <canvas id="lineChart" ></canvas>
         </div>
     </div>
 </div>
 
+<!--admin manage container - sub content - edit admin model-->
+<!-- Modal -->
+<div class="modal fade" id="admin-manage-container-edit-admin-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Existing Admin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
+                <div style="display: flex;">
+                    <div style="flex-direction: column; width: 600px;">
+                        <div class="mb-4">
+                            <div class="row text-center">
+                                <div class="col-xs-6 text-center" style=" margin-top: 10px;">
+                                    <div class='product-holder'>
+                                        <img src="" width="300" height="310" class='product-image' id="edit_profile_image" style="border: 1px solid #000; border-radius: 50%; filter: brightness(90%)">
+                                        <input id="edit_profile_image_input" class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px; width: 250px; margin-left: 70px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="flex-direction: column; width: 100%; height: 480px; overflow-y: auto;">
+                        <div data-spy="scroll" data-target="#navbar-example3" data-offset="0">
+
+
+
+                            <div class="mb-4">
+                                <label for="g_a_a_name" class="form-label" style="margin-left: 40%">Name</label>
+                                <input placeholder="Name here..." type="text" class="form-control" id="e_g_a_a_name"  style="width: 85%; background-color: #EDF1D6; border-color: #EDF1D6; border-width: 1.5px">
+                                <div class="invalid-feedback">
+                                    *Enter your name, which must be at least 4 characters long and contain only letters and spaces.
+                                    *Ex:-John Doe, john doe
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="g_a_a_address" class="form-label" style="margin-left: 39.5%">Address</label>
+                                <input placeholder="Address here..." type="text" class="form-control" id="e_g_a_a_address" style="width: 85%; background-color: #EDF1D6; border-color: #EDF1D6; border-width: 1.5px">
+                                <div class="invalid-feedback">
+                                    *Enter your adress, which must be at least 4 characters long and contain only letters, commas, spaces like these examples.
+                                    *Ex:- 123 Main,Street / 456 Elm Street, Apt. 7B / 789 Oak Lane, Suite
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="g_a_a_nic" class="form-label" style="margin-left: 40.5%">NIC</label>
+                                <input placeholder="NIC here..." type="text" class="form-control" id="e_g_a_a_nic" style="width: 85%; background-color: #EDF1D6; border-color: #EDF1D6; border-width: 1.5px">
+                                <div class="invalid-feedback">
+                                    *Enter your correct Srilankan National ID card number.
+                                    *Ex:- xxxxxxxxxxxx / xxxxxxxxxv
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="g_a_a_tell" class="form-label" style="margin-left: 40.5%">Tell</label>
+                                <input placeholder="Tell number here..." type="text" class="form-control" id="e_g_a_a_tell" style="width: 85%; background-color: #EDF1D6; border-color: #EDF1D6; border-width: 1.5px">
+                                <div class="invalid-feedback">
+                                    *Enter your correct Srilankan Telephone number.
+                                    *Ex:- 0xxxxxxxxx / +94xxxxxxxxx
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="g_a_a_experience" class="form-label" style="margin-left: 38.5%">Experience</label>
+                                <input placeholder="Expereience type here..." type="number" class="form-control" id="e_g_a_a_experience" style="width: 85%; background-color: #EDF1D6; border-color: #EDF1D6; border-width: 1.5px">
+                                <div class="invalid-feedback">
+                                    *Enter only number value.
+                                    *Ex:- 10 / 4
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="g_a_a_age" class="form-label" style="margin-left: 39%">Birthday</label>
+                                <input placeholder="Birthday select here..." type="date" class="form-control" id="e_g_a_a_age" style="width: 85%; background-color: #EDF1D6; border-color: #EDF1D6; border-width: 1.5px">
+                                <div class="invalid-feedback">
+                                    *Enter your Birthday, which must included pattern like these example.
+                                    *Ex:- year-month-day
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="g_a_a_perdayfee" class="form-label" style="margin-left: 38.5%">Per day fee</label>
+                                <input placeholder="Perday fee here..." type="number" class="form-control" id="e_g_a_a_perdayfee" style="width: 85%; background-color: #EDF1D6; border-color: #EDF1D6; border-width: 1.5px">
+                                <div class="invalid-feedback">
+                                    *Enter only number value.
+                                    *Ex:- 10 / 4
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="g_a_a_remarks" class="form-label" style="margin-left: 39%">Remarks</label>
+                                <input placeholder="Remarks here..." type="text" class="form-control" id="e_g_a_a_remarks" style="width: 85%; background-color: #EDF1D6; border-color: #EDF1D6; border-width: 1.5px">
+                                <div class="invalid-feedback">
+                                    *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
+                                    *Ex:- lorem lorem.
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="g_a_a_gender" class="form-label" style="margin-left: 39.5%">Gender</label>
+                                <select class="form-control" id="e_g_a_a_gender" style="width: 85%; background-color: #EDF1D6; border-color: #EDF1D6; border-width: 1.5px">
+                                    <option value="">Select Gender here...</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="trans">Trans</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    *Select gender here... Male or Femlae
+                                </div>
+                            </div>
+                            <br>
+                            <div class="mb-4 " style="display: flex; flex-direction: column; ">
+                                <label for="g_a_a_nic_front_image" class="form-label" >NIC / Passport - Front View</label>
+                                <img src="" width="530" height="370"  id="edit_front_nic_image" style="border: 0.5px solid #609966; border-radius: 1%; ">
+                                <input id="edit_front_nic_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #EDF1D6; border: 1.5px solid #609966; width: 250px">
+                                <div class="valid-feedback" id="e_g_a_a_nic_frontimg-valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback" id="e_g_a_a_nic_frontimg-invalid-feedback">
+                                    Please choose a valid image (JPG, JPEG, PNG, or GIF format) and ensure the file size is less than 2MB.
+                                </div>
+                            </div>
+                            <br>
+                            <div class="mb-4" style="display: flex; flex-direction: column; ">
+                                <label for="g_a_a_nic_rear_image" class="form-label" >NIC / Passport - Rear View</label>
+                                <img src="" width="530" height="370"  id="edit_rear_nic_image" style="border: 0.5px solid #609966; border-radius: 1%; ">
+                                <input id="edit_rear_nic_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #EDF1D6; border: 1.5px solid #609966; border-radius: 1%; width: 250px">
+                                <div class="valid-feedback" id="e_g_a_a_nic_rearimg-valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback" id="e_g_a_a_nic_rearimg-invalid-feedback">
+                                    Please choose a valid image (JPG, JPEG, PNG, or GIF format) and ensure the file size is less than 2MB.
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary text-white" style="width: 80px" disabled id="e_a_m_n_a_a_savebtn" onclick="saveEditGuide()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- delete confiremation model -->
+<!-- Modal -->
+<div class="modal fade " id="guide_admin_main_pg_delete-model" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0,0,0,0.25); backdrop-filter: blur(3px)">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-danger text-white">
+            <div class="modal-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height=25" fill="white" class="bi bi-x-octagon" viewBox="0 0 16 16">
+                    <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/>
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+                <h5 class="modal-title" >Guide Delete Confiremation!</h5>
+            </div>
+            <div class="modal-body">
+                <p class="modal-dialog-centered" id="guide_admin_main_pg_delete-model_text"></p>
+                <p class="modal-dialog-centered" >Are you Sure to delete this Guide?</p>
+                <button type="button" class="btn btn-secondary" style="width: 80px" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary text-white" style="width: 120px" onclick="saveDeleteGuide()">Yes Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <!-- loading window -->
 <!-- use Modal -->
-<div class="modal fade" id="hotel_admin_main_pg-loading-model" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0,0,0,0); backdrop-filter: blur(6px)">
+<div class="modal fade" id="guide_admin_main_pg-loading-model" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0,0,0,0); backdrop-filter: blur(6px)">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <!--          <div class="modal-header">-->
             <!--            -->
             <!--          </div>-->
-            <div class="modal-body text-center" style="background-color: #594545">
-                <img src="assets/images/hotellogogif.gif" class="img-fluid" alt="Responsive image" style="width: 60%; height: 60%">
+            <div class="modal-body text-center" style="background-color: #40513B">
+                <img src="assets/images/guidelogogif.gif" class="img-fluid" alt="Responsive image" style="width: 60%; height: 60%">
                 <h6 class="modal-title text-white" id="exampleModalLongTitle">Please Wait... </h6>
             </div>
         </div>
     </div>
 </div>
 
-<!-- alert window -->
+<!-- Error alert model -->
 <!-- Modal -->
-<div class="modal fade" id="alert-model" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="alert-model-title">title</h5>
+<div class="modal fade " id="guide_admin_main_pg_alert-model-error" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0,0,0,0.25); backdrop-filter: blur(3px)">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-danger text-white">
+            <div class="modal-header ">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+                    <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
+                    <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
+                </svg>
+                <h5 class="modal-title" id="guide_admin_main_pg_alert-model-title-error">title</h5>
             </div>
             <div class="modal-body">
-                <p class="modal-dialog-centered" id="alert-model-content">content</p>
-            </div>
-            <div class="modal-footer ">
-                <button type="button" class="btn btn-primary bg-success w-25" onclick="closeAlerModel()" id="alert-model-btn"> Ok </button>
+                <p class="modal-dialog-centered" id="guide_admin_main_pg_alert-model-content-error">content</p>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Error Unauthorize model -->
+<!-- Modal -->
+<div class="modal fade " id="guide_admin_main_pg_alert-model-unauthorise-error" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0,0,0,0.25); backdrop-filter: blur(3px)">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-danger text-white">
+            <div class="modal-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height=25" fill="white" class="bi bi-x-octagon" viewBox="0 0 16 16">
+                    <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/>
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+                <h5 class="modal-title" id="guide_admin_main_pg_alert-model-title-unauthorise-error">Something went wrong!</h5>
+            </div>
+            <div class="modal-body">
+                <p class="modal-dialog-centered" id="guide_admin_main_pg_alert-model-content-unauthorise-error">Unauthorize error has occurred! Please logout and Sign in Again...</p>
+                <button type="button" class="btn btn-secondary"><a href="intro_login_page.html" style="color: white; "> Logout & Sign in click here...</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Done alert model -->
+<!-- Modal -->
+<div class="modal fade" id="guide_admin_main_pg-alert-model-done"  tabindex="-1" role="dialog"  aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0, 0, 0, 0.37);">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-success text-white">
+            <div class="modal-header ">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-check-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                </svg>
+                <h5 class="modal-title" id="guide_admin_main_pg_alert-model-title-done">title</h5>
+            </div>
+            <div class="modal-body">
+                <p class="modal-dialog-centered" id="guide_admin_main_pg_alert-model-content-done">content</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="alert bg-success" id="alert" role="alert" style="width: 400px; position: fixed; z-index: 2000000; bottom: 0; right: 0; display: none">
+    <h3 class="alert-heading">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-check-circle" viewBox="0 0 16 16" style="display: inline-block; vertical-align: middle;">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+        </svg>
+        <span style="display: inline-block; vertical-align: middle; color: white">Done...</span>
+    </h3>
+    <hr>
+    <p class="mb-0" style="color: white">This Operation Succeed....</p>
+</div>
+
 
 <script>
     $(function () {
@@ -570,6 +1058,9 @@
 </script>
 <script src="./assets/js/util/RespondCodes.js"></script>
 <script src="./assets/js/util/RoleTypes.js"></script>
-<script src="assets/js/main_js/hoteladmin_main.js"></script>
+<script src="./assets/js/util/Regax.js"></script>
+<script src="./assets/js/hotelserviceconsole/db/localGuideDB.js"></script>
+<script src="./assets/js/hotelserviceconsole/dto/GuideDTO.js"></script>
+<script src="assets/js/hotelserviceconsole/hoteleadmin_main.js"></script>
 </body>
 </html>
