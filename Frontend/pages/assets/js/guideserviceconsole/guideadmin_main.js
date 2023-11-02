@@ -1,8 +1,25 @@
 //-----------------  varibales  ---------------------------------------
 const guide_admin_main_pg_loading_model = $('#guide_admin_main_pg-loading-model');
 
+const guide_admin_main_pg_alert_model_unauthorise_error = $('#guide_admin_main_pg_alert-model-unauthorise-error');
+
+const guide_admin_main_pg_alert_model_error = $('#guide_admin_main_pg_alert-model-error');
+const guide_admin_main_pg_alert_model_title_error =  $('#guide_admin_main_pg_alert-model-title-error');
+const guide_admin_main_pg_alert_model_content_error = $('#guide_admin_main_pg_alert-model-content-error');
+
+const guide_admin_main_pg_alert_model_done = $('#guide_admin_main_pg-alert-model-done');
+const guide_admin_main_pg_alert_model_title_done =  $('#guide_admin_main_pg_alert-model-title-done');
+const guide_admin_main_pg_alert_model_content_done = $('#guide_admin_main_pg_alert-model-content-done');
+
 const guide_admin_main_pg_profile_img = $("#guide_admin_main_pg_profile_img");
 const guide_admin_main_pg_top_admin_name = $("#guide_admin_main_pg_top_admin_name")
+const p_s_username = $('#p_s_username');
+const p_s_email = $('#p_s_email');
+const p_s_nameinitial = $('#p_s_nameinitial');
+const p_s_nic = $('#p_s_nic');
+const p_s_address = $('#p_s_address');
+const p_s_image = $('#p_s_image')
+const p_s_password = $('#p_s_password');
 
 //time
 const g_a_time = $('#g_a_time');
@@ -109,7 +126,97 @@ $(document).ready(function(){
     }
 });
 
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//                                          First load default
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+loadAdminProfileData();
+
+
 //------------------------------------------------------------------------------------
+function loadAdminProfileData(){
+    console.log(localStorage.getItem("secure_data_user_admin_username"));
+    console.log(localStorage.getItem("secure_data_user_admin_access_token"));
+    console.log(localStorage.getItem("secure_data_user_admin_refresh_token"));
+
+    //show loading model
+    guide_admin_main_pg_loading_model.modal('show');
+
+    $.ajax({
+        method: "GET",
+        contentType: "application/json",
+        url: 'http://localhost:1010/main/guide-service/guide-admin-get-profile-data',
+        async: true,
+        data: {
+            access_username: localStorage.getItem("secure_data_guide_admin_username"),
+            access_jwt_token: localStorage.getItem("secure_data_guide_admin_access_token"),
+            access_refresh_token: localStorage.getItem("secure_data_guide_admin_refresh_token")
+        },
+        success: function(data) {
+            if (data.rspd_code === RespondCodes.Response_SUCCESS) {
+                // Save tokens to localStorage
+                localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
+                localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
+                localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
+
+                // Set image from base64 data
+                guide_admin_main_pg_profile_img.attr('src', data.data.profile_image);
+                guide_admin_main_pg_top_admin_name.text("Mr. "+data.token.access_username+" [Admin]");
+
+                //fill setting form
+                p_s_username.val(data.data.name);
+                p_s_email.val(data.data.email);
+                p_s_nameinitial.val(data.data.name_with_initial);
+                p_s_nic.val(data.data.nic_or_passport);
+                p_s_address.val(data.data.address);
+                p_s_image.attr('src', data.data.profile_image);
+
+
+                // //check textflds validations after adding data
+                // checkSettingsAddedDataAtTextflds();
+
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+                }, 1000); // delay
+
+            } else {
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    guide_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 401){
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
+
+                }, 1000); // delay
+            }else {
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    guide_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+        }
+    });
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 //--------------------------------- Set time to UI------------------------------------
 $(document).ready(function(){

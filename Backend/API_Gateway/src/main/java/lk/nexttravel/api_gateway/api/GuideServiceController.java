@@ -29,7 +29,7 @@ public class GuideServiceController {
     GuideService guideService;
 
     //user login
-    @GetMapping(value = {"/guide-admin-get-profile-image"}, consumes = {"application/json"})
+    @GetMapping(value = {"/guide-admin-get-profile-data"}, consumes = {"application/json"})
     public Mono<ResponseEntity<RespondDTO>> userAdminGetProfileImage(
             @RequestParam("access_username") @NonNull String access_username
             ,
@@ -37,7 +37,7 @@ public class GuideServiceController {
             ,
             @RequestParam("access_refresh_token") @NonNull String access_refresh_token
     ){
-        return guideService.UserAdminGetProfileImage(
+        return guideService.UserAdminGetProfileData(
                 access_username
                 ,
                 access_jwt_token
