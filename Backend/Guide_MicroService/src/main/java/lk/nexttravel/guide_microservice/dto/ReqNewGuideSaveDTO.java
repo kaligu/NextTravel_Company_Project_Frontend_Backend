@@ -24,12 +24,31 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ReqNewGuideSaveDTO {
-    @Id
     private String id;
-    private String name_with_initial;
+
+    private String name;
+
+    private String remarks;
+
+    private int experience;
+
+    private String nic;
+
+    private String nic_front_view;
+
+    private String nic_rear_view;
+
+    private String tell;
+
+    private String gender;
+
+    private Data age;
+
+    private String image;
+
     private String address;
-    private String profile_image;
-    private String nic_or_passport;
+
+    private int perday_fee;
 
     //---for security purpose
     private String token;

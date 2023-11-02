@@ -7,6 +7,7 @@
 package lk.nexttravel.guide_microservice.service.impl;
 
 import lk.nexttravel.guide_microservice.dto.ReqNewGuideSaveDTO;
+import lk.nexttravel.guide_microservice.entity.Guide;
 import lk.nexttravel.guide_microservice.persistence.GuideRepository;
 import lk.nexttravel.guide_microservice.service.GuideService;
 import lk.nexttravel.guide_microservice.service.security.APIGatewayJwtAccessTokenServiceBackend;
@@ -33,17 +34,25 @@ public class GuideServiceImpl implements GuideService {
     @Override
     public ResponseEntity<String> SaveNewGuide_Prepare(ReqNewGuideSaveDTO reqNewGuideSaveDTO) {
         //check authentication
+        System.out.println(reqNewGuideSaveDTO.getName());
         try {
             if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqNewGuideSaveDTO.getToken())) {  //check gateway token
-
                 //save into database
                 guideRepository.save(
-                        Admin.builder()
-                                .id(reqNewClientSaveDTO.getId())
-                                .address(reqNewClientSaveDTO.getAddress())
-                                .profile_image(reqNewClientSaveDTO.getProfile_image())
-                                .signup_name_with_initial(reqNewClientSaveDTO.getName_with_initial())
-                                .nic_or_passport(reqNewClientSaveDTO.getNic_or_passport())
+                        Guide.builder()
+                                .id(reqNewGuideSaveDTO.getId())
+                                .name(reqNewGuideSaveDTO.getName())
+                                .remarks(reqNewGuideSaveDTO.getRemarks())
+                                .experience(reqNewGuideSaveDTO.getExperience())
+                                .nic(reqNewGuideSaveDTO.getNic())
+                                .nic_front_view(reqNewGuideSaveDTO.getNic_front_view())
+                                .nic_rear_view(reqNewGuideSaveDTO.getNic_rear_view())
+                                .tell(reqNewGuideSaveDTO.getTell())
+                                .gender(reqNewGuideSaveDTO.getGender())
+                                .dob(reqNewGuideSaveDTO.getAge())
+                                .image(reqNewGuideSaveDTO.getImage())
+                                .address(reqNewGuideSaveDTO.getAddress())
+                                .perday_fee(reqNewGuideSaveDTO.getPerday_fee())
                                 .transaction_state(RespondCodes.PENDING)
                                 .build()
                 );
@@ -64,12 +73,20 @@ public class GuideServiceImpl implements GuideService {
             if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqNewGuideSaveDTO.getToken())) {  //check gateway token
                 //save into database
                 guideRepository.save(
-                        Admin.builder()
-                                .id(reqNewClientSaveDTO.getId())
-                                .address(reqNewClientSaveDTO.getAddress())
-                                .profile_image(reqNewClientSaveDTO.getProfile_image())
-                                .signup_name_with_initial(reqNewClientSaveDTO.getName_with_initial())
-                                .nic_or_passport(reqNewClientSaveDTO.getNic_or_passport())
+                        Guide.builder()
+                                .id(reqNewGuideSaveDTO.getId())
+                                .name(reqNewGuideSaveDTO.getName())
+                                .remarks(reqNewGuideSaveDTO.getRemarks())
+                                .experience(reqNewGuideSaveDTO.getExperience())
+                                .nic(reqNewGuideSaveDTO.getNic())
+                                .nic_front_view(reqNewGuideSaveDTO.getNic_front_view())
+                                .nic_rear_view(reqNewGuideSaveDTO.getNic_rear_view())
+                                .tell(reqNewGuideSaveDTO.getTell())
+                                .gender(reqNewGuideSaveDTO.getGender())
+                                .dob(reqNewGuideSaveDTO.getAge())
+                                .image(reqNewGuideSaveDTO.getImage())
+                                .address(reqNewGuideSaveDTO.getAddress())
+                                .perday_fee(reqNewGuideSaveDTO.getPerday_fee())
                                 .transaction_state(RespondCodes.COMMITED)
                                 .build()
                 );
@@ -90,12 +107,20 @@ public class GuideServiceImpl implements GuideService {
             if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqNewGuideSaveDTO.getToken())) {  //check gateway token
                 //delete
                 guideRepository.delete(
-                        Admin.builder()
-                                .id(reqNewClientSaveDTO.getId())
-                                .address(reqNewClientSaveDTO.getAddress())
-                                .profile_image(reqNewClientSaveDTO.getProfile_image())
-                                .signup_name_with_initial(reqNewClientSaveDTO.getName_with_initial())
-                                .nic_or_passport(reqNewClientSaveDTO.getNic_or_passport())
+                        Guide.builder()
+                                .id(reqNewGuideSaveDTO.getId())
+                                .name(reqNewGuideSaveDTO.getName())
+                                .remarks(reqNewGuideSaveDTO.getRemarks())
+                                .experience(reqNewGuideSaveDTO.getExperience())
+                                .nic(reqNewGuideSaveDTO.getNic())
+                                .nic_front_view(reqNewGuideSaveDTO.getNic_front_view())
+                                .nic_rear_view(reqNewGuideSaveDTO.getNic_rear_view())
+                                .tell(reqNewGuideSaveDTO.getTell())
+                                .gender(reqNewGuideSaveDTO.getGender())
+                                .dob(reqNewGuideSaveDTO.getAge())
+                                .image(reqNewGuideSaveDTO.getImage())
+                                .address(reqNewGuideSaveDTO.getAddress())
+                                .perday_fee(reqNewGuideSaveDTO.getPerday_fee())
                                 .build()
                 );
 

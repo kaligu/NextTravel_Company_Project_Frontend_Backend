@@ -46,9 +46,9 @@ public class Guide {
 
     private String tell;
 
-    private String grnder;
+    private String gender;
 
-    private int age;
+    private Data dob;
 
     private String image;
 
