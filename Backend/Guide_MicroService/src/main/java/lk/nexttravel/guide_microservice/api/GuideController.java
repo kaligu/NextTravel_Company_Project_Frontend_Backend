@@ -6,10 +6,36 @@
 */
 package lk.nexttravel.guide_microservice.api;
 
+import lk.nexttravel.guide_microservice.dto.ReqNewGuideSaveDTO;
+import lk.nexttravel.guide_microservice.service.GuideService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 /**
  * @author : H.C.Kaligu Jayanath
  * Date    : 11/2/2023
  * Time    : 5:34 AM
  */
+
+@RestController
+@RequestMapping("/guide")
+@CrossOrigin("*")
 public class GuideController {
+    @Autowired
+    GuideService guideService;
+
+    //----------Save New Guide ------
+    @PostMapping(value = "/save_new_guide")
+    public ResponseEntity<String> SaveNewClient_Prepare(@RequestBody ReqNewGuideSaveDTO reqNewGuideSaveDTO){
+        return guideService.SaveNewGuide_Prepare(reqNewGuideSaveDTO);
+    }
+    @PutMapping(value = "/save_new_guide")
+    public ResponseEntity<String> SaveNewClient_Commit(@RequestBody ReqNewGuideSaveDTO reqNewGuideSaveDTO){
+        return guideService.SaveNewGuide_Commit(reqNewGuideSaveDTO);
+    }
+    @DeleteMapping(value = "/save_new_guide")
+    public ResponseEntity<String> SaveNewClient_Abrot(@RequestBody ReqNewGuideSaveDTO reqNewGuideSaveDTO){
+        return guideService.SaveNewGuide_Abrot(reqNewGuideSaveDTO);
+    }
 }

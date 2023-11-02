@@ -40,7 +40,7 @@ public class GuideServiceImpl implements GuideService {
                 //save into database
                 guideRepository.save(
                         Guide.builder()
-                                .id(reqNewGuideSaveDTO.getId())
+                                .id("reqNewGuideSaveDTO.getId()")
                                 .name(reqNewGuideSaveDTO.getName())
                                 .remarks(reqNewGuideSaveDTO.getRemarks())
                                 .experience(reqNewGuideSaveDTO.getExperience())
@@ -49,7 +49,7 @@ public class GuideServiceImpl implements GuideService {
                                 .nic_rear_view(reqNewGuideSaveDTO.getNic_rear_view())
                                 .tell(reqNewGuideSaveDTO.getTell())
                                 .gender(reqNewGuideSaveDTO.getGender())
-                                .dob(reqNewGuideSaveDTO.getAge())
+                                .dob(reqNewGuideSaveDTO.getDob())
                                 .image(reqNewGuideSaveDTO.getImage())
                                 .address(reqNewGuideSaveDTO.getAddress())
                                 .perday_fee(reqNewGuideSaveDTO.getPerday_fee())
@@ -74,7 +74,7 @@ public class GuideServiceImpl implements GuideService {
                 //save into database
                 guideRepository.save(
                         Guide.builder()
-                                .id(reqNewGuideSaveDTO.getId())
+                                .id("reqNewGuideSaveDTO.getId()")
                                 .name(reqNewGuideSaveDTO.getName())
                                 .remarks(reqNewGuideSaveDTO.getRemarks())
                                 .experience(reqNewGuideSaveDTO.getExperience())
@@ -83,7 +83,7 @@ public class GuideServiceImpl implements GuideService {
                                 .nic_rear_view(reqNewGuideSaveDTO.getNic_rear_view())
                                 .tell(reqNewGuideSaveDTO.getTell())
                                 .gender(reqNewGuideSaveDTO.getGender())
-                                .dob(reqNewGuideSaveDTO.getAge())
+                                .dob(reqNewGuideSaveDTO.getDob())
                                 .image(reqNewGuideSaveDTO.getImage())
                                 .address(reqNewGuideSaveDTO.getAddress())
                                 .perday_fee(reqNewGuideSaveDTO.getPerday_fee())
@@ -108,7 +108,7 @@ public class GuideServiceImpl implements GuideService {
                 //delete
                 guideRepository.delete(
                         Guide.builder()
-                                .id(reqNewGuideSaveDTO.getId())
+                                .id("reqNewGuideSaveDTO.getId()")
                                 .name(reqNewGuideSaveDTO.getName())
                                 .remarks(reqNewGuideSaveDTO.getRemarks())
                                 .experience(reqNewGuideSaveDTO.getExperience())
@@ -117,7 +117,7 @@ public class GuideServiceImpl implements GuideService {
                                 .nic_rear_view(reqNewGuideSaveDTO.getNic_rear_view())
                                 .tell(reqNewGuideSaveDTO.getTell())
                                 .gender(reqNewGuideSaveDTO.getGender())
-                                .dob(reqNewGuideSaveDTO.getAge())
+                                .dob(reqNewGuideSaveDTO.getDob())
                                 .image(reqNewGuideSaveDTO.getImage())
                                 .address(reqNewGuideSaveDTO.getAddress())
                                 .perday_fee(reqNewGuideSaveDTO.getPerday_fee())

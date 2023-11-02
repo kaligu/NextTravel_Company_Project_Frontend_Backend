@@ -24,8 +24,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ReqNewGuideSaveDTO {
-    private String id;
-
     private String name;
 
     private String remarks;
@@ -42,7 +40,7 @@ public class ReqNewGuideSaveDTO {
 
     private String gender;
 
-    private Data age;
+    private Data dob;
 
     private String image;
 
