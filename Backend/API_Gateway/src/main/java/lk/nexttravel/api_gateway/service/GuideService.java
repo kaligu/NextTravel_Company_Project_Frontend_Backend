@@ -28,4 +28,6 @@ public interface GuideService {
     Mono<ResponseEntity<RespondDTO>> getAllGuides(String access_username, String access_jwt_token, String access_refresh_token);
 
     Mono<ResponseEntity<RespondDTO>> updateGuide(String id, String name, String address, String remarks, String experience, String nic, String nicFrontView, String nicRearView, String tell, String gender, String dob, String image, String perdayFee, String accessUsername, String accessToken, String refreshToken);
+
+    Mono<ResponseEntity<RespondDTO>> deleteGuide(String id, String access_username, String access_jwt_token, String access_refresh_token);
 }

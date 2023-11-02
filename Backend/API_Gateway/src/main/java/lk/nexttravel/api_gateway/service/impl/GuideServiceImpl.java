@@ -87,10 +87,7 @@ public class GuideServiceImpl implements GuideService {
                             &&
                             internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_GUIDE)
             ) {
-                System.out.println("$$$$$$$$$$$$$$$");
-                System.out.println(access_username);
-                System.out.println(access_jwt_token);
-                System.out.println(access_refresh_token);
+
                 //get data using restcontroller
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_JSON);
@@ -135,10 +132,7 @@ public class GuideServiceImpl implements GuideService {
                 return Mono.error(new UnauthorizeException("Unauthorized request"));
             }
         }catch (Exception e){
-            System.out.println("$$$$$$$$$$$$$$$"+e);
-            System.out.println(access_username);
-            System.out.println(access_jwt_token);
-            System.out.println(access_refresh_token);
+
             return Mono.error(new InternalServerException("Internal Server error!"+e));
         }
     }
@@ -427,6 +421,69 @@ public class GuideServiceImpl implements GuideService {
                 return Mono.error(new UnauthorizeException("Unauthorized request"));
             }
         }catch (Exception e){
+            return Mono.error(new InternalServerException("Internal Server error!"+e));
+        }
+    }
+
+    @Override
+    public Mono<ResponseEntity<RespondDTO>> deleteGuide(String id, String access_username, String access_jwt_token, String access_refresh_token) {
+        try{
+            FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder().access_jwt_token(access_jwt_token).access_username(access_username).access_refresh_token(access_refresh_token).build();
+
+
+            InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
+            System.out.println(internalFrontendSecurityCheckDTO.toString());
+            if(
+                    internalFrontendSecurityCheckDTO.isAccesssible()
+                            &&
+                            internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_GUIDE)
+            ) {
+
+                //get data using restcontroller
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                HttpEntity<String> entity = new HttpEntity<>(null, headers); // Sending an empty body
+
+                User user = userRepository.findUserByName(frontendTokenDTO.getAccess_username()).get();
+
+                System.out.println(user.getId());
+                ResponseEntity<ReqProfileDataAdminsDTO> reqProfileDataAdminsDTOResponseEntity = restTemplate.exchange(
+                        "http://localhost:1020/api/admin/user-admin-get-profile-data?id=" + user.getId() + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
+                        HttpMethod.GET,
+                        entity,
+                        ReqProfileDataAdminsDTO.class
+                );
+                //send to front
+                return Mono.just(new ResponseEntity<RespondDTO>(
+                        RespondDTO.builder()
+                                .rspd_code(RespondCodes.Respond_SUCCESS)
+                                .data(
+                                        UserReqProfileDataDTO.builder()
+                                                .id(user.getId())
+                                                .name(user.getName())
+                                                .name_with_initial(reqProfileDataAdminsDTOResponseEntity.getBody().getName_with_initial())
+                                                .address(reqProfileDataAdminsDTOResponseEntity.getBody().getAddress())
+                                                .email(user.getEmail())
+                                                .profile_image(reqProfileDataAdminsDTOResponseEntity.getBody().getProfile_image())
+                                                .nic_or_passport(reqProfileDataAdminsDTOResponseEntity.getBody().getNic_or_passport())
+                                                .build()
+                                )
+                                .token(
+                                        FrontendTokenDTO.builder()
+                                                .access_username(internalFrontendSecurityCheckDTO.getUsername())
+                                                .access_jwt_token(internalFrontendSecurityCheckDTO.getAccess_token())
+                                                .access_refresh_token(internalFrontendSecurityCheckDTO.getRefresh_token())
+                                                .build()
+                                )
+                                .build()
+                        ,
+                        HttpStatus.OK
+                ));
+            }else {
+                return Mono.error(new UnauthorizeException("Unauthorized request"));
+            }
+        }catch (Exception e){
+
             return Mono.error(new InternalServerException("Internal Server error!"+e));
         }
     }
