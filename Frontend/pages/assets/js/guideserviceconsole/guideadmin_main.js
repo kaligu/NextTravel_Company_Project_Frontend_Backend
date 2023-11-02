@@ -1165,6 +1165,19 @@ function loadDataAfterOpenedViewGuideContainer(){
             });
 
 
+            $(".delete-btn").on('click', function() {
+                var guideId = $(this).data('guide-id');
+
+                // Assuming 'adminData' is the array of admin objects
+                var guide = data.data.find(function(item) {
+                    return item.id === guideId;
+                });
+
+                $('#guide_admin_main_pg_delete-model_text').text(guide.id);
+
+                $('#guide_admin_main_pg_delete-model').modal('show');
+            });
+
             //hide loading model
             setTimeout(function () {
                 guide_admin_main_pg_loading_model.modal('hide');
@@ -1591,8 +1604,10 @@ function saveEditGuide(){
                         $('#alert').show();
                         setTimeout(function () {
                             $('#alert').hide();
+                            admin_manage_container_edit_admin_model.modal('hide');
+                            console.log("done");
                             window.location.refresh();
-                        }, 1000); // delay
+                        }, 100); // delay
                     }, 100); // delay
 
                 }, 1000); // delay
@@ -1638,6 +1653,10 @@ function saveEditGuide(){
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+//--------delete on server
+function saveDeleteGuide(){
+    console.log("deleted");
+}
 
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
