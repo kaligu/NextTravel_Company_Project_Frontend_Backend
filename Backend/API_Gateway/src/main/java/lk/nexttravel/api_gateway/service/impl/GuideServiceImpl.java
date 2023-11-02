@@ -16,12 +16,16 @@ import lk.nexttravel.api_gateway.dto.TransactionDTO;
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
 import lk.nexttravel.api_gateway.dto.user.ReqProfileDataAdminsDTO;
+import lk.nexttravel.api_gateway.dto.user.ReqUpdateGuideAdminDTO;
 import lk.nexttravel.api_gateway.dto.user.UserReqNewClientSaveDTO;
 import lk.nexttravel.api_gateway.dto.user.UserReqProfileDataDTO;
 import lk.nexttravel.api_gateway.entity.User;
 import lk.nexttravel.api_gateway.service.GuideService;
 import lk.nexttravel.api_gateway.service.security.Authenticate_Authorize_Service;
 import lk.nexttravel.api_gateway.service.security.util.APIGatewayJwtAccessTokenServiceBackend;
+import lk.nexttravel.api_gateway.service.security.util.APIGatewayJwtAccessTokenServiceFrontend;
+import lk.nexttravel.api_gateway.service.security.util.RefreshTokenServiceFrontend;
+import lk.nexttravel.api_gateway.service.transaction.TransactionCordinator;
 import lk.nexttravel.api_gateway.util.RespondCodes;
 import lk.nexttravel.api_gateway.util.RoleTypes;
 import lk.nexttravel.api_gateway.util.RqRpURLs;
@@ -58,6 +62,16 @@ public class GuideServiceImpl implements GuideService {
 
     @Autowired
     APIGatewayJwtAccessTokenServiceBackend apiGatewayJwtAccessTokenServiceBackend;
+
+    @Autowired
+    TransactionCordinator transactionCordinator;
+
+    @Autowired
+    APIGatewayJwtAccessTokenServiceFrontend apiGatewayJwtAccessTokenServiceFrontend;
+
+    @Autowired
+    RefreshTokenServiceFrontend refreshTokenServiceFrontend;
+
 
     @Override
     public Mono<ResponseEntity<RespondDTO>> UserAdminGetProfileData(String access_username, String access_jwt_token, String access_refresh_token) {
@@ -146,19 +160,18 @@ public class GuideServiceImpl implements GuideService {
                 }
 
                 //send data into transaction Coordinator for prepare
-
                 transactionDTOArrayList.add(
                         TransactionDTO.builder()      //send data into User Service - task2
                                 .url(RqRpURLs.User_Service_Guide_Update) //url
                                 .httpMethod(HttpMethod.POST)  //http method
                                 .data(
-                                        UserReqNewClientSaveDTO.builder()
-                                                .token( apiGatewayJwtAccessTokenServiceBackend.generateToken() ) //create a session token to connect with microservice check this request is valid request
-                                                .id(id)
-                                                .address(userSignupDTO.getSignup_address())
-                                                .nic_or_passport(userSignupDTO.getSignup_nic_or_passport())
-                                                .profile_image("encodedImage")
-                                                .name_with_initial(userSignupDTO.getSignup_name_with_initial())
+                                        ReqUpdateGuideAdminDTO.builder()
+                                                .signup_name_with_initial(nameinitial)
+                                                .nic_or_passport(nic)
+                                                .address(address)
+                                                .profile_image(profileImage_base64String)
+                                                .transaction_state(RespondCodes.PENDING)
+                                                .token(apiGatewayJwtAccessTokenServiceBackend.generateToken())
                                                 .build()
                                 )
                                 .build()
@@ -178,32 +191,31 @@ public class GuideServiceImpl implements GuideService {
                     transactionCordinator.commitPhaseForCreate(transactionDTOArrayList);
 
                     //Access Token Create Get
-                    String newAccessToken = APIGatewayJwtAccessTokenServiceFrontend.generateToken(userSignupDTO.getSignup_name()); //create and get JWT access token
+                    String newAccessToken = apiGatewayJwtAccessTokenServiceFrontend.generateToken(username); //create and get JWT access token
 
                     //UserRefreshToken Save On Gateway DB
                     String newRefreshToken = refreshTokenServiceFrontend.createRefreshToken(savedUser.get()); //create get and save refresh token
 
-                    FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder()
+                    FrontendTokenDTO newfrontendTokenDTO = FrontendTokenDTO.builder()
                             .access_username(savedUser.get().getName())
                             .access_jwt_token(newAccessToken) //create access token and assign it
                             .access_refresh_token(newRefreshToken)  //create refresh token and save and assign it
                             .build();
 
-                    //send mail
-                    mailService.sendEmailForNewUserSignup(userSignupDTO.getSignup_email(), userSignupDTO.getSignup_name());
-
                     //----------------------------------------------return if all are done
-                    return new ResponseEntity<RespondDTO> (
-                            RespondDTO.builder()
-                                    .rspd_code(RespondCodes.Respond_DATA_SAVED)
-                                    .token(frontendTokenDTO)
-                                    .data(savedUser.get().getRole_type())
-                                    .build()
-                            ,
-                            HttpStatus.CREATED);
+                    return Mono.just(
+                            new ResponseEntity<RespondDTO> (
+                                    RespondDTO.builder()
+                                            .rspd_code(RespondCodes.Respond_DATA_SAVED)
+                                            .token(newfrontendTokenDTO)
+                                            .data(null)
+                                            .build()
+                                    ,
+                                    HttpStatus.CREATED)
+                    );
                 }else {
                     //abrot User
-                    userRepository.delete(userRepository.findUserByName(userSignupDTO.getSignup_name()).get());
+                    userRepository.delete(userRepository.findUserByName(username).get());
 
                     //abrot Client
                     transactionCordinator.rollbackPhaseForCreate(transactionDTOArrayList);
@@ -217,113 +229,5 @@ public class GuideServiceImpl implements GuideService {
         }catch (Exception e){
             return Mono.error(new InternalServerException("Internal Server error!"+e));
         }
-
-
-
-
-        try {
-            String encodedpassword = passwordEncoder.encode(password);
-
-            Optional<User> savedUser;
-            if(userRepository.existsByName(u)){
-                //User Save On Gateway DB -task 1
-                savedUser = Optional.of(
-                        userRepository.save(
-                                User.builder()
-                                        .id(id)
-                                        .name(userSignupDTO.getSignup_name())
-                                        .email(userSignupDTO.getSignup_email())
-                                        .password(encodedpassword)
-                                        .role_type(RoleTypes.ROLE_CLIENT)
-                                        .transaction_state(RespondCodes.PENDING)
-                                        .build())
-                );
-            }else {
-                throw new Exception("Not found");
-            }
-
-
-            //send data into transaction Coordinator for prepare
-
-            transactionDTOArrayList.add(
-                    TransactionDTO.builder()      //send data into User Service - task2
-                            .url(RqRpURLs.User_Service_New_Client_Save_Signup) //url
-                            .httpMethod(HttpMethod.POST)  //http method
-                            .data(
-                                    UserReqNewClientSaveDTO.builder()
-                                            .token( apiGatewayJwtAccessTokenServiceBackend.generateToken() ) //create a session token to connect with microservice check this request is valid request
-                                            .id(id)
-                                            .address(userSignupDTO.getSignup_address())
-                                            .nic_or_passport(userSignupDTO.getSignup_nic_or_passport())
-                                            .profile_image("encodedImage")
-                                            .name_with_initial(userSignupDTO.getSignup_name_with_initial())
-                                            .build()
-                            )
-                            .build()
-            );
-            //add transactiondto arraylist for commit
-            boolean isAllMicroServiceTasksCommited =false;
-            isAllMicroServiceTasksCommited = transactionCordinator.preparePhaseForCreate(transactionDTOArrayList);
-
-            if(
-                    savedUser.isPresent() && isAllMicroServiceTasksCommited
-            ){
-                //commit user
-                savedUser.get().setTransaction_state(RespondCodes.COMMITED);
-                userRepository.save(savedUser.get());
-
-                //commit
-                transactionCordinator.commitPhaseForCreate(transactionDTOArrayList);
-
-                //Access Token Create Get
-                String newAccessToken = APIGatewayJwtAccessTokenServiceFrontend.generateToken(userSignupDTO.getSignup_name()); //create and get JWT access token
-
-                //UserRefreshToken Save On Gateway DB
-                String newRefreshToken = refreshTokenServiceFrontend.createRefreshToken(savedUser.get()); //create get and save refresh token
-
-                FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder()
-                        .access_username(savedUser.get().getName())
-                        .access_jwt_token(newAccessToken) //create access token and assign it
-                        .access_refresh_token(newRefreshToken)  //create refresh token and save and assign it
-                        .build();
-
-                //send mail
-                mailService.sendEmailForNewUserSignup(userSignupDTO.getSignup_email(), userSignupDTO.getSignup_name());
-
-                //----------------------------------------------return if all are done
-                return new ResponseEntity<RespondDTO> (
-                        RespondDTO.builder()
-                                .rspd_code(RespondCodes.Respond_DATA_SAVED)
-                                .token(frontendTokenDTO)
-                                .data(savedUser.get().getRole_type())
-                                .build()
-                        ,
-                        HttpStatus.CREATED);
-            }else {
-                //abrot User
-                userRepository.delete(userRepository.findUserByName(userSignupDTO.getSignup_name()).get());
-
-                //abrot Client
-                transactionCordinator.rollbackPhaseForCreate(transactionDTOArrayList);
-
-                throw new InternalServerException("This User not saved!");
-            }
-        } catch (Exception e){
-
-            //abrot User
-            userRepository.delete(userRepository.findUserByName(userSignupDTO.getSignup_name()).get());
-
-            //abrot Client
-            transactionCordinator.rollbackPhaseForCreate(transactionDTOArrayList);
-
-            throw new InternalServerException("This User not saved!");
-        }
-
-
-
-
-
-
-
     }
 }
