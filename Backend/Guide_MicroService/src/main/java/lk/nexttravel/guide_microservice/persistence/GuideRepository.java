@@ -8,7 +8,10 @@ package lk.nexttravel.guide_microservice.persistence;
 
 import lk.nexttravel.guide_microservice.entity.Guide;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
 
 /**
  * @author : H.C.Kaligu Jayanath
@@ -18,4 +21,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GuideRepository extends MongoRepository<Guide , String> {
+    ArrayList<Guide> findAll();
 }

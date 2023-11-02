@@ -319,26 +319,13 @@ public class GuideServiceImpl implements GuideService {
                             internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_GUIDE)
             ) {
 
-                ArrayList<UserAdminDTO> userAdminDTOS = new ArrayList<>();
-
-                //get on User DB admin datas
-                ArrayList<User> userArrayList = userRepository.findAllByNameContains(search_keyword);
-
-                //fill and add
-                for (User user:userArrayList){
-                    UserAdminDTO userAdminDTO = new UserAdminDTO();
-                    userAdminDTO.setId(user.getId());
-                    userAdminDTO.setName(user.getName());
-                    userAdminDTO.setEmail(user.getEmail());
-                    userAdminDTO.setRole_type(user.getRole_type());
-
                     //get data using restcontroller
                     HttpHeaders headers = new HttpHeaders();
                     headers.setContentType(MediaType.APPLICATION_JSON);
                     HttpEntity<String> entity = new HttpEntity<>(null, headers); // Sending an empty body
 
-                    ResponseEntity<AdminDTO> adminDTOResponseEntity = restTemplate.exchange(
-                            "http://localhost:1020/api/admin/get-admin-data?search_keyword=" + user.getId() + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
+                    ResponseEntity<ArrayList<Gio>> adminDTOResponseEntity = restTemplate.exchange(
+                            "http://localhost:1030/api/guide/getall-guides?token="+ apiGatewayJwtAccessTokenServiceBackend.generateToken(),
                             HttpMethod.GET,
                             entity,
                             AdminDTO.class

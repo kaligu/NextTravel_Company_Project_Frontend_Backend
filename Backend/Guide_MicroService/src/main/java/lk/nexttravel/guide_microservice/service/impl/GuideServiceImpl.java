@@ -75,6 +75,17 @@ public class GuideServiceImpl implements GuideService {
 
     @Override
     public ResponseEntity<ArrayList<Guide>> getAllGuides(String token) {
-        return null;
+        try {
+            if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(token)) {  //check gateway token
+
+                ArrayList<Guide> guideArrayList= guideRepository.findAll();
+                return new ResponseEntity<>(guideArrayList, HttpStatus.CREATED);
+
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

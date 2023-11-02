@@ -38,7 +38,6 @@ public class GuideController {
     //search all guides
     @GetMapping(value = "/getall-guides")
     public ResponseEntity<ArrayList<Guide>> getAllGuides(
-            @RequestParam String search_keyword ,
             @RequestParam String token
     ){
         return guideService.getAllGuides(token);
