@@ -28,14 +28,7 @@ public class GuideController {
     //----------Save New Guide ------
     @PostMapping(value = "/save_new_guide")
     public ResponseEntity<String> SaveNewClient_Prepare(@RequestBody ReqNewGuideSaveDTO reqNewGuideSaveDTO){
-        return guideService.SaveNewGuide_Prepare(reqNewGuideSaveDTO);
+        return guideService.SaveNewGuide(reqNewGuideSaveDTO);
     }
-    @PutMapping(value = "/save_new_guide")
-    public ResponseEntity<String> SaveNewClient_Commit(@RequestBody ReqNewGuideSaveDTO reqNewGuideSaveDTO){
-        return guideService.SaveNewGuide_Commit(reqNewGuideSaveDTO);
-    }
-    @DeleteMapping(value = "/save_new_guide")
-    public ResponseEntity<String> SaveNewClient_Abrot(@RequestBody ReqNewGuideSaveDTO reqNewGuideSaveDTO){
-        return guideService.SaveNewGuide_Abrot(reqNewGuideSaveDTO);
-    }
+
 }

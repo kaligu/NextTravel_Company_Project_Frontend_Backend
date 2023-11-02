@@ -15,9 +15,5 @@ import org.springframework.http.ResponseEntity;
  * Time    : 5:35 AM
  */
 public interface GuideService {
-    ResponseEntity<String> SaveNewGuide_Prepare(ReqNewGuideSaveDTO reqNewGuideSaveDTO);
-
-    ResponseEntity<String> SaveNewGuide_Commit(ReqNewGuideSaveDTO reqNewGuideSaveDTO);
-
-    ResponseEntity<String> SaveNewGuide_Abrot(ReqNewGuideSaveDTO reqNewGuideSaveDTO);
+    ResponseEntity<String> SaveNewGuide(ReqNewGuideSaveDTO reqNewGuideSaveDTO);
 }

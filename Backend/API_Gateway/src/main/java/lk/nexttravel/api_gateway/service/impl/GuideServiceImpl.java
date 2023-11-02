@@ -72,6 +72,7 @@ public class GuideServiceImpl implements GuideService {
     @Autowired
     RefreshTokenServiceFrontend refreshTokenServiceFrontend;
 
+    private final RestTemplate newrestTemplate = new RestTemplate();
 
     @Override
     public Mono<ResponseEntity<RespondDTO>> UserAdminGetProfileData(String access_username, String access_jwt_token, String access_refresh_token) {
@@ -241,6 +242,56 @@ public class GuideServiceImpl implements GuideService {
 
     @Override
     public Mono<ResponseEntity<RespondDTO>> createNewGuide(String name, String address, String remarks, String experience, String nic, String nicFrontView, String nicRearView, String tell, String gender, String dob, String image, String perdayFee, String accessUsername, String accessToken, String refreshToken) {
-        return null;
+
+        ArrayList<TransactionDTO> transactionDTOArrayList = new ArrayList<>(); // for transactions
+        try{
+            FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder().access_jwt_token(accessToken).access_username(accessUsername).access_refresh_token(refreshToken).build();
+            InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
+            if(
+                    internalFrontendSecurityCheckDTO.isAccesssible()
+                            &&
+                            internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_GUIDE)
+            ) {
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+
+                ResponseEntity<String> responseEntity = restTemplate.exchange(
+                        data.getUrl(),
+                        HttpMethod.POST,
+                        new HttpEntity<Object> (
+                                data.getData()
+                                ,
+                                headers
+                        ),
+                        String.class
+                );
+
+                responseEntity.getStatusCode()==HttpStatus.CREATED; //if done return true
+
+                FrontendTokenDTO newfrontendTokenDTO = FrontendTokenDTO.builder()
+                        .access_username(savedUser.get().getName())
+                        .access_jwt_token(internalFrontendSecurityCheckDTO.getAccess_token())
+                        .access_refresh_token(internalFrontendSecurityCheckDTO.getRefresh_token())
+                        .build();
+
+                //----------------------------------------------return if all are done
+                return Mono.just(
+                        new ResponseEntity<RespondDTO> (
+                                RespondDTO.builder()
+                                        .rspd_code(RespondCodes.Respond_DATA_SAVED)
+                                        .token(newfrontendTokenDTO)
+                                        .data(null)
+                                        .build()
+                                ,
+                                HttpStatus.CREATED)
+                );
+
+            }else {
+                return Mono.error(new UnauthorizeException("Unauthorized request"));
+            }
+        }catch (Exception e){
+            return Mono.error(new InternalServerException("Internal Server error!"+e));
+        }
     }
 }
