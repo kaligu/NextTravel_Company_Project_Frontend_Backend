@@ -33,7 +33,7 @@ public class GuideServiceController {
 
     //user login
     @GetMapping(value = {"/guide-admin-get-profile-data"}, consumes = {"application/json"})
-    public Mono<ResponseEntity<RespondDTO>> userAdminGetProfileImage(
+    public Mono<ResponseEntity<RespondDTO>> userAdminGetProfileDataa(
             @RequestParam("access_username") @NonNull String access_username
             ,
             @RequestParam("access_jwt_token") @NonNull String access_jwt_token
@@ -52,6 +52,7 @@ public class GuideServiceController {
     //update Profile Data - guide admin
     @PostMapping(value = {"/guide-admin-update-profile-data"}, consumes = {"multipart/form-data"})
     public Mono<ResponseEntity<RespondDTO>> userAdminUpdateProfileData(
+            @RequestPart("id") String id,
             @RequestPart("username") String username,
             @RequestPart("address") String address,
             @RequestPart("email") String email,
@@ -75,6 +76,7 @@ public class GuideServiceController {
         ){
 
             return guideService.UserAdminUpdateProfileData(
+                    id,
                     username,
                     address,
                     email,

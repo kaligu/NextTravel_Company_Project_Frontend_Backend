@@ -77,12 +77,19 @@ public class GuideServiceImpl implements GuideService {
     public Mono<ResponseEntity<RespondDTO>> UserAdminGetProfileData(String access_username, String access_jwt_token, String access_refresh_token) {
         try{
             FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder().access_jwt_token(access_jwt_token).access_username(access_username).access_refresh_token(access_refresh_token).build();
+
+
             InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
+            System.out.println(internalFrontendSecurityCheckDTO.toString());
             if(
                     internalFrontendSecurityCheckDTO.isAccesssible()
                             &&
                             internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_GUIDE)
             ) {
+                System.out.println("$$$$$$$$$$$$$$$");
+                System.out.println(access_username);
+                System.out.println(access_jwt_token);
+                System.out.println(access_refresh_token);
                 //get data using restcontroller
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_JSON);
@@ -90,6 +97,7 @@ public class GuideServiceImpl implements GuideService {
 
                 User user = userRepository.findUserByName(frontendTokenDTO.getAccess_username()).get();
 
+                System.out.println(user.getId());
                 ResponseEntity<ReqProfileDataAdminsDTO> reqProfileDataAdminsDTOResponseEntity = restTemplate.exchange(
                         "http://localhost:1020/api/admin/user-admin-get-profile-data?id=" + user.getId() + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
                         HttpMethod.GET,
@@ -126,12 +134,16 @@ public class GuideServiceImpl implements GuideService {
                 return Mono.error(new UnauthorizeException("Unauthorized request"));
             }
         }catch (Exception e){
+            System.out.println("$$$$$$$$$$$$$$$"+e);
+            System.out.println(access_username);
+            System.out.println(access_jwt_token);
+            System.out.println(access_refresh_token);
             return Mono.error(new InternalServerException("Internal Server error!"+e));
         }
     }
 
     @Override
-    public Mono<ResponseEntity<RespondDTO>> UserAdminUpdateProfileData(String username, String address, String email, String nic, String password, String nameinitial, String profileImage_base64String, String access_username, String access_jwt_token, String access_refresh_token) {
+    public Mono<ResponseEntity<RespondDTO>> UserAdminUpdateProfileData(String id, String username, String address, String email, String nic, String password, String nameinitial, String profileImage_base64String, String access_username, String access_jwt_token, String access_refresh_token) {
         ArrayList<TransactionDTO> transactionDTOArrayList = new ArrayList<>(); // for transactions
         try{
             FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder().access_jwt_token(access_jwt_token).access_username(access_username).access_refresh_token(access_refresh_token).build();
@@ -143,19 +155,18 @@ public class GuideServiceImpl implements GuideService {
             ) {
 
                 String encodedpassword = passwordEncoder.encode(password);
+                System.out.println(password);
 
-                Optional<User> savedUser;
-                if(userRepository.existsByName(username)){
+                Optional<User> savedUser = userRepository.findUserByName(username);
+
+                if(savedUser.isPresent()){
                     //User Save On Gateway DB -task 1
-                    savedUser = Optional.of(
-                            userRepository.save(
-                                    User.builder()
-                                            .name(username)
-                                            .email(email)
-                                            .password(encodedpassword)
-                                            .transaction_state(RespondCodes.PENDING)
-                                            .build())
-                    );
+                    savedUser.get().setId(id);
+                    savedUser.get().setPassword(encodedpassword);
+                    savedUser.get().setEmail(email);
+                    savedUser.get().setName(username);
+                    savedUser.get().setTransaction_state(RespondCodes.PENDING);
+                    userRepository.save(savedUser.get());
                 }else {
                     throw new Exception("Not found");
                 }
@@ -167,6 +178,7 @@ public class GuideServiceImpl implements GuideService {
                                 .httpMethod(HttpMethod.POST)  //http method
                                 .data(
                                         ReqUpdateGuideAdminDTO.builder()
+                                                .id(id)
                                                 .name_with_initial(nameinitial)
                                                 .nic_or_passport(nic)
                                                 .address(address)
@@ -191,16 +203,10 @@ public class GuideServiceImpl implements GuideService {
                     //commit
                     transactionCordinator.commitPhaseForUpdate(transactionDTOArrayList);
 
-                    //Access Token Create Get
-                    String newAccessToken = apiGatewayJwtAccessTokenServiceFrontend.generateToken(username); //create and get JWT access token
-
-                    //UserRefreshToken Save On Gateway DB
-                    String newRefreshToken = refreshTokenServiceFrontend.createRefreshToken(savedUser.get()); //create get and save refresh token
-
                     FrontendTokenDTO newfrontendTokenDTO = FrontendTokenDTO.builder()
                             .access_username(savedUser.get().getName())
-                            .access_jwt_token(newAccessToken) //create access token and assign it
-                            .access_refresh_token(newRefreshToken)  //create refresh token and save and assign it
+                            .access_jwt_token(internalFrontendSecurityCheckDTO.getAccess_token())
+                            .access_refresh_token(internalFrontendSecurityCheckDTO.getRefresh_token())
                             .build();
 
                     //----------------------------------------------return if all are done

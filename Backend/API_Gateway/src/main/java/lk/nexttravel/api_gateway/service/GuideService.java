@@ -21,5 +21,5 @@ public interface GuideService {
     Mono<ResponseEntity<RespondDTO>> UserAdminGetProfileData(String access_username, String access_jwt_token, String access_refresh_token);
 
     //update
-    Mono<ResponseEntity<RespondDTO>> UserAdminUpdateProfileData(String username, String address, String email, String nic, String password, String nameinitial, String profileImage_base64String, String access_username, String access_jwt_token, String access_refresh_token);
+    Mono<ResponseEntity<RespondDTO>> UserAdminUpdateProfileData(String id, String username, String address, String email, String nic, String password, String nameinitial, String profileImage_base64String, String access_username, String access_jwt_token, String access_refresh_token);
 }

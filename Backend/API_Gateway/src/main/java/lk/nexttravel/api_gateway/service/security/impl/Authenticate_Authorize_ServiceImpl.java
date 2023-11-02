@@ -36,7 +36,9 @@ public class Authenticate_Authorize_ServiceImpl implements Authenticate_Authoriz
 
     @Override
     public InternalFrontendSecurityCheckDTO validateRequestsAndGetMetaData(FrontendTokenDTO frontendTokenDTO) {
+
         InternalJWTUserDTO internalJWTUserDTO = this.apiGatewayJwtAccessTokenServiceFrontend.validateUpdateGetUserJWT(frontendTokenDTO.getAccess_jwt_token(), frontendTokenDTO.getAccess_username());
+
         InternalRefreshTUserDTO internalRefreshTUserDTO = this.refreshTokenServiceFrontend.validateUpdateGetUserJWT(frontendTokenDTO.getAccess_refresh_token(), frontendTokenDTO.getAccess_username());
 
         if (internalJWTUserDTO.isUserAuthorized() && internalRefreshTUserDTO.isUserAuthenticated()) {

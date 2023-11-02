@@ -302,7 +302,9 @@ public class SystemUserServiceImpl implements SystemUserService {
     @Override
     public Mono<ResponseEntity<RespondDTO>> checkUsernamePasswordUserLogin(String username, String password) {
        try{
+
            Optional<User> user=userRepository.findUserByName(username);
+           System.out.println(passwordEncoder.matches( password, user.get().getPassword()) + " password");
            if(user.isPresent()){
                //check Username password matched
                if(

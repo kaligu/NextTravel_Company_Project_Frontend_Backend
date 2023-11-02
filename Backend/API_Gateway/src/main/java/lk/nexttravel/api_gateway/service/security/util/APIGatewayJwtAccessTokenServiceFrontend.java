@@ -67,8 +67,13 @@ public class APIGatewayJwtAccessTokenServiceFrontend {
 
     //validateUpdateGetUserJWT  - this method check JWT and if it expired create new and role and user name return
     public InternalJWTUserDTO validateUpdateGetUserJWT(String token, String username){
+        System.out.println(username+"t   t");
+        System.out.println(token);
+
         InternalJWTUserDTO internalJWTUserDTO = new InternalJWTUserDTO();
         Optional<RoleTypes> userRoletype = getRoleByUsername(username); //username with has a role type  and pick it
+        System.out.println(userRoletype.isPresent());
+
         //check JWT
         try {
             if(userRoletype.isPresent()){ //check database and get role
@@ -90,12 +95,14 @@ public class APIGatewayJwtAccessTokenServiceFrontend {
             }
 
         } catch (ExpiredJwtException e) { //if token expired
+            System.out.println(e.getMessage());
             internalJWTUserDTO.setUserAuthorized(true);
             internalJWTUserDTO.setAccessToken(generateToken(username)); //generate and add new token
             internalJWTUserDTO.setUsername(username);
             return internalJWTUserDTO;
 
         } catch (Exception e) { //if token mismatched
+            System.out.println(e.getMessage());
             internalJWTUserDTO.setUserAuthorized(false);
             internalJWTUserDTO.setRole(null);
             return internalJWTUserDTO;

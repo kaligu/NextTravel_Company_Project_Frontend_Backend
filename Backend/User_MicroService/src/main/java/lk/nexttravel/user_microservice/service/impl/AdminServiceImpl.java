@@ -188,6 +188,7 @@ public class AdminServiceImpl implements AdminService {
                 //save into database
                 Admin admin = adminRepository.save(
                         Admin.builder()
+                                .id(reqUpdateGuideAdminDTO.getId())
                                 .address(reqUpdateGuideAdminDTO.getAddress())
                                 .profile_image(reqUpdateGuideAdminDTO.getProfile_image())
                                 .signup_name_with_initial(reqUpdateGuideAdminDTO.getName_with_initial())
@@ -214,6 +215,7 @@ public class AdminServiceImpl implements AdminService {
                 //save into database
                 adminRepository.save(
                         Admin.builder()
+                                .id(reqUpdateGuideAdminDTO.getId())
                                 .address(reqUpdateGuideAdminDTO.getAddress())
                                 .profile_image(reqUpdateGuideAdminDTO.getProfile_image())
                                 .signup_name_with_initial(reqUpdateGuideAdminDTO.getName_with_initial())

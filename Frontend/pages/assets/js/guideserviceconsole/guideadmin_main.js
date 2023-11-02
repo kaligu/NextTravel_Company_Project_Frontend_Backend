@@ -61,7 +61,6 @@ var guidNICFrontImage_Base64String = "";
 var guidNOCRearImage_Base64String = "";
 
 //setting validations
-let pstxtfld1 = false;
 let pstxtfld2 = false;
 let pstxtfld3 = false;
 let pstxtfld4 = false;
@@ -180,8 +179,8 @@ function loadAdminProfileData(){
                 guide_admin_main_pg_top_admin_name.text("Mr. "+data.token.access_username+" [Admin]");
 
                 //fill setting form
-                p_s_id.val(data.data.id);
-                p_s_username.val(data.data.name);
+                p_s_id.text(data.data.id);
+                p_s_username.text(data.data.name);
                 p_s_email.val(data.data.email);
                 p_s_nameinitial.val(data.data.name_with_initial);
                 p_s_nic.val(data.data.nic_or_passport);
@@ -237,16 +236,6 @@ function loadAdminProfileData(){
 
 //--------------------------checkSettingsAddedDataAtTextflds()---------------
 function checkSettingsAddedDataAtTextflds(){
-    //check username
-    if(isNameRegaxChecked(p_s_username.val())){
-        p_s_username.removeClass('is-invalid');
-        p_s_username.addClass('is-valid');
-        pstxtfld1 = true;
-    }else{
-        p_s_username.addClass('is-invalid');
-        p_s_username.removeClass('is-valid');
-        pstxtfld1 = false;
-    }
 
     //check name with initial
     if(isNameWithInitialRegaxChecked(p_s_nameinitial.val())){
@@ -353,27 +342,13 @@ profileImageInput.onchange = () => {
 };
 
 function settingUpdateBtnTrigger(){
-    if(pstxtfld1===true && pstxtfld2===true && pstxtfld3===true && pstxtfld4===true && pstxtfld5===true && pstxtfld6===true && pstxtfld7===true){
+    if(pstxtfld2===true && pstxtfld3===true && pstxtfld4===true && pstxtfld5===true && pstxtfld6===true && pstxtfld7===true){
         // All conditions are true, enable the signup button
         $('#p_s_updateSettingbtn').prop("disabled", false);
     }else{
         $('#p_s_updateSettingbtn').prop("disabled", true);
     }
 }
-
-p_s_username.on('keyup', function () {
-    if(isNameRegaxChecked(p_s_username.val())){
-        p_s_username.removeClass('is-invalid');
-        p_s_username.addClass('is-valid');
-        pstxtfld1 = true;
-        settingUpdateBtnTrigger();
-    }else{
-        p_s_username.addClass('is-invalid');
-        p_s_username.removeClass('is-valid');
-        pstxtfld1 = false;
-        settingUpdateBtnTrigger();
-    }
-});
 
 p_s_nameinitial.on('keyup', function () {
     if(isNameWithInitialRegaxChecked(p_s_nameinitial.val())){
@@ -512,15 +487,9 @@ $(document).ready(function(){
 
 //------------------ update on backend Settings if profile Update btn clicked
 function saveUpdatedProfileSettings(){
-    console.log(p_s_username.val());
-    console.log(p_s_email.val());
-    console.log(p_s_nameinitial.val());
-    console.log(p_s_nic.val());
-    console.log(p_s_address.val());
-    console.log(p_s_password.val());
-    console.log(profileImage_Base64String);
     var formData = new FormData();
-    formData.append("username", p_s_username.val());
+    formData.append("id", p_s_id.text());
+    formData.append("username", p_s_username.text());
     formData.append("address", p_s_address.val());
     formData.append("email", p_s_email.val());
     formData.append("nic", p_s_nic.val());
@@ -544,16 +513,26 @@ function saveUpdatedProfileSettings(){
         success:function (data){
             if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
 
+                guide_admin_main_pg_alert_model_title_done.text("Done!");
+                guide_admin_main_pg_alert_model_content_done.text("Your Profile Updated!");
+
                 //hide loading model
                 setTimeout(function () {
+
+                    //save tokens on local localStorage - user admin
+                    localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
+                    localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
+                    localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
                     guide_admin_main_pg_loading_model.modal('hide');
 
-                    guide_admin_main_pg_alert_model_title_done.text("Done!");
-                    guide_admin_main_pg_alert_model_content_done.text("Your Profile Updated!");
-                    guideImage_Base64String.modal('show');
+                    setTimeout(function () {
 
+                        window.location.reload();
+
+                    }, 1000); // delay
                 }, 1000); // delay
                 console.log("fail to logout exception");
+
 
             }else{
                 //hide loading model
@@ -562,7 +541,6 @@ function saveUpdatedProfileSettings(){
 
                     guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
                     guide_admin_main_pg_alert_model_content_error.text("Try Again!");
-                    guide_admin_main_pg_alert_model_error.modal('show');
 
                 }, 1000); // delay
                 console.log("fail to logout exception");
@@ -917,6 +895,91 @@ function saveNewGuideBtnClicked(){
     //add into db testing for view table load data
     GuideObjsLocalDB.push(newGuideDTO);
 
+}
+
+function saveUpdatedProfileSettings(){
+    var formData = new FormData();
+    formData.append("id", p_s_id.text());
+    formData.append("username", p_s_username.text());
+    formData.append("address", p_s_address.val());
+    formData.append("email", p_s_email.val());
+    formData.append("nic", p_s_nic.val());
+    formData.append("password", p_s_password.val());
+    formData.append("nameinitial", p_s_nameinitial.val());
+    formData.append("profileImage_Base64String", profileImage_Base64String);
+    formData.append("access_username", localStorage.getItem("secure_data_guide_admin_username"));
+    formData.append("access_jwt_token", localStorage.getItem("secure_data_guide_admin_access_token"));
+    formData.append("access_refresh_token", localStorage.getItem("secure_data_guide_admin_refresh_token"));
+//show loading model
+    guide_admin_main_pg_loading_model.modal('show');
+
+    console.log("success");
+
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:1010/main/guide-service/guide-admin-update-profile-data",
+        data: formData,
+        processData: false,  // Prevent jQuery from processing data
+        contentType: false,  // Set content type to false to let the browser set it
+        success:function (data){
+            if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
+
+                guide_admin_main_pg_alert_model_title_done.text("Done!");
+                guide_admin_main_pg_alert_model_content_done.text("Your Profile Updated!");
+
+                //hide loading model
+                setTimeout(function () {
+
+                    //save tokens on local localStorage - user admin
+                    localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
+                    localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
+                    localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    setTimeout(function () {
+
+                        window.location.reload();
+
+                    }, 1000); // delay
+                }, 1000); // delay
+                console.log("fail to logout exception");
+
+
+            }else{
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+        },
+        error: function (xhr,exception){
+            if (xhr.status === 401){
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
+
+                }, 1000); // delay
+            }else {
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    guide_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+
+        }
+    })
 }
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 
