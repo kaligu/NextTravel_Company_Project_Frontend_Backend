@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 @ToString
 
 @Component
-public class ReqNewClientSaveDTO {
+public class ReqNewGuideSaveDTO {
     @Id
     private String id;
     private String name_with_initial;

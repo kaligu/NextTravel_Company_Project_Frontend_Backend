@@ -6,6 +6,7 @@
 */
 package lk.nexttravel.guide_microservice.service;
 
+import lk.nexttravel.guide_microservice.dto.ReqNewGuideSaveDTO;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -14,9 +15,9 @@ import org.springframework.http.ResponseEntity;
  * Time    : 5:35 AM
  */
 public interface GuideService {
-    ResponseEntity<String> SaveNewClient_Prepare(ReqNewClientSaveDTO reqNewClientSaveDTO);
+    ResponseEntity<String> SaveNewGuide_Prepare(ReqNewGuideSaveDTO reqNewGuideSaveDTO);
 
-    ResponseEntity<String> SaveNewClient_Commit(ReqNewClientSaveDTO reqNewClientSaveDTO);
+    ResponseEntity<String> SaveNewGuide_Commit(ReqNewGuideSaveDTO reqNewGuideSaveDTO);
 
-    ResponseEntity<String> SaveNewClient_Abrot(ReqNewClientSaveDTO reqNewClientSaveDTO);
+    ResponseEntity<String> SaveNewGuide_Abrot(ReqNewGuideSaveDTO reqNewGuideSaveDTO);
 }
