@@ -924,6 +924,7 @@ function saveNewGuideBtnClicked(){
                         $('#alert').show();
                         setTimeout(function () {
                             $('#alert').hide();
+                            window.location.refresh();
                         }, 1000); // delay
                     }, 100); // delay
 
