@@ -48,4 +48,13 @@ public class GuideController {
     ){
         return guideService.getAllGuides(token);
     }
+
+    //sdelete guide
+    @GetMapping(value = "/delete-guide")
+    public ResponseEntity<String> deleteGuide(
+            @RequestParam String id,
+            @RequestParam String token
+    ){
+        return guideService.deleteGuide(id, token);
+    }
 }

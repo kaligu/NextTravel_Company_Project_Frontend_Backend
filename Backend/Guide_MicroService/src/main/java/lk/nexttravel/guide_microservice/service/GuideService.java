@@ -23,4 +23,6 @@ public interface GuideService {
     ResponseEntity<ArrayList<Guide>> getAllGuides(String token);
 
     ResponseEntity<String> updateGuide(ReqNewGuideSaveDTO reqNewGuideSaveDTO);
+
+    ResponseEntity<String> deleteGuide(String id, String token);
 }
