@@ -238,4 +238,9 @@ public class GuideServiceImpl implements GuideService {
             return Mono.error(new InternalServerException("Internal Server error!"+e));
         }
     }
+
+    @Override
+    public Mono<ResponseEntity<RespondDTO>> createNewGuide(String name, String address, String remarks, String experience, String nic, String nicFrontView, String nicRearView, String tell, String gender, String dob, String image, String perdayFee, String accessUsername, String accessToken, String refreshToken) {
+        return null;
+    }
 }

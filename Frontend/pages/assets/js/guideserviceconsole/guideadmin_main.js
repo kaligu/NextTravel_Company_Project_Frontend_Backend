@@ -195,6 +195,14 @@ function loadAdminProfileData(){
                 //hide loading model
                 setTimeout(function () {
                     guide_admin_main_pg_loading_model.modal('hide');
+
+                    setTimeout(function () {
+                        $('#alert').show();
+                        setTimeout(function () {
+                            $('#alert').hide();
+                        }, 1000); // delay
+                    }, 100); // delay
+
                 }, 1000); // delay
 
             } else {
@@ -513,23 +521,25 @@ function saveUpdatedProfileSettings(){
         success:function (data){
             if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
 
-                guide_admin_main_pg_alert_model_title_done.text("Done!");
-                guide_admin_main_pg_alert_model_content_done.text("Your Profile Updated!");
+
+                //save tokens on local localStorage - user admin
+                localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
+                localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
+                localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
+
 
                 //hide loading model
                 setTimeout(function () {
-
-                    //save tokens on local localStorage - user admin
-                    localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
-                    localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
-                    localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
                     guide_admin_main_pg_loading_model.modal('hide');
 
                     setTimeout(function () {
+                        $('#alert').show();
+                        setTimeout(function () {
+                            window.location.reload();
+                            $('#alert').hide();
+                        }, 1000); // delay
+                    }, 100); // delay
 
-                        window.location.reload();
-
-                    }, 1000); // delay
                 }, 1000); // delay
                 console.log("fail to logout exception");
 
@@ -900,40 +910,35 @@ function saveNewGuideBtnClicked(){
         processData: false,  // Prevent jQuery from processing data
         contentType: false,  // Set content type to false to let the browser set it
         success:function (data){
-            if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
-
-                guide_admin_main_pg_alert_model_title_done.text("Done!");
-                guide_admin_main_pg_alert_model_content_done.text("Your Profile Updated!");
-
-                //save tokens on local localStorage - user admin
-                localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
-                localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
-                localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
+            //hide loading model
+            setTimeout(function () {
+                guide_admin_main_pg_loading_model.modal('hide');
 
                 setTimeout(function () {
-                    guide_admin_main_pg_loading_model.modal('hide');
-
+                    $('#alert').show();
                     setTimeout(function () {
-                        guide_admin_main_pg_alert_model_title_done.modal('show');
-                        // window.location.reload();
-
+                        $('#alert').hide();
                     }, 1000); // delay
-                }, 1000); // delay
-                console.log("fail to logout exception");
+                }, 100); // delay
 
-            }else{
-                //hide loading model
-                setTimeout(function () {
-                    guide_admin_main_pg_loading_model.modal('hide');
-
-                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
-                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
-
-                }, 1000); // delay
-                console.log("fail to logout exception");
-            }
+            }, 1000); // delay
+            // if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
+            //
+            //
+            // }else{
+            //     //hide loading model
+            //     setTimeout(function () {
+            //         guide_admin_main_pg_loading_model.modal('hide');
+            //
+            //         guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+            //         guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+            //
+            //     }, 1000); // delay
+            //     console.log("fail to logout exception");
+            // }
         },
         error: function (xhr,exception){
+            console.log("fail to logout exception");
             if (xhr.status === 401){
                 setTimeout(function () {
                     guide_admin_main_pg_loading_model.modal('hide');

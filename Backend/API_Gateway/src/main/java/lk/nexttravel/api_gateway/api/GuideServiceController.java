@@ -114,17 +114,35 @@ public class GuideServiceController {
             @RequestPart("access_refresh_token") String refreshToken
     ){
         if(
-                username.matches(RegaxStrings.NameRegax) &&
-                        address.matches(RegaxStrings.AddressRegax) &&
-                        email.matches(RegaxStrings.EmailRegax) &&
-                        nic.matches(RegaxStrings.NICRegax) &&
-                        password.matches(RegaxStrings.PasswordRegax) &&
-                        nameinitial.matches(RegaxStrings.NameWithInitialRegax)
-
-
+                name.matches(RegaxStrings.NameRegax) &&
+                        address.matches(RegaxStrings.AddressRegax)  &&
+                        remarks.matches(RegaxStrings.TextRegax)  &&
+                        experience.matches(RegaxStrings.OnlyNumberRegax)  &&
+                        nic.matches(RegaxStrings.NICRegax)  &&
+                        tell.matches(RegaxStrings.TellRegax)  &&
+                        gender.matches(RegaxStrings.GenderRegax)  &&
+                        dob.matches(RegaxStrings.DOBRegax)  &&
+                        perdayFee.matches(RegaxStrings.AddressRegax)
         ){
-            System.out.println(" Done");
-            return Mono.just(new ResponseEntity<>(new RespondDTO(),HttpStatus.OK));
+
+            return guideService.createNewGuide(
+                    name,
+                    address,
+                    remarks,
+                    experience,
+                    nic,
+                    nicFrontView,
+                    nicRearView,
+                    tell,
+                    gender,
+                    dob,
+                    image,
+                    perdayFee,
+                    accessUsername,
+                    accessToken,
+                    refreshToken
+            );
+
         }else {
             System.out.println("error");
             return Mono.error( new InvalidInputException("Data Invalid!") );
