@@ -48,7 +48,7 @@ public class Guide {
 
     private String gender;
 
-    private Data dob;
+    private String dob;
 
     private String image;
 

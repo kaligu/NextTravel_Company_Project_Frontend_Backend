@@ -4,10 +4,9 @@
   @ Date         : 10/21/2023
   @ Time         : 2:54 PM
 */
-package lk.nexttravel.guide_microservice.dto;
+package lk.nexttravel.api_gateway.dto.guide;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
 
 /**
