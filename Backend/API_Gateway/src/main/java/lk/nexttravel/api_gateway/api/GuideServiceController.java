@@ -93,4 +93,41 @@ public class GuideServiceController {
             return Mono.error( new InvalidInputException("Data Invalid!") );
         }
     }
+
+    //Add new Guide
+    @PostMapping(value = {"/create-new-guide"}, consumes = {"multipart/form-data"})
+    public Mono<ResponseEntity<RespondDTO>> createNewGuide(
+            @RequestPart("name") String name,
+            @RequestPart("address") String address,
+            @RequestPart("remarks") String remarks,
+            @RequestPart("experience") String experience,
+            @RequestPart("nic") String nic,
+            @RequestPart("nic_front_view") String nicFrontView,
+            @RequestPart("nic_rear_view") String nicRearView,
+            @RequestPart("tell") String tell,
+            @RequestPart("gender") String gender,
+            @RequestPart("dob") String dob,
+            @RequestPart("image") String image,
+            @RequestPart("perday_fee") String perdayFee,
+            @RequestPart("access_username") String accessUsername,
+            @RequestPart("access_jwt_token") String accessToken,
+            @RequestPart("access_refresh_token") String refreshToken
+    ){
+        if(
+                username.matches(RegaxStrings.NameRegax) &&
+                        address.matches(RegaxStrings.AddressRegax) &&
+                        email.matches(RegaxStrings.EmailRegax) &&
+                        nic.matches(RegaxStrings.NICRegax) &&
+                        password.matches(RegaxStrings.PasswordRegax) &&
+                        nameinitial.matches(RegaxStrings.NameWithInitialRegax)
+
+
+        ){
+            System.out.println(" Done");
+            return Mono.just(new ResponseEntity<>(new RespondDTO(),HttpStatus.OK));
+        }else {
+            System.out.println("error");
+            return Mono.error( new InvalidInputException("Data Invalid!") );
+        }
+    }
 }

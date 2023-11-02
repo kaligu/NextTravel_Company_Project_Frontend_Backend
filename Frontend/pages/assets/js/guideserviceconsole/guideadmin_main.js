@@ -873,52 +873,30 @@ function addGuideSaveBtnIsEnableTrigger(){
 //---------------------------------------------New Guide container - add guide from - save Btn Clicked send data into server-----------------------------
 function saveNewGuideBtnClicked(){
 
-    var newGuideDTO = new GuideDTO(
-        "U001",
-        g_a_a_name.val(),
-        g_a_a_address.val(),
-        g_a_a_nic.val(),
-        g_a_a_tell.val(),
-        g_a_a_experience.val(),
-        g_a_a_age.val(),
-        g_a_a_perdayfee.val(),
-        g_a_a_remarks.val(),
-        g_a_a_gender.val(),
-        guideImage_Base64String,
-        guidNICFrontImage_Base64String,
-        guidNOCRearImage_Base64String
-    );
-
-    //print console
-    newGuideDTO.toString();
-
-    //add into db testing for view table load data
-    GuideObjsLocalDB.push(newGuideDTO);
-
-}
-
-function saveUpdatedProfileSettings(){
-    var formData = new FormData();
-    formData.append("id", p_s_id.text());
-    formData.append("username", p_s_username.text());
-    formData.append("address", p_s_address.val());
-    formData.append("email", p_s_email.val());
-    formData.append("nic", p_s_nic.val());
-    formData.append("password", p_s_password.val());
-    formData.append("nameinitial", p_s_nameinitial.val());
-    formData.append("profileImage_Base64String", profileImage_Base64String);
-    formData.append("access_username", localStorage.getItem("secure_data_guide_admin_username"));
-    formData.append("access_jwt_token", localStorage.getItem("secure_data_guide_admin_access_token"));
-    formData.append("access_refresh_token", localStorage.getItem("secure_data_guide_admin_refresh_token"));
-//show loading model
+    //show loading model
     guide_admin_main_pg_loading_model.modal('show');
 
-    console.log("success");
+    var newformData = new FormData();
+    newformData.append("name", g_a_a_name.val());
+    newformData.append("address", g_a_a_address.val());
+    newformData.append("remarks", g_a_a_remarks.val());
+    newformData.append("experience", g_a_a_experience.val());
+    newformData.append("nic", g_a_a_nic.val());
+    newformData.append("nic_front_view", guidNICFrontImage_Base64String);
+    newformData.append("nic_rear_view", guidNOCRearImage_Base64String);
+    newformData.append("tell", g_a_a_tell.val());
+    newformData.append("gender", g_a_a_gender.val());
+    newformData.append("dob", g_a_a_age.val());
+    newformData.append("image", guideImage_Base64String);
+    newformData.append("perday_fee", g_a_a_perdayfee.val());
+    newformData.append("access_username", localStorage.getItem("secure_data_guide_admin_username"));
+    newformData.append("access_jwt_token", localStorage.getItem("secure_data_guide_admin_access_token"));
+    newformData.append("access_refresh_token", localStorage.getItem("secure_data_guide_admin_refresh_token"));
 
     $.ajax({
         method: "POST",
-        url: "http://localhost:1010/main/guide-service/guide-admin-update-profile-data",
-        data: formData,
+        url: "http://localhost:1010/main/guide-service/create-new-guide",
+        data: newformData,
         processData: false,  // Prevent jQuery from processing data
         contentType: false,  // Set content type to false to let the browser set it
         success:function (data){
@@ -927,23 +905,21 @@ function saveUpdatedProfileSettings(){
                 guide_admin_main_pg_alert_model_title_done.text("Done!");
                 guide_admin_main_pg_alert_model_content_done.text("Your Profile Updated!");
 
-                //hide loading model
-                setTimeout(function () {
+                //save tokens on local localStorage - user admin
+                localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
+                localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
+                localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
 
-                    //save tokens on local localStorage - user admin
-                    localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
-                    localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
-                    localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
+                setTimeout(function () {
                     guide_admin_main_pg_loading_model.modal('hide');
 
                     setTimeout(function () {
-
-                        window.location.reload();
+                        guide_admin_main_pg_alert_model_title_done.modal('show');
+                        // window.location.reload();
 
                     }, 1000); // delay
                 }, 1000); // delay
                 console.log("fail to logout exception");
-
 
             }else{
                 //hide loading model
@@ -980,7 +956,9 @@ function saveUpdatedProfileSettings(){
 
         }
     })
+
 }
+
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
