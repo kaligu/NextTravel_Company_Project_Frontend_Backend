@@ -13,6 +13,7 @@ const guide_admin_main_pg_alert_model_content_done = $('#guide_admin_main_pg_ale
 
 const guide_admin_main_pg_profile_img = $("#guide_admin_main_pg_profile_img");
 const guide_admin_main_pg_top_admin_name = $("#guide_admin_main_pg_top_admin_name")
+const p_s_id = $('#p_s_id');
 const p_s_username = $('#p_s_username');
 const p_s_email = $('#p_s_email');
 const p_s_nameinitial = $('#p_s_nameinitial');
@@ -179,6 +180,7 @@ function loadAdminProfileData(){
                 guide_admin_main_pg_top_admin_name.text("Mr. "+data.token.access_username+" [Admin]");
 
                 //fill setting form
+                p_s_id.val(data.data.id);
                 p_s_username.val(data.data.name);
                 p_s_email.val(data.data.email);
                 p_s_nameinitial.val(data.data.name_with_initial);
@@ -517,31 +519,30 @@ function saveUpdatedProfileSettings(){
     console.log(p_s_address.val());
     console.log(p_s_password.val());
     console.log(profileImage_Base64String);
-
+    var formData = new FormData();
+    formData.append("username", p_s_username.val());
+    formData.append("address", p_s_address.val());
+    formData.append("email", p_s_email.val());
+    formData.append("nic", p_s_nic.val());
+    formData.append("password", p_s_password.val());
+    formData.append("nameinitial", p_s_nameinitial.val());
+    formData.append("profileImage_Base64String", profileImage_Base64String);
+    formData.append("access_username", localStorage.getItem("secure_data_guide_admin_username"));
+    formData.append("access_jwt_token", localStorage.getItem("secure_data_guide_admin_access_token"));
+    formData.append("access_refresh_token", localStorage.getItem("secure_data_guide_admin_refresh_token"));
 //show loading model
     guide_admin_main_pg_loading_model.modal('show');
 
     console.log("success");
 
     $.ajax({
-        method:"GET",
-        contentType:"application/json",
-        url:"http://localhost:1010/main/guide-service/guide-admin-update-profile-data",
-        async:false,
-        data: {
-            username: p_s_username.val(),
-            address: p_s_address.val(),
-            email: p_s_email.val(),
-            nic: p_s_nic.val(),
-            password: p_s_password.val(),
-            nameinitial: p_s_nameinitial.val(),
-            profileImage_Base64String: profileImage_Base64String,
-            access_username: localStorage.getItem("secure_data_guide_admin_username"),
-            access_jwt_token: localStorage.getItem("secure_data_guide_admin_access_token"),
-            access_refresh_token: localStorage.getItem("secure_data_guide_admin_refresh_token")
-        },
+        method: "POST",
+        url: "http://localhost:1010/main/guide-service/guide-admin-update-profile-data",
+        data: formData,
+        processData: false,  // Prevent jQuery from processing data
+        contentType: false,  // Set content type to false to let the browser set it
         success:function (data){
-            if(data.rspd_code === RespondCodes.Respond_PASSWORD_MATCHED){
+            if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
 
                 //hide loading model
                 setTimeout(function () {
@@ -554,8 +555,18 @@ function saveUpdatedProfileSettings(){
                 }, 1000); // delay
                 console.log("fail to logout exception");
 
-            }
+            }else{
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
 
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    guide_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
         },
         error: function (xhr,exception){
             if (xhr.status === 401){

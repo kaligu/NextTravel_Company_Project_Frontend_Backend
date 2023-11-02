@@ -21,7 +21,7 @@ public class RegaxStrings {
     public static final String TextRegax = "^[a-zA-Z0-9, ]+$";
     public static final String OnlyNumberRegax = "^(?=.*[0-9]).*$";
     public static final String GenderRegax  = "^(male|female|trans)$";
-    public static final String NameWithInitialRegax = "([A-Z])\\w+\\s([A-Z])\\w*\\s*([A-Z])*(?=,*)";
+    public static final String NameWithInitialRegax = "^[A-Za-z. ]+$";
     public static final String EmailRegax = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     public static final String PasswordRegax  = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$";
 

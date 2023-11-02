@@ -57,10 +57,6 @@ public class AdminController {
     public ResponseEntity<String> SaveUpdatedAdmin_Commit(@RequestBody ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO){
         return adminService.SaveUpdatedAdmin_Commit(reqUpdateGuideAdminDTO);
     }
-    @DeleteMapping(value = "/update_admin")
-    public ResponseEntity<String> SaveUpdatedAdmin_Abrot(@RequestBody ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO){
-        return adminService. SaveUpdatedAdmin_Abrot(reqUpdateGuideAdminDTO);
-    }
 
 
     //get Profile Data - user admin

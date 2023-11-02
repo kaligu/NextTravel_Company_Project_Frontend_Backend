@@ -35,6 +35,4 @@ public interface AdminService {
     ResponseEntity<String> SaveUpdatedAdmin_Prepare(ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO);
 
     ResponseEntity<String> SaveUpdatedAdmin_Commit(ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO);
-
-    ResponseEntity<String> SaveUpdatedAdmin_Abrot(ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO);
 }

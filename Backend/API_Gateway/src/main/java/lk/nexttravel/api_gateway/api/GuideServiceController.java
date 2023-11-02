@@ -11,6 +11,7 @@ import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.service.GuideService;
 import lk.nexttravel.api_gateway.util.RegaxStrings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
@@ -49,27 +50,18 @@ public class GuideServiceController {
     }
 
     //update Profile Data - guide admin
-    @GetMapping(value = {"/guide-admin-update-profile-data"}, consumes = {"application/json"})
+    @PostMapping(value = {"/guide-admin-update-profile-data"}, consumes = {"multipart/form-data"})
     public Mono<ResponseEntity<RespondDTO>> userAdminUpdateProfileData(
-            @RequestParam("username") @NonNull String username
-            ,
-            @RequestParam("address") @NonNull String address
-            ,
-            @RequestParam("email") @NonNull String email
-            ,
-            @RequestParam("nic") @NonNull String nic
-            ,
-            @RequestParam("password") @NonNull String password
-            ,
-            @RequestParam("nameinitial") @NonNull String nameinitial
-            ,
-            @RequestParam("profileImage_Base64String") @NonNull String profileImage_Base64String
-            ,
-            @RequestParam("access_username") @NonNull String access_username
-            ,
-            @RequestParam("access_jwt_token") @NonNull String access_jwt_token
-            ,
-            @RequestParam("access_refresh_token") @NonNull String access_refresh_token
+            @RequestPart("username") String username,
+            @RequestPart("address") String address,
+            @RequestPart("email") String email,
+            @RequestPart("nic") String nic,
+            @RequestPart("password") String password,
+            @RequestPart("nameinitial") String nameinitial,
+            @RequestPart("profileImage_Base64String") String profileImage_Base64String,
+            @RequestPart("access_username") String access_username,
+            @RequestPart("access_jwt_token") String access_jwt_token,
+            @RequestPart("access_refresh_token") String access_refresh_token
     ){
         if(
                 username.matches(RegaxStrings.NameRegax) &&
@@ -79,7 +71,9 @@ public class GuideServiceController {
                         password.matches(RegaxStrings.PasswordRegax) &&
                         nameinitial.matches(RegaxStrings.NameWithInitialRegax)
 
+
         ){
+
             return guideService.UserAdminUpdateProfileData(
                     username,
                     address,
@@ -93,6 +87,7 @@ public class GuideServiceController {
                     access_refresh_token
             );
         }else {
+            System.out.println("error");
             return Mono.error( new InvalidInputException("Data Invalid!") );
         }
     }

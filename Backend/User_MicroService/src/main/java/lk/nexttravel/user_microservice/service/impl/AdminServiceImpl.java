@@ -207,6 +207,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public ResponseEntity<String> SaveUpdatedAdmin_Commit(ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO) {
+        System.out.println(reqUpdateGuideAdminDTO.getProfile_image());
         //check authentication
         try {
             if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqUpdateGuideAdminDTO.getToken())) {  //check gateway token
@@ -222,30 +223,6 @@ public class AdminServiceImpl implements AdminService {
                 );
 
                 return new ResponseEntity<>(RespondCodes.Respond_DATA_SAVED, HttpStatus.CREATED);
-            } else {
-                return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
-            }
-        }catch (Exception e){
-            return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
-    public ResponseEntity<String> SaveUpdatedAdmin_Abrot(ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO) {
-        //check authentication
-        try {
-            if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqUpdateGuideAdminDTO.getToken())) {  //check gateway token
-                //delete
-                adminRepository.delete(
-                        Admin.builder()
-                                .address(reqUpdateGuideAdminDTO.getAddress())
-                                .profile_image(reqUpdateGuideAdminDTO.getProfile_image())
-                                .signup_name_with_initial(reqUpdateGuideAdminDTO.getName_with_initial())
-                                .nic_or_passport(reqUpdateGuideAdminDTO.getNic_or_passport())
-                                .build()
-                );
-
-                return new ResponseEntity<>(RespondCodes.Respond_DATA_DELETED, HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
             }

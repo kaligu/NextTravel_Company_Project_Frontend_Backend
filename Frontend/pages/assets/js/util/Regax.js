@@ -74,7 +74,7 @@ function isGenderRegaxChecked(text) {
     return regex.test(text);
 }
 function isNameWithInitialRegaxChecked(name) {
-    const regex = /([A-Z])\w+\s([A-Z])\w*\s*([A-Z])*(?=,*)/;
+    const regex = /^[A-Za-z. ]+$/;
     return regex.test(name);
 // *Enter valid Name with initial.
 //     *It must contains dots , letters like these pattern.

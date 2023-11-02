@@ -96,9 +96,7 @@ public class TransactionCoordinatorImpl implements TransactionCordinator {
 
     @Override
     public void rollbackPhaseForUpdate(List<TransactionDTO> transactionDTOList) {
-        for (TransactionDTO transactionDTO : transactionDTOList){
-            sendToDelete(transactionDTO);
-        }
+        System.out.println("done");
     }
 
     @Override
