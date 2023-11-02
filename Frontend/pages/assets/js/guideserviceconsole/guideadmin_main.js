@@ -75,7 +75,7 @@ const e_g_a_a_nic_rear_image = $('#e_g_a_a_nic_rear_image');
 var e_guideImage_Base64String = "";
 var e_guidNICFrontImage_Base64String = "";
 var e_guidNOCRearImage_Base64String = "";
-
+let e_g_a_a_id = "";
 const edit_profile_image_input = document.getElementById('edit_profile_image_input'); //front nic
 const edit_rear_nic_image_input = document.getElementById('edit_rear_nic_image_input'); //front nic
 const edit_front_nic_image_input = document.getElementById('edit_front_nic_image_input'); //front nic
@@ -1143,6 +1143,9 @@ function loadDataAfterOpenedViewGuideContainer(){
                 (e_g_a_a_remarks).val(guide.remarks);
                 (e_g_a_a_gender).val(guide.gender);
 
+                e_g_a_a_id = guide.id;
+
+
                 $('#edit_rear_nic_image').attr('src', `${guide.nic_rear_view}`);
                 e_guidNOCRearImage_Base64String = guide.nic_rear_view;
 
@@ -1199,21 +1202,6 @@ function loadDataAfterOpenedViewGuideContainer(){
     });
 }
 
-//--------------------------Edit & Delete Guide on Guide Table---------------------
-// Event listener for Edit button
-// Event listener for Edit button
-$(document).on("click", ".edit-btn", function() {
-    var guideId = $(this).data("guide-id");
-    console.log("edited", guideId);
-    var guideToEdit = GuideObjsLocalDB.find(guide => guide.getGuideID() === guideId);
-
-    if (guideToEdit) {
-        console.log("Name:", guideToEdit.getGuideName());
-        // Perform edit actions if guideToEdit is found
-    } else {
-        console.log("Guide not found for ID:", guideId);
-    }
-});
 
 $(document).on("click", ".delete-btn", function() {
     var guideId = $(this).data("guide-id");
@@ -1540,7 +1528,113 @@ function editGuideSaveBtnIsEnableTrigger(){
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
 
+//send to server
+function saveEditGuide(){
 
+    //show loading model
+    guide_admin_main_pg_loading_model.modal('show');
+
+    var editformData = new FormData();
+    editformData.append("id", e_g_a_a_id);
+    editformData.append("name", e_g_a_a_name.val());
+    editformData.append("address", e_g_a_a_address.val());
+    editformData.append("remarks", e_g_a_a_remarks.val());
+    editformData.append("experience", e_g_a_a_experience.val());
+    editformData.append("nic", e_g_a_a_nic.val());
+    editformData.append("nic_front_view", e_guidNICFrontImage_Base64String);
+    editformData.append("nic_rear_view", e_guidNOCRearImage_Base64String);
+    editformData.append("tell", e_g_a_a_tell.val());
+    editformData.append("gender", e_g_a_a_gender.val());
+    editformData.append("dob", e_g_a_a_age.val());
+    editformData.append("image", e_guideImage_Base64String);
+    editformData.append("perday_fee", e_g_a_a_perdayfee.val());
+    editformData.append("access_username", localStorage.getItem("secure_data_guide_admin_username"));
+    editformData.append("access_jwt_token", localStorage.getItem("secure_data_guide_admin_access_token"));
+    editformData.append("access_refresh_token", localStorage.getItem("secure_data_guide_admin_refresh_token"));
+
+    // console.log("id: ", editformData.get("id"));
+    // console.log("name: ", editformData.get("name"));
+    // console.log("address: ", editformData.get("address"));
+    // console.log("remarks: ", editformData.get("remarks"));
+    // console.log("experience: ", editformData.get("experience"));
+    // console.log("nic: ", editformData.get("nic"));
+    // console.log("nic_front_view: ", editformData.get("nic_front_view"));
+    // console.log("nic_rear_view: ", editformData.get("nic_rear_view"));
+    // console.log("tell: ", editformData.get("tell"));
+    // console.log("gender: ", editformData.get("gender"));
+    // console.log("dob: ", editformData.get("dob"));
+    // console.log("image: ", editformData.get("image"));
+    // console.log("perday_fee: ", editformData.get("perday_fee"));
+    // console.log("access_username: ", editformData.get("access_username"));
+    // console.log("access_jwt_token: ", editformData.get("access_jwt_token"));
+    // console.log("access_refresh_token: ", editformData.get("access_refresh_token"));
+
+
+    $.ajax({
+        method: "PUT",
+        url: "http://localhost:1010/main/guide-service/update-guide",
+        data: editformData,
+        processData: false,  // Prevent jQuery from processing data
+        contentType: false,  // Set content type to false to let the browser set it
+        success:function (data){
+            if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
+
+                //save tokens on local localStorage - user admin
+                localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
+                localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
+                localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
+                console.log("done");
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+                    setTimeout(function () {
+                        $('#alert').show();
+                        setTimeout(function () {
+                            $('#alert').hide();
+                            window.location.refresh();
+                        }, 1000); // delay
+                    }, 100); // delay
+
+                }, 1000); // delay
+
+            }else {
+                console.log("error");
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+        },
+        error: function (xhr,exception){
+            console.log("fail to logout exception");
+            if (xhr.status === 401){
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
+
+                }, 1000); // delay
+            }else {
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    guide_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+
+        }
+    })
+}
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -1577,7 +1671,3 @@ $(document).ready(function () {
 });
 
 //-----------------------------------------------------------------------------
-
-function saveEditGuide(){
-    console.log("edited");
-}
