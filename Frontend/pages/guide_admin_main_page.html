@@ -794,6 +794,67 @@
     </div>
 </div>
 
+<!--admin manage container - sub content - edit admin model-->
+<!-- Modal -->
+<div class="modal fade" id="admin-manage-container-edit-admin-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Existing Admin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
+                <div style="display: flex;">
+                    <div style="flex-direction: column; width: 600px;">
+                        <div class="mb-4">
+                            <div class="row text-center">
+                                <div class="col-xs-6 text-center" style=" margin-top: 10px;">
+                                    <div class='product-holder'>
+                                        <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" width="300" height="310" class='product-image' id="e_m_n_a_a_image" style="border: 1px solid #000; border-radius: 50%; filter: brightness(90%)">
+                                        <input id="plus-image" class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #e5f1f8; border-color: #112D4E; border-width: 1.5px; width: 250px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="flex-direction: column; width: 800px; height: 480px; overflow-y: auto;">
+                        <div data-spy="scroll" data-target="#navbar-example3" data-offset="0">
+                            <div class="mb-4">
+                                <label for="e_m_n_a_a_username" class="form-label">Username</label>
+                                <input type="email" class="form-control" id="e_m_n_a_a_username" aria-describedby="emailHelp" style="width: 95%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                            </div>
+                            <div class="mb-4">
+                                <label for="e_m_n_a_a_nameinitial" class="form-label">Name with Initial</label>
+                                <input type="email" class="form-control" id="e_m_n_a_a_nameinitial" aria-describedby="emailHelp" style="width: 95%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                            </div>
+                            <div class="mb-4">
+                                <label for="e_m_n_a_a_email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="e_m_n_a_a_email" aria-describedby="emailHelp" style="width: 95%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                            </div>
+                            <div class="mb-4">
+                                <label for="e_m_n_a_a_nic" class="form-label">NIC / Passport</label>
+                                <input type="email" class="form-control" id="e_m_n_a_a_nic" aria-describedby="emailHelp" style="width: 95%; background-color:#f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                            </div>
+                            <div class="mb-4">
+                                <label for="e_m_n_a_a_address" class="form-label">Physical Address</label>
+                                <input type="email" class="form-control" id="e_m_n_a_a_address" aria-describedby="emailHelp" style="width: 95%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                            </div>
+                            <div class="mb-4">
+                                <label for="e_m_n_a_a_salary" class="form-label">Salary</label>
+                                <input type="email" class="form-control" id="e_m_n_a_a_salary" aria-describedby="emailHelp" style="width: 95%; background-color: #f1e5f8; border-color: #112D4E; border-width: 1.5px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary text-white" id="a_m_n_a_a_savebtn" onclick="saveEditAdmin()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- loading window -->
 <!-- use Modal -->
 <div class="modal fade" id="guide_admin_main_pg-loading-model" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0,0,0,0); backdrop-filter: blur(6px)">
@@ -869,7 +930,7 @@
     </div>
 </div>
 
-//alert done
+
 <div class="alert bg-success" id="alert" role="alert" style="width: 400px; position: fixed; z-index: 2000000; bottom: 0; right: 0; display: none">
     <h3 class="alert-heading">
         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-check-circle" viewBox="0 0 16 16" style="display: inline-block; vertical-align: middle;">

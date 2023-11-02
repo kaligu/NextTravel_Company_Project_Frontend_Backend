@@ -67,6 +67,8 @@ let pstxtfld4 = false;
 let pstxtfld5 = false;
 let pstxtfld6 = false;
 let pstxtfld7 = true; //image
+
+const admin_manage_container_edit_admin_model = $("#admin-manage-container-edit-admin-model");
 //---------------------------------------------------------------------
 
 //------------------- navigate containers -------------------------------------------------------
@@ -982,80 +984,153 @@ function saveNewGuideBtnClicked(){
 
 //load data
 function loadDataAfterOpenedViewGuideContainer(){
-    //ajax request and load data into local GuideObjsLocalDB------
-    loadajax();
+    //show loading model
+    guide_admin_main_pg_loading_model.modal('show');
 
-    //-----------------------------------------------
-
-    //-----------------load data into table
     //clear table
-    $("#adminTableBody").html("");
+    $("#guideTableBody").html("");
 
-    //add data into table
-    GuideObjsLocalDB.forEach(function(guide) {
-        var newRow = $("<tr></tr>");
+    $.ajax({
+        method: "GET",
+        contentType: "application/json",
+        url: 'http://localhost:1010/main/guide-service/guides-getall',
+        async: true,
+        data: {
+            access_username: localStorage.getItem("secure_data_guide_admin_username"),
+            access_jwt_token: localStorage.getItem("secure_data_guide_admin_access_token"),
+            access_refresh_token: localStorage.getItem("secure_data_guide_admin_refresh_token")
+        },
+        success: function(data) {
+            console.log("done");
+            data.data.forEach(function (guide){
 
-        newRow.html(`
+
+                var newRow = $("<tr></tr>");
+
+                newRow.html(`
         <td>
-            <p class="fw-normal mb-1">${guide.getGuideName()}</p>
+            <p class="fw-normal mb-1">${guide.id}</p>
         </td>
         <td>
             <div class="d-flex align-items-center">
-                <img src="${guide.getGuideProfileimage()}" alt="" style="width: 60px; height: 60px" class="rounded-circle" />
+                <img src="${guide.image}" alt="" style="width: 60px; height: 60px" class="rounded-circle" />
                 <div class="ms-3">
-                    <p class="fw-bold mb-1">${guide.getGuideName()}</p>
+                    <p class="fw-bold mb-1">${guide.name}</p>
                 </div>
             </div>
         </td>
         <td>
-            <p class="fw-normal mb-1">${guide.getGuideAddress()}</p>
+            <p class="fw-normal mb-1">${guide.address}</p>
+        </td>
+           <td>
+            <p class="fw-normal mb-1">${guide.nic}</p>
         </td>
         <td>
-            <p class="fw-normal mb-1">${guide.getGuideNic()}</p>
+            <p class="fw-normal mb-1">${guide.tell}</p>
         </td>
         <td>
-            <p class="fw-normal mb-1">${guide.getGuideTell()}</p>
+            <p class="fw-normal mb-1">${guide.experience}</p>
         </td>
         <td>
-            <p class="fw-normal mb-1">${guide.getGuideExperience()}</p>
+            <p class="fw-normal mb-1">${guide.dob}</p>
         </td>
         <td>
-            <p class="text-muted mb-1">${guide.getGuideDob()}</p>
+            <p class="fw-normal mb-1">${guide.perday_fee}</p>
         </td>
         <td>
-            <p class="fw-normal mb-1">${guide.getGuidePerdayfee()}</p>
+            <p class="text-muted mb-1">${guide.remarks}</p>
         </td>
         <td>
-            <p class="fw-normal mb-1">${guide.getGuideRemarks()}</p>
-        </td>
-        <td>
-            <p class="fw-normal mb-1">${guide.getGuideGender()}</p>
+            <p class="fw-normal mb-1">${guide.gender}</p>
         </td>
         <td>
             <div class="d-flex align-items-center">
-                <img src="${guide.getGuideNicfrontimage()}" alt="" style="width: 280px; height: 140px" />
+                <img src="${guide.nic_front_view}" alt="" style="width: 280px; height: 140px" />
             </div>
         </td>
         <td>
             <div class="d-flex align-items-center">
-                <img src="${guide.getGuideNicrearimage()}" alt="" style="width: 280px; height: 140px" />
+                <img src="${guide.nic_rear_view}" alt="" style="width: 280px; height: 140px" />
             </div>
         </td>
         <td>
-                <button type="button" class="btn btn-info text-white edit-btn" data-guide-id="${guide.getGuideID()}">
+                <button type="button" class="btn btn-info text-white edit-btn" data-guide-id="${guide.id}">
                     Edit
                 </button>
             </td>
             <td>
-                <button type="button" class="btn btn-danger delete-btn" data-guide-id="${guide.getGuideID()}">
+                <button type="button" class="btn btn-danger delete-btn" data-guide-id="${guide.id}">
                     Delete
                 </button>
             </td>
     `);
 
-        $("#guideTableBody").append(newRow);
-    });
+                $("#guideTableBody").append(newRow);
 
+
+            });
+
+
+            $(".edit-btn").on('click', function() {
+                var guideId = $(this).data('guide-id');
+
+                // Assuming 'adminData' is the array of admin objects
+                var guide = data.data.find(function(item) {
+                    return item.id === guideId;
+                });
+
+                // Populate modal with admin's information
+                // Set modal field values with corresponding admin data
+                admin_manage_container_edit_admin_model.find('#e_m_n_a_a_username').val(guide.name);
+                // admin_manage_container_edit_admin_model.find('#e_m_n_a_a_nameinitial').val(admin.signup_name_with_initial);
+                // admin_manage_container_edit_admin_model.find('#e_m_n_a_a_email').val(admin.email);
+                // admin_manage_container_edit_admin_model.find('#e_m_n_a_a_nic').val(admin.nic_or_passport);
+                // admin_manage_container_edit_admin_model.find('#e_m_n_a_a_address').val(admin.address);
+                // admin_manage_container_edit_admin_model.find('#e_m_n_a_a_salary').val(admin.salary);
+
+                // Change this line to correctly set the 'src' attribute of the image
+                admin_manage_container_edit_admin_model.find('#e_m_n_a_a_image').attr('src', `${guide.image}`);
+
+
+                admin_manage_container_edit_admin_model.modal('show');
+            });
+
+
+            //hide loading model
+            setTimeout(function () {
+                guide_admin_main_pg_loading_model.modal('hide');
+                setTimeout(function () {
+                    $('#alert').show();
+                    setTimeout(function () {
+                        $('#alert').hide();
+                    }, 1000); // delay
+                }, 100); // delay
+
+            }, 1000); // delay
+
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 401){
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
+
+                }, 1000); // delay
+            }else {
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    guide_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+        }
+    });
 }
 
 //--------------------------Edit & Delete Guide on Guide Table---------------------
@@ -1087,44 +1162,6 @@ $(document).on("click", ".delete-btn", function() {
     }
 });
 
-
-function loadajax(){
-    $.ajax({
-        method: "GET",
-        contentType: "application/json",
-        url: 'http://localhost:1010/main/guide-service/guides-getall',
-        async: true,
-        data: {
-            access_username: localStorage.getItem("secure_data_guide_admin_username"),
-            access_jwt_token: localStorage.getItem("secure_data_guide_admin_access_token"),
-            access_refresh_token: localStorage.getItem("secure_data_guide_admin_refresh_token")
-        },
-        success: function(data) {
-         console.log("done");
-        },
-        error: function(xhr, status, error) {
-            if (xhr.status === 401){
-                setTimeout(function () {
-                    guide_admin_main_pg_loading_model.modal('hide');
-
-                    guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
-
-                }, 1000); // delay
-            }else {
-                //hide loading model
-                setTimeout(function () {
-                    guide_admin_main_pg_loading_model.modal('hide');
-
-                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
-                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
-                    guide_admin_main_pg_alert_model_error.modal('show');
-
-                }, 1000); // delay
-                console.log("fail to logout exception");
-            }
-        }
-    });
-}
 
 //-------------------------------------------------------------------------
 
