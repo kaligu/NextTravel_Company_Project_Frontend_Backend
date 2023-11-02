@@ -910,39 +910,37 @@ function saveNewGuideBtnClicked(){
         processData: false,  // Prevent jQuery from processing data
         contentType: false,  // Set content type to false to let the browser set it
         success:function (data){
-            //hide loading model
-            setTimeout(function () {
+            if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
 
-                if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
-
-                }else {
-
-                }
-
-                guide_admin_main_pg_loading_model.modal('hide');
-
+                //save tokens on local localStorage - user admin
+                localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
+                localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
+                localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
+                console.log("done");
+                //hide loading model
                 setTimeout(function () {
-                    $('#alert').show();
+                    guide_admin_main_pg_loading_model.modal('hide');
                     setTimeout(function () {
-                        $('#alert').hide();
-                    }, 1000); // delay
-                }, 100); // delay
+                        $('#alert').show();
+                        setTimeout(function () {
+                            $('#alert').hide();
+                        }, 1000); // delay
+                    }, 100); // delay
 
-            }, 1000); // delay
-            // if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
-            //
-            //
-            // }else{
-            //     //hide loading model
-            //     setTimeout(function () {
-            //         guide_admin_main_pg_loading_model.modal('hide');
-            //
-            //         guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
-            //         guide_admin_main_pg_alert_model_content_error.text("Try Again!");
-            //
-            //     }, 1000); // delay
-            //     console.log("fail to logout exception");
-            // }
+                }, 1000); // delay
+
+            }else {
+                console.log("error");
+                    //hide loading model
+                    setTimeout(function () {
+                        guide_admin_main_pg_loading_model.modal('hide');
+
+                        guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                        guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+
+                    }, 1000); // delay
+                    console.log("fail to logout exception");
+            }
         },
         error: function (xhr,exception){
             console.log("fail to logout exception");
