@@ -149,6 +149,62 @@ public class GuideServiceController {
         }
     }
 
+    //update Guide
+    @PutMapping(value = {"/update-guide"}, consumes = {"multipart/form-data"})
+    public Mono<ResponseEntity<RespondDTO>> updateGuide(
+            @RequestPart("id") String id,
+            @RequestPart("name") String name,
+            @RequestPart("address") String address,
+            @RequestPart("remarks") String remarks,
+            @RequestPart("experience") String experience,
+            @RequestPart("nic") String nic,
+            @RequestPart("nic_front_view") String nicFrontView,
+            @RequestPart("nic_rear_view") String nicRearView,
+            @RequestPart("tell") String tell,
+            @RequestPart("gender") String gender,
+            @RequestPart("dob") String dob,
+            @RequestPart("image") String image,
+            @RequestPart("perday_fee") String perdayFee,
+            @RequestPart("access_username") String accessUsername,
+            @RequestPart("access_jwt_token") String accessToken,
+            @RequestPart("access_refresh_token") String refreshToken
+    ){
+        if(
+                name.matches(RegaxStrings.NameRegax) &&
+                        address.matches(RegaxStrings.AddressRegax)  &&
+                        remarks.matches(RegaxStrings.TextRegax)  &&
+                        experience.matches(RegaxStrings.OnlyNumberRegax)  &&
+                        nic.matches(RegaxStrings.NICRegax)  &&
+                        tell.matches(RegaxStrings.TellRegax)  &&
+                        gender.matches(RegaxStrings.GenderRegax)  &&
+                        dob.matches(RegaxStrings.DOBRegax)  &&
+                        perdayFee.matches(RegaxStrings.AddressRegax)
+        ){
+
+            return guideService.updateGuide(
+                    id,
+                    name,
+                    address,
+                    remarks,
+                    experience,
+                    nic,
+                    nicFrontView,
+                    nicRearView,
+                    tell,
+                    gender,
+                    dob,
+                    image,
+                    perdayFee,
+                    accessUsername,
+                    accessToken,
+                    refreshToken
+            );
+
+        }else {
+            return Mono.error( new InvalidInputException("Data Invalid!") );
+        }
+    }
+
     //admin manage window- search all admins
     @GetMapping(value = {"/guides-getall"}, consumes = {"application/json"})
     public Mono<ResponseEntity<RespondDTO>> getAllAdminsDataList(

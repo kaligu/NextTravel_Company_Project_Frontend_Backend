@@ -31,8 +31,14 @@ public class GuideController {
 
     //----------Save New Guide ------
     @PostMapping(value = "/save_new_guide")
-    public ResponseEntity<String> SaveNewClient_Prepare(@RequestBody ReqNewGuideSaveDTO reqNewGuideSaveDTO){
+    public ResponseEntity<String> SaveNewGuide(@RequestBody ReqNewGuideSaveDTO reqNewGuideSaveDTO){
         return guideService.SaveNewGuide(reqNewGuideSaveDTO);
+    }
+
+    //----------update Guide ------
+    @PutMapping(value = "/save_new_guide")
+    public ResponseEntity<String> updateGuidee(@RequestBody ReqNewGuideSaveDTO reqNewGuideSaveDTO){
+        return guideService.updateGuide(reqNewGuideSaveDTO);
     }
 
     //search all guides

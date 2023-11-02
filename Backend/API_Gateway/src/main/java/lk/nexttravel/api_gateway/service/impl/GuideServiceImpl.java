@@ -243,7 +243,6 @@ public class GuideServiceImpl implements GuideService {
     @Override
     public Mono<ResponseEntity<RespondDTO>> createNewGuide(String name, String address, String remarks, String experience, String nic, String nicFrontView, String nicRearView, String tell, String gender, String dob, String image, String perdayFee, String accessUsername, String accessToken, String refreshToken) {
 
-        ArrayList<TransactionDTO> transactionDTOArrayList = new ArrayList<>(); // for transactions
         try{
             FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder().access_jwt_token(accessToken).access_username(accessUsername).access_refresh_token(refreshToken).build();
             InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
@@ -360,6 +359,75 @@ public class GuideServiceImpl implements GuideService {
         }catch (Exception e){
             System.out.println("internal server error");
             throw new InternalServerException("Internal server Error");
+        }
+    }
+
+    @Override
+    public Mono<ResponseEntity<RespondDTO>> updateGuide(String id, String name, String address, String remarks, String experience, String nic, String nicFrontView, String nicRearView, String tell, String gender, String dob, String image, String perdayFee, String accessUsername, String accessToken, String refreshToken) {
+        try{
+            FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder().access_jwt_token(accessToken).access_username(accessUsername).access_refresh_token(refreshToken).build();
+            InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
+            if(
+                    internalFrontendSecurityCheckDTO.isAccesssible()
+                            &&
+                            internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_GUIDE)
+            ) {
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+
+                ResponseEntity<String> responseEntity = restTemplate.exchange(
+                        RqRpURLs.Guide_Service_New_Guide_save,
+                        HttpMethod.PUT,
+                        new HttpEntity<Object> (
+                                ReqNewGuideSaveDTO.builder()
+                                        .id(id)
+                                        .name(name)
+                                        .remarks(remarks)
+                                        .experience(Integer.parseInt(experience))
+                                        .nic(nic)
+                                        .nic_front_view(nicFrontView)
+                                        .nic_rear_view(nicRearView)
+                                        .tell(tell)
+                                        .gender(gender)
+                                        .dob(dob)
+                                        .image(image)
+                                        .address(address)
+                                        .perday_fee(Integer.parseInt(perdayFee))
+                                        .token(apiGatewayJwtAccessTokenServiceBackend.generateToken())
+                                        .build()
+                                ,
+                                headers
+                        ),
+                        String.class
+                );
+
+                if(responseEntity.getStatusCode()==HttpStatus.CREATED){
+                    FrontendTokenDTO newfrontendTokenDTO = FrontendTokenDTO.builder()
+                            .access_username(accessUsername)
+                            .access_jwt_token(internalFrontendSecurityCheckDTO.getAccess_token())
+                            .access_refresh_token(internalFrontendSecurityCheckDTO.getRefresh_token())
+                            .build();
+
+                    //----------------------------------------------return if all are done
+                    return Mono.just(
+                            new ResponseEntity<RespondDTO> (
+                                    RespondDTO.builder()
+                                            .rspd_code(RespondCodes.Respond_DATA_SAVED)
+                                            .token(newfrontendTokenDTO)
+                                            .data(null)
+                                            .build()
+                                    ,
+                                    HttpStatus.CREATED)
+                    );
+                }else {
+                    throw new Exception("Server error");
+                }
+            }else {
+                return Mono.error(new UnauthorizeException("Unauthorized request"));
+            }
+        }catch (Exception e){
+            return Mono.error(new InternalServerException("Internal Server error!"+e));
         }
     }
 }

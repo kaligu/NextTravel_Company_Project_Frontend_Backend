@@ -60,7 +60,7 @@ public class GuideServiceImpl implements GuideService {
                                 .image(reqNewGuideSaveDTO.getImage())
                                 .address(reqNewGuideSaveDTO.getAddress())
                                 .perday_fee(reqNewGuideSaveDTO.getPerday_fee())
-                                .transaction_state(RespondCodes.PENDING)
+                                .transaction_state(RespondCodes.COMMITED)
                                 .build()
                 );
 
@@ -75,7 +75,6 @@ public class GuideServiceImpl implements GuideService {
 
     @Override
     public ResponseEntity<ArrayList<Guide>> getAllGuides(String token) {
-        System.out.println("done");
         try {
             if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(token)) {  //check gateway token
 
@@ -88,6 +87,40 @@ public class GuideServiceImpl implements GuideService {
             }
         }catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<String> updateGuide(ReqNewGuideSaveDTO reqNewGuideSaveDTO) {
+        //check authentication
+        try {
+            if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqNewGuideSaveDTO.getToken())) {  //check gateway token
+                //save into database
+                guideRepository.save(
+                        Guide.builder()
+                                .id(reqNewGuideSaveDTO.getId())
+                                .name(reqNewGuideSaveDTO.getName())
+                                .remarks(reqNewGuideSaveDTO.getRemarks())
+                                .experience(reqNewGuideSaveDTO.getExperience())
+                                .nic(reqNewGuideSaveDTO.getNic())
+                                .nic_front_view(reqNewGuideSaveDTO.getNic_front_view())
+                                .nic_rear_view(reqNewGuideSaveDTO.getNic_rear_view())
+                                .tell(reqNewGuideSaveDTO.getTell())
+                                .gender(reqNewGuideSaveDTO.getGender())
+                                .dob(reqNewGuideSaveDTO.getDob())
+                                .image(reqNewGuideSaveDTO.getImage())
+                                .address(reqNewGuideSaveDTO.getAddress())
+                                .perday_fee(reqNewGuideSaveDTO.getPerday_fee())
+                                .transaction_state(RespondCodes.COMMITED)
+                                .build()
+                );
+
+                return new ResponseEntity<>(RespondCodes.Respond_DATA_SAVED, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
