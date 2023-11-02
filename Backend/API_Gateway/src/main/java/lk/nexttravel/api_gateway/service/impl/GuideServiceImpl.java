@@ -15,6 +15,7 @@ import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.TransactionDTO;
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
+import lk.nexttravel.api_gateway.dto.guide.GuideDTO;
 import lk.nexttravel.api_gateway.dto.guide.ReqNewGuideSaveDTO;
 import lk.nexttravel.api_gateway.dto.user.*;
 import lk.nexttravel.api_gateway.entity.User;
@@ -28,6 +29,7 @@ import lk.nexttravel.api_gateway.util.RespondCodes;
 import lk.nexttravel.api_gateway.util.RoleTypes;
 import lk.nexttravel.api_gateway.util.RqRpURLs;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -319,32 +321,27 @@ public class GuideServiceImpl implements GuideService {
                             internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_GUIDE)
             ) {
 
-                    //get data using restcontroller
-                    HttpHeaders headers = new HttpHeaders();
-                    headers.setContentType(MediaType.APPLICATION_JSON);
-                    HttpEntity<String> entity = new HttpEntity<>(null, headers); // Sending an empty body
+                ArrayList<GuideDTO> guideDTOS = new ArrayList<>();
 
-                    ResponseEntity<ArrayList<Gio>> adminDTOResponseEntity = restTemplate.exchange(
-                            "http://localhost:1030/api/guide/getall-guides?token="+ apiGatewayJwtAccessTokenServiceBackend.generateToken(),
-                            HttpMethod.GET,
-                            entity,
-                            AdminDTO.class
-                    );
-                    userAdminDTO.setSignup_name_with_initial(adminDTOResponseEntity.getBody().getSignup_name_with_initial());
-                    userAdminDTO.setNic_or_passport(adminDTOResponseEntity.getBody().getNic_or_passport());
-                    userAdminDTO.setAddress(adminDTOResponseEntity.getBody().getAddress());
-                    userAdminDTO.setSalary(adminDTOResponseEntity.getBody().getSalary());
-                    userAdminDTO.setProfile_image(adminDTOResponseEntity.getBody().getProfile_image());
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                HttpEntity<String> entity = new HttpEntity<>(null, headers);
 
-                    //add dto to list
-                    userAdminDTOS.add(userAdminDTO);
-                }
+                ParameterizedTypeReference<ArrayList<GuideDTO>> typeRef = new ParameterizedTypeReference<ArrayList<GuideDTO>>() {};
 
-                //send to front
+                ResponseEntity<ArrayList<GuideDTO>> guideDTOEntity = restTemplate.exchange(
+                        "http://localhost:1030/api/guide/getall-guides?token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
+                        HttpMethod.GET,
+                        entity,
+                        typeRef // Use the ParameterizedTypeReference to specify the collection type
+                );
+
+                guideDTOS = guideDTOEntity.getBody();
+
                 return Mono.just(new ResponseEntity<RespondDTO>(
                         RespondDTO.builder()
                                 .rspd_code(RespondCodes.Respond_SUCCESS)
-                                .data(userAdminDTOS)
+                                .data(guideDTOS)
                                 .token(
                                         FrontendTokenDTO.builder()
                                                 .access_username(internalFrontendSecurityCheckDTO.getUsername())

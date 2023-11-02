@@ -983,6 +983,7 @@ function saveNewGuideBtnClicked(){
 //load data
 function loadDataAfterOpenedViewGuideContainer(){
     //ajax request and load data into local GuideObjsLocalDB------
+    loadajax();
 
     //-----------------------------------------------
 
@@ -1086,6 +1087,44 @@ $(document).on("click", ".delete-btn", function() {
     }
 });
 
+
+function loadajax(){
+    $.ajax({
+        method: "GET",
+        contentType: "application/json",
+        url: 'http://localhost:1010/main/guide-service/guides-getall',
+        async: true,
+        data: {
+            access_username: localStorage.getItem("secure_data_guide_admin_username"),
+            access_jwt_token: localStorage.getItem("secure_data_guide_admin_access_token"),
+            access_refresh_token: localStorage.getItem("secure_data_guide_admin_refresh_token")
+        },
+        success: function(data) {
+         console.log("done");
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 401){
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
+
+                }, 1000); // delay
+            }else {
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    guide_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+        }
+    });
+}
 
 //-------------------------------------------------------------------------
 
