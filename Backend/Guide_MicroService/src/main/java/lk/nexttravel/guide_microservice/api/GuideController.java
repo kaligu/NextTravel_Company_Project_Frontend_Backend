@@ -50,7 +50,7 @@ public class GuideController {
     }
 
     //sdelete guide
-    @GetMapping(value = "/delete-guide")
+    @DeleteMapping(value = "/delete-guide")
     public ResponseEntity<String> deleteGuide(
             @RequestParam String id,
             @RequestParam String token

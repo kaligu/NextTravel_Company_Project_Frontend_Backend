@@ -444,41 +444,35 @@ public class GuideServiceImpl implements GuideService {
                 headers.setContentType(MediaType.APPLICATION_JSON);
                 HttpEntity<String> entity = new HttpEntity<>(null, headers); // Sending an empty body
 
-                User user = userRepository.findUserByName(frontendTokenDTO.getAccess_username()).get();
-
-                System.out.println(user.getId());
-                ResponseEntity<ReqProfileDataAdminsDTO> reqProfileDataAdminsDTOResponseEntity = restTemplate.exchange(
-                        "http://localhost:1020/api/admin/user-admin-get-profile-data?id=" + user.getId() + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
-                        HttpMethod.GET,
+                ResponseEntity<String> ResponseEntity = restTemplate.exchange(
+                        "http://localhost:1030/api/guide/delete-guide?id=" + id + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
+                        HttpMethod.DELETE,
                         entity,
-                        ReqProfileDataAdminsDTO.class
+                        String.class
                 );
-                //send to front
-                return Mono.just(new ResponseEntity<RespondDTO>(
-                        RespondDTO.builder()
-                                .rspd_code(RespondCodes.Respond_SUCCESS)
-                                .data(
-                                        UserReqProfileDataDTO.builder()
-                                                .id(user.getId())
-                                                .name(user.getName())
-                                                .name_with_initial(reqProfileDataAdminsDTOResponseEntity.getBody().getName_with_initial())
-                                                .address(reqProfileDataAdminsDTOResponseEntity.getBody().getAddress())
-                                                .email(user.getEmail())
-                                                .profile_image(reqProfileDataAdminsDTOResponseEntity.getBody().getProfile_image())
-                                                .nic_or_passport(reqProfileDataAdminsDTOResponseEntity.getBody().getNic_or_passport())
-                                                .build()
-                                )
-                                .token(
-                                        FrontendTokenDTO.builder()
-                                                .access_username(internalFrontendSecurityCheckDTO.getUsername())
-                                                .access_jwt_token(internalFrontendSecurityCheckDTO.getAccess_token())
-                                                .access_refresh_token(internalFrontendSecurityCheckDTO.getRefresh_token())
-                                                .build()
-                                )
-                                .build()
-                        ,
-                        HttpStatus.OK
-                ));
+                if(ResponseEntity.getStatusCode()== HttpStatus.OK){
+                    //send to front
+                    return Mono.just(new ResponseEntity<RespondDTO>(
+                            RespondDTO.builder()
+                                    .rspd_code(RespondCodes.Respond_SUCCESS)
+                                    .data(
+                                            null
+                                    )
+                                    .token(
+                                            FrontendTokenDTO.builder()
+                                                    .access_username(internalFrontendSecurityCheckDTO.getUsername())
+                                                    .access_jwt_token(internalFrontendSecurityCheckDTO.getAccess_token())
+                                                    .access_refresh_token(internalFrontendSecurityCheckDTO.getRefresh_token())
+                                                    .build()
+                                    )
+                                    .build()
+                            ,
+                            HttpStatus.OK
+                    ));
+                }else {
+                    throw new Exception("not deleted");
+                }
+
             }else {
                 return Mono.error(new UnauthorizeException("Unauthorized request"));
             }

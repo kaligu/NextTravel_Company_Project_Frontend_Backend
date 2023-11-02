@@ -192,10 +192,11 @@ public class UserServiceImpl implements UserService {
         try{
             FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder().access_jwt_token(access_jwt_token).access_username(access_username).access_refresh_token(access_refresh_token).build();
             InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
+
+            System.out.println("**********"+internalFrontendSecurityCheckDTO.isAccesssible());
             if(
                     internalFrontendSecurityCheckDTO.isAccesssible()
-                            &&
-                            internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_USER)
+
             ) {
 
                 //delelte saved refresh token on DB

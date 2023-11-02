@@ -960,7 +960,7 @@ function saveNewGuideBtnClicked(){
                         $('#alert').show();
                         setTimeout(function () {
                             $('#alert').hide();
-                            window.location.refresh();
+                            window.location.reload();
                         }, 1000); // delay
                     }, 100); // delay
 
@@ -1606,7 +1606,7 @@ function saveEditGuide(){
                             $('#alert').hide();
                             admin_manage_container_edit_admin_model.modal('hide');
                             console.log("done");
-                            window.location.refresh();
+                            window.location.reload();
                         }, 100); // delay
                     }, 100); // delay
 
@@ -1655,7 +1655,80 @@ function saveEditGuide(){
 
 //--------delete on server
 function saveDeleteGuide(){
-    console.log("deleted");
+    //show loading model
+    guide_admin_main_pg_loading_model.modal('show');
+
+    $.ajax({
+        method: "GET",
+        contentType: "application/json",
+        url: 'http://localhost:1010/main/guide-service/delete-guide',
+        async: true,
+        data: {
+            id: $('#guide_admin_main_pg_delete-model_text').text(),
+            access_username: localStorage.getItem("secure_data_guide_admin_username"),
+            access_jwt_token: localStorage.getItem("secure_data_guide_admin_access_token"),
+            access_refresh_token: localStorage.getItem("secure_data_guide_admin_refresh_token")
+        },
+        success:function (data){
+            if(data.rspd_code === RespondCodes.Response_SUCCESS){
+
+                //save tokens on local localStorage - user admin
+                localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
+                localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
+                localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
+                console.log("done");
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+                    setTimeout(function () {
+                        $('#alert').show();
+                        setTimeout(function () {
+                            $('#alert').hide();
+                            $('#guide_admin_main_pg_delete-model').modal('hide');
+                            console.log("done");
+                            window.location.reload();
+                        }, 100); // delay
+                    }, 100); // delay
+
+                }, 1000); // delay
+
+            }else {
+                console.log("error");
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+        },
+        error: function (xhr,exception){
+            console.log(exception);
+            if (xhr.status === 401){
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
+
+                }, 1000); // delay
+            }else {
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    guide_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+
+        }
+    })
 }
 
 
@@ -1690,3 +1763,80 @@ $(document).ready(function () {
 });
 
 //-----------------------------------------------------------------------------
+//        LOGOUT
+//-----------------------------------------
+
+function UserManageConsoleLogout(){
+    //show loading model
+    guide_admin_main_pg_loading_model.modal('show');
+
+    //send request
+    $.ajax({
+        method: "GET",
+        contentType: "application/json",
+        url: 'http://localhost:1010/main/user-service/request-to-logout',
+        async: true,
+        data: {
+            access_username: localStorage.getItem("secure_data_guide_admin_username"),
+            access_jwt_token: localStorage.getItem("secure_data_guide_admin_access_token"),
+            access_refresh_token: localStorage.getItem("secure_data_guide_admin_refresh_token")
+        },
+        success: function(data) {
+            if (data.rspd_code === RespondCodes.Response_SUCCESS) {
+                // clear tokens to localStorage
+                localStorage.setItem("secure_data_guide_admin_username", " ");
+                localStorage.setItem("secure_data_guide_admin_access_token", " ");
+                localStorage.setItem("secure_data_guide_admin_refresh_token", " ");
+
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+                    setTimeout(function () {
+                        $('#alert').show();
+                        setTimeout(function () {
+                            $('#alert').hide();
+                            admin_manage_container_edit_admin_model.modal('hide');
+                            console.log("done");
+                            window.open("http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/index.html?_ijt=52ammnccq57t2dg07p5m351hpu&_ij_reload=RELOAD_ON_SAVE");
+                        }, 100); // delay
+                    }, 100); // delay
+
+                }, 1000); // delay
+
+            }else {
+
+                console.log("error");
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 401){
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
+
+                }, 1000); // delay
+            }else {
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    guide_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+        }
+    });
+}

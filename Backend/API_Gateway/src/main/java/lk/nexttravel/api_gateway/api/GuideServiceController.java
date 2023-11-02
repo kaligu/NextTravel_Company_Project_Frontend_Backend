@@ -222,16 +222,19 @@ public class GuideServiceController {
     //delete guide
     @GetMapping(value = {"/delete-guide"}, consumes = {"application/json"})
     public Mono<ResponseEntity<RespondDTO>> deleteGuide(
-            @RequestParam("access_username") @NonNull String id,
+            @RequestParam("id")  String id
+            ,
 
-            @RequestParam("access_username") @NonNull String access_username
+            @RequestParam("access_username")  String access_username
             ,
-            @RequestParam("access_jwt_token") @NonNull String access_jwt_token
+            @RequestParam("access_jwt_token") String access_jwt_token
             ,
-            @RequestParam("access_refresh_token") @NonNull String access_refresh_token
+            @RequestParam("access_refresh_token")  String access_refresh_token
     ){
+        System.out.println("requested");
         return guideService.deleteGuide(
                 id,
+
                 access_username
                 ,
                 access_jwt_token
