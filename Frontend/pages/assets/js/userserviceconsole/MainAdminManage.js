@@ -318,7 +318,6 @@ if(pstxtfld1===true && pstxtfld2===true && pstxtfld3===true && pstxtfld4===true 
 }
 }
 //------------------ update on backend Settings
-
 function saveUpdatedProfileSettings(){
 
 }

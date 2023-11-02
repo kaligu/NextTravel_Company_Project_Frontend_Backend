@@ -73,3 +73,20 @@ function isGenderRegaxChecked(text) {
     const regex = /^(male|female|trans)$/;
     return regex.test(text);
 }
+function isNameWithInitialRegaxChecked(name) {
+    const regex = /([A-Z])\w+\s([A-Z])\w*\s*([A-Z])*(?=,*)/;
+    return regex.test(name);
+// *Enter valid Name with initial.
+//     *It must contains dots , letters like these pattern.
+//     *Ex : H.K.Pam Lowev / C.F.Kamal Perera
+}
+
+function isEmailRegaxChecked(email) {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
+}
+
+function isPasswordRegaxChecked(password) {
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    return regex.test(password);
+}

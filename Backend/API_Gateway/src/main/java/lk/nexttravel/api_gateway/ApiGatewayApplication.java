@@ -53,7 +53,7 @@ public class ApiGatewayApplication {
                 systemUserService.saveNewAdminUserOnlyTesting(
                         UserSignupDTO.builder()
                                 .signup_name("kaligu")
-                                .signup_name_with_initial("H.C.K.Jayanath")
+                                .signup_name_with_initial("H.C.K.Jayanath Perera")
                                 .signup_address("Horana")
                                 .signup_email("chethiyakaligu2@gmail.com")
                                 .signup_nic_or_passport("200133702832")
@@ -83,7 +83,7 @@ public class ApiGatewayApplication {
                 systemUserService.saveNewAdminUserOnlyTesting(
                         UserSignupDTO.builder()
                                 .signup_name("lakamal")
-                                .signup_name_with_initial("K.P.M.Lakmal")
+                                .signup_name_with_initial("K.P.M.Lakmal Perera")
                                 .signup_address("Padukka")
                                 .signup_email("chethiyakaligu2@gmail.com")
                                 .signup_nic_or_passport("199658652548")
@@ -113,7 +113,7 @@ public class ApiGatewayApplication {
                 systemUserService.saveNewAdminUserOnlyTesting(
                         UserSignupDTO.builder()
                                 .signup_name("nirot")
-                                .signup_name_with_initial("M.K.P.Nirot")
+                                .signup_name_with_initial("M.K.P.Nirot Perera")
                                 .signup_address("Moragalla")
                                 .signup_email("chethiyakaligu2@gmail.com")
                                 .signup_nic_or_passport("198858652548")

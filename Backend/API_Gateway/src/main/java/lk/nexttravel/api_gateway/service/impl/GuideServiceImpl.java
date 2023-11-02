@@ -55,7 +55,7 @@ public class GuideServiceImpl implements GuideService {
             if(
                     internalFrontendSecurityCheckDTO.isAccesssible()
                             &&
-                            internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_USER)
+                            internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_GUIDE)
             ) {
                 //get data using restcontroller
                 HttpHeaders headers = new HttpHeaders();

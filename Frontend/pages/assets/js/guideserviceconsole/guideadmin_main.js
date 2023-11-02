@@ -21,6 +21,8 @@ const p_s_address = $('#p_s_address');
 const p_s_image = $('#p_s_image')
 const p_s_password = $('#p_s_password');
 
+var profileImage_Base64String = "";
+
 //time
 const g_a_time = $('#g_a_time');
 
@@ -57,6 +59,14 @@ var guideImage_Base64String = "";
 var guidNICFrontImage_Base64String = "";
 var guidNOCRearImage_Base64String = "";
 
+//setting validations
+let pstxtfld1 = false;
+let pstxtfld2 = false;
+let pstxtfld3 = false;
+let pstxtfld4 = false;
+let pstxtfld5 = false;
+let pstxtfld6 = false;
+let pstxtfld7 = true; //image
 //---------------------------------------------------------------------
 
 //------------------- navigate containers -------------------------------------------------------
@@ -129,15 +139,20 @@ $(document).ready(function(){
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //                                          First load default
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+$(document).ready(function(){
 
-loadAdminProfileData();
+    loadAdminProfileData();
+
+    $('#body').css('display','block');
+});
+
 
 
 //------------------------------------------------------------------------------------
 function loadAdminProfileData(){
-    console.log(localStorage.getItem("secure_data_user_admin_username"));
-    console.log(localStorage.getItem("secure_data_user_admin_access_token"));
-    console.log(localStorage.getItem("secure_data_user_admin_refresh_token"));
+    console.log(localStorage.getItem("secure_data_guide_admin_username"));
+    console.log(localStorage.getItem("secure_data_guide_admin_access_token"));
+    console.log(localStorage.getItem("secure_data_guide_admin_refresh_token"));
 
     //show loading model
     guide_admin_main_pg_loading_model.modal('show');
@@ -171,9 +186,10 @@ function loadAdminProfileData(){
                 p_s_address.val(data.data.address);
                 p_s_image.attr('src', data.data.profile_image);
 
+                profileImage_Base64String =data.data.profile_image;
 
-                // //check textflds validations after adding data
-                // checkSettingsAddedDataAtTextflds();
+                //check textflds validations after adding data
+                checkSettingsAddedDataAtTextflds();
 
                 //hide loading model
                 setTimeout(function () {
@@ -216,6 +232,217 @@ function loadAdminProfileData(){
         }
     });
 }
+
+//--------------------------checkSettingsAddedDataAtTextflds()---------------
+function checkSettingsAddedDataAtTextflds(){
+    //check username
+    if(isNameRegaxChecked(p_s_username.val())){
+        p_s_username.removeClass('is-invalid');
+        p_s_username.addClass('is-valid');
+        pstxtfld1 = true;
+    }else{
+        p_s_username.addClass('is-invalid');
+        p_s_username.removeClass('is-valid');
+        pstxtfld1 = false;
+    }
+
+    //check name with initial
+    if(isNameWithInitialRegaxChecked(p_s_nameinitial.val())){
+        p_s_nameinitial.removeClass('is-invalid');
+        p_s_nameinitial.addClass('is-valid');
+        pstxtfld2=true;
+    }else{
+        p_s_nameinitial.addClass('is-invalid');
+        p_s_nameinitial.removeClass('is-valid');
+        pstxtfld2=false;
+    }
+
+    //check email
+    if(isEmailRegaxChecked(p_s_email.val())){
+        p_s_email.removeClass('is-invalid');
+        p_s_email.addClass('is-valid');
+        pstxtfld3=true;
+    }else{
+        p_s_email.addClass('is-invalid');
+        p_s_email.removeClass('is-valid');
+        pstxtfld3=false;
+    }
+
+    //check address
+    if(isAddressRegaxChecked(p_s_address.val())){
+        p_s_address.removeClass('is-invalid');
+        p_s_address.addClass('is-valid');
+        pstxtfld4=true;
+    }else{
+        p_s_address.addClass('is-invalid');
+        p_s_address.removeClass('is-valid');
+        pstxtfld4=false;
+    }
+
+    //check nic
+    if(isNICRegaxChecked(p_s_nic.val())){
+        p_s_nic.removeClass('is-invalid');
+        p_s_nic.addClass('is-valid');
+        pstxtfld5=true;
+    }else{
+        p_s_nic.addClass('is-invalid');
+        p_s_nic.removeClass('is-valid');
+        p_s_nic.removeClass('is-valid');
+        pstxtfld5=false;
+    }
+
+}
+
+//------- profile setting image set ------------
+$(document).ready(function() {
+    $('#p_s_image_input').on('change', function () {
+        var newImageFile = this.files[0]; // Get the file when a change occurs in the input
+
+        if (newImageFile) { // Check if a file is selected
+            var reader = new FileReader();
+            var baseString;
+            reader.onload = function () {
+                baseString = reader.result;
+
+                // Update the 'src' attribute of the image element
+                p_s_image.attr('src', baseString);
+                profileImage_Base64String = baseString;
+            };
+            reader.readAsDataURL(newImageFile);
+        } else {
+            console.error('No file selected');
+        }
+    });
+});
+
+const profileImageInput = document.getElementById('p_s_image_input');
+profileImageInput.onchange = () => {
+    const minvalidFeedback = $('#img-invalid-feedback');
+    const mvalidFeedback = $('#img-valid-feedback');
+    const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    const maxFileSize = 2 * 1024 * 1024; // 2MB
+
+
+    if (profileImageInput.files.length > 0) {
+        const file = profileImageInput.files[0];
+        const fileName = file.name.toLowerCase();
+        const fileExtension = fileName.split('.').pop();
+
+        if (allowedExtensions.includes(fileExtension) && file.size <= maxFileSize) {
+            profileImageInput.classList.remove('is-invalid');
+            profileImageInput.classList.add('is-valid');
+            mvalidFeedback.css('display', 'block');
+            minvalidFeedback.css('display', 'none');
+
+            pstxtfld7 = true;
+
+            settingUpdateBtnTrigger();//trigger to enable
+        } else {
+            profileImageInput.classList.remove('is-valid');
+            profileImageInput.classList.add('is-invalid');
+            minvalidFeedback.css('display', 'block');
+            mvalidFeedback.css('display', 'none');
+
+            pstxtfld7 = false;
+
+            settingUpdateBtnTrigger();//trigger to enable
+        }
+    }
+};
+
+function settingUpdateBtnTrigger(){
+    if(pstxtfld1===true && pstxtfld2===true && pstxtfld3===true && pstxtfld4===true && pstxtfld5===true && pstxtfld6===true && pstxtfld7===true){
+        // All conditions are true, enable the signup button
+        $('#p_s_updateSettingbtn').prop("disabled", false);
+    }else{
+        $('#p_s_updateSettingbtn').prop("disabled", true);
+    }
+}
+
+p_s_username.on('keyup', function () {
+    if(isNameRegaxChecked(p_s_username.val())){
+        p_s_username.removeClass('is-invalid');
+        p_s_username.addClass('is-valid');
+        pstxtfld1 = true;
+        settingUpdateBtnTrigger();
+    }else{
+        p_s_username.addClass('is-invalid');
+        p_s_username.removeClass('is-valid');
+        pstxtfld1 = false;
+        settingUpdateBtnTrigger();
+    }
+});
+
+p_s_nameinitial.on('keyup', function () {
+    if(isNameWithInitialRegaxChecked(p_s_nameinitial.val())){
+        p_s_nameinitial.removeClass('is-invalid');
+        p_s_nameinitial.addClass('is-valid');
+        pstxtfld2=true;
+        settingUpdateBtnTrigger();
+    }else{
+        p_s_nameinitial.addClass('is-invalid');
+        p_s_nameinitial.removeClass('is-valid');
+        pstxtfld2=false;
+        settingUpdateBtnTrigger();
+    }
+
+});
+
+p_s_email.on('keyup', function () {
+    if(isEmailRegaxChecked(p_s_email.val())){
+        p_s_email.removeClass('is-invalid');
+        p_s_email.addClass('is-valid');
+        pstxtfld3=true;
+        settingUpdateBtnTrigger();
+    }else{
+        p_s_email.addClass('is-invalid');
+        p_s_email.removeClass('is-valid');
+        pstxtfld3=false;
+        settingUpdateBtnTrigger();
+    }
+});
+
+p_s_address.on('keyup', function () {
+    if(isAddressRegaxChecked(p_s_address.val())){
+        p_s_address.removeClass('is-invalid');
+        p_s_address.addClass('is-valid');
+        pstxtfld4=true;
+        settingUpdateBtnTrigger();
+    }else{
+        p_s_address.addClass('is-invalid');
+        p_s_address.removeClass('is-valid');
+        pstxtfld4=false;
+        settingUpdateBtnTrigger();
+    }
+});
+
+p_s_nic.on('keyup', function () {
+    if(isNICRegaxChecked(p_s_nic.val())){
+        p_s_nic.removeClass('is-invalid');
+        p_s_nic.addClass('is-valid');
+        pstxtfld5=true;
+        settingUpdateBtnTrigger();
+    }else{
+        p_s_nic.addClass('is-invalid');
+        p_s_nic.removeClass('is-valid');
+        pstxtfld5=false;
+        settingUpdateBtnTrigger();
+    }
+});
+
+p_s_password.on('keyup', function () {
+    if(isPasswordRegaxChecked(p_s_password.val())){
+        p_s_password.removeClass('is-invalid');
+        p_s_password.addClass('is-valid');
+        pstxtfld6=true;
+        settingUpdateBtnTrigger();
+    }else{
+        p_s_password.addClass('is-invalid');
+        p_s_password.removeClass('is-valid');
+        pstxtfld6=false;
+        settingUpdateBtnTrigger();
+    }
+});
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 //--------------------------------- Set time to UI------------------------------------
@@ -276,6 +503,26 @@ $(document).ready(function(){
 //         }
 //     });
 // });
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//                                          Profile Setting update
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//------------------ update on backend Settings if profile Update btn clicked
+function saveUpdatedProfileSettings(){
+    console.log(p_s_username.val());
+    console.log(p_s_email.val());
+    console.log(p_s_nameinitial.val());
+    console.log(p_s_nic.val());
+    console.log(p_s_address.val());
+    console.log(p_s_password.val());
+    console.log(profileImage_Base64String);
+
+
+}
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //                                          Guide Manage
