@@ -6,8 +6,10 @@
 */
 package lk.nexttravel.api_gateway.api;
 
+import lk.nexttravel.api_gateway.advice.util.InvalidInputException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.service.GuideService;
+import lk.nexttravel.api_gateway.util.RegaxStrings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
@@ -69,6 +71,29 @@ public class GuideServiceController {
             ,
             @RequestParam("access_refresh_token") @NonNull String access_refresh_token
     ){
-        return adminService.userAdminGetProfileData(id,token);
+        if(
+                username.matches(RegaxStrings.NameRegax) &&
+                        address.matches(RegaxStrings.AddressRegax) &&
+                        email.matches(RegaxStrings.EmailRegax) &&
+                        nic.matches(RegaxStrings.NICRegax) &&
+                        password.matches(RegaxStrings.PasswordRegax) &&
+                        nameinitial.matches(RegaxStrings.NameWithInitialRegax)
+
+        ){
+            return guideService.UserAdminUpdateProfileData(
+                    username,
+                    address,
+                    email,
+                    nic,
+                    password,
+                    nameinitial,
+                    profileImage_Base64String,
+                    access_username,
+                    access_jwt_token,
+                    access_refresh_token
+            );
+        }else {
+            return Mono.error( new InvalidInputException("Data Invalid!") );
+        }
     }
 }
