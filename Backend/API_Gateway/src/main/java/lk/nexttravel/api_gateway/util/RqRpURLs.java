@@ -10,4 +10,6 @@ public class RqRpURLs {
     public static final String User_Service_New_Client_Save_Signup              = "http://localhost:1020/api/client/save_new_client";
 
     public static final String User_Service_New_Admin_Save_Signup              = "http://localhost:1020/api/admin/save_new_admin";
+
+    public static final String  User_Service_Guide_Update = "http://localhost:1020/api/admin/update_admin";
 }

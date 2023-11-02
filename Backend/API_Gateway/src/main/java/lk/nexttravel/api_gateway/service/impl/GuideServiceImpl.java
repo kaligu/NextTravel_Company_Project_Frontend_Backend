@@ -166,7 +166,7 @@ public class GuideServiceImpl implements GuideService {
                                 .httpMethod(HttpMethod.POST)  //http method
                                 .data(
                                         ReqUpdateGuideAdminDTO.builder()
-                                                .signup_name_with_initial(nameinitial)
+                                                .name_with_initial(nameinitial)
                                                 .nic_or_passport(nic)
                                                 .address(address)
                                                 .profile_image(profileImage_base64String)

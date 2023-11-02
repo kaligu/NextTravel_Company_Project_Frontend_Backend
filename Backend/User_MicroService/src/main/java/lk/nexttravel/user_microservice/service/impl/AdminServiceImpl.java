@@ -8,6 +8,7 @@ package lk.nexttravel.user_microservice.service.impl;
 
 import lk.nexttravel.user_microservice.dto.ReqNewClientSaveDTO;
 import lk.nexttravel.user_microservice.dto.ReqProfileDataAdminsDTO;
+import lk.nexttravel.user_microservice.dto.ReqUpdateGuideAdminDTO;
 import lk.nexttravel.user_microservice.entity.Admin;
 import lk.nexttravel.user_microservice.entity.Client;
 import lk.nexttravel.user_microservice.persistence.AdminRepository;
@@ -175,6 +176,81 @@ public class AdminServiceImpl implements AdminService {
 
         }catch (Exception e){
             return new ResponseEntity<Admin>((Admin) null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<String> SaveUpdatedAdmin_Prepare(ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO) {
+        //check authentication
+        try {
+            if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqUpdateGuideAdminDTO.getToken())) {  //check gateway token
+
+                //save into database
+                Admin admin = adminRepository.save(
+                        Admin.builder()
+                                .address(reqUpdateGuideAdminDTO.getAddress())
+                                .profile_image(reqUpdateGuideAdminDTO.getProfile_image())
+                                .signup_name_with_initial(reqUpdateGuideAdminDTO.getName_with_initial())
+                                .nic_or_passport(reqUpdateGuideAdminDTO.getNic_or_passport())
+                                .transaction_state(RespondCodes.PENDING)
+                                .build()
+                );
+
+                return new ResponseEntity<>(RespondCodes.Respond_DATA_SAVED, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<String> SaveUpdatedAdmin_Commit(ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO) {
+        //check authentication
+        try {
+            if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqUpdateGuideAdminDTO.getToken())) {  //check gateway token
+                //save into database
+                adminRepository.save(
+                        Admin.builder()
+                                .address(reqUpdateGuideAdminDTO.getAddress())
+                                .profile_image(reqUpdateGuideAdminDTO.getProfile_image())
+                                .signup_name_with_initial(reqUpdateGuideAdminDTO.getName_with_initial())
+                                .nic_or_passport(reqUpdateGuideAdminDTO.getNic_or_passport())
+                                .transaction_state(RespondCodes.COMMITED)
+                                .build()
+                );
+
+                return new ResponseEntity<>(RespondCodes.Respond_DATA_SAVED, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<String> SaveUpdatedAdmin_Abrot(ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO) {
+        //check authentication
+        try {
+            if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqUpdateGuideAdminDTO.getToken())) {  //check gateway token
+                //delete
+                adminRepository.delete(
+                        Admin.builder()
+                                .address(reqUpdateGuideAdminDTO.getAddress())
+                                .profile_image(reqUpdateGuideAdminDTO.getProfile_image())
+                                .signup_name_with_initial(reqUpdateGuideAdminDTO.getName_with_initial())
+                                .nic_or_passport(reqUpdateGuideAdminDTO.getNic_or_passport())
+                                .build()
+                );
+
+                return new ResponseEntity<>(RespondCodes.Respond_DATA_DELETED, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

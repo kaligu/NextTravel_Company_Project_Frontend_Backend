@@ -23,11 +23,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ReqUpdateGuideAdminDTO {
-    private String signup_name_with_initial;
+    private String name_with_initial;
     private String nic_or_passport;
     private String address;
     private String profile_image;
-    private String transaction_state;
 
     //---for security purpose
     private String token;

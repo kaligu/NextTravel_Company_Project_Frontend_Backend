@@ -8,6 +8,7 @@ package lk.nexttravel.user_microservice.api;
 
 import lk.nexttravel.user_microservice.dto.ReqNewClientSaveDTO;
 import lk.nexttravel.user_microservice.dto.ReqProfileDataAdminsDTO;
+import lk.nexttravel.user_microservice.dto.ReqUpdateGuideAdminDTO;
 import lk.nexttravel.user_microservice.entity.Admin;
 import lk.nexttravel.user_microservice.service.AdminService;
 import lk.nexttravel.user_microservice.service.ClientService;
@@ -46,6 +47,22 @@ public class AdminController {
         return adminService.SaveNewClient_Abrot(reqNewClientSaveDTO);
     }
 
+
+    //----------Update Admin ------
+    @PostMapping(value = "/update_admin")
+    public ResponseEntity<String> SaveUpdatedAdmin_Prepare(@RequestBody ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO){
+        return adminService.SaveUpdatedAdmin_Prepare(reqUpdateGuideAdminDTO);
+    }
+    @PutMapping(value = "/update_admin")
+    public ResponseEntity<String> SaveUpdatedAdmin_Commit(@RequestBody ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO){
+        return adminService.SaveUpdatedAdmin_Commit(reqUpdateGuideAdminDTO);
+    }
+    @DeleteMapping(value = "/update_admin")
+    public ResponseEntity<String> SaveUpdatedAdmin_Abrot(@RequestBody ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO){
+        return adminService. SaveUpdatedAdmin_Abrot(reqUpdateGuideAdminDTO);
+    }
+
+
     //get Profile Data - user admin
     @GetMapping(value = "/user-admin-get-profile-data")
     public ResponseEntity<ReqProfileDataAdminsDTO> userAdminGetProfileData(
@@ -82,30 +99,13 @@ public class AdminController {
         return adminService.userAdminGetProfileData(id,token);
     }
 
-    //get profile image - guide admin
-    @GetMapping(value = "/travelpackage-admin-get-profile-image")
-    public ResponseEntity<ReqProfileDataAdminsDTO> travelpackageAdminGetProfileData(
-            @RequestParam String id ,
-            @RequestParam String token
-    ){
-        return adminService.userAdminGetProfileData(id,token);
-    }
-
-    //update Profile Data - user admin
-    @GetMapping(value = "/user-admin-update-data")
+    //update Profile Data - guide admin
+    @PutMapping(value = "/save_new_client")
     public ResponseEntity<ReqProfileDataAdminsDTO> userAdminUpdateProfileData(
             @RequestParam String id ,
             @RequestParam String token
     ){
         return adminService.userAdminGetProfileData(id,token);
-    }
-    //update Profile Data - user admin
-    @GetMapping(value = "/user-admin-update-data")
-    public ResponseEntity<ReqProfileDataAdminsDTO> userAdminUpdateProfileData(
-            @RequestParam String id ,
-            @RequestParam String token
-    ){
-        return adminService.userAdminUpdateProfileData(id,token,);
     }
 
 

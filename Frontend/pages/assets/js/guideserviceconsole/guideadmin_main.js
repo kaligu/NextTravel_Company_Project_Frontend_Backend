@@ -518,7 +518,68 @@ function saveUpdatedProfileSettings(){
     console.log(p_s_password.val());
     console.log(profileImage_Base64String);
 
+//show loading model
+    guide_admin_main_pg_loading_model.modal('show');
 
+    console.log("success");
+
+    $.ajax({
+        method:"GET",
+        contentType:"application/json",
+        url:"http://localhost:1010/main/guide-service/guide-admin-update-profile-data",
+        async:false,
+        data: {
+            username: p_s_username.val(),
+            address: p_s_address.val(),
+            email: p_s_email.val(),
+            nic: p_s_nic.val(),
+            password: p_s_password.val(),
+            nameinitial: p_s_nameinitial.val(),
+            profileImage_Base64String: profileImage_Base64String,
+            access_username: localStorage.getItem("secure_data_guide_admin_username"),
+            access_jwt_token: localStorage.getItem("secure_data_guide_admin_access_token"),
+            access_refresh_token: localStorage.getItem("secure_data_guide_admin_refresh_token")
+        },
+        success:function (data){
+            if(data.rspd_code === RespondCodes.Respond_PASSWORD_MATCHED){
+
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_done.text("Done!");
+                    guide_admin_main_pg_alert_model_content_done.text("Your Profile Updated!");
+                    guideImage_Base64String.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+
+            }
+
+        },
+        error: function (xhr,exception){
+            if (xhr.status === 401){
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
+
+                }, 1000); // delay
+            }else {
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    guide_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+
+        }
+    })
 }
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

@@ -8,6 +8,7 @@ package lk.nexttravel.user_microservice.service;
 
 import lk.nexttravel.user_microservice.dto.ReqNewClientSaveDTO;
 import lk.nexttravel.user_microservice.dto.ReqProfileDataAdminsDTO;
+import lk.nexttravel.user_microservice.dto.ReqUpdateGuideAdminDTO;
 import lk.nexttravel.user_microservice.entity.Admin;
 import org.springframework.http.ResponseEntity;
 
@@ -30,4 +31,10 @@ public interface AdminService {
 
     //get admin by id
     ResponseEntity<Admin> getAllAdminsSataNySearch(String id , String token);
+
+    ResponseEntity<String> SaveUpdatedAdmin_Prepare(ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO);
+
+    ResponseEntity<String> SaveUpdatedAdmin_Commit(ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO);
+
+    ResponseEntity<String> SaveUpdatedAdmin_Abrot(ReqUpdateGuideAdminDTO reqUpdateGuideAdminDTO);
 }
