@@ -55,4 +55,7 @@ public class Guide {
     private String address;
 
     private int perday_fee;
+
+    //for 2PC transaction
+    private String transaction_state;
 }
