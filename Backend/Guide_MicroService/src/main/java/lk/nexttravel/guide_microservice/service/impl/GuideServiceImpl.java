@@ -18,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 /**
  * @author : H.C.Kaligu Jayanath
  * Date    : 11/2/2023
@@ -69,5 +71,10 @@ public class GuideServiceImpl implements GuideService {
         }catch (Exception e){
             return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @Override
+    public ResponseEntity<ArrayList<Guide>> getAllGuides(String token) {
+        return null;
     }
 }

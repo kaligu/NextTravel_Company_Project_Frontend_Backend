@@ -7,10 +7,14 @@
 package lk.nexttravel.guide_microservice.api;
 
 import lk.nexttravel.guide_microservice.dto.ReqNewGuideSaveDTO;
+import lk.nexttravel.guide_microservice.entity.Guide;
 import lk.nexttravel.guide_microservice.service.GuideService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : H.C.Kaligu Jayanath
@@ -31,4 +35,12 @@ public class GuideController {
         return guideService.SaveNewGuide(reqNewGuideSaveDTO);
     }
 
+    //search all guides
+    @GetMapping(value = "/getall-guides")
+    public ResponseEntity<ArrayList<Guide>> getAllGuides(
+            @RequestParam String search_keyword ,
+            @RequestParam String token
+    ){
+        return guideService.getAllGuides(token);
+    }
 }

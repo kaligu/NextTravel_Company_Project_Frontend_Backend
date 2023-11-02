@@ -16,10 +16,7 @@ import lk.nexttravel.api_gateway.dto.TransactionDTO;
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
 import lk.nexttravel.api_gateway.dto.guide.ReqNewGuideSaveDTO;
-import lk.nexttravel.api_gateway.dto.user.ReqProfileDataAdminsDTO;
-import lk.nexttravel.api_gateway.dto.user.ReqUpdateGuideAdminDTO;
-import lk.nexttravel.api_gateway.dto.user.UserReqNewClientSaveDTO;
-import lk.nexttravel.api_gateway.dto.user.UserReqProfileDataDTO;
+import lk.nexttravel.api_gateway.dto.user.*;
 import lk.nexttravel.api_gateway.entity.User;
 import lk.nexttravel.api_gateway.service.GuideService;
 import lk.nexttravel.api_gateway.service.security.Authenticate_Authorize_Service;
@@ -308,6 +305,77 @@ public class GuideServiceImpl implements GuideService {
             }
         }catch (Exception e){
             return Mono.error(new InternalServerException("Internal Server error!"+e));
+        }
+    }
+
+    @Override
+    public Mono<ResponseEntity<RespondDTO>> getAllGuides(String access_username, String access_jwt_token, String access_refresh_token) {
+        try{
+            FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder().access_jwt_token(access_jwt_token).access_username(access_username).access_refresh_token(access_refresh_token).build();
+            InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
+            if(
+                    internalFrontendSecurityCheckDTO.isAccesssible()
+                            &&
+                            internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_GUIDE)
+            ) {
+
+                ArrayList<UserAdminDTO> userAdminDTOS = new ArrayList<>();
+
+                //get on User DB admin datas
+                ArrayList<User> userArrayList = userRepository.findAllByNameContains(search_keyword);
+
+                //fill and add
+                for (User user:userArrayList){
+                    UserAdminDTO userAdminDTO = new UserAdminDTO();
+                    userAdminDTO.setId(user.getId());
+                    userAdminDTO.setName(user.getName());
+                    userAdminDTO.setEmail(user.getEmail());
+                    userAdminDTO.setRole_type(user.getRole_type());
+
+                    //get data using restcontroller
+                    HttpHeaders headers = new HttpHeaders();
+                    headers.setContentType(MediaType.APPLICATION_JSON);
+                    HttpEntity<String> entity = new HttpEntity<>(null, headers); // Sending an empty body
+
+                    ResponseEntity<AdminDTO> adminDTOResponseEntity = restTemplate.exchange(
+                            "http://localhost:1020/api/admin/get-admin-data?search_keyword=" + user.getId() + "&token=" + apiGatewayJwtAccessTokenServiceBackend.generateToken(),
+                            HttpMethod.GET,
+                            entity,
+                            AdminDTO.class
+                    );
+                    userAdminDTO.setSignup_name_with_initial(adminDTOResponseEntity.getBody().getSignup_name_with_initial());
+                    userAdminDTO.setNic_or_passport(adminDTOResponseEntity.getBody().getNic_or_passport());
+                    userAdminDTO.setAddress(adminDTOResponseEntity.getBody().getAddress());
+                    userAdminDTO.setSalary(adminDTOResponseEntity.getBody().getSalary());
+                    userAdminDTO.setProfile_image(adminDTOResponseEntity.getBody().getProfile_image());
+
+                    //add dto to list
+                    userAdminDTOS.add(userAdminDTO);
+                }
+
+                //send to front
+                return Mono.just(new ResponseEntity<RespondDTO>(
+                        RespondDTO.builder()
+                                .rspd_code(RespondCodes.Respond_SUCCESS)
+                                .data(userAdminDTOS)
+                                .token(
+                                        FrontendTokenDTO.builder()
+                                                .access_username(internalFrontendSecurityCheckDTO.getUsername())
+                                                .access_jwt_token(internalFrontendSecurityCheckDTO.getAccess_token())
+                                                .access_refresh_token(internalFrontendSecurityCheckDTO.getRefresh_token())
+                                                .build()
+                                )
+                                .build()
+                        ,
+                        HttpStatus.OK
+                ));
+
+            }else {
+                return Mono.error(new UnauthorizeException("Unauthorized request"));
+            }
+        }catch (Exception e){
+            System.out.println("internal server error");
+            throw new InternalServerException("Internal server Error");
         }
     }
 }

@@ -7,7 +7,10 @@
 package lk.nexttravel.guide_microservice.service;
 
 import lk.nexttravel.guide_microservice.dto.ReqNewGuideSaveDTO;
+import lk.nexttravel.guide_microservice.entity.Guide;
 import org.springframework.http.ResponseEntity;
+
+import java.util.ArrayList;
 
 /**
  * @author : H.C.Kaligu Jayanath
@@ -16,4 +19,6 @@ import org.springframework.http.ResponseEntity;
  */
 public interface GuideService {
     ResponseEntity<String> SaveNewGuide(ReqNewGuideSaveDTO reqNewGuideSaveDTO);
+
+    ResponseEntity<ArrayList<Guide>> getAllGuides(String token);
 }

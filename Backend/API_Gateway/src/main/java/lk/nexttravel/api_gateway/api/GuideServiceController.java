@@ -150,15 +150,13 @@ public class GuideServiceController {
     }
 
     //admin manage window- search all admins
-    @GetMapping(value = {"/admin-mng-get-all-admins"}, consumes = {"application/json"})
+    @GetMapping(value = {"/guides-getall"}, consumes = {"application/json"})
     public Mono<ResponseEntity<RespondDTO>> getAllAdminsDataList(
-            @RequestParam("search_keyword") @NonNull String search_keyword,
             @RequestParam("access_username") @NonNull String access_username,
             @RequestParam("access_jwt_token") @NonNull String access_jwt_token,
             @RequestParam("access_refresh_token") @NonNull String access_refresh_token
     ){
-        return userService.getAllAdminsBySearch(
-                search_keyword,
+        return guideService.getAllGuides(
                 access_username,
                 access_jwt_token,
                 access_refresh_token
