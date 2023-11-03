@@ -7,8 +7,8 @@
 package lk.nexttravel.vehicle_microservice.service.impl;
 
 
-import lk.nexttravel.hotel_microservice.entity.util.DatabaseSequence;
-import lk.nexttravel.hotel_microservice.service.SequenceGeneratorService;
+import lk.nexttravel.vehicle_microservice.entity.util.DatabaseSequence;
+import lk.nexttravel.vehicle_microservice.service.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Update;

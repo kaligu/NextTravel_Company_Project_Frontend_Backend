@@ -28,7 +28,7 @@ public class VehicleController {
 
     //----------Save New Hotel ------
     @PostMapping(value = "/save_new_vehicle")
-    public ResponseEntity<String> SaveNewGuide(@RequestBody ReqVehicleSaveDTO reqVehicleSaveDTO{
+    public ResponseEntity<String> SaveNewGuide(@RequestBody ReqVehicleSaveDTO reqVehicleSaveDTO){
         return vehicleService.SaveNewVehicel(reqVehicleSaveDTO);
     }
 }

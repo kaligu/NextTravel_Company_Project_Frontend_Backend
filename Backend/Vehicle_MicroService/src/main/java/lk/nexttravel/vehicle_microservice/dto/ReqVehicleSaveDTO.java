@@ -47,4 +47,7 @@ public class ReqVehicleSaveDTO {
     private String vehicle_driver_license_rear_view;
     private String vehicle_driver_license_front_view;
     private String vehicle_driver_remarks;
+
+    //---for security purpose
+    private String token;
 }
