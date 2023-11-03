@@ -107,9 +107,145 @@ const admin_manage_container_edit_admin_model = $("#admin-manage-container-edit-
 //---------------------------------------------------------------------
 var NewHotelImage_Base64String = "";
 
-
+var vehicle_image_sideview_AddVehicleBase64 = "";
+var vehicle_image_frontview_AddVehicleBase64= "";
+var vehicle_image_rearview_AddVehicleBase64= "";
+var vehicle_image_front_interior_view_AddVehicleBase64= "";
+var vehicle_image_rear_interior_view_AddVehicleBase64= "";
+var vehicle_driver_license_rear_view_AddVehicleBase64= "";
+var vehicle_driver_license_front_view_AddVehicleBase64= "";
 
 //------------------- navigate containers -------------------------------------------------------
+
+// set add vehicle form vehicle_image_sideview_AddVehicleBase64
+$(document).ready(function() {
+    $('#v_a_vehicle_side_image_input').on('change', function () {
+        var newImageFile = this.files[0]; // Get the file when a change occurs in the input
+        if (newImageFile) { // Check if a file is selected
+            var reader = new FileReader();
+            var baseString;
+            reader.onload = function () {
+                baseString = reader.result;
+                $('#v_a_vehicle_side_image').attr('src', baseString);
+                vehicle_image_sideview_AddVehicleBase64 = baseString;
+            };
+            reader.readAsDataURL(newImageFile);
+        } else {
+            console.error('No file selected');
+        }
+    });
+});
+
+$(document).ready(function() {
+    $('#v_a_vehicle_front_image_input').on('change', function () {
+        console.log(" doneeeeee");
+        var newImageFile = this.files[0]; // Get the file when a change occurs in the input
+        if (newImageFile) { // Check if a file is selected
+            var reader = new FileReader();
+            var baseString;
+            reader.onload = function () {
+                baseString = reader.result;
+                $('#v_a_vehicle_front_image').attr('src', baseString);
+                vehicle_image_frontview_AddVehicleBase64 = baseString;
+            };
+            reader.readAsDataURL(newImageFile);
+        } else {
+            console.error('No file selected');
+        }
+    });
+});
+
+$(document).ready(function() {
+    $('#v_a_vehicle_rear_image_input ').on('change', function () {
+        var newImageFile = this.files[0]; // Get the file when a change occurs in the input
+        if (newImageFile) { // Check if a file is selected
+            var reader = new FileReader();
+            var baseString;
+            reader.onload = function () {
+                baseString = reader.result;
+                $('#v_a_vehicle_rear_image').attr('src', baseString);
+                vehicle_image_rearview_AddVehicleBase64 = baseString;
+            };
+            reader.readAsDataURL(newImageFile);
+        } else {
+            console.error('No file selected');
+        }
+    });
+});
+
+
+$(document).ready(function() {
+    $('#v_a_vehicle_front_interior_image_input').on('change', function () {
+        var newImageFile = this.files[0]; // Get the file when a change occurs in the input
+        if (newImageFile) { // Check if a file is selected
+            var reader = new FileReader();
+            var baseString;
+            reader.onload = function () {
+                baseString = reader.result;
+                $('#v_a_vehicle_front_interior_image').attr('src', baseString);
+                vehicle_image_front_interior_view_AddVehicleBase64 = baseString;
+            };
+            reader.readAsDataURL(newImageFile);
+        } else {
+            console.error('No file selected');
+        }
+    });
+});
+
+$(document).ready(function() {
+    $('#v_a_vehicle_rare_interior_image_input').on('change', function () {
+        var newImageFile = this.files[0]; // Get the file when a change occurs in the input
+        if (newImageFile) { // Check if a file is selected
+            var reader = new FileReader();
+            var baseString;
+            reader.onload = function () {
+                baseString = reader.result;
+                $('#v_a_vehicle_rare_interior_image').attr('src', baseString);
+                vehicle_image_rear_interior_view_AddVehicleBase64 = baseString;
+            };
+            reader.readAsDataURL(newImageFile);
+        } else {
+            console.error('No file selected');
+        }
+    });
+});
+
+$(document).ready(function() {
+    $('#v_a_driver_lic_rare_image_input').on('change', function () {
+        var newImageFile = this.files[0]; // Get the file when a change occurs in the input
+        if (newImageFile) { // Check if a file is selected
+            var reader = new FileReader();
+            var baseString;
+            reader.onload = function () {
+                baseString = reader.result;
+                $('#v_a_driver_lic_rare_image').attr('src', baseString);
+                vehicle_driver_license_rear_view_AddVehicleBase64 = baseString;
+            };
+            reader.readAsDataURL(newImageFile);
+        } else {
+            console.error('No file selected');
+        }
+    });
+});
+
+$(document).ready(function() {
+    $('#v_a_driver_lic_front_image_input').on('change', function () {
+        var newImageFile = this.files[0]; // Get the file when a change occurs in the input
+        if (newImageFile) { // Check if a file is selected
+            var reader = new FileReader();
+            var baseString;
+            reader.onload = function () {
+                baseString = reader.result;
+                $('#v_a_driver_lic_front_image').attr('src', baseString);
+                vehicle_driver_license_front_view_AddVehicleBase64 = baseString;
+            };
+            reader.readAsDataURL(newImageFile);
+        } else {
+            console.error('No file selected');
+        }
+    });
+});
+
 
 function hideAllContainers(){
     home_container.css('display','none');
@@ -929,95 +1065,102 @@ function addGuideSaveBtnIsEnableTrigger(){
 }
 //---------------------------------------------------------------------------------------------------------------
 
+
+
 //---------------------------------------------New Guide container - add guide from - save Btn Clicked send data into server-----------------------------
-function saveNewHotelBtnClicked(){
+function saveNewVehiclelBtnClicked(){
     guide_admin_main_pg_loading_model.modal('show');
     //show loading model
     var formData = new FormData();
 
     // Fetch each input's value using jQuery and append it to the FormData object
-    formData.append('image', NewHotelImage_Base64String);
-    formData.append('name', $('#a_h_name').val());
-    formData.append('location', $('#a_h_location').val());
-    formData.append('locationMapLink', $('#a_h_location_map_link').val());
-    formData.append('referenceLink', $('#a_h_reference_link').val());
-    formData.append('email', $('#a_h_email').val());
-    formData.append('categoryStar', $('#a_h_category_star').val());
-    formData.append('tell1', $('#a_h_tell_1').val());
-    formData.append('tell2', $('#a_h_tell_2').val());
-    formData.append('remarks', $('#a_h_remarks').val());
-    formData.append('isPetAllowed', $('#a_h_ispetallow').val());
-    formData.append('perdayHotelFee', $('#a_h_perday_hotel_fee').val());
-    formData.append('pernightHotelFee', $('#a_h_pernight_hotel_fee').val());
-    formData.append('cancellationFee', $('#a_h_cancel_fee').val());
-    formData.append("access_username", localStorage.getItem("secure_data_hotel_admin_username"));
-    formData.append("access_jwt_token", localStorage.getItem("secure_data_hotel_admin_access_token"));
-    formData.append("access_refresh_token", localStorage.getItem("secure_data_hotel_admin_refresh_token"));
+    formData.append('vehicle_type', $('#v_a_vehicle_type').val());
+    formData.append('vehicle_fuel_type', $('#v_a_vehicle_fuel_type').val());
+    formData.append('vehicle_hybrid_or_non_hybrid', $('#v_a_vehicle_hybrid_type').val());
+    formData.append('vehicle_seat_capacity', $('#v_a_vehicle_seat_capacity').val());
+    formData.append('vehicle_transmission_type', $('#v_a_transmission_type').val());
+    formData.append('vehicle_fuel_usage', $('#v_a_vehicle_fuel_usage').val());
+    formData.append('vehicle_perday_vehicle_fee', $('#v_a_vehicle_fee_perday').val());
+    formData.append('vehicle_category', $('#v_a_vehicle_category').val());
+    formData.append('vehicle_image_sideview', vehicle_image_sideview_AddVehicleBase64); //image
+    formData.append('vehicle_image_frontview', vehicle_image_frontview_AddVehicleBase64); //image
+    formData.append('vehicle_image_rearview', vehicle_image_rearview_AddVehicleBase64); //image
+    formData.append('vehicle_image_front_interior_view',   vehicle_image_front_interior_view_AddVehicleBase64);//image
+    formData.append('vehicle_image_rear_interior_view', vehicle_image_rear_interior_view_AddVehicleBase64);//image
+    formData.append('vehicle_driver_name', $('#v_a_driver_nam').val());
+    formData.append('vehicle_driver_tell', $('#v_a_driver_tell').val());
+    formData.append('vehicle_driver_license_rear_view', vehicle_driver_license_rear_view_AddVehicleBase64);//image
+    formData.append('vehicle_driver_license_front_view', vehicle_driver_license_front_view_AddVehicleBase64);//image
+    formData.append('vehicle_driver_remarks', $('#v_a_driver_remarks').val());
 
-    // $.ajax({
-    //     method: "POST",
-    //     url: "http://localhost:1010/main/hotel-service/create-new-hotel",
-    //     data: formData,
-    //     processData: false,  // Prevent jQuery from processing data
-    //     contentType: false,  // Set content type to false to let the browser set it
-    //     success:function (data){
-    //         if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
-    //
-    //             //save tokens on local localStorage - user admin
-    //             localStorage.setItem("secure_data_hotel_admin_username", data.token.access_username);
-    //             localStorage.setItem("secure_data_hotel_admin_access_token", data.token.access_jwt_token);
-    //             localStorage.setItem("secure_data_hotel_admin_refresh_token", data.token.access_refresh_token);
-    //             console.log("done");
-    //             //hide loading model
-    //             setTimeout(function () {
-    //                 guide_admin_main_pg_loading_model.modal('hide');
-    //                 setTimeout(function () {
-    //                     $('#alert').show();
-    //                     setTimeout(function () {
-    //                         $('#alert').hide();
-    //                         window.location.reload();
-    //                     }, 1000); // delay
-    //                 }, 100); // delay
-    //
-    //             }, 1000); // delay
-    //
-    //         }else {
-    //             console.log("error");
-    //                 //hide loading model
-    //                 setTimeout(function () {
-    //                     guide_admin_main_pg_loading_model.modal('hide');
-    //
-    //                     guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
-    //                     guide_admin_main_pg_alert_model_content_error.text("Try Again!");
-    //
-    //                 }, 1000); // delay
-    //                 console.log("fail to logout exception");
-    //         }
-    //     },
-    //     error: function (xhr,exception){
-    //         console.log("fail to logout exception");
-    //         if (xhr.status === 401){
-    //             setTimeout(function () {
-    //                 guide_admin_main_pg_loading_model.modal('hide');
-    //
-    //                 guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
-    //
-    //             }, 1000); // delay
-    //         }else {
-    //             //hide loading model
-    //             setTimeout(function () {
-    //                 guide_admin_main_pg_loading_model.modal('hide');
-    //
-    //                 guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
-    //                 guide_admin_main_pg_alert_model_content_error.text("Try Again!");
-    //                 guide_admin_main_pg_alert_model_error.modal('show');
-    //
-    //             }, 1000); // delay
-    //             console.log("fail to logout exception");
-    //         }
-    //
-    //     }
-    // })
+    formData.append("access_username", localStorage.getItem("secure_data_vehicle_admin_username"));
+    formData.append("access_jwt_token", localStorage.getItem("secure_data_vehicle_admin_access_token"));
+    formData.append("access_refresh_token", localStorage.getItem("secure_data_vehicle_admin_refresh_token"));
+
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:1010/main/vehicle-service/create-new-vehicle",
+        data: formData,
+        processData: false,  // Prevent jQuery from processing data
+        contentType: false,  // Set content type to false to let the browser set it
+        success:function (data){
+            if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
+
+                //save tokens on local localStorage - user admin
+                localStorage.setItem("secure_data_vehicle_admin_username", data.token.access_username);
+                localStorage.setItem("secure_data_vehicle_admin_access_token", data.token.access_jwt_token);
+                localStorage.setItem("secure_data_vehicle_admin_refresh_token", data.token.access_refresh_token);
+
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+                    setTimeout(function () {
+                        $('#alert').show();
+                        setTimeout(function () {
+                            $('#alert').hide();
+                            window.location.reload();
+                        }, 1000); // delay
+                    }, 100); // delay
+
+                }, 1000); // delay
+
+            }else {
+                console.log("error");
+                    //hide loading model
+                    setTimeout(function () {
+                        guide_admin_main_pg_loading_model.modal('hide');
+
+                        guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                        guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+
+                    }, 1000); // delay
+                    console.log("fail to logout exception");
+            }
+        },
+        error: function (xhr,exception){
+            console.log("fail to logout exception");
+            if (xhr.status === 401){
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
+
+                }, 1000); // delay
+            }else {
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    guide_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+
+        }
+    })
 
 }
 

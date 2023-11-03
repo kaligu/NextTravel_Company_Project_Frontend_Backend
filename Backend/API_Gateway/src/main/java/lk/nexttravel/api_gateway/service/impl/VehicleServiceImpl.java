@@ -149,6 +149,7 @@ public class VehicleServiceImpl implements VehicleService {
                                         .vehicle_driver_license_front_view(vehicle_driver_license_front_view)
                                         .vehicle_driver_remarks(vehicle_driver_remarks)
 
+                                        .token(apiGatewayJwtAccessTokenServiceBackend.generateToken())
                                         .build()
                                 ,
                                 headers
