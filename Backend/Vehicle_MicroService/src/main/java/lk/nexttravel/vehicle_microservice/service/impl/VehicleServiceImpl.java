@@ -45,7 +45,28 @@ public class VehicleServiceImpl implements VehicleService {
                 //save into database
                 vehicleRepository.save(
                         Vehicle.builder()
-                                .
+                                .vehicle_id(id)
+                                .vehicle_type(reqVehicleSaveDTO.getVehicle_type())
+                                .vehicle_fuel_type(reqVehicleSaveDTO.getVehicle_fuel_type())
+                                .vehicle_hybrid_or_non_hybrid(reqVehicleSaveDTO.getVehicle_hybrid_or_non_hybrid())
+                                .vehicle_seat_capacity(reqVehicleSaveDTO.getVehicle_seat_capacity())
+                                .vehicle_transmission_type(reqVehicleSaveDTO.getVehicle_transmission_type())
+                                .vehicle_fuel_usage(reqVehicleSaveDTO.getVehicle_fuel_usage())
+                                .vehicle_perday_vehicle_fee(reqVehicleSaveDTO.getVehicle_perday_vehicle_fee())
+                                .vehicle_category(reqVehicleSaveDTO.getVehicle_category())
+
+                                .vehicle_image_sideview(reqVehicleSaveDTO.getVehicle_image_sideview())
+                                .vehicle_image_frontview(reqVehicleSaveDTO.getVehicle_image_frontview())
+                                .vehicle_image_rearview(reqVehicleSaveDTO.getVehicle_image_rearview())
+                                .vehicle_image_front_interior_view(reqVehicleSaveDTO.getVehicle_image_front_interior_view())
+                                .vehicle_image_rear_interior_view(reqVehicleSaveDTO.getVehicle_image_rear_interior_view())
+
+                                .vehicle_driver_name(reqVehicleSaveDTO.getVehicle_driver_name())
+                                .vehicle_driver_tell(reqVehicleSaveDTO.getVehicle_driver_tell())
+                                .vehicle_driver_license_rear_view(reqVehicleSaveDTO.getVehicle_driver_license_rear_view())
+                                .vehicle_driver_license_front_view(reqVehicleSaveDTO.getVehicle_driver_license_front_view())
+                                .vehicle_driver_remarks(reqVehicleSaveDTO.getVehicle_driver_remarks())
+
                                 .build()
                 );
 
