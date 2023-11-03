@@ -921,7 +921,7 @@ function addGuideSaveBtnIsEnableTrigger(){
 
 //---------------------------------------------New Guide container - add guide from - save Btn Clicked send data into server-----------------------------
 function saveNewHotelBtnClicked(){
-
+    guide_admin_main_pg_loading_model.modal('show');
     //show loading model
     var formData = new FormData();
 

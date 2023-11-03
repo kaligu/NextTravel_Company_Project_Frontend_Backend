@@ -40,7 +40,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public ResponseEntity<String> SaveNewHotel(ReqHotelSaveDTO reqHotelSaveDTO) {
         //check authentication
-        System.out.println(reqHotelSaveDTO.getName());
+//        System.out.println(reqHotelSaveDTO.toString());
         String id = "H00"+sequenceGeneratorService.generateSequence(Hotel.SEQUENCE_NAME);
         try {
             if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(reqHotelSaveDTO.getToken())) {  //check gateway token
@@ -70,6 +70,7 @@ public class HotelServiceImpl implements HotelService {
                 return new ResponseEntity<>(RespondCodes.Respond_NOT_AUTHORISED, HttpStatus.UNAUTHORIZED);
             }
         }catch (Exception e){
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(RespondCodes.Respond_SERVERSIDE_INTERNAL_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

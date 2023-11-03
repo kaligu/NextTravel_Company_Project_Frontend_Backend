@@ -147,6 +147,7 @@ public class HotelServiceImpl implements HotelService {
                                         .tell_2(tell2)
                                         .reference_link(referenceLink)
                                         .image(image)
+                                        .token(apiGatewayJwtAccessTokenServiceBackend.generateToken())
                                         .build()
                                 ,
                                 headers
