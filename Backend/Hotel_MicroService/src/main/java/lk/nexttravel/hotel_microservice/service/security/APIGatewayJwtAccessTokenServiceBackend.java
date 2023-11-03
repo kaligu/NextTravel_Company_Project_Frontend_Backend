@@ -5,7 +5,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lk.nexttravel.guide_microservice.util.security.SecurityCodes;
+
+import lk.nexttravel.hotel_microservice.util.security.SecurityCodes;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
