@@ -12,6 +12,7 @@ import lk.nexttravel.api_gateway.advice.util.UnauthorizeException;
 import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
+import lk.nexttravel.api_gateway.dto.guide.ReqNewGuideSaveDTO;
 import lk.nexttravel.api_gateway.dto.user.ReqProfileDataAdminsDTO;
 import lk.nexttravel.api_gateway.dto.user.UserReqProfileDataDTO;
 import lk.nexttravel.api_gateway.entity.User;
@@ -20,6 +21,7 @@ import lk.nexttravel.api_gateway.service.security.Authenticate_Authorize_Service
 import lk.nexttravel.api_gateway.service.security.util.APIGatewayJwtAccessTokenServiceBackend;
 import lk.nexttravel.api_gateway.util.RespondCodes;
 import lk.nexttravel.api_gateway.util.RoleTypes;
+import lk.nexttravel.api_gateway.util.RqRpURLs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -107,6 +109,74 @@ public class HotelServiceImpl implements HotelService {
             }
         }catch (Exception e){
 
+            return Mono.error(new InternalServerException("Internal Server error!"+e));
+        }
+    }
+
+    @Override
+    public Mono<ResponseEntity<RespondDTO>> createNewHotel(String name, String location, String locationMapLink, String remarks, String referenceLink, String email, String tell1, String tell2, String categoryStar, String isPetAllowed, String perdayHotelFee, String pernightHotelFee, String cancellationFee, String image, String accessUsername, String accessToken, String refreshToken) {
+        try{
+            FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder().access_jwt_token(accessToken).access_username(accessUsername).access_refresh_token(refreshToken).build();
+            InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
+            if(
+                    internalFrontendSecurityCheckDTO.isAccesssible()
+                            &&
+                            internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_GUIDE)
+            ) {
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+
+                ResponseEntity<String> responseEntity = restTemplate.exchange(
+                        RqRpURLs.Guide_Service_New_Guide_save,
+                        HttpMethod.POST,
+                        new HttpEntity<Object> (
+                                ReqNewGuideSaveDTO.builder()
+                                        .name(name)
+                                        .remarks(remarks)
+                                        .experience(Integer.parseInt(experience))
+                                        .nic(nic)
+                                        .nic_front_view(nicFrontView)
+                                        .nic_rear_view(nicRearView)
+                                        .tell(tell)
+                                        .gender(gender)
+                                        .dob(dob)
+                                        .image(image)
+                                        .address(address)
+                                        .perday_fee(Integer.parseInt(perdayFee))
+                                        .token(apiGatewayJwtAccessTokenServiceBackend.generateToken())
+                                        .build()
+                                ,
+                                headers
+                        ),
+                        String.class
+                );
+
+                if(responseEntity.getStatusCode()==HttpStatus.CREATED){
+                    FrontendTokenDTO newfrontendTokenDTO = FrontendTokenDTO.builder()
+                            .access_username(accessUsername)
+                            .access_jwt_token(internalFrontendSecurityCheckDTO.getAccess_token())
+                            .access_refresh_token(internalFrontendSecurityCheckDTO.getRefresh_token())
+                            .build();
+
+                    //----------------------------------------------return if all are done
+                    return Mono.just(
+                            new ResponseEntity<RespondDTO> (
+                                    RespondDTO.builder()
+                                            .rspd_code(RespondCodes.Respond_DATA_SAVED)
+                                            .token(newfrontendTokenDTO)
+                                            .data(null)
+                                            .build()
+                                    ,
+                                    HttpStatus.CREATED)
+                    );
+                }else {
+                    throw new Exception("Server error");
+                }
+            }else {
+                return Mono.error(new UnauthorizeException("Unauthorized request"));
+            }
+        }catch (Exception e){
             return Mono.error(new InternalServerException("Internal Server error!"+e));
         }
     }

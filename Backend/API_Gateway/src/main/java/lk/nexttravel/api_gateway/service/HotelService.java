@@ -19,4 +19,6 @@ public interface HotelService {
     //get user admin profile image
 
     Mono<ResponseEntity<RespondDTO>> UserAdminGetProfileData(String access_username, String access_jwt_token, String access_refresh_token);
+
+    Mono<ResponseEntity<RespondDTO>> createNewHotel(String name, String location, String locationMapLink, String remarks, String referenceLink, String email, String tell1, String tell2, String categoryStar, String isPetAllowed, String perdayHotelFee, String pernightHotelFee, String cancellationFee, String image, String accessUsername, String accessToken, String refreshToken);
 }

@@ -940,6 +940,9 @@ function saveNewHotelBtnClicked(){
     formData.append('perdayHotelFee', $('#a_h_perday_hotel_fee').val());
     formData.append('pernightHotelFee', $('#a_h_pernight_hotel_fee').val());
     formData.append('cancellationFee', $('#a_h_cancel_fee').val());
+    formData.append("access_username", localStorage.getItem("secure_data_hotel_admin_username"));
+    formData.append("access_jwt_token", localStorage.getItem("secure_data_hotel_admin_access_token"));
+    formData.append("access_refresh_token", localStorage.getItem("secure_data_hotel_admin_refresh_token"));
     //
     // $.ajax({
     //     method: "POST",
