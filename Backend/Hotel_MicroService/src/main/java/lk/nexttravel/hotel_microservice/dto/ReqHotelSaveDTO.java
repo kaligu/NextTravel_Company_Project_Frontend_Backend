@@ -1,37 +1,29 @@
 /*
   @ Author       : C.Kaligu Jayanath
   @ Prjoect Name : NextTravel_Company_Project_Frontend_Backend
-  @ Date         : 11/1/2023
-  @ Time         : 9:47 PM
+  @ Date         : 11/3/2023
+  @ Time         : 7:27 AM
 */
-package lk.nexttravel.hotel_microservice.entity;
+package lk.nexttravel.hotel_microservice.dto;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  * @author : H.C.Kaligu Jayanath
- * Date    : 11/1/2023
- * Time    : 9:47 PM
+ * Date    : 11/3/2023
+ * Time    : 7:27 AM
  */
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@Data
 @Builder
+@ToString
 
-@Document(collection = "Hotel")
-public class Hotel {
-    @Transient
-    public static final String SEQUENCE_NAME = "hotels_sequence";
+@Component
+public class ReqHotelSaveDTO {
 
-    @Id
     private String id;
     private String location;
     private String location_coordinates;
@@ -48,9 +40,6 @@ public class Hotel {
     private String reference_link;
     private String image;
 
-    //for 2PC transaction
-    private String transaction_state;
-
-    @DBRef
-    private List<HotelOptions> options;
+    //---for security purpose
+    private String token;
 }
