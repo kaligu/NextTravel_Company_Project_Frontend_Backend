@@ -18,7 +18,7 @@
         }
 
         #guideTable th, #guideTable td {
-            border: 0.2px solid #FCDEC0;
+            border: 0.2px solid #F9F7F7;
         }
 
         ::-webkit-scrollbar {
@@ -74,51 +74,51 @@
         }
 
         #guideTable thead tr th:nth-child(1) {
-            background-color: #B4846C; /* Change the background color to red */
+            background-color:#3F72AF; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(2) {
-            background-color: #B4846C; /* Change the background color to red */
+            background-color: #3F72AF; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(3) {
-            background-color: #B4846C; /* Change the background color to red */
+            background-color: #3F72AF; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(4) {
-            background-color: #B4846C; /* Change the background color to red */
+            background-color: #3F72AF; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(5) {
-            background-color: #B4846C; /* Change the background color to red */
+            background-color:#3F72AF; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(6) {
-            background-color: #B4846C; /* Change the background color to red */
+            background-color: #3F72AF; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(7) {
-            background-color: #B4846C; /* Change the background color to red */
+            background-color: #3F72AF; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(8) {
-            background-color:#B4846C; /* Change the background color to red */
+            background-color:#3F72AF; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(9) {
-            background-color: #B4846C; /* Change the background color to red */
+            background-color:#3F72AF; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(10) {
-            background-color: #B4846C; /* Change the background color to red */
+            background-color: #3F72AF; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(11) {
-            background-color: #B4846C; /* Change the background color to red */
+            background-color: #3F72AF; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(12) {
-            background-color: #B4846C; /* Change the background color to red */
+            background-color:#3F72AF; /* Change the background color to red */
             color: white; /* Change the text color to white */
         }
         #guideTable thead tr th:nth-child(13) {
@@ -285,7 +285,7 @@
 
 <!--Home container-->
 <div class="container-fluid" id="home_container" style="background-color: #F9F7F7; display: none">
-    <h2 style="color: rgb(180,132,108); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; "> Home</h2>
+    <h2 style="color: rgb(63,114,175); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; "> Home</h2>
     <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
         <div class="card-body">
 
@@ -343,230 +343,158 @@
     <h2 style="color: rgb(63,114,175); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; "> New Vehicle</h2>
     <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
         <div class="card-body">
-            <div style="display: flex; flex-direction: column;">
-                <div class="mb-4">
-                    <div class="row text-center">
-                        <div class="col-xs-6 text-center" style=" margin-top: 10px;">
-                            <div class='product-holder'>
-                                <br><br>
-                                <img src="assets/images/hoteladdimg.jpg" width="300" height="310" class='product-image' id="g_a_a_image" style="border: 1px solid #000; border-radius: 50%; filter: brightness(90%)" alt="">
-                                <input id="g_a_a_image_input" class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px; width: 250px; margin-left: 41%; margin-top: 10px">
-                                <div class="valid-feedback" id="g_a_a_img-valid-feedback">
-                                    Looks good!
-                                </div>
-                                <div class="invalid-feedback" id="g_a_a_img-invalid-feedback">
-                                    Please choose a valid image (JPG, JPEG, PNG, or GIF format) and ensure the file size is less than 2MB.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
             <div style="flex-direction: column; margin-left: 15%">
-                <div class="mb-4">
-                    <label for="a_h_name" class="form-label" style="margin-left: 40%">Name</label>
-                    <input placeholder="Name here..." type="text" class="form-control" id="a_h_name"  style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
+                <br>
+                <br>
+                <div class="mb-4 ">
+                    <label for="v_a_vehicle_type" class="form-label"  style="margin-left: 40%">Vehicle Type</label>
+                    <input type="text" class="form-control" id="v_a_vehicle_type"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Enter your name, which must be at least 4 characters long and contain only letters and spaces.
-                        *Ex:-John Doe, john doe
+                        *
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="a_h_location" class="form-label" style="margin-left: 39.5%">Location</label>
-                    <input placeholder="Address here..." type="text" class="form-control" id="a_h_location" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
+                    <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Fuel Type</label>
+                    <input type="text" class="form-control" id="v_a_vehicle_fuel_type"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Enter your adress, which must be at least 4 characters long and contain only letters, commas, spaces like these examples.
-                        *Ex:- 123 Main,Street / 456 Elm Street, Apt. 7B / 789 Oak Lane, Suite
+                        *
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="a_h_location_map_link" class="form-label" style="margin-left: 40.5%">Location Map Link</label>
-                    <input placeholder="NIC here..." type="text" class="form-control" id="a_h_location_map_link" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
+                    <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Energy Type (Hybrid or Non Hybrid )</label>
+                    <input type="text" class="form-control" id="v_a_vehicle_hybrid_type"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Enter your correct Srilankan National ID card number.
-                        *Ex:- xxxxxxxxxxxx / xxxxxxxxxv
+                        *
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="a_h_reference_link" class="form-label" style="margin-left: 40.5%">Reference Link</label>
-                    <input placeholder="Tell number here..." type="text" class="form-control" id="a_h_reference_link" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
+                    <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Seat Capacity</label>
+                    <input type="text" class="form-control" id="v_a_vehicle_seat_capacity"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Enter your correct Srilankan Telephone number.
-                        *Ex:- 0xxxxxxxxx / +94xxxxxxxxx
+                        *
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="a_h_email" class="form-label" style="margin-left: 38.5%">Email</label>
-                    <input placeholder="Expereience type here..." type="text" class="form-control" id="a_h_email" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
+                    <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Seat Capacity</label>
+                    <input type="text" class="form-control" id="v_a_vehicle_trns_type"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Enter only number value.
-                        *Ex:- 10 / 4
+                        *
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="a_h_category_star" class="form-label" style="margin-left: 39%">Category[Stars]</label>
-                    <input placeholder="Birthday select here..." type="number" class="form-control" id="a_h_category_star" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
+                    <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Fuel Usage</label>
+                    <input type="text" class="form-control" id="v_a_vehicle_fuel_usage"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Enter your Birthday, which must included pattern like these example.
-                        *Ex:- year-month-day
+                        *
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="a_h_tell_1" class="form-label" style="margin-left: 38.5%">Tell-1</label>
-                    <input placeholder="Perday fee here..." type="text" class="form-control" id="a_h_tell_1" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
+                    <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Vehicle Fee (per day)</label>
+                    <input type="text" class="form-control" id="v_a_vehicle_fee_perday"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Enter only number value.
-                        *Ex:- 10 / 4
+                        *
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="a_h_tell_2" class="form-label" style="margin-left: 39%">Tell-2</label>
-                    <input placeholder="Remarks here..." type="text" class="form-control" id="a_h_tell_2" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
+                    <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Vehicle Category </label>
+                    <input type="text" class="form-control" id="v_a_vehicle_category"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="a_h_remarks" class="form-label" style="margin-left: 39%">Remarks</label>
-                    <input placeholder="Remarks here..." type="text" class="form-control" id="a_h_remarks" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="a_h_ispetallow" class="form-label" style="margin-left: 39%">is pet allowed?</label>
-                    <input placeholder="Remarks here..." type="text" class="form-control" id="a_h_ispetallow" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="a_h_perday_hotel_fee" class="form-label" style="margin-left: 39%">Per Day Hotel Fee for Days</label>
-                    <input placeholder="Remarks here..." type="text" class="form-control" id="a_h_perday_hotel_fee" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="a_h_pernight_hotel_fee" class="form-label" style="margin-left: 39%">Per Night Fee</label>
-                    <input placeholder="Remarks here..." type="text" class="form-control" id="a_h_pernight_hotel_fee" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="a_h_cancel_fee" class="form-label" style="margin-left: 39%">Cancellation Fee</label>
-                    <input placeholder="Remarks here..." type="text" class="form-control" id="a_h_cancel_fee" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
+                        *
                     </div>
                 </div>
                 <hr>
-                <h2>Hotel Option - 1</h2>
-                <div class="mb-4">
-                    <label for="a_h_cancel_fee" class="form-label" style="margin-left: 39%">Description</label>
-                    <input placeholder="Description" type="text" class="form-control" id="a_h_op1_description" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
+                <h1> Vehicle Views</h1>
+                <div class="mb-4 " style="display: flex; flex-direction: column">
+                    <label for="v_a_vehicle_side_image" class="form-label" style="margin-left: 34%"> Vehicle - Side View</label>
+                    <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_vehicle_side_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                    <input id="v_a_vehicle_side_image_input "  class="form-control " type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
                     <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                    </div>
+                </div>
+                <div class="mb-4 " style="display: flex; flex-direction: column">
+                    <label for="v_a_vehicle_front_image" class="form-label" style="margin-left: 34%"> Vehicle - Side View</label>
+                    <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_vehicle_front_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                    <input id="v_a_vehicle_front_image_input "  class="form-control " type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                    </div>
+                </div>
+                <div class="mb-4 " style="display: flex; flex-direction: column">
+                    <label for="v_a_vehicle_rear_image" class="form-label" style="margin-left: 34%"> Vehicle - Rear View</label>
+                    <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_vehicle_rear_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                    <input id="v_a_vehicle_rear_image_input "  class="form-control " type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                    </div>
+                </div>
+                <div class="mb-4 " style="display: flex; flex-direction: column">
+                    <label for="v_a_vehicle_front_interior_image" class="form-label" style="margin-left: 34%"> Vehicle - Front Interior View</label>
+                    <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_vehicle_front_interior_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                    <input id="v_a_vehicle_front_interior_image_input "  class="form-control " type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                    </div>
+                </div>
+                <div class="mb-4 " style="display: flex; flex-direction: column">
+                    <label for="v_a_vehicle_rare_interior_image" class="form-label" style="margin-left: 34%"> Vehicle - Rare Interior View</label>
+                    <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_vehicle_rare_interior_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                    <input id="v_a_vehicle_rare_interior_image_input "  class="form-control " type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                    </div>
+                </div>
+                <hr>
+                <h1> Driver Details</h1>
+                <div class="mb-4">
+                    <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%"> Driver Name</label>
+                    <input type="text" class="form-control" id="v_a_driver_name"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="a_h_cancel_fee" class="form-label" style="margin-left: 39%">Name</label>
-                    <input placeholder="Name" type="text" class="form-control" id="a_h_op1_name" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
+                    <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%"> Driver Contact</label>
+                    <input type="text" class="form-control" id="v_a_driver_tell"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 " style="display: flex; flex-direction: column">
+                    <label for="v_a_driver_lic_rare_image" class="form-label" style="margin-left: 34%">Driver License - Rare View</label>
+                    <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_driver_lic_rare_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                    <input id="v_a_driver_lic_rare_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                    </div>
+                </div>
+                <div class="mb-4 " style="display: flex; flex-direction: column">
+                    <label for="v_a_driver_lic_front_image" class="form-label" style="margin-left: 34%">Driver License - Front View</label>
+                    <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_driver_lic_front_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                    <input id="v_a_driver_lic_front_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
+                    <div class="invalid-feedback">
+                        *Starts with an uppercase letter, followed by one or more lowercase letters.
+                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="a_h_cancel_fee" class="form-label" style="margin-left: 39%">Fee</label>
-                    <input placeholder="fee" type="text" class="form-control" id="a_h_op1_fee" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
+                    <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%"> Remarks</label>
+                    <input type="text" class="form-control" id="v_a_driver_remarks"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
                     <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
-                    </div>
-                </div>
-                <h2>Hotel Option - 2</h2>
-                <div class="mb-4">
-                    <label for="a_h_cancel_fee" class="form-label" style="margin-left: 39%">Description</label>
-                    <input placeholder="Description" type="text" class="form-control" id="a_h_op2_description" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="a_h_cancel_fee" class="form-label" style="margin-left: 39%">Name</label>
-                    <input placeholder="Name" type="text" class="form-control" id="a_h_op2_name" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="a_h_cancel_fee" class="form-label" style="margin-left: 39%">Fee</label>
-                    <input placeholder="fee" type="text" class="form-control" id="a_h_op2_fee" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
-                    </div>
-                </div>
-                <h2>Hotel Option - 3</h2>
-                <div class="mb-4">
-                    <label for="a_h_cancel_fee" class="form-label" style="margin-left: 39%">Description</label>
-                    <input placeholder="Description" type="text" class="form-control" id="a_h_op3_description" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="a_h_cancel_fee" class="form-label" style="margin-left: 39%">Name</label>
-                    <input placeholder="Name" type="text" class="form-control" id="a_h_op3_name" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="a_h_cancel_fee" class="form-label" style="margin-left: 39%">Fee</label>
-                    <input placeholder="fee" type="text" class="form-control" id="a_h_op3_fee" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
-                    </div>
-                </div>
-                <h2>Hotel Option 4</h2>
-                <div class="mb-4">
-                    <label for="a_h_cancel_fee" class="form-label" style="margin-left: 39%">Description</label>
-                    <input placeholder="Description" type="text" class="form-control" id="a_h_op4_description" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="a_h_cancel_fee" class="form-label" style="margin-left: 39%">Name</label>
-                    <input placeholder="Name" type="text" class="form-control" id="a_h_op4_name" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="a_h_cancel_fee" class="form-label" style="margin-left: 39%">Fee</label>
-                    <input placeholder="fee" type="text" class="form-control" id="a_h_op4_fee" style="width: 85%; background-color: #FCDEC0; border-color: #FCDEC0; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Enter your Remarks, which must include letters, numbers, commas, spaces,pullstop.
-                        *Ex:- lorem lorem.
+                        *
                     </div>
                 </div>
             </div>
@@ -581,8 +509,8 @@
 </div>
 
 <!--Search Guide container-->
-<div class="container-fluid" id="search_guide_container" style="background-color: #FCDEC0; display: none">
-    <h2 style="color: rgb(180,132,108); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Guide Changes</h2>
+<div class="container-fluid" id="search_guide_container" style="background-color: #F9F7F; display: none">
+    <h2 style="color: rgb(63,114,175); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Guide Changes</h2>
     <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
         <div class="card-body">
 
@@ -893,11 +821,11 @@
 
 
 <!--review container-->
-<div class="container-fluid" id="review_container" style="background-color: #FCDEC0; display: none">
-    <h2 style="color: rgb(180,132,108); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Review</h2>
+<div class="container-fluid" id="review_container" style="background-color: #F9F7F; display: none">
+    <h2 style="color: rgb(63,114,175); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Review</h2>
     <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
         <div class="card-body">
-            <h4 style="color: rgb(229,178,153);font-style: italic; ">Chart of Guide adding efficiency</h4>
+            <h4 style="color: rgb(63,114,175);font-style: italic; ">Chart of Guide adding efficiency</h4>
             <canvas id="lineChart" ></canvas>
         </div>
     </div>

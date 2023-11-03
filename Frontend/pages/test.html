@@ -125,6 +125,176 @@
     </style>
 
 
+    <!--New vehicle container-->
+    <div class="container-fluid" id="add_guide_container" style="background-color: #FCDEC0; display: none">
+        <h2 style="color: rgb(180,132,108); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; "> New Hotel</h2>
+        <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
+            <div class="card-body">
+
+                <div style="flex-direction: column; margin-left: 15%">
+                    <div class="mb-4 ">
+                        <label for="v_a_vehicle_type" class="form-label"  style="margin-left: 40%">Vehicle Type</label>
+                        <input type="text" class="form-control" id="v_a_vehicle_type"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
+                        <div class="invalid-feedback">
+                            *
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Fuel Type</label>
+                        <input type="text" class="form-control" id="v_a_vehicle_fuel_type"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
+                        <div class="invalid-feedback">
+                            *
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Energy Type (Hybrid or Non Hybrid )</label>
+                        <input type="text" class="form-control" id="v_a_vehicle_hybrid_type"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
+                        <div class="invalid-feedback">
+                            *
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Seat Capacity</label>
+                        <input type="text" class="form-control" id="v_a_vehicle_seat_capacity"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
+                        <div class="invalid-feedback">
+                            *
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Seat Capacity</label>
+                        <input type="text" class="form-control" id="v_a_vehicle_trns_type"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
+                        <div class="invalid-feedback">
+                            *
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Fuel Usage</label>
+                        <input type="text" class="form-control" id="v_a_vehicle_fuel_usage"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
+                        <div class="invalid-feedback">
+                            *
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Vehicle Fee (per day)</label>
+                        <input type="text" class="form-control" id="v_a_vehicle_fee_perday"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
+                        <div class="invalid-feedback">
+                            *
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Vehicle Category </label>
+                        <input type="text" class="form-control" id="v_a_vehicle_category"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
+                        <div class="invalid-feedback">
+                            *
+                        </div>
+                    </div>
+                    <hr>
+                    <h1> Vehicle Views</h1>
+                    <div class="mb-4 " style="display: flex; flex-direction: column">
+                        <label for="v_a_vehicle_side_image" class="form-label" style="margin-left: 34%"> Vehicle - Side View</label>
+                        <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_vehicle_side_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                        <input id="v_a_vehicle_side_image_input "  class="form-control " type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
+                        <div class="invalid-feedback">
+                            *Starts with an uppercase letter, followed by one or more lowercase letters.
+                            *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                            *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        </div>
+                    </div>
+                    <div class="mb-4 " style="display: flex; flex-direction: column">
+                        <label for="v_a_vehicle_front_image" class="form-label" style="margin-left: 34%"> Vehicle - Side View</label>
+                        <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_vehicle_front_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                        <input id="v_a_vehicle_front_image_input "  class="form-control " type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
+                        <div class="invalid-feedback">
+                            *Starts with an uppercase letter, followed by one or more lowercase letters.
+                            *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                            *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        </div>
+                    </div>
+                    <div class="mb-4 " style="display: flex; flex-direction: column">
+                        <label for="v_a_vehicle_rear_image" class="form-label" style="margin-left: 34%"> Vehicle - Rear View</label>
+                        <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_vehicle_rear_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                        <input id="v_a_vehicle_rear_image_input "  class="form-control " type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
+                        <div class="invalid-feedback">
+                            *Starts with an uppercase letter, followed by one or more lowercase letters.
+                            *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                            *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        </div>
+                    </div>
+                    <div class="mb-4 " style="display: flex; flex-direction: column">
+                        <label for="v_a_vehicle_front_interior_image" class="form-label" style="margin-left: 34%"> Vehicle - Front Interior View</label>
+                        <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_vehicle_front_interior_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                        <input id="v_a_vehicle_front_interior_image_input "  class="form-control " type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
+                        <div class="invalid-feedback">
+                            *Starts with an uppercase letter, followed by one or more lowercase letters.
+                            *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                            *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        </div>
+                    </div>
+                    <div class="mb-4 " style="display: flex; flex-direction: column">
+                        <label for="v_a_vehicle_rare_interior_image" class="form-label" style="margin-left: 34%"> Vehicle - Rare Interior View</label>
+                        <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_vehicle_rare_interior_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                        <input id="v_a_vehicle_rare_interior_image_input "  class="form-control " type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
+                        <div class="invalid-feedback">
+                            *Starts with an uppercase letter, followed by one or more lowercase letters.
+                            *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                            *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        </div>
+                    </div>
+                    <hr>
+                    <h1> Driver Details</h1>
+                    <div class="mb-4">
+                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%"> Driver Name</label>
+                        <input type="text" class="form-control" id="v_a_driver_name"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
+                        <div class="invalid-feedback">
+                            *
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%"> Driver Contact</label>
+                        <input type="text" class="form-control" id="v_a_driver_tell"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
+                        <div class="invalid-feedback">
+                            *
+                        </div>
+                    </div>
+                    <div class="mb-4 " style="display: flex; flex-direction: column">
+                        <label for="v_a_driver_lic_rare_image" class="form-label" style="margin-left: 34%">Driver License - Rare View</label>
+                        <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_driver_lic_rare_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                        <input id="v_a_driver_lic_rare_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
+                        <div class="invalid-feedback">
+                            *Starts with an uppercase letter, followed by one or more lowercase letters.
+                            *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                            *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        </div>
+                    </div>
+                    <div class="mb-4 " style="display: flex; flex-direction: column">
+                        <label for="v_a_driver_lic_front_image" class="form-label" style="margin-left: 34%">Driver License - Front View</label>
+                        <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_driver_lic_front_image" style="border: 0.5px solid #000; border-radius: 1%; ">
+                        <input id="v_a_driver_lic_front_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
+                        <div class="invalid-feedback">
+                            *Starts with an uppercase letter, followed by one or more lowercase letters.
+                            *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
+                            *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%"> Remarks</label>
+                        <input type="text" class="form-control" id="v_a_driver_remarks"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
+                        <div class="invalid-feedback">
+                            *
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <div style="margin-left: 39%">
+                    <button type="button" class="btn btn-primary  " id="v_a_a_btn" onclick="saveNewVehicleBtnClicked()" style="width: 20rem; height: 4rem; font-size: 1.4rem;">Save</button>
+                </div>
+                <br><br>
+            </div>
+        </div>
+    </div>
+
+
+
 </head>
 <body style="border-color: #F9F7F7">
 
