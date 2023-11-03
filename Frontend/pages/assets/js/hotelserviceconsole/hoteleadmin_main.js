@@ -947,7 +947,7 @@ function saveNewHotelBtnClicked(){
     $.ajax({
         method: "POST",
         url: "http://localhost:1010/main/hotel-service/create-new-hotel",
-        data: newformData,
+        data: formData,
         processData: false,  // Prevent jQuery from processing data
         contentType: false,  // Set content type to false to let the browser set it
         success:function (data){

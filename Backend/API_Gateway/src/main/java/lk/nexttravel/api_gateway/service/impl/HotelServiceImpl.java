@@ -122,7 +122,7 @@ public class HotelServiceImpl implements HotelService {
             if(
                     internalFrontendSecurityCheckDTO.isAccesssible()
                             &&
-                            internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_GUIDE)
+                            internalFrontendSecurityCheckDTO.getRole().equals(RoleTypes.ROLE_ADMIN_SERVICE_HOTEL)
             ) {
 
                 HttpHeaders headers = new HttpHeaders();
