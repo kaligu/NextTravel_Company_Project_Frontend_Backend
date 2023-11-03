@@ -68,7 +68,23 @@ public class HotelServiceController {
             @RequestPart("cancellationFee") String cancellationFee,
             @RequestPart("access_username") String accessUsername,
             @RequestPart("access_jwt_token") String accessToken,
-            @RequestPart("access_refresh_token") String refreshToken
+            @RequestPart("access_refresh_token") String refreshToken,
+
+            @RequestPart("option_1_description") String option_1_description,
+            @RequestPart("option_1_name") String option_1_name,
+            @RequestPart("option_1_fee") String option_1_fee,
+
+            @RequestPart("option_2_description") String option_2_description,
+            @RequestPart("option_2_name") String option_2_name,
+            @RequestPart("option_2_fee") String option_2_fee,
+
+            @RequestPart("option_3_description") String option_3_description,
+            @RequestPart("option_3_name") String option_3_name,
+            @RequestPart("option_3_fee") String option_3_fee,
+
+            @RequestPart("option_4_description") String option_4_description,
+            @RequestPart("option_4_name") String option_4_name,
+            @RequestPart("option_4_fee") String option_4_fee
     ) {
         if (true) {
             return hotelService.createNewHotel(
@@ -88,7 +104,19 @@ public class HotelServiceController {
                     image,
                     accessUsername,
                     accessToken,
-                    refreshToken
+                    refreshToken,
+                    option_1_description,
+                    option_1_name,
+                    option_1_fee,
+                    option_2_description,
+                    option_2_name,
+                    option_2_fee,
+                    option_3_description,
+                    option_3_name,
+                    option_3_fee,
+                    option_4_description,
+                    option_4_name,
+                    option_4_fee
             );
         } else {
             System.out.println("error");

@@ -62,6 +62,23 @@ public class HotelServiceImpl implements HotelService {
                                 .tell_2(reqHotelSaveDTO.getTell_2())
                                 .reference_link(reqHotelSaveDTO.getReference_link())
                                 .image(reqHotelSaveDTO.getImage())
+
+                                .option_1_description(reqHotelSaveDTO.getOption_1_name())
+                                .option_1_name(reqHotelSaveDTO.getOption_1_description())
+                                .option_1_fee(reqHotelSaveDTO.getOption_1_fee())
+
+                                .option_2_name(reqHotelSaveDTO.getOption_2_name())
+                                .option_2_description(reqHotelSaveDTO.getOption_2_description())
+                                .option_2_fee(reqHotelSaveDTO.getOption_2_fee())
+
+                                .option_3_name(reqHotelSaveDTO.getOption_3_name())
+                                .option_3_description(reqHotelSaveDTO.getOption_3_description())
+                                .option_3_fee(reqHotelSaveDTO.getOption_3_fee())
+
+                                .option_4_name(reqHotelSaveDTO.getOption_4_name())
+                                .option_4_description(reqHotelSaveDTO.getOption_4_description())
+                                .option_4_fee(reqHotelSaveDTO.getOption_4_fee())
+
                                 .build()
                 );
 

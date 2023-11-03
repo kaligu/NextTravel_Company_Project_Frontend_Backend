@@ -954,6 +954,19 @@ function saveNewHotelBtnClicked(){
     formData.append("access_jwt_token", localStorage.getItem("secure_data_hotel_admin_access_token"));
     formData.append("access_refresh_token", localStorage.getItem("secure_data_hotel_admin_refresh_token"));
 
+    formData.append('option_1_description', $('#a_h_perday_hotel_fee').val());
+    formData.append('option_1_name', $('#a_h_pernight_hotel_fee').val());
+    formData.append('option_1_fee', $('#a_h_cancel_fee').val());
+    formData.append('option_2_description', $('#a_h_perday_hotel_fee').val());
+    formData.append('option_2_name', $('#a_h_pernight_hotel_fee').val());
+    formData.append('option_2_fee', $('#a_h_cancel_fee').val());
+    formData.append('option_3_description', $('#a_h_perday_hotel_fee').val());
+    formData.append('option_3_name', $('#a_h_pernight_hotel_fee').val());
+    formData.append('option_3_fee', $('#a_h_cancel_fee').val());
+    formData.append('option_4_description', $('#a_h_perday_hotel_fee').val());
+    formData.append('option_4_name', $('#a_h_pernight_hotel_fee').val());
+    formData.append('option_4_fee', $('#a_h_cancel_fee').val());
+
     // $.ajax({
     //     method: "POST",
     //     url: "http://localhost:1010/main/hotel-service/create-new-hotel",

@@ -115,7 +115,7 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public Mono<ResponseEntity<RespondDTO>> createNewHotel(String name, String location, String locationMapLink, String remarks, String referenceLink, String email, String tell1, String tell2, String categoryStar, String isPetAllowed, String perdayHotelFee, String pernightHotelFee, String cancellationFee, String image, String accessUsername, String accessToken, String refreshToken) {
+    public Mono<ResponseEntity<RespondDTO>> createNewHotel(String name, String location, String locationMapLink, String remarks, String referenceLink, String email, String tell1, String tell2, String categoryStar, String isPetAllowed, String perdayHotelFee, String pernightHotelFee, String cancellationFee, String image, String accessUsername, String accessToken, String refreshToken , String option_1_description, String option_1_name ,String option_1_fee, String option_2_description, String option_2_name,  String option_2_fee, String option_3_description, String option_3_name, String option_3_fee, String option_4_description, String option_4_name, String option_4_fee) {
         try{
             FrontendTokenDTO frontendTokenDTO = FrontendTokenDTO.builder().access_jwt_token(accessToken).access_username(accessUsername).access_refresh_token(refreshToken).build();
             InternalFrontendSecurityCheckDTO internalFrontendSecurityCheckDTO = authenticate_authorize_service.validateRequestsAndGetMetaData(frontendTokenDTO);
@@ -148,6 +148,23 @@ public class HotelServiceImpl implements HotelService {
                                         .reference_link(referenceLink)
                                         .image(image)
                                         .token(apiGatewayJwtAccessTokenServiceBackend.generateToken())
+
+                                        .option_1_name(option_1_name)
+                                        .option_1_description(option_1_description)
+                                        .option_1_fee(option_1_fee)
+
+                                        .option_2_name(option_2_name)
+                                        .option_2_description(option_2_description)
+                                        .option_2_fee(option_2_fee)
+
+                                        .option_3_name(option_3_name)
+                                        .option_3_description(option_3_description)
+                                        .option_3_fee(option_3_fee)
+
+                                        .option_4_name(option_4_name)
+                                        .option_4_description(option_4_description)
+                                        .option_4_fee(option_4_fee)
+
                                         .build()
                                 ,
                                 headers
