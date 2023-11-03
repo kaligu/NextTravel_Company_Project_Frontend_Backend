@@ -2,10 +2,12 @@ package lk.nexttravel.vehicle_microservice.advice;
 
 
 
-import lk.nexttravel.hotel_microservice.advice.util.InternalServerException;
-import lk.nexttravel.hotel_microservice.advice.util.NotfoundException;
-import lk.nexttravel.hotel_microservice.dto.RespondDTO;
-import lk.nexttravel.hotel_microservice.util.RespondCodes;
+
+
+import lk.nexttravel.vehicle_microservice.advice.util.InternalServerException;
+import lk.nexttravel.vehicle_microservice.advice.util.NotfoundException;
+import lk.nexttravel.vehicle_microservice.dto.RespondDTO;
+import lk.nexttravel.vehicle_microservice.util.RespondCodes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
