@@ -6,9 +6,11 @@
 */
 package lk.nexttravel.vehicle_microservice.api;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lk.nexttravel.vehicle_microservice.dto.ReqVehicleSaveDTO;
+import lk.nexttravel.vehicle_microservice.service.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author : H.C.Kaligu Jayanath
@@ -20,4 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/vehicle")
 @CrossOrigin("*")
 public class VehicleController {
+
+    @Autowired
+    VehicleService vehicleService;
+
+    //----------Save New Hotel ------
+    @PostMapping(value = "/save_new_vehicle")
+    public ResponseEntity<String> SaveNewGuide(@RequestBody ReqVehicleSaveDTO reqVehicleSaveDTO{
+        return vehicleService.SaveNewVehicel(reqVehicleSaveDTO);
+    }
 }
