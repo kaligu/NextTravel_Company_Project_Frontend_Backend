@@ -108,7 +108,7 @@ public class VehicleServiceImpl implements VehicleService {
                 headers.setContentType(MediaType.APPLICATION_JSON);
 
                 ResponseEntity<String> responseEntity = restTemplate.exchange(
-                        "http://localhost:1040/api/hotel/save_new_hotel",
+                        "http://localhost:1050/api/vehicle/save_new_vehicle",
                         HttpMethod.POST,
                         new HttpEntity<Object> (
                                 ReqVehicleSaveDTO.builder()
