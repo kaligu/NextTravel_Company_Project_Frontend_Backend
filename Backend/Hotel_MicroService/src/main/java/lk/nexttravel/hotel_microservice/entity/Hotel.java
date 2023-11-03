@@ -51,6 +51,24 @@ public class Hotel {
     //for 2PC transaction
     private String transaction_state;
 
-    @DBRef
-    private List<HotelOptions> options;
+
+    //option1 1
+    private String option_1_description;
+    private String option_1_name;
+    private String option_1_fee;
+
+    //option1 2
+    private String option_2_description;
+    private String option_2_name;
+    private String option_2_fee;
+
+    //option1 3
+    private String option_3_description;
+    private String option_3_name;
+    private String option_3_fee;
+
+    //option1 4
+    private String option_4_description;
+    private String option_4_name;
+    private String option_4_fee;
 }
