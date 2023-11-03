@@ -17,5 +17,6 @@ import reactor.core.publisher.Mono;
  */
 public interface HotelService {
     //get user admin profile image
-    Mono<ResponseEntity<RespondDTO>> UserAdminGetProfileImage(String access_username, String access_jwt_token, String access_refresh_token);
+
+    Mono<ResponseEntity<RespondDTO>> UserAdminGetProfileData(String access_username, String access_jwt_token, String access_refresh_token);
 }

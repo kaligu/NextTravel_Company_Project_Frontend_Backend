@@ -30,15 +30,15 @@ public class HotelServiceController {
     HotelService hotelService;
 
     //user login
-    @GetMapping(value = {"/hotel-admin-get-profile-image"}, consumes = {"application/json"})
-    public Mono<ResponseEntity<RespondDTO>> userAdminGetProfileImage(
+    @GetMapping(value = {"/hotel-admin-get-profile-data"}, consumes = {"application/json"})
+    public Mono<ResponseEntity<RespondDTO>> userAdminGetProfileDataa(
             @RequestParam("access_username") @NonNull String access_username
             ,
             @RequestParam("access_jwt_token") @NonNull String access_jwt_token
             ,
             @RequestParam("access_refresh_token") @NonNull String access_refresh_token
     ){
-        return hotelService.UserAdminGetProfileImage(
+        return hotelService.UserAdminGetProfileData(
                 access_username
                 ,
                 access_jwt_token

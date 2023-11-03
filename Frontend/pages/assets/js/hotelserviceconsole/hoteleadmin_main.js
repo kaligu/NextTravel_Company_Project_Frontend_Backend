@@ -199,7 +199,7 @@ function loadAdminProfileData(){
     $.ajax({
         method: "GET",
         contentType: "application/json",
-        url: 'http://localhost:1010/main/guide-service/guide-admin-get-profile-data',
+        url: 'http://localhost:1010/main/hotel-service/hotel-admin-get-profile-data',
         async: true,
         data: {
             access_username: localStorage.getItem("secure_data_hotel_admin_username"),
