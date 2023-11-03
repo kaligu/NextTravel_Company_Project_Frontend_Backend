@@ -128,24 +128,10 @@ public class HotelServiceImpl implements HotelService {
                 headers.setContentType(MediaType.APPLICATION_JSON);
 
                 ResponseEntity<String> responseEntity = restTemplate.exchange(
-                        RqRpURLs.Guide_Service_New_Guide_save,
+                        "http://localhost:1040/api/hotel/save_new_hotel",
                         HttpMethod.POST,
                         new HttpEntity<Object> (
-                                ReqNewGuideSaveDTO.builder()
-                                        .name(name)
-                                        .remarks(remarks)
-                                        .experience(Integer.parseInt(experience))
-                                        .nic(nic)
-                                        .nic_front_view(nicFrontView)
-                                        .nic_rear_view(nicRearView)
-                                        .tell(tell)
-                                        .gender(gender)
-                                        .dob(dob)
-                                        .image(image)
-                                        .address(address)
-                                        .perday_fee(Integer.parseInt(perdayFee))
-                                        .token(apiGatewayJwtAccessTokenServiceBackend.generateToken())
-                                        .build()
+                                Req
                                 ,
                                 headers
                         ),
