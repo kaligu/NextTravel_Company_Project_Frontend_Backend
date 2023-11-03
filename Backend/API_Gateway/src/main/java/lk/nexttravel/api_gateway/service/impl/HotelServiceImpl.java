@@ -13,6 +13,7 @@ import lk.nexttravel.api_gateway.dto.RespondDTO;
 import lk.nexttravel.api_gateway.dto.auth.FrontendTokenDTO;
 import lk.nexttravel.api_gateway.dto.auth.InternalFrontendSecurityCheckDTO;
 import lk.nexttravel.api_gateway.dto.guide.ReqNewGuideSaveDTO;
+import lk.nexttravel.api_gateway.dto.hotel.ReqHotelSaveDTO;
 import lk.nexttravel.api_gateway.dto.user.ReqProfileDataAdminsDTO;
 import lk.nexttravel.api_gateway.dto.user.UserReqProfileDataDTO;
 import lk.nexttravel.api_gateway.entity.User;
@@ -131,7 +132,22 @@ public class HotelServiceImpl implements HotelService {
                         "http://localhost:1040/api/hotel/save_new_hotel",
                         HttpMethod.POST,
                         new HttpEntity<Object> (
-                                Req
+                                ReqHotelSaveDTO.builder()
+                                        .location(location)
+                                        .location_coordinates(locationMapLink)
+                                        .category_stars(Integer.parseInt(categoryStar))
+                                        .name(name)
+                                        .remarks(remarks)
+                                        .perday_hotel_fee_for_days(Integer.parseInt(perdayHotelFee))
+                                        .perday_hotel_fee_for_nights(Integer.parseInt(pernightHotelFee))
+                                        .email(email)
+                                        .is_pet_allowed(Boolean.parseBoolean(isPetAllowed))
+                                        .cancellation_fee(Integer.parseInt(cancellationFee))
+                                        .tell_1(tell1)
+                                        .tell_2(tell2)
+                                        .reference_link(referenceLink)
+                                        .image(image)
+                                        .build()
                                 ,
                                 headers
                         ),

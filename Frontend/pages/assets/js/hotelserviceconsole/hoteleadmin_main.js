@@ -943,71 +943,71 @@ function saveNewHotelBtnClicked(){
     formData.append("access_username", localStorage.getItem("secure_data_hotel_admin_username"));
     formData.append("access_jwt_token", localStorage.getItem("secure_data_hotel_admin_access_token"));
     formData.append("access_refresh_token", localStorage.getItem("secure_data_hotel_admin_refresh_token"));
-    //
-    // $.ajax({
-    //     method: "POST",
-    //     url: "http://localhost:1010/main/guide-service/create-new-guide",
-    //     data: newformData,
-    //     processData: false,  // Prevent jQuery from processing data
-    //     contentType: false,  // Set content type to false to let the browser set it
-    //     success:function (data){
-    //         if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
-    //
-    //             //save tokens on local localStorage - user admin
-    //             localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
-    //             localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
-    //             localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
-    //             console.log("done");
-    //             //hide loading model
-    //             setTimeout(function () {
-    //                 guide_admin_main_pg_loading_model.modal('hide');
-    //                 setTimeout(function () {
-    //                     $('#alert').show();
-    //                     setTimeout(function () {
-    //                         $('#alert').hide();
-    //                         window.location.reload();
-    //                     }, 1000); // delay
-    //                 }, 100); // delay
-    //
-    //             }, 1000); // delay
-    //
-    //         }else {
-    //             console.log("error");
-    //                 //hide loading model
-    //                 setTimeout(function () {
-    //                     guide_admin_main_pg_loading_model.modal('hide');
-    //
-    //                     guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
-    //                     guide_admin_main_pg_alert_model_content_error.text("Try Again!");
-    //
-    //                 }, 1000); // delay
-    //                 console.log("fail to logout exception");
-    //         }
-    //     },
-    //     error: function (xhr,exception){
-    //         console.log("fail to logout exception");
-    //         if (xhr.status === 401){
-    //             setTimeout(function () {
-    //                 guide_admin_main_pg_loading_model.modal('hide');
-    //
-    //                 guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
-    //
-    //             }, 1000); // delay
-    //         }else {
-    //             //hide loading model
-    //             setTimeout(function () {
-    //                 guide_admin_main_pg_loading_model.modal('hide');
-    //
-    //                 guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
-    //                 guide_admin_main_pg_alert_model_content_error.text("Try Again!");
-    //                 guide_admin_main_pg_alert_model_error.modal('show');
-    //
-    //             }, 1000); // delay
-    //             console.log("fail to logout exception");
-    //         }
-    //
-    //     }
-    // })
+
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:1010/main/hotel-service/create-new-hotel",
+        data: newformData,
+        processData: false,  // Prevent jQuery from processing data
+        contentType: false,  // Set content type to false to let the browser set it
+        success:function (data){
+            if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
+
+                //save tokens on local localStorage - user admin
+                localStorage.setItem("secure_data_hotel_admin_username", data.token.access_username);
+                localStorage.setItem("secure_data_hotel_admin_access_token", data.token.access_jwt_token);
+                localStorage.setItem("secure_data_hotel_admin_refresh_token", data.token.access_refresh_token);
+                console.log("done");
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+                    setTimeout(function () {
+                        $('#alert').show();
+                        setTimeout(function () {
+                            $('#alert').hide();
+                            window.location.reload();
+                        }, 1000); // delay
+                    }, 100); // delay
+
+                }, 1000); // delay
+
+            }else {
+                console.log("error");
+                    //hide loading model
+                    setTimeout(function () {
+                        guide_admin_main_pg_loading_model.modal('hide');
+
+                        guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                        guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+
+                    }, 1000); // delay
+                    console.log("fail to logout exception");
+            }
+        },
+        error: function (xhr,exception){
+            console.log("fail to logout exception");
+            if (xhr.status === 401){
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
+
+                }, 1000); // delay
+            }else {
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    guide_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+
+        }
+    })
 
 }
 

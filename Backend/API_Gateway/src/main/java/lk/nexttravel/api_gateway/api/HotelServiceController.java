@@ -50,7 +50,7 @@ public class HotelServiceController {
     }
 
     //Add new Guide
-    @PostMapping(value = {"/create-new-guide"}, consumes = {"multipart/form-data"})
+    @PostMapping(value = {"/create-new-hotel"}, consumes = {"multipart/form-data"})
     public Mono<ResponseEntity<RespondDTO>> createNewGuide(
             @RequestPart("image") String image,
             @RequestPart("name") String name,
