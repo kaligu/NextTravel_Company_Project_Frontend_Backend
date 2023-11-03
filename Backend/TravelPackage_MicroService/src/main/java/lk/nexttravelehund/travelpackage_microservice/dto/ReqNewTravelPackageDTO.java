@@ -2,34 +2,27 @@
   @ Author       : C.Kaligu Jayanath
   @ Prjoect Name : NextTravel_Company_Project_Frontend_Backend
   @ Date         : 11/3/2023
-  @ Time         : 10:18 AM
+  @ Time         : 4:42 PM
 */
-package lk.nexttravelehund.travelpackage_microservice.entity;
+package lk.nexttravelehund.travelpackage_microservice.dto;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
 /**
  * @author : H.C.Kaligu Jayanath
  * Date    : 11/3/2023
- * Time    : 10:18 AM
+ * Time    : 4:42 PM
  */
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@Data
 @Builder
+@ToString
 
-@Document(collection = "TravelPackage")
-public class TravelPackage {
-    @Transient
-    public static final String SEQUENCE_NAME = "travelpackage_sequence";
-
-    @Id
-    private String id;
+@Component
+public class ReqNewTravelPackageDTO {
 
     private String travelpackage_name;
     private int travelpackage_total_profit;//*
@@ -60,4 +53,7 @@ public class TravelPackage {
     private String promotion_rate;
     private String promotion_start_date;
     private String promotion_end_date;
+
+    //---for security purpose
+    private String token;
 }

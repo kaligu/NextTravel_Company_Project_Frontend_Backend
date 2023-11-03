@@ -1,742 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NextTravel - Vehicles Manage</title>
-    <!-- favicon img -->
-    <link rel="shortcut icon" type="image/icon" href="assets/images/faviconlogo.png"/>
-    <script src="assets/js/jquery-3.6.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <style>
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Booking</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../booking/css/booking.css">
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../booking/lib/wow/wow.min.js"></script>
+    <script src="../booking/lib/easing/easing.min.js"></script>
+    <script src="../booking/lib/waypoints/waypoints.min.js"></script>
+    <script src="../booking/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../booking/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="../booking/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="../booking/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Libraries Stylesheet -->
+    <link href="../booking/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../booking/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../booking/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../booking/css/animate.css">
+    <link rel="stylesheet" href="../booking/css/datepicker.css">
+    <link rel="stylesheet" href="../booking/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../booking/css/hover-min.css">
+    <link rel="stylesheet" href="../booking/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="../booking/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../booking/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../booking/css/responsive.css">
+    <link rel="stylesheet" href="../booking/css/bootstrap.min.css">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
 
-        /* Track */
-        ::-webkit-scrollbar-track {
-            background: #F9F7F7;
-        }
-
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            background: #112D4E;
-        }
-
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3F72AF;
-        }
-
-        .btn-primary {
-            color: #ffffff;
-            background-color: #3F72AF;
-            border-color: #112D4E;
-            border-radius: 10px;
-            border-width: 5px;
-        }
-
-        .btn-primary:disabled {
-            color: #000000;
-            background-color: #DBE2EF;
-            border-color: #3F72AF;
-            border-radius: 10px;
-            border-width: 5px;
-        }
-
-        .btn-primary:hover {
-            color: #ffffff;
-            background-color: #112D4E;
-            border-color: #3F72AF;
-            border-radius: 10px;
-            border-width: 5px;
-        }
-
-        .btn-primary:focus,
-        .btn-primary.focus {
-            box-shadow: 0 0 0 .2rem #112D4E
-        }
-
-        :root{
-            background-color: #F9F7F7;
-        }
-
-        #guideTable thead tr th:nth-child(1) {
-            background-color: #3F72AF; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(2) {
-            background-color: #3F72AF; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(3) {
-            background-color: #3F72AF; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(4) {
-            background-color: #3F72AF; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(5) {
-            background-color: #3F72AF; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(6) {
-            background-color: #3F72AF; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(7) {
-            background-color: #3F72AF; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(8) {
-            background-color:#3F72AF; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(9) {
-            background-color: #3F72AF; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(10) {
-            background-color: #3F72AF; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(11) {
-            background-color: #3F72AF; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(12) {
-            background-color: #3F72AF; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(13) {
-            background-color: #3F72AF; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(14) {
-            background-color: #0090ff; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-        #guideTable thead tr th:nth-child(15) {
-            background-color: #ff0000; /* Change the background color to red */
-            color: white; /* Change the text color to white */
-        }
-    </style>
-
-
-    <!--New vehicle container-->
-    <div class="container-fluid" id="add_guide_container" style="background-color: #FCDEC0; display: none">
-        <h2 style="color: rgb(180,132,108); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; "> New Hotel</h2>
-        <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
-            <div class="card-body">
-
-                <div style="flex-direction: column; margin-left: 15%">
-                    <div class="mb-4 ">
-                        <label for="v_a_vehicle_type" class="form-label"  style="margin-left: 40%">Vehicle Type</label>
-                        <input type="text" class="form-control" id="v_a_vehicle_type"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                        <div class="invalid-feedback">
-                            *
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Fuel Type</label>
-                        <input type="text" class="form-control" id="v_a_vehicle_fuel_type"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                        <div class="invalid-feedback">
-                            *
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Energy Type (Hybrid or Non Hybrid )</label>
-                        <input type="text" class="form-control" id="v_a_vehicle_hybrid_type"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                        <div class="invalid-feedback">
-                            *
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Seat Capacity</label>
-                        <input type="text" class="form-control" id="v_a_vehicle_seat_capacity"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                        <div class="invalid-feedback">
-                            *
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Seat Capacity</label>
-                        <input type="text" class="form-control" id="v_a_vehicle_trns_type"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                        <div class="invalid-feedback">
-                            *
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Fuel Usage</label>
-                        <input type="text" class="form-control" id="v_a_vehicle_fuel_usage"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                        <div class="invalid-feedback">
-                            *
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Vehicle Fee (per day)</label>
-                        <input type="text" class="form-control" id="v_a_vehicle_fee_perday"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                        <div class="invalid-feedback">
-                            *
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Vehicle Category </label>
-                        <input type="text" class="form-control" id="v_a_vehicle_category"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                        <div class="invalid-feedback">
-                            *
-                        </div>
-                    </div>
-                    <hr>
-                    <h1> Vehicle Views</h1>
-                    <div class="mb-4 " style="display: flex; flex-direction: column">
-                        <label for="v_a_vehicle_side_image" class="form-label" style="margin-left: 34%"> Vehicle - Side View</label>
-                        <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_vehicle_side_image" style="border: 0.5px solid #000; border-radius: 1%; ">
-                        <input id="v_a_vehicle_side_image_input "  class="form-control " type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
-                        <div class="invalid-feedback">
-                            *Starts with an uppercase letter, followed by one or more lowercase letters.
-                            *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                            *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                        </div>
-                    </div>
-                    <div class="mb-4 " style="display: flex; flex-direction: column">
-                        <label for="v_a_vehicle_front_image" class="form-label" style="margin-left: 34%"> Vehicle - Side View</label>
-                        <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_vehicle_front_image" style="border: 0.5px solid #000; border-radius: 1%; ">
-                        <input id="v_a_vehicle_front_image_input "  class="form-control " type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
-                        <div class="invalid-feedback">
-                            *Starts with an uppercase letter, followed by one or more lowercase letters.
-                            *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                            *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                        </div>
-                    </div>
-                    <div class="mb-4 " style="display: flex; flex-direction: column">
-                        <label for="v_a_vehicle_rear_image" class="form-label" style="margin-left: 34%"> Vehicle - Rear View</label>
-                        <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_vehicle_rear_image" style="border: 0.5px solid #000; border-radius: 1%; ">
-                        <input id="v_a_vehicle_rear_image_input "  class="form-control " type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
-                        <div class="invalid-feedback">
-                            *Starts with an uppercase letter, followed by one or more lowercase letters.
-                            *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                            *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                        </div>
-                    </div>
-                    <div class="mb-4 " style="display: flex; flex-direction: column">
-                        <label for="v_a_vehicle_front_interior_image" class="form-label" style="margin-left: 34%"> Vehicle - Front Interior View</label>
-                        <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_vehicle_front_interior_image" style="border: 0.5px solid #000; border-radius: 1%; ">
-                        <input id="v_a_vehicle_front_interior_image_input "  class="form-control " type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
-                        <div class="invalid-feedback">
-                            *Starts with an uppercase letter, followed by one or more lowercase letters.
-                            *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                            *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                        </div>
-                    </div>
-                    <div class="mb-4 " style="display: flex; flex-direction: column">
-                        <label for="v_a_vehicle_rare_interior_image" class="form-label" style="margin-left: 34%"> Vehicle - Rare Interior View</label>
-                        <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_vehicle_rare_interior_image" style="border: 0.5px solid #000; border-radius: 1%; ">
-                        <input id="v_a_vehicle_rare_interior_image_input "  class="form-control " type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
-                        <div class="invalid-feedback">
-                            *Starts with an uppercase letter, followed by one or more lowercase letters.
-                            *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                            *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                        </div>
-                    </div>
-                    <hr>
-                    <h1> Driver Details</h1>
-                    <div class="mb-4">
-                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%"> Driver Name</label>
-                        <input type="text" class="form-control" id="v_a_driver_name"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                        <div class="invalid-feedback">
-                            *
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%"> Driver Contact</label>
-                        <input type="text" class="form-control" id="v_a_driver_tell"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                        <div class="invalid-feedback">
-                            *
-                        </div>
-                    </div>
-                    <div class="mb-4 " style="display: flex; flex-direction: column">
-                        <label for="v_a_driver_lic_rare_image" class="form-label" style="margin-left: 34%">Driver License - Rare View</label>
-                        <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_driver_lic_rare_image" style="border: 0.5px solid #000; border-radius: 1%; ">
-                        <input id="v_a_driver_lic_rare_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
-                        <div class="invalid-feedback">
-                            *Starts with an uppercase letter, followed by one or more lowercase letters.
-                            *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                            *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                        </div>
-                    </div>
-                    <div class="mb-4 " style="display: flex; flex-direction: column">
-                        <label for="v_a_driver_lic_front_image" class="form-label" style="margin-left: 34%">Driver License - Front View</label>
-                        <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="v_a_driver_lic_front_image" style="border: 0.5px solid #000; border-radius: 1%; ">
-                        <input id="v_a_driver_lic_front_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
-                        <div class="invalid-feedback">
-                            *Starts with an uppercase letter, followed by one or more lowercase letters.
-                            *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                            *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%"> Remarks</label>
-                        <input type="text" class="form-control" id="v_a_driver_remarks"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                        <div class="invalid-feedback">
-                            *
-                        </div>
-                    </div>
-                </div>
-                <br><br>
-                <div style="margin-left: 39%">
-                    <button type="button" class="btn btn-primary  " id="v_a_a_btn" onclick="saveNewVehicleBtnClicked()" style="width: 20rem; height: 4rem; font-size: 1.4rem;">Save</button>
-                </div>
-                <br><br>
-            </div>
-        </div>
-    </div>
-
-
-
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 </head>
-<body style="border-color: #F9F7F7">
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+        <a href="" class="navbar-brand p-0">
 
-<!--Side navigation bar-->
-<div class="d-flex flex-column flex-shrink-0 fixed-top h-100" style="width: 5.5rem; background-color:#112D4E">
-    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center py-5 " style="background-color: #112D4E">
-        <br>
-        <!--   Home -->
-        <li>
-            <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Home Window">
-                <svg id="home_nav_icon" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-house" viewBox="0 0 16 16">
-                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
-                </svg>
-            </a>
-        </li>
-        <!--     add New Guide button-->
-        <li>
-            <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Admins Manage">
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-person-plus" viewBox="0 0 16 16">
-                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                </svg>
-            </a>
-        </li>
-        <!--    view Guides  -->
-        <li>
-            <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Finance Data">
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-person-vcard" viewBox="0 0 16 16">
-                    <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5ZM9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8Zm1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Z"/>
-                    <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2ZM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96c.026-.163.04-.33.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1.006 1.006 0 0 1 1 12V4Z"/>
-                </svg>
-            </a>
-        </li>
-        <!--    graph  -->
-        <li>
-            <a href="#" class="nav-link py-3 border-bottom rounded-0 icon-link-hover" data-toggle="tooltip" data-placement="top" title="Finance Data">
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-graph-up" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
-                </svg>
-            </a>
-        </li>
-    </ul>
-    <div class="dropdown border-top ">
-        <a href="#" class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="" id="guide_admin_main_pg_profile_img" alt="profileimage" width="60" height="60" class="rounded-circle">
+            <!--                <img src="img/logo.png" alt="Logo" width="100" height="70"> &lt;!&ndash;--><span style="color: #13e3e3; font-size: 30px; font-weight: bold">Next</span><span style="color: #869791; font-family: 'Courier New',cursive; font-size: 25px;"> Travel</span>
         </a>
-        <ul class="dropdown-menu text-small shadow" >
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item " href="#">Log out</a></li>
-        </ul>
-    </div>
-</div>
-
-<!-- Top Bar -->
-<nav class="navbar navbar-expand-lg fixed-top" style="background-color:#112D4E;">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse justify-content-start">
-            <img src="assets/images/logomain.png" alt="mdo" width="185" height="60" class="rounded-circle" style="position: absolute; margin-top: -0.1rem;">
-        </div>
-        <p style="color: white; margin-left: 1rem; font-size: 18px">Vehicles Manage Console -</p>
-        <p style="color: #c5c5c5; margin-left: 0.3rem; font-style: italic; font-size: 15px" id="guide_admin_main_pg_top_admin_name">Mr.test [Admin]</p>
-        <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
-            <p style="color: white; font-size: 16px">5.56AM 10/08/2023</p>
-        </div>
-    </div>
-</nav>
-
-<!--Home container-->
-<div class="container-fluid" id="home_container" style="background-color: #F9F7F7; display: none">
-    <h2 style="color: rgb(63,114,175); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; "> Home</h2>
-    <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
-        <div class="card-body">
-
-
-        </div>
-    </div>
-</div>
-
-<!--New Vehicle container-->
-<div class="container-fluid" id="add_guide_container" style="background-color: #F9F7F7; display: block">
-    <h2 style="color: rgb(63,114,175); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; "> New Guide</h2>
-    <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
-        <div class="card-body">
-            <div style="display: flex; flex-direction: column;">
-                <div class="mb-4">
-                    <div class="row text-center">
-                        <div class="col-xs-6 text-center" style=" margin-top: 10px;">
-                            <div class='product-holder'>
-                                <br><br>
-                                <img src="assets/images/userImage.png" width="300" height="310" class='product-image' id="c_m_s_a_image" style="border: 1px solid #000; border-radius: 50%; filter: brightness(90%)" alt="">
-                                <input id="c_m_s_a_image_input" class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px; margin-left: 41%; margin-top: 10px">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="#about.html" class="nav-item nav-link">Booking</a>
+                <a href="#service.html" class="nav-item nav-link">Hotels</a>
+                <a href="#package.html" class="nav-item nav-link">Packages</a>
+                <a href="#Testimonial.html" class="nav-item nav-link">Vehicles</a>
+                <a href="#contact.html" class="nav-item nav-link">Guides</a>
             </div>
-            <br>
-            <div style="flex-direction: column; margin-left: 15%">
-                <div class="mb-4">
-                    <label for="v_a_vehicle_type" class="form-label" style="margin-left: 40%">Vehicle Type</label>
-                    <input type="text" class="form-control" id="v_a_vehicle_type"  style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *
+            <button class="btn btn-outline-light rounded-pill" id="loginBtn">LogOut</button>
+            <a class="nav-link" href="#" data-toggle="dropdown">
+                <img src="img/user.jpg" style="width:50px; border-radius:50%;"/>
+                <span class="xp-user-live"></span>
+            </a>
+        </div>
+    </nav>
+</header>
+<body style="background-color: #002752">
+<main class="container mt-4" >
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Book Your Travel</h2>
+            <form>
+                <div class="form-group">
+                    <label for="destination">Destination:</label>
+                    <input type="text" class="form-control" id="destination" placeholder="Enter your destination">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="departure">Departure Date:</label>
+                        <input type="date" class="form-control" id="departure">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="return">Return Date:</label>
+                        <input type="date" class="form-control" id="return">
                     </div>
                 </div>
-                <div class="mb-4">
-                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 39.5%">Address</label>
-                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                    </div>
+                <div class="form-group">
+                    <label for="travelers">Number of Travelers:</label>
+                    <input type="number" class="form-control" id="travelers" placeholder="Enter the number of travelers">
                 </div>
-                <div class="mb-4">
-                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 40.5%">NIC</label>
-                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; background-color:#DBE2EF; border-color:#DBE2EF; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 40.5%">Tell</label>
-                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 38.5%">Experience</label>
-                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 40.5%">Age</label>
-                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 38.5%">Per day fee</label>
-                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="c_m_s_a_nameinitial" class="form-label" style="margin-left: 39%">Remarks</label>
-                    <input type="text" class="form-control" id="c_m_s_a_nameinitial" style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                    <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="genderSelect" class="form-label" style="margin-left: 39.5%">Gender</label>
-                    <select class="form-control" id="genderSelect" style="width: 85%; background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
-                <br>
-                <div class="mb-4 " style="display: flex; flex-direction: column">
-                    <label for="c_m_s_a_nic_front_image" class="form-label" style="margin-left: 34%">NIC / Passport - Front View</label>
-                    <img src="assets/images/frontnicimage.png" width="85%" height="350"  id="c_m_s_a_nic_front_image" style="border: 0.5px solid #000; border-radius: 1%; ">
-                    <input id="c_m_s_a_nic_front_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
-                    <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                    </div>
-                </div>
-                <br>
-                <div class="mb-4" style="display: flex; flex-direction: column">
-                    <label for="c_m_s_a_nic_rear_image" class="form-label" style="margin-left: 34%">NIC / Passport - Rear View</label>
-                    <img src="assets/images/rearnicimage.png" width="85%" height="350"  id="c_m_s_a_nic_rear_image" style="border: 0.5px solid #000; border-radius: 1%; ">
-                    <input id="c_m_s_a_nic_rear_image_input"  class="form-control" type="file" accept=".jpg, .jpeg, .webp" style="background-color: #DBE2EF; border-color: #DBE2EF; border-width: 1.5px; width: 250px">
-                    <div class="invalid-feedback">
-                        *Starts with an uppercase letter, followed by one or more lowercase letters.
-                        *Can contain one or more spaces, followed by an uppercase letter, followed by one or more lowercase letters.lowercase letters.
-                        *Examples: John Doe ,Jane M. Doe ,Peter B. Brown
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div style="margin-left: 39%">
-                <button type="button" class="btn btn-primary  " id="c_m_s_a_savebtn" onclick="saveAddClient()" style="width: 20rem; height: 4rem; font-size: 1.4rem;">Save</button>
-            </div>
-            <br><br>
+                <button type="submit" class="btn btn-primary">Search for Flights</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <h2>Popular Destinations</h2>
+            <ul class="list-group">
+                <li class="list-group-item">Paris</li>
+                <li class="list-group-item">New York</li>
+                <li class="list-group-item">Tokyo</li>
+                <li class="list-group-item">London</li>
+                <li class="list-group-item">Dubai</li>
+            </ul>
         </div>
     </div>
-</div>
 
-<!--Search Guide container-->
-<div class="container-fluid" id="search_guide_container" style="background-color: #F9F7F7; display: none">
-    <h2 style="color: rgb(63,114,175); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Guides Changes</h2>
-    <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
-        <div class="card-body">
-
-            <div style="width: 100%; height: 540px; overflow-y: auto;">
-                <table id="guideTable" class="table align-middle mb-0"  style="width: 100%">
-                    <thead>
-                    <tr >
-                        <th>ID</th>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>NIC</th>
-                        <th>Tell</th>
-                        <th>Experience</th>
-                        <th>Age</th>
-                        <th>Per day fee</th>
-                        <th>Remarks</th>
-                        <th>Gender</th>
-                        <th>NIC / Passport - Front View</th>
-                        <th>NIC / Passport - Rear View</th>
-                        <th>      </th>
-                        <th>      </th>
-                    </tr>
-                    </thead>
-                    <tbody id="clientTableBody">
-                    <tr>
-                        <td>
-                            <p class="fw-normal mb-1">U001</p>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center ">
-                                <img
-                                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                                        alt=""
-                                        style="width: 60px; height: 60px"
-                                        class="rounded-circle"
-                                />
-                                <div class="ms-3">
-                                    <p class="fw-bold mb-1">kaligu</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">H.C.K.Jaynath</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Kaligu@1234</p>
-                        </td>
-                        <td>
-                            <p class="text-muted mb-1">chethiyakaligu2@gmail.com</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">200133702832</p>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img
-                                        src="assets/images/frontnicimage.png"
-                                        alt=""
-                                        style="width: 280px; height: 140px"
-                                />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img
-                                        src="assets/images/frontnicimage.png"
-                                        alt=""
-                                        style="width: 280px; height: 140px"
-                                />
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Male</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">22</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">0767095344</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">no</p>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-info text-white">
-                                Edit
-                            </button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <p class="fw-normal mb-1">U001</p>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img
-                                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                                        alt=""
-                                        style="width: 60px; height: 60px"
-                                        class="rounded-circle"
-                                />
-                                <div class="ms-3">
-                                    <p class="fw-bold mb-1">kaligu</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">H.C.K.Jaynath</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Kaligu@1234</p>
-                        </td>
-                        <td>
-                            <p class="text-muted mb-1">chethiyakaligu2@gmail.com</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">No.120 , Kolambayahena , Gurugoda , Meewanapalana</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">200133702832</p>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img
-                                        src="assets/images/frontnicimage.png"
-                                        alt=""
-                                        style="width: 280px; height: 140px"
-                                />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img
-                                        src="assets/images/frontnicimage.png"
-                                        alt=""
-                                        style="width: 280px; height: 140px"
-                                />
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Male</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">22</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">0767095344</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">no</p>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-info text-white">
-                                Edit
-                            </button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--graph container-->
-<div class="container-fluid" id="graph_container" style="background-color: #F9F7F7; display: none">
-    <h2 style="color: rgb(63,114,175); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; ">Review</h2>
-    <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
-        <div class="card-body">
-
-
-        </div>
-    </div>
-</div>
-
-<!-- loading window -->
-<!-- use Modal -->
-<div class="modal fade" id="vehicle_admin_main_pg-loading-model" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0,0,0,0); backdrop-filter: blur(6px)">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <!--          <div class="modal-header">-->
-            <!--            -->
-            <!--          </div>-->
-            <div class="modal-body text-center" style="background-color: #112D4E">
-                <img src="assets/images/vehiclelogogif.gif" class="img-fluid" alt="Responsive image" style="width: 60%; height: 60%">
-                <h6 class="modal-title text-white" id="exampleModalLongTitle">Please Wait... </h6>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- alert window -->
-<!-- Modal -->
-<div class="modal fade" id="alert-model" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="alert-model-title">title</h5>
-            </div>
-            <div class="modal-body">
-                <p class="modal-dialog-centered" id="alert-model-content">content</p>
-            </div>
-            <div class="modal-footer ">
-                <button type="button" class="btn btn-primary bg-success w-25" onclick="closeAlerModel()" id="alert-model-btn"> Ok </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-</script>
-<script src="./assets/js/util/RespondCodes.js"></script>
-<script src="./assets/js/util/RoleTypes.js"></script>
-<script src="assets/js/vehicleadminconsole/vehicleadmin_main.js"></script>
 </body>
 </html>
