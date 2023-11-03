@@ -1,111 +1,162 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Booking</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../booking/css/booking.css">
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../booking/lib/wow/wow.min.js"></script>
-    <script src="../booking/lib/easing/easing.min.js"></script>
-    <script src="../booking/lib/waypoints/waypoints.min.js"></script>
-    <script src="../booking/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="../booking/lib/tempusdominus/js/moment.min.js"></script>
-    <script src="../booking/lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="../booking/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Libraries Stylesheet -->
-    <link href="../booking/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="../booking/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="../booking/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../booking/css/animate.css">
-    <link rel="stylesheet" href="../booking/css/datepicker.css">
-    <link rel="stylesheet" href="../booking/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../booking/css/hover-min.css">
-    <link rel="stylesheet" href="../booking/css/jquery-ui.min.css">
-    <link rel="stylesheet" href="../booking/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../booking/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../booking/css/responsive.css">
-    <link rel="stylesheet" href="../booking/css/bootstrap.min.css">
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<!--New vehicle container-->
+<div class="container-fluid" id="add_guide_container" style="background-color: #FCDEC0; display: none">
+    <h2 style="color: rgb(180,132,108); margin-top: 4rem; margin-left: 7.5rem; font-style: italic; "> New Hotel</h2>
+    <div class="card" style="width: 90%; margin-top: 1rem; margin-left: 7.5rem; border-color:white; border-width: 0.05rem; box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);">
+        <div class="card-body">
 
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-</head>
-<body>
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
-        <a href="" class="navbar-brand p-0">
-
-            <!--                <img src="img/logo.png" alt="Logo" width="100" height="70"> &lt;!&ndash;--><span style="color: #13e3e3; font-size: 30px; font-weight: bold">Next</span><span style="color: #869791; font-family: 'Courier New',cursive; font-size: 25px;"> Travel</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="fa fa-bars"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto py-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="#about.html" class="nav-item nav-link">Booking</a>
-                <a href="#service.html" class="nav-item nav-link">Hotels</a>
-                <a href="#package.html" class="nav-item nav-link">Packages</a>
-                <a href="#Testimonial.html" class="nav-item nav-link">Vehicles</a>
-                <a href="#contact.html" class="nav-item nav-link">Guides</a>
+            <div style="flex-direction: column; margin-left: 15%">
+                <div class="mb-4 ">
+                    <label for="p_a_travel_areas" class="form-label"  style="margin-left: 40%"> Travel Areas</label>
+                    <input type="text" class="form-control" id="p_a_travel_areas"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_category" class="form-label"  style="margin-left: 40%"> Package Category</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_category"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_service_charge" class="form-label"  style="margin-left: 40%"> Service Charge</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_service_charge"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_travel_distance" class="form-label"  style="margin-left: 40%"> Travelling Distance (km)</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_travel_distance"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_travel_duration" class="form-label"  style="margin-left: 40%"> Travelling Duration</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_travel_duration"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_travel_hotel_book_type" class="form-label"  style="margin-left: 40%"> Hotel Booking Type</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_travel_hotel_book_type"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_travel_hotel_book_night" class="form-label"  style="margin-left: 40%"> Hotel Booking No of Nights</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_travel_hotel_book_night"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_travel_hotel_book_days" class="form-label"  style="margin-left: 40%"> Hotel Booking No of Days</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_travel_hotel_book_days"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <hr>
+                <h1> Video Tutorial</h1>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_travel_video_name" class="form-label"  style="margin-left: 40%"> Video Name</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_travel_video_name"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_travel_video_content" class="form-label"  style="margin-left: 40%"> Video Content</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_travel_video_content"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_travel_video_link" class="form-label"  style="margin-left: 40%"> Video Link</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_travel_video_link"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <hr>
+                <h1> Life Insurance</h1>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_insurance_name" class="form-label"  style="margin-left: 40%"> Insurance Name</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_insurance_name"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_insurance_description" class="form-label"  style="margin-left: 40%"> Insurance Description</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_insurance_description"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_insurance_policies" class="form-label"  style="margin-left: 40%"> Insurance Policies</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_insurance_policies"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_insurance_value" class="form-label"  style="margin-left: 40%"> Insurance Coverage Value</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_insurance_value"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <hr>
+                <h1> Promotions</h1>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_promotion_name" class="form-label"  style="margin-left: 40%"> Promotions Name</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_promotion_name"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_promotion_content" class="form-label"  style="margin-left: 40%"> Promotions Content</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_promotion_content"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_promotion_rate" class="form-label"  style="margin-left: 40%"> Promotions Rate</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_promotion_rate"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_promotion_startDate" class="form-label"  style="margin-left: 40%"> Promotions Start Date</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_promotion_startDate"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
+                <div class="mb-4 ">
+                    <label for="p_a_travel_package_promotion_endDate" class="form-label"  style="margin-left: 40%"> Promotions End Date</label>
+                    <input type="text" class="form-control" id="p_a_travel_package_promotion_endDate"  style="width: 85%; background-color: #CDF5FD; border-color: #DBE2EF; border-width: 1.5px">
+                    <div class="invalid-feedback">
+                        *
+                    </div>
+                </div>
             </div>
-            <button class="btn btn-outline-light rounded-pill" id="loginBtn">LogOut</button>
-            <a class="nav-link" href="#" data-toggle="dropdown">
-                <img src="img/user.jpg" style="width:50px; border-radius:50%;"/>
-                <span class="xp-user-live"></span>
-            </a>
-        </div>
-    </nav>
-</header>
-<body style="background-color: #002752">
-<main class="container mt-4" >
-    <div class="row">
-        <div class="col-md-8">
-            <h2>Book Your Travel</h2>
-            <form>
-                <div class="form-group">
-                    <label for="destination">Destination:</label>
-                    <input type="text" class="form-control" id="destination" placeholder="Enter your destination">
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="departure">Departure Date:</label>
-                        <input type="date" class="form-control" id="departure">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="return">Return Date:</label>
-                        <input type="date" class="form-control" id="return">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="travelers">Number of Travelers:</label>
-                    <input type="number" class="form-control" id="travelers" placeholder="Enter the number of travelers">
-                </div>
-                <button type="submit" class="btn btn-primary">Search for Flights</button>
-            </form>
-        </div>
-        <div class="col-md-4">
-            <h2>Popular Destinations</h2>
-            <ul class="list-group">
-                <li class="list-group-item">Paris</li>
-                <li class="list-group-item">New York</li>
-                <li class="list-group-item">Tokyo</li>
-                <li class="list-group-item">London</li>
-                <li class="list-group-item">Dubai</li>
-            </ul>
+            <br><br>
+            <div style="margin-left: 39%">
+                <button type="button" class="btn btn-primary  " id="p_a_a_btn" onclick="saveNewTravelPackageBtnClicked()" style="width: 20rem; height: 4rem; font-size: 1.4rem;">Save</button>
+            </div>
+            <br><br>
         </div>
     </div>
-
-</body>
-</html>
+</div>

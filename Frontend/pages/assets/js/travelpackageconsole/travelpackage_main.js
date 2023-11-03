@@ -186,96 +186,96 @@ $(document).ready(function(){
 
 //------------------------------------------------------------------------------------
 function loadAdminProfileData(){
-    console.log(localStorage.getItem("secure_data_guide_admin_username"));
-    console.log(localStorage.getItem("secure_data_guide_admin_access_token"));
-    console.log(localStorage.getItem("secure_data_guide_admin_refresh_token"));
-    //
-    // //show loading model
-    // guide_admin_main_pg_loading_model.modal('show');
-    //
-    // $.ajax({
-    //     method: "GET",
-    //     contentType: "application/json",
-    //     url: 'http://localhost:1010/main/guide-service/guide-admin-get-profile-data',
-    //     async: true,
-    //     data: {
-    //         access_username: localStorage.getItem("secure_data_guide_admin_username"),
-    //         access_jwt_token: localStorage.getItem("secure_data_guide_admin_access_token"),
-    //         access_refresh_token: localStorage.getItem("secure_data_guide_admin_refresh_token")
-    //     },
-    //     success: function(data) {
-    //         if (data.rspd_code === RespondCodes.Response_SUCCESS) {
-    //             // Save tokens to localStorage
-    //             localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
-    //             localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
-    //             localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
-    //
-    //             // Set image from base64 data
-    //             guide_admin_main_pg_profile_img.attr('src', data.data.profile_image);
-    //             guide_admin_main_pg_top_admin_name.text("Mr. "+data.token.access_username+" [Admin]");
-    //
-    //             //fill setting form
-    //             p_s_id.text(data.data.id);
-    //             p_s_username.text(data.data.name);
-    //             p_s_email.val(data.data.email);
-    //             p_s_nameinitial.val(data.data.name_with_initial);
-    //             p_s_nic.val(data.data.nic_or_passport);
-    //             p_s_address.val(data.data.address);
-    //             p_s_image.attr('src', data.data.profile_image);
-    //
-    //             profileImage_Base64String =data.data.profile_image;
-    //
-    //             //check textflds validations after adding data
-    //             checkSettingsAddedDataAtTextflds();
-    //
-    //             //hide loading model
-    //             setTimeout(function () {
-    //                 guide_admin_main_pg_loading_model.modal('hide');
-    //
-    //                 setTimeout(function () {
-    //                     $('#alert').show();
-    //                     setTimeout(function () {
-    //                         $('#alert').hide();
-    //                     }, 1000); // delay
-    //                 }, 100); // delay
-    //
-    //             }, 1000); // delay
-    //
-    //         } else {
-    //             //hide loading model
-    //             setTimeout(function () {
-    //                 guide_admin_main_pg_loading_model.modal('hide');
-    //
-    //                 guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
-    //                 guide_admin_main_pg_alert_model_content_error.text("Try Again!");
-    //                 guide_admin_main_pg_alert_model_error.modal('show');
-    //
-    //             }, 1000); // delay
-    //             console.log("fail to logout exception");
-    //         }
-    //     },
-    //     error: function(xhr, status, error) {
-    //         if (xhr.status === 401){
-    //             setTimeout(function () {
-    //                 guide_admin_main_pg_loading_model.modal('hide');
-    //
-    //                 guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
-    //
-    //             }, 1000); // delay
-    //         }else {
-    //             //hide loading model
-    //             setTimeout(function () {
-    //                 guide_admin_main_pg_loading_model.modal('hide');
-    //
-    //                 guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
-    //                 guide_admin_main_pg_alert_model_content_error.text("Try Again!");
-    //                 guide_admin_main_pg_alert_model_error.modal('show');
-    //
-    //             }, 1000); // delay
-    //             console.log("fail to logout exception");
-    //         }
-    //     }
-    // });
+    console.log(localStorage.getItem("secure_data_travelpackage_admin_username"));
+    console.log(localStorage.getItem("secure_data_travelpackage_admin_access_token"));
+    console.log(localStorage.getItem("secure_data_travelpackage_admin_refresh_token"));
+
+    //show loading model
+    guide_admin_main_pg_loading_model.modal('show');
+
+    $.ajax({
+        method: "GET",
+        contentType: "application/json",
+        url: 'http://localhost:1010/main/travelpackage-service/travelpackage-admin-get-profile-data',
+        async: true,
+        data: {
+            access_username: localStorage.getItem("secure_data_travelpackage_admin_username"),
+            access_jwt_token: localStorage.getItem("secure_data_travelpackage_admin_access_token"),
+            access_refresh_token: localStorage.getItem("secure_data_travelpackage_admin_refresh_token")
+        },
+        success: function(data) {
+            if (data.rspd_code === RespondCodes.Response_SUCCESS) {
+                // Save tokens to localStorage
+                localStorage.setItem("secure_data_travelpackage_admin_username", data.token.access_username);
+                localStorage.setItem("secure_data_travelpackage_admin_access_token", data.token.access_jwt_token);
+                localStorage.setItem("secure_data_travelpackage_admin_refresh_token", data.token.access_refresh_token);
+
+                // Set image from base64 data
+                guide_admin_main_pg_profile_img.attr('src', data.data.profile_image);
+                guide_admin_main_pg_top_admin_name.text("Mr. "+data.token.access_username+" [Admin]");
+
+                //fill setting form
+                p_s_id.text(data.data.id);
+                p_s_username.text(data.data.name);
+                p_s_email.val(data.data.email);
+                p_s_nameinitial.val(data.data.name_with_initial);
+                p_s_nic.val(data.data.nic_or_passport);
+                p_s_address.val(data.data.address);
+                p_s_image.attr('src', data.data.profile_image);
+
+                profileImage_Base64String =data.data.profile_image;
+
+                //check textflds validations after adding data
+                checkSettingsAddedDataAtTextflds();
+
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    setTimeout(function () {
+                        $('#alert').show();
+                        setTimeout(function () {
+                            $('#alert').hide();
+                        }, 1000); // delay
+                    }, 100); // delay
+
+                }, 1000); // delay
+
+            } else {
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    guide_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 401){
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
+
+                }, 1000); // delay
+            }else {
+                //hide loading model
+                setTimeout(function () {
+                    guide_admin_main_pg_loading_model.modal('hide');
+
+                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+                    guide_admin_main_pg_alert_model_error.modal('show');
+
+                }, 1000); // delay
+                console.log("fail to logout exception");
+            }
+        }
+    });
 }
 
 //--------------------------checkSettingsAddedDataAtTextflds()---------------
@@ -531,90 +531,90 @@ $(document).ready(function(){
 
 //------------------ update on backend Settings if profile Update btn clicked
 function saveUpdatedProfileSettings(){
-    var formData = new FormData();
-    formData.append("id", p_s_id.text());
-    formData.append("username", p_s_username.text());
-    formData.append("address", p_s_address.val());
-    formData.append("email", p_s_email.val());
-    formData.append("nic", p_s_nic.val());
-    formData.append("password", p_s_password.val());
-    formData.append("nameinitial", p_s_nameinitial.val());
-    formData.append("profileImage_Base64String", profileImage_Base64String);
-    formData.append("access_username", localStorage.getItem("secure_data_guide_admin_username"));
-    formData.append("access_jwt_token", localStorage.getItem("secure_data_guide_admin_access_token"));
-    formData.append("access_refresh_token", localStorage.getItem("secure_data_guide_admin_refresh_token"));
-//show loading model
-    guide_admin_main_pg_loading_model.modal('show');
-
-    console.log("success");
-
-    $.ajax({
-        method: "POST",
-        url: "http://localhost:1010/main/guide-service/guide-admin-update-profile-data",
-        data: formData,
-        processData: false,  // Prevent jQuery from processing data
-        contentType: false,  // Set content type to false to let the browser set it
-        success:function (data){
-            if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
-
-
-                //save tokens on local localStorage - user admin
-                localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
-                localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
-                localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
-
-
-                //hide loading model
-                setTimeout(function () {
-                    guide_admin_main_pg_loading_model.modal('hide');
-
-                    setTimeout(function () {
-                        $('#alert').show();
-                        setTimeout(function () {
-                            window.location.reload();
-                            $('#alert').hide();
-                        }, 1000); // delay
-                    }, 100); // delay
-
-                }, 1000); // delay
-                console.log("fail to logout exception");
-
-
-            }else{
-                //hide loading model
-                setTimeout(function () {
-                    guide_admin_main_pg_loading_model.modal('hide');
-
-                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
-                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
-
-                }, 1000); // delay
-                console.log("fail to logout exception");
-            }
-        },
-        error: function (xhr,exception){
-            if (xhr.status === 401){
-                setTimeout(function () {
-                    guide_admin_main_pg_loading_model.modal('hide');
-
-                    guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
-
-                }, 1000); // delay
-            }else {
-                //hide loading model
-                setTimeout(function () {
-                    guide_admin_main_pg_loading_model.modal('hide');
-
-                    guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
-                    guide_admin_main_pg_alert_model_content_error.text("Try Again!");
-                    guide_admin_main_pg_alert_model_error.modal('show');
-
-                }, 1000); // delay
-                console.log("fail to logout exception");
-            }
-
-        }
-    })
+//     var formData = new FormData();
+//     formData.append("id", p_s_id.text());
+//     formData.append("username", p_s_username.text());
+//     formData.append("address", p_s_address.val());
+//     formData.append("email", p_s_email.val());
+//     formData.append("nic", p_s_nic.val());
+//     formData.append("password", p_s_password.val());
+//     formData.append("nameinitial", p_s_nameinitial.val());
+//     formData.append("profileImage_Base64String", profileImage_Base64String);
+//     formData.append("access_username", localStorage.getItem("secure_data_guide_admin_username"));
+//     formData.append("access_jwt_token", localStorage.getItem("secure_data_guide_admin_access_token"));
+//     formData.append("access_refresh_token", localStorage.getItem("secure_data_guide_admin_refresh_token"));
+// //show loading model
+//     guide_admin_main_pg_loading_model.modal('show');
+//
+//     console.log("success");
+//
+//     $.ajax({
+//         method: "POST",
+//         url: "http://localhost:1010/main/guide-service/guide-admin-update-profile-data",
+//         data: formData,
+//         processData: false,  // Prevent jQuery from processing data
+//         contentType: false,  // Set content type to false to let the browser set it
+//         success:function (data){
+//             if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
+//
+//
+//                 //save tokens on local localStorage - user admin
+//                 localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
+//                 localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
+//                 localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
+//
+//
+//                 //hide loading model
+//                 setTimeout(function () {
+//                     guide_admin_main_pg_loading_model.modal('hide');
+//
+//                     setTimeout(function () {
+//                         $('#alert').show();
+//                         setTimeout(function () {
+//                             window.location.reload();
+//                             $('#alert').hide();
+//                         }, 1000); // delay
+//                     }, 100); // delay
+//
+//                 }, 1000); // delay
+//                 console.log("fail to logout exception");
+//
+//
+//             }else{
+//                 //hide loading model
+//                 setTimeout(function () {
+//                     guide_admin_main_pg_loading_model.modal('hide');
+//
+//                     guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+//                     guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+//
+//                 }, 1000); // delay
+//                 console.log("fail to logout exception");
+//             }
+//         },
+//         error: function (xhr,exception){
+//             if (xhr.status === 401){
+//                 setTimeout(function () {
+//                     guide_admin_main_pg_loading_model.modal('hide');
+//
+//                     guide_admin_main_pg_alert_model_unauthorise_error.modal('show');
+//
+//                 }, 1000); // delay
+//             }else {
+//                 //hide loading model
+//                 setTimeout(function () {
+//                     guide_admin_main_pg_loading_model.modal('hide');
+//
+//                     guide_admin_main_pg_alert_model_title_error.text("Error has occurd!");
+//                     guide_admin_main_pg_alert_model_content_error.text("Try Again!");
+//                     guide_admin_main_pg_alert_model_error.modal('show');
+//
+//                 }, 1000); // delay
+//                 console.log("fail to logout exception");
+//             }
+//
+//         }
+//     })
 }
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -684,7 +684,7 @@ $(document).ready(function() {
 });
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
 
-//----------------------------------New Guide container -add guide from - validation all fields-------------------
+//----------------------------------New travelpackage container -add Travelpackage from - validation all fields-------------------
 let g_a_a_fld_1 = false;
 let g_a_a_fld_2 = false;
 let g_a_a_fld_3 = false;
@@ -916,32 +916,42 @@ function addGuideSaveBtnIsEnableTrigger(){
 }
 //---------------------------------------------------------------------------------------------------------------
 
-//---------------------------------------------New Guide container - add guide from - save Btn Clicked send data into server-----------------------------
-function saveNewGuideBtnClicked(){
+//---------------------------------------------New Travelpackage container - add travelpackage from - save Btn Clicked send data into server-----------------------------
+function saveNewTravelPackBtnClicked(){
 
     //show loading model
     guide_admin_main_pg_loading_model.modal('show');
 
     var newformData = new FormData();
-    newformData.append("name", g_a_a_name.val());
-    newformData.append("address", g_a_a_address.val());
-    newformData.append("remarks", g_a_a_remarks.val());
-    newformData.append("experience", g_a_a_experience.val());
-    newformData.append("nic", g_a_a_nic.val());
-    newformData.append("nic_front_view", guidNICFrontImage_Base64String);
-    newformData.append("nic_rear_view", guidNOCRearImage_Base64String);
-    newformData.append("tell", g_a_a_tell.val());
-    newformData.append("gender", g_a_a_gender.val());
-    newformData.append("dob", g_a_a_age.val());
-    newformData.append("image", guideImage_Base64String);
-    newformData.append("perday_fee", g_a_a_perdayfee.val());
-    newformData.append("access_username", localStorage.getItem("secure_data_guide_admin_username"));
-    newformData.append("access_jwt_token", localStorage.getItem("secure_data_guide_admin_access_token"));
-    newformData.append("access_refresh_token", localStorage.getItem("secure_data_guide_admin_refresh_token"));
+    newformData.append("travelpackage_name", $('#p_a_travel_pack_name').val());
+    newformData.append("travelpackage_travel_areas", $('#p_a_travel_areas').val());
+    newformData.append("travelpackage_category", $('#p_a_travel_package_category').val());
+    newformData.append("travelpackage_service_charge", $('#p_a_travel_package_service_charge').val());
+    newformData.append("travelpackage_travelling_length_km", $('#p_a_travel_package_travel_distance').val());
+    newformData.append("travelpackage_travelling_days", $('#p_a_travel_package_travel_duration').val());
+    newformData.append("travelpackage_hotel_booking_type", $('#p_a_travel_package_travel_hotel_book_type').val());
+    newformData.append("travelpackage_hotel_booking_nigths", $('#p_a_travel_package_travel_hotel_book_night').val());
+    newformData.append("travelpackage_hotel_booking_days", $('#p_a_travel_package_travel_hotel_book_days').val());
+    newformData.append("vedio_name", $('#p_a_travel_package_travel_video_name').val());
+    newformData.append("vedio_content", $('#p_a_travel_package_travel_video_content').val());
+    newformData.append("vedio_link", $('#p_a_travel_package_travel_video_link').val());
+
+    newformData.append("insuarance_name", $('#p_a_travel_package_insurance_name').val());
+    newformData.append("insuarance_description", $('#p_a_travel_package_insurance_description').val());
+    newformData.append("insuarance_policies", $('#p_a_travel_package_insurance_policies').val());
+    newformData.append("insuarance_covergae_value", $('#p_a_travel_package_insurance_value').val());
+    newformData.append("promotion_name", $('#p_a_travel_package_promotion_name').val());
+    newformData.append("promotion_content", $('#p_a_travel_package_promotion_content').val());
+    newformData.append("promotion_rate", $('#p_a_travel_package_promotion_rate').val());
+    newformData.append("promotion_start_date", $('#p_a_travel_package_promotion_startDate').val());
+    newformData.append("promotion_end_date", $('#p_a_travel_package_promotion_endDate').val());
+    newformData.append("access_username", localStorage.getItem("secure_data_travelpackage_admin_username"));
+    newformData.append("access_jwt_token", localStorage.getItem("secure_data_travelpackage_admin_access_token"));
+    newformData.append("access_refresh_token", localStorage.getItem("secure_data_travelpackage_admin_refresh_token"));
 
     $.ajax({
         method: "POST",
-        url: "http://localhost:1010/main/guide-service/create-new-guide",
+        url: "http://localhost:1010/main/travelpackage-service/create-new-travelpack",
         data: newformData,
         processData: false,  // Prevent jQuery from processing data
         contentType: false,  // Set content type to false to let the browser set it
@@ -949,9 +959,9 @@ function saveNewGuideBtnClicked(){
             if(data.rspd_code === RespondCodes.Respond_DATA_SAVED){
 
                 //save tokens on local localStorage - user admin
-                localStorage.setItem("secure_data_guide_admin_username", data.token.access_username);
-                localStorage.setItem("secure_data_guide_admin_access_token", data.token.access_jwt_token);
-                localStorage.setItem("secure_data_guide_admin_refresh_token", data.token.access_refresh_token);
+                localStorage.setItem("secure_data_travelpackage_admin_username", data.token.access_username);
+                localStorage.setItem("secure_data_travelpackage_admin_access_token", data.token.access_jwt_token);
+                localStorage.setItem("secure_data_travelpackage_admin_refresh_token", data.token.access_refresh_token);
                 console.log("done");
                 //hide loading model
                 setTimeout(function () {

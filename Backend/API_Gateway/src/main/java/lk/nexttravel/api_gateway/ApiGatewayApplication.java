@@ -79,15 +79,15 @@ public class ApiGatewayApplication {
                         RoleTypes.ROLE_ADMIN_SERVICE_VEHICLE
                 );
             }
-            if(!userRepository.existsByName("lakmal")){
+            if(!userRepository.existsByName("sanura")){
                 systemUserService.saveNewAdminUserOnlyTesting(
                         UserSignupDTO.builder()
-                                .signup_name("lakamal")
-                                .signup_name_with_initial("K.P.M.Lakmal Perera")
+                                .signup_name("sanura")
+                                .signup_name_with_initial("K.P.M.Sanura Perera")
                                 .signup_address("Padukka")
                                 .signup_email("chethiyakaligu2@gmail.com")
                                 .signup_nic_or_passport("199658652548")
-                                .signup_password("Lakmal@1234")
+                                .signup_password("Sanura@1234")
                                 .signup_profile_image(TravelPackageServiceMngrImg)
                                 .build()
                         ,

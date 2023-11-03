@@ -6,8 +6,9 @@
 */
 package lk.nexttravelehund.travelpackage_microservice.service.impl;
 
-import lk.nexttravel.guide_microservice.entity.util.DatabaseSequence;
-import lk.nexttravel.guide_microservice.service.SequenceGeneratorService;
+
+import lk.nexttravelehund.travelpackage_microservice.entity.util.DatabaseSequence;
+import lk.nexttravelehund.travelpackage_microservice.service.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Update;

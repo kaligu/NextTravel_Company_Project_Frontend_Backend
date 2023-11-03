@@ -320,11 +320,34 @@ function readyToEnableSignupBtn() {
     }
 }
 
+
+var imageBase64 = "";
+// set add vehicle form vehicle_image_sideview_AddVehicleBase64
+$(document).ready(function() {
+    $('#signup_profile_image').on('change', function () {
+        var newImageFile = this.files[0]; // Get the file when a change occurs in the input
+        if (newImageFile) { // Check if a file is selected
+            var reader = new FileReader();
+            var baseString;
+            reader.onload = function () {
+                baseString = reader.result;
+                imageBase64 = baseString;
+                console.log(imageBase64);
+            };
+            reader.readAsDataURL(newImageFile);
+        } else {
+            console.error('No file selected');
+        }
+    });
+});
+
 //-------------------------------------send signup form data into DB
 function sendSignupDataIntoServer(){
 
     //show loading model
     loadingModel.modal('show');
+
+
 
     //fields variables
     let form_signup_name = signup_username.val();
@@ -333,7 +356,7 @@ function sendSignupDataIntoServer(){
     let form_signup_password = signup_password.val();
     let form_signup_nic_or_passport = signup_nic_or_passport.val();
     let form_signup_address = signup_address.val();
-    let form_signup_profile_image = $('#signup_profile_image')[0].files[0];
+    let form_signup_profile_image = imageBase64;
 
     var formData = new FormData();
     formData.append("signup_name", form_signup_name);
