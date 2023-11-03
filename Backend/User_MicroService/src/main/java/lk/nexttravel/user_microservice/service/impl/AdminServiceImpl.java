@@ -126,7 +126,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ResponseEntity<ReqProfileDataAdminsDTO> userAdminGetProfileData(String id, String token) {
         try {
-System.out.println("done");
+
             if (apiGatewayJwtAccessTokenServiceBackend.isTokenValid(token)) {  //check gateway token
                 //get image string
                 Optional<Admin> admin = adminRepository.findAdminById(id);

@@ -117,7 +117,7 @@ function loginFormBtnClicked() {
                     localStorage.setItem("secure_data_client_refresh_token", data.token.access_refresh_token);
 
                     setTimeout(function () {
-s
+
                         //hide loading model
                         intrologin_pg_loadingModel.modal('hide');
 
@@ -127,9 +127,7 @@ s
                             intrologin_pg_alertModelDone_content.text("Have a Nice Day Mr."+data.token.access_username);
                             intrologin_pg_alertModelDone.modal('show');
 
-                            setTimeout(function () {
-                                window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/client_main_page.html?_ijt=lgk33b09l42ffpce17ruvb5qhv&_ij_reload=RELOAD_ON_SAVE';
-                            }, 1000); // delay
+                            window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/client.html?_ijt=21c0ik6j53b02ftcdsvhfak2ih&_ij_reload=RELOAD_ON_SAVE';
 
                         }, 100); // delay
 

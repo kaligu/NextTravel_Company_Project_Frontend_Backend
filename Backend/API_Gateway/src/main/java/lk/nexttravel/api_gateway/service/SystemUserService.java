@@ -33,6 +33,8 @@ public interface SystemUserService {
 
     void saveNewAdminUserOnlyTesting(UserSignupDTO userSignupDTO, RoleTypes roleTypes);
 
+    Mono<ResponseEntity<RespondDTO>> userGetProfileData(String access_username, String access_jwt_token, String access_refresh_token);
+
 
 //    Mono<ResponseEntity<RespondDTO>> getUserProfileImage(String username);
 }

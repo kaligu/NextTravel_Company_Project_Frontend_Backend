@@ -408,7 +408,7 @@ function sendSignupDataIntoServer(){
 
                     location.reload();
 
-                    window.location.href = 'http://localhost:63342/NextTravel_Company_Project_Frontend_Backend/Frontend/pages/client_main_page.html?_ijt=65d3q769nd0k24e1vqus1m71m7&_ij_reload=RELOAD_ON_SAVE';
+                    window.location.href = 'Frontend/client.html';
                 });
             }else{
                 //hide loading model

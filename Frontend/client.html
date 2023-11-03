@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Hotelier - Hotel HTML Template</title>
+    <title>NextTravel</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -32,10 +32,35 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        :root{
+            background-color: #F9F7F7;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #F9F7F7;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #000812;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3F72AF;
+        }
+
+    </style>
 </head>
 
-<body>
-<div class="container-xxl bg-white p-0">
+<body style="background-color: black">
+<div class="container-fluid bg-white p-0">
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -45,13 +70,14 @@
     <!-- Spinner End -->
 
     <!-- Header Start -->
-    <div class="container-fluid bg-dark px-0">
-        <div class="row gx-0">
+    <div class="container-fluid bg-dark">
+        <div class="container-fluid bg-dark px-0">
+            <div class="row gx-0">
 
-            <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
+                <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
                 <div class="dropdown border-top ">
                     <a href="#" class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="css/img/image.jpeg" id="guide_admin_main_pg_profile_img" alt="profileimage" width="60" height="60" class="rounded-circle">
+                        <img src="css/img/image.jpeg" id="profile_image" alt="profileimage" width="60" height="60" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-lg shadow bg-warning" >
                         <li><a class="dropdown-item btn-success" data-bs-toggle="modal" data-bs-target="#profile-setting-model">Settings</a></li>
@@ -62,7 +88,7 @@
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div style="margin-left: 20px" class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
                         <a href="about.html" class="nav-item nav-link">About</a>
@@ -78,7 +104,7 @@
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
-                    <h2 style="color: white">Next Travel</h2>
+<!--                    <h2 style="color: white">Next Travel</h2>-->
                 </div>
             </nav>
         </div>
@@ -676,6 +702,8 @@
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 </div>
 
+
+
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -690,6 +718,8 @@
 
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
+
+<script src="js/client-js.js"></script>
 </body>
 
 </html>
