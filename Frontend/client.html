@@ -38,7 +38,7 @@
         }
 
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 5px;
         }
 
         /* Track */
@@ -48,12 +48,12 @@
 
         /* Handle */
         ::-webkit-scrollbar-thumb {
-            background: #000812;
+            background: #00142e;
         }
 
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
-            background: #3F72AF;
+            background: #9c9c9c;
         }
 
     </style>
@@ -77,7 +77,7 @@
                 <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
                 <div class="dropdown border-top ">
                     <a href="#" class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="css/img/image.jpeg" id="profile_image" alt="profileimage" width="60" height="60" class="rounded-circle">
+                        <img src="" id="profile_image" alt="profileimage" width="60" height="60" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-lg shadow bg-warning" >
                         <li><a class="dropdown-item btn-success" data-bs-toggle="modal" data-bs-target="#profile-setting-model">Settings</a></li>
@@ -104,7 +104,11 @@
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
-<!--                    <h2 style="color: white">Next Travel</h2>-->
+                    <div style="display: flex">
+                        <h2 style="color: white">Next</h2>
+                        <h2 style="color: #2ec0d9">Travel</h2>
+                    </div>
+
                 </div>
             </nav>
         </div>
@@ -123,8 +127,8 @@
                     <div class="p-3" style="max-width: 700px;">
                         <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury Living</h6>
                         <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious Hotel</h1>
-                        <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>
-                        <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a>
+<!--                        <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>-->
+<!--                        <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a>-->
                     </div>
                 </div>
             </div>
@@ -134,8 +138,7 @@
                     <div class="p-3" style="max-width: 700px;">
                         <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury Living</h6>
                         <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious Hotel</h1>
-                        <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>
-                        <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a>
+
                     </div>
                 </div>
             </div>
@@ -697,6 +700,93 @@
 </div>
 <!-- Footer End -->
 
+    <!-- loading window -->
+    <!-- use Modal -->
+    <div class="modal fade" id="guide_admin_main_pg-loading-model" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0,0,0,0); backdrop-filter: blur(6px)">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <!--          <div class="modal-header">-->
+                <!--            -->
+                <!--          </div>-->
+                <div class="modal-body text-center" style="background-color: #2C3333">
+                    <img src="assets/images/travelpackageloadigngif.gif" class="img-fluid" alt="Responsive image" style="width: 60%; height: 60%">
+                    <h6 class="modal-title text-white" id="exampleModalLongTitle">Please Wait... </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error alert model -->
+    <!-- Modal -->
+    <div class="modal fade " id="guide_admin_main_pg_alert-model-error" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0,0,0,0.25); backdrop-filter: blur(3px)">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content bg-danger text-white">
+                <div class="modal-header ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+                        <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
+                        <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
+                    </svg>
+                    <h5 class="modal-title" id="guide_admin_main_pg_alert-model-title-error">title</h5>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-dialog-centered" id="guide_admin_main_pg_alert-model-content-error">content</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Unauthorize model -->
+    <!-- Modal -->
+    <div class="modal fade " id="guide_admin_main_pg_alert-model-unauthorise-error" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0,0,0,0.25); backdrop-filter: blur(3px)">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content bg-danger text-white">
+                <div class="modal-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height=25" fill="white" class="bi bi-x-octagon" viewBox="0 0 16 16">
+                        <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/>
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <h5 class="modal-title" id="guide_admin_main_pg_alert-model-title-unauthorise-error">Something went wrong!</h5>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-dialog-centered" id="guide_admin_main_pg_alert-model-content-unauthorise-error">Unauthorize error has occurred! Please logout and Sign in Again...</p>
+                    <button type="button" class="btn btn-secondary"><a href="intro_login_page.html" style="color: white; "> Logout & Sign in click here...</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Done alert model -->
+    <!-- Modal -->
+    <div class="modal fade" id="guide_admin_main_pg-alert-model-done"  tabindex="-1" role="dialog"  aria-hidden="true" data-bs-backdrop='static' style="background-color: rgba(0, 0, 0, 0.37);">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content bg-success text-white">
+                <div class="modal-header ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-check-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                    </svg>
+                    <h5 class="modal-title" id="guide_admin_main_pg_alert-model-title-done">title</h5>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-dialog-centered" id="guide_admin_main_pg_alert-model-content-done">content</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="alert bg-success" id="alert" role="alert" style="width: 400px; position: fixed; z-index: 2000000; bottom: 0; right: 0; display: none">
+        <h3 class="alert-heading">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-check-circle" viewBox="0 0 16 16" style="display: inline-block; vertical-align: middle;">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+            </svg>
+            <span style="display: inline-block; vertical-align: middle; color: white">Done...</span>
+        </h3>
+        <hr>
+        <p class="mb-0" style="color: white">This Operation Succeed....</p>
+    </div>
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -719,6 +809,7 @@
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
 
+<script src="pages/assets/js/util/RespondCodes.js"></script>
 <script src="js/client-js.js"></script>
 </body>
 
